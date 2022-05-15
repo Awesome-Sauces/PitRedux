@@ -231,6 +231,17 @@ public class events implements Listener {
     @EventHandler 
     public static void MainDamageEvent(EntityDamageByEntityEvent event){
         Player defender = null;
+        if(event.getCause().equals(EntityDamageEvent.DamageCause.MAGIC)){
+            if(event.getDamager() instanceof Player && event.getEntity() instanceof Player){
+                if(((Player) event.getEntity()).getHealth() - event.getDamage() <= 2){
+                    event.setCancelled(true);
+                    escapeProc.put(String.valueOf(event.getEntity().getUniqueId()), false);
+                    KillMan((Player) event.getDamager(), (Player) event.getEntity());
+                }
+            }
+
+            return;
+        }
         if(!(event.getEntity() instanceof Player)) {return;}
         if((event.getDamager() instanceof Arrow)) {
             Arrow arrow = (Arrow) event.getDamager();
@@ -263,7 +274,20 @@ public class events implements Listener {
             ReduxDamageEvent mainEvent = new ReduxDamageEvent(playerExists(attacker), playerExists(defender), event.getDamage(), event);
             Bukkit.getPluginManager().callEvent(mainEvent);
             if (!mainEvent.isCancelled()) {
-                mainEvent.setCancelled(true);
+                event.setDamage(mainEvent.getReduxDamage());
+
+                // Running the true dmg
+                EntityDamageByEntityEvent truedmg = new EntityDamageByEntityEvent(mainEvent.getAttacker().getPlayerObject(), mainEvent.getDefenders().getPlayerObject(),
+                        EntityDamageEvent.DamageCause.MAGIC, mainEvent.getReduxTrueDamage());
+                Bukkit.getServer().getPluginManager().callEvent(truedmg);
+                if(!truedmg.isCancelled()) {
+                    Player player = mainEvent.getDefenders().getPlayerObject();
+                    player.setHealth(Math.max(player.getHealth() - mainEvent.getReduxTrueDamage(), 0));
+                }
+                // Running the true dmg
+
+            }else{
+                event.setCancelled(true);
             }
         }else{
             event.setCancelled(true);

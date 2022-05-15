@@ -13,12 +13,6 @@ import java.util.regex.Pattern;
 import static com.alpha.redux.well.loreChecker.CheckEnchantOnPant;
 import static com.alpha.redux.well.loreChecker.CheckEnchantOnSword;
 
-enum MysticType{
-    SWORD,
-    PANT,
-    BOW
-}
-
 public class EnchantingMechanics {
 
     List<String> lore;

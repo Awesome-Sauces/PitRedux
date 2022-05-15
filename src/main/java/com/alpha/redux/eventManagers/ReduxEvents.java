@@ -222,6 +222,7 @@ public class ReduxEvents implements Listener {
 
         }
 
+        /*
         try{
             if(attacker.getInventory().getItemInHand().getType().equals(Material.GOLD_SWORD)){
                 ItemStack sword = attacker.getInventory().getItemInHand();
@@ -236,6 +237,8 @@ public class ReduxEvents implements Listener {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+         */
 
         try{
             if(attacker.getInventory().getItemInHand().getType().equals(Material.WOOD_SWORD)){
@@ -399,7 +402,7 @@ public class ReduxEvents implements Listener {
 
                 }
             }else{
-                event.getBukkitEvent().setDamage(Math.max(damage, 0));
+                event.setReduxDamage(Math.max(damage, 0));
                 //defender.setHealth(Math.max(defender.getHealth()-true_dmg, 0));
             }
         }else if (defender.getHealth() - (2 + true_dmg) >= -2 && defender.getHealth() - (2 + true_dmg) <= 1.5) {
@@ -414,7 +417,7 @@ public class ReduxEvents implements Listener {
         }else{
             try{
                 defender.setHealth(Math.max(defender.getHealth()-true_dmg, 1));
-                event.getBukkitEvent().setDamage(Math.max(damage, 0));
+                event.setReduxDamage(Math.max(damage, 0));
             }catch (Exception e){}
         }
     }
