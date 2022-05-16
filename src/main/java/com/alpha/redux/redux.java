@@ -8,6 +8,7 @@ import com.alpha.redux.apis.hunter.HunterEntity;
 import com.alpha.redux.apis.skyblock.skyblockEvents;
 import com.alpha.redux.apis.skyblock.skyblockItems;
 import com.alpha.redux.commands.command;
+import com.alpha.redux.commands.repairs.ClickHandler;
 import com.alpha.redux.entityHandlers.MysticHandler.MysticEventHandler.MysticEventHandlers;
 import com.alpha.redux.entityHandlers.ReduxPlayerHandler;
 import com.alpha.redux.eventManagers.ReduxEvents;
@@ -69,6 +70,7 @@ public class redux extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ReduxPlayerHandler(), this);
         getServer().getPluginManager().registerEvents(new InventoryEventManager(), this);
         getServer().getPluginManager().registerEvents(new MysticEventHandlers(), this);
+        getServer().getPluginManager().registerEvents(new ClickHandler(), this);
         getCommand("enchantPant").setExecutor(commands);
         getCommand("activateBooster").setExecutor(commands);
         getCommand("purchaseDyes").setExecutor(commands);

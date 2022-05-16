@@ -254,6 +254,7 @@ public class pants {
 
     public static void EscapePodEvent(Player attacker, Player defender, Double damage, List<String> lore){
 
+
         try {
             if (defender.hasPotionEffect(PotionEffectType.POISON)) {
                 return;

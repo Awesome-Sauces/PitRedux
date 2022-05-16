@@ -25,6 +25,7 @@ public class ReduxPlayer {
 
     Player player;
     String uuid;
+    boolean escape = true;
     double damageIncrease;
     double damageDecrease;
     double xpBooster = 1;
@@ -84,6 +85,20 @@ public class ReduxPlayer {
         hasEconomy(this.uuid);
         addEconomy(this.uuid, amount);
     }
+
+    public boolean getEscape(){
+        if (this.escape){
+            if(this.player.getHealth() / 2 == 10){
+                this.escape = false;
+                return true;
+            }else return false;
+        }
+        return false;
+    }
+
+    public void setEscape(boolean set){this.escape = set;}
+
+    public void resetEscape(){this.escape = true;}
 
     public double getPlayerGoldBooster(){
         return this.goldBooster;

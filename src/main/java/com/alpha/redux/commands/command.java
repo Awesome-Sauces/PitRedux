@@ -1,6 +1,7 @@
 package com.alpha.redux.commands;
 
 import com.alpha.redux.apis.chatManager.rank;
+import com.alpha.redux.commands.repairs.menu;
 import com.alpha.redux.events.boards;
 import com.alpha.redux.items.enchants;
 import com.alpha.redux.playerdata.economy;
@@ -21,6 +22,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +40,7 @@ import static com.alpha.redux.apis.commandBuilder.BaseChecks;
 import static com.alpha.redux.apis.leaderboardsplus.leaderboards.*;
 import static com.alpha.redux.apis.locations.getSpawnLocation;
 import static com.alpha.redux.apis.skyblock.skyblockItems.termy;
+import static com.alpha.redux.commands.repairs.ClickHandler.repairItem;
 import static com.alpha.redux.events.events.*;
 import static com.alpha.redux.events.nonPermItems.ClearAndCheck;
 import static com.alpha.redux.funEvents.event.endTwoTimes;
@@ -128,6 +131,10 @@ public class command implements CommandExecutor {
         }
 
         if(cmd.getName().equalsIgnoreCase("repairs")){
+
+            player.openInventory(menu.confirmationGui(player));
+            return true;
+            /*
             if(player.getInventory().containsAtLeast(enchants.vile, 1)){
                 try{
                     ItemMeta meta = player.getInventory().getItemInHand().getItemMeta();
@@ -138,6 +145,8 @@ public class command implements CommandExecutor {
                         player.sendMessage(ChatColor.RED + "This mystic has the max lives!");
                         return true;
                     }
+
+
 
                     meta.setLore(MysticRepairs(meta.getLore()));
 
@@ -153,6 +162,8 @@ public class command implements CommandExecutor {
                 player.sendMessage(ChatColor.RED + "You don't have any vile!");
                 return true;
             }
+
+             */
         }
 
         if(cmd.getName().equalsIgnoreCase("veloCheck")){
@@ -170,12 +181,8 @@ public class command implements CommandExecutor {
                     }
 
                     if(success){
-
-
                         Location playerLocation = checkedPlayer.getLocation();
-                        for (int i = 0; i < 50; i++) {
-                            checkedPlayer.setVelocity(player.getEyeLocation().getDirection());
-                        }
+                        checkedPlayer.setVelocity(new Vector(0, 100, 0));
                         checkedPlayer.teleport(playerLocation);
                     }
                 }
