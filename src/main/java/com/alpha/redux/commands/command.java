@@ -142,7 +142,7 @@ public class command implements CommandExecutor {
                     String lives = meta.getLore().get(0);
 
                     if(ChatColor.stripColor(lives).contains("Lives: 20/20")){
-                        player.sendMessage(ChatColor.RED + "This mystic has the max lives!");
+                        player.sendMessage(Chat Color.RED + "This mystic has the max lives!");
                         return true;
                     }
 

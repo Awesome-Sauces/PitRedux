@@ -17,6 +17,7 @@ import java.util.*;
 import static com.alpha.redux.DeathHandler.killHandler.getNPC;
 import static com.alpha.redux.DeathHandler.killHandler.isNPC;
 import static com.alpha.redux.ItemEvents.notgladiator.*;
+import static com.alpha.redux.playerdata.prestiges.getPrestige;
 import static com.alpha.redux.well.enchanters.*;
 import static com.alpha.redux.well.loreChecker.CheckEnchantOnPant;
 
@@ -32,7 +33,7 @@ public class pants {
     public static void VenomEvent(Player player, Player defender){
         try {
             if(isNPC(defender)){return;}
-            if (defender.getInventory().getBoots() != null && defender.getInventory().getBoots().getItemMeta().equals(itemManager.arma.getItemMeta())) {
+            if (defender.getInventory().getBoots() != null && defender.getInventory().getBoots().getItemMeta().equals(itemManager.arma.getItemMeta()) || getPrestige(String.valueOf(player.getUniqueId())) <= 15) {
                 Sounds.GAMBLE_NO.play(player);
             } else if (player.getInventory().getLeggings() != null && player.getInventory().getLeggings().getItemMeta().equals(itemManager.venom.getItemMeta())) {
 

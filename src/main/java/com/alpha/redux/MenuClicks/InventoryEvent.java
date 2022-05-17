@@ -27,6 +27,7 @@ import static com.alpha.redux.events.events.Strength;
 import static com.alpha.redux.playerdata.economy.*;
 import static com.alpha.redux.apis.advancedInventory.ItemMaker;
 import static com.alpha.redux.events.events.Has_Strength;
+import static com.alpha.redux.playerdata.goldReq.getGoldRequirement;
 import static com.alpha.redux.playerdata.prestiges.*;
 import static com.alpha.redux.playerdata.prestiges.getPrestige;
 import static com.alpha.redux.playerdata.streaks.*;
@@ -314,6 +315,13 @@ public class InventoryEvent {
             randomDUDE = GetCurrentLevel(String.valueOf(player.getUniqueId()), xpManager.getXp(String.valueOf(player.getUniqueId())), prestiges.getPrestige(String.valueOf(player.getUniqueId())), player);
 
             if (randomDUDE[1] >= 120) {
+
+                if(getEconomy(String.valueOf(player.getUniqueId())) >= getGoldRequirement(getPrestige(String.valueOf(player.getUniqueId())))){
+                    player.sendMessage(ChatColor.RED + "You can't afford this!");
+                    player.closeInventory();
+                    return;
+                }
+
                 if (getPrestige(String.valueOf(player.getUniqueId())) >= 100) {
                     setPrestige(String.valueOf(player.getUniqueId()), 100);
                     player.sendMessage(ChatColor.RED + "You've reached the max Prestige! Congrats!");
