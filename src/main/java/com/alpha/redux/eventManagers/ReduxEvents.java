@@ -142,7 +142,6 @@ public class ReduxEvents implements Listener {
             if(attacker.getInventory().getLeggings().getType().equals(Material.LEATHER_LEGGINGS)){
                 try{
                     VenomEvent(attacker, defender);
-                    event.addReduxDamage(RegularityEvent(attacker, defender, damage, attacker.getInventory().getLeggings().getItemMeta().getLore()));
                 } catch (Exception e) {
 
                 }
@@ -153,74 +152,13 @@ public class ReduxEvents implements Listener {
 
 
 
-        try {
-            if(defender.getInventory().getLeggings() != null){
-                if(defender.getInventory().getLeggings().getType().equals(Material.LEATHER_LEGGINGS)){
-                    try {
-                        damage -= damage * .3;
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+        if(defender.getInventory().getLeggings() != null){
+            if(defender.getInventory().getLeggings().getType().equals(Material.LEATHER_LEGGINGS)){
+                event.subtractReduxDamage(damage * .3);
 
-                    try {
-                        event.subtractReduxDamage(CriticallyFunkyEvent(ReduxAttacker, ReduxDefender, event.getReduxDamage(), defender.getInventory().getLeggings().getItemMeta().getLore()));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        EscapePodEvent(attacker, defender, event.getReduxDamage(), defender.getInventory().getLeggings().getItemMeta().getLore());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        event.subtractReduxDamage(NotGlad(defender, event.getReduxDamage(), defender.getInventory().getLeggings().getItemMeta().getLore()));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try{
-                        event.subtractReduxDamage(ProtectionEvent(defender, event.getReduxDamage(), defender.getInventory().getLeggings().getItemMeta().getLore()));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        true_dmg = true_dmg * Mirrors(defender, true_dmg, defender.getInventory().getLeggings().getItemMeta().getLore());
-                        sword_true = sword_true * Mirrors(defender, sword_true, defender.getInventory().getLeggings().getItemMeta().getLore());
-                    }catch (Exception ignored){
-
-                    }
-
-                    try{
-                        RetroGravityMicrocosm(attacker, defender, event.getReduxDamage(), defender.getInventory().getLeggings().getItemMeta().getLore());
-                    }catch (Exception ignored){
-
-                    }
-
-
-                    try{
-                        event.subtractReduxDamage(solitudeEnchant(defender, event.getReduxDamage(), defender.getInventory().getLeggings().getItemMeta().getLore()));
-                    }catch (Exception ignored){
-
-                    }
-
-
-                }
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
-        damage = event.getReduxDamage();
-
-        try {
-            defender.setHealth(Math.max(defender.getHealth() - sword_true, 1));
-        } catch (Exception e) {
-
-        }
 
         /*
         try{
@@ -240,56 +178,25 @@ public class ReduxEvents implements Listener {
 
          */
 
-        try{
-            if(attacker.getInventory().getItemInHand().getType().equals(Material.WOOD_SWORD)){
-                ItemStack sword = attacker.getInventory().getItemInHand();
-                if (!(attacker.getLocation().getY() >= getSpawnProtection())){damage += Billionaire(attacker, damage, sword.getItemMeta().getLore());}
-                if (!(attacker.getLocation().getY() >= getSpawnProtection())){damage += GambleSword(attacker, damage, sword.getItemMeta().getLore());}
-                damage += DiamondStomp(ReduxAttacker, ReduxDefender, damage, sword.getItemMeta().getLore());
-                damage += PainFocusEvent(ReduxAttacker, ReduxDefender ,damage, sword.getItemMeta().getLore());
-                damage += damage * criticalFunkyDamageCalculation(attacker, 0.0, true);
-                damage += KingBuster(attacker, defender ,damage, sword.getItemMeta().getLore());
-                damage += Sharker(attacker, defender ,damage, sword.getItemMeta().getLore());
-                damage += Sharpness(attacker,damage, sword.getItemMeta().getLore());
-                attacker.setHealth(Math.min(attacker.getHealth() + Lifesteals(attacker, damage, sword.getItemMeta().getLore()), attacker.getMaxHealth()));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        if(mega_damage_amount.containsKey(String.valueOf(defender.getUniqueId()))){
+            event.addReduxDamage(Math.round(mega_damage_amount.get(String.valueOf(defender.getUniqueId()))));
         }
 
-        try {
-            if(mega_damage_amount.containsKey(String.valueOf(defender.getUniqueId()))){
-                damage += Math.round(mega_damage_amount.get(String.valueOf(defender.getUniqueId())));
-            }
-        }catch (Exception e){
+        attacker.setHealth(Math.min(attacker.getHealth() +.5, attacker.getMaxHealth()));
 
+
+        if(defender.getInventory().getHelmet() != null && defender.getInventory().getHelmet().equals(itemManager.goldHelm)){
+            event.subtractReduxDamage(event.getReduxDamage() * .20);
         }
 
-        try{
-            attacker.setHealth(Math.min(attacker.getHealth() +.5, attacker.getMaxHealth()));
-        }catch (Exception e){
-
-        }
-
-        try{
-            if(defender.getInventory().getHelmet().equals(itemManager.goldHelm)){
-                damage -= damage * .20;
-            }
-        } catch (Exception e) {
-
-        }
-
-        try{
-            if(defender.getInventory().getChestplate().equals(itemManager.arch)){
-                damage -= damage * .10;
-            }
-        } catch (Exception e) {
-
+        if(defender.getInventory().getChestplate() != null && defender.getInventory().getChestplate().equals(itemManager.arch)){
+            event.subtractReduxDamage(event.getReduxDamage() * .10);
         }
 
         if(isNPC(defender)){
             if(Objects.requireNonNull(getNPC(defender)).getId() == 41){
-                damage = damage / 1000;
+                event.setReduxDamage(event.getReduxDamage()/1000);
             }
         }
 
@@ -298,34 +205,14 @@ public class ReduxEvents implements Listener {
             return;
         }
 
-        try{
-            if (EXEcutioner(attacker, defender, damage, attacker.getInventory().getItemInHand().getItemMeta().getLore())) {
-                event.setCancelled(true);
-                try{
-                    KillMan(attacker, defender);
-                    return;
-                } catch (Exception e) {
 
-                }
-
-            }
-        }catch (Exception e){
-
-        }
-
-        try{
-
-            damage -= damage * ((double) damageDecrease.getDecrease(String.valueOf(defender.getUniqueId())) / 100);
-
-        }catch (Exception e){
-
-        }
+        event.subtractReduxDamage(event.getReduxDamage() * ((double) damageDecrease.getDecrease(String.valueOf(defender.getUniqueId())) / 100));
 
         try {
             if(getPrestige(String.valueOf(attacker.getUniqueId())) <= 1){
-                damage += damage * .10;
+                event.addReduxDamage(event.getReduxDamage() *.1);
             }else if(getPrestige(String.valueOf(defender.getUniqueId())) <= 1){
-                damage -= damage * .25;
+                event.subtractReduxDamage(event.getReduxDamage()*.5);
             }
         }catch (Exception e){
 
@@ -334,27 +221,21 @@ public class ReduxEvents implements Listener {
         try{
             if(isNPC(defender)){
                 if(Objects.requireNonNull(getNPC(defender)).getName().contains(ChatColor.GRAY + "[lvl 1]")){
-                    damage = damage / 10000;
+                    event.setReduxDamage(event.getReduxDamage()/100);
                 }
             }
         }catch (Exception e){
 
         }
 
-        try {
-            if (attacker.getInventory().getChestplate() != null) {
-                if (attacker.getInventory().getChestplate().equals(enchants.malding_chestplate)) {
-                    triggerChestplateMalding(attacker, defender, damage);
-                }
-            }
-        } catch (Exception e) {
-
+        if (attacker.getInventory().getChestplate() != null && attacker.getInventory().getChestplate().equals(enchants.malding_chestplate)) {
+            triggerChestplateMalding(attacker, defender, damage);
         }
 
         try{
-            damage += damage * ReduxAttacker.getPlayerIncrease();
+            event.addReduxDamage(event.getReduxDamage()*ReduxAttacker.getPlayerIncrease());
             ReduxAttacker.setPlayerIncrease(.0001);
-            damage -= damage * ReduxDefender.getPlayerDecrease();
+            event.subtractReduxDamage(event.getReduxDamage()*ReduxDefender.getPlayerDecrease());
             ReduxDefender.setPlayerDecrease(.0001);
         }catch (Exception e){
 
@@ -363,17 +244,17 @@ public class ReduxEvents implements Listener {
         try {
             if(defender.getInventory().getChestplate() != null){
                 if(defender.getInventory().getChestplate().equals(enchants.malding_chestplate)){
-                    damage -= damage * .10;
+                    event.subtractReduxDamage(event.getReduxDamage()*.10);
                 }
             }
             if(defender.getInventory().getLeggings() != null){
                 if(defender.getInventory().getLeggings().equals(enchants.malding_pants)){
-                    damage -= damage * .10;
+                    event.subtractReduxDamage(event.getReduxDamage()*.10);
                 }
             }
             if(defender.getInventory().getBoots() != null){
                 if(defender.getInventory().getBoots().equals(enchants.malding_boots)){
-                    damage -= damage * .10;
+                    event.subtractReduxDamage(event.getReduxDamage()*.10);
                 }
             }
         } catch (Exception e) {
@@ -386,32 +267,30 @@ public class ReduxEvents implements Listener {
 
 
         if(isNPC(attacker)){
-            damage = 5;
+            event.setReduxDamage(5);
         }
 
         if(isNPC(defender)){
 
-            damage = Math.max(damage / 3, 1);
+            event.setReduxDamage(Math.max(event.getReduxDamage() / 3, 1));
 
-            if (defender.getHealth() - (damage + true_dmg) <= 3) {
+            if (defender.getHealth() - (event.getReduxDamage()) <= 3) {
                 event.setCancelled(true);
                 try{
                     KillMan(attacker, defender);
-                    return;
-                } catch (Exception e) {
+                } catch (Exception ignored) {
 
                 }
             }else{
                 event.setReduxDamage(Math.max(damage, 0));
                 //defender.setHealth(Math.max(defender.getHealth()-true_dmg, 0));
             }
-        }else if (defender.getHealth() - (2 + true_dmg) >= -2 && defender.getHealth() - (2 + true_dmg) <= 1.5) {
+        }else if (defender.getHealth() - 2 >= -2 && defender.getHealth() - 2 <= 1.5) {
             event.setCancelled(true);
             try{
                 escapeProc.put(String.valueOf(defender.getUniqueId()), false);
                 KillMan(attacker, defender);
-                return;
-            } catch (Exception e) {
+            } catch (Exception ignored) {
 
             }
         }else{

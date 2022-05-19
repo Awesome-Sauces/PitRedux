@@ -1,5 +1,6 @@
 package com.alpha.redux.entityHandlers.MysticHandler;
 
+import com.alpha.redux.entityHandlers.MysticHandler.Pants.*;
 import com.alpha.redux.entityHandlers.MysticHandler.Swords.*;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
@@ -40,7 +41,18 @@ public class EnchantRuntime {
             new Perun(event);
             new Shark(event);
             new Sharp(event);
-        }else if(MysticType.valueOf(mysticType).equals(MysticType.SWORD)){
+        }else if(MysticType.valueOf(mysticType).equals(MysticType.PANT)){
+            new CriticallyFunky(event, event.getDefenders());
+            new EscapePod(event, event.getDefenders());
+            new FractionalReserve(event, event.getDefenders());
+            new Mirror(event, event.getDefenders());
+            new NotGladiator(event, event.getDefenders());
+            new Peroxide(event, event.getDefenders());
+            new Protection(event, event.getDefenders());
+            new RetroGravityMicrocosm(event, event.getDefenders());
+            new Solitude(event, event.getDefenders());
+            new Regularity(event, attacker);
+
 
         }
 

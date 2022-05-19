@@ -18,14 +18,18 @@ public class MysticEventHandlers implements Listener {
         List<String> DefenderPants = event.getDefenderPantEnchants();
         List<String> DefenderSword = event.getDefenderSwordEnchants();
 
-        if(!DefenderPants.isEmpty()) {
+        if(!AttackerPants.isEmpty()) {
             new EnchantRuntime(event.getAttacker(), event.getDefenders(), event, "PANT").run();
         }
+
 
         if(!AttackerSword.isEmpty()) {
             new EnchantRuntime(event.getAttacker(), event.getDefenders(), event, "SWORD").run();
         }
 
+        if(!DefenderPants.isEmpty()) {
+            new EnchantRuntime(event.getAttacker(), event.getDefenders(), event, "PANT").run();
+        }
 
     }
 
