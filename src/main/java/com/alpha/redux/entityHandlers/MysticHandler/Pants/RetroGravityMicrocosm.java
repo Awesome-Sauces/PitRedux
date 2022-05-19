@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class RetroGravityMicrocosm {
 
-    private static Map<String, Integer> hitCounter = new HashMap<String, Integer>();
+    public static Map<String, Integer> hitCounter = new HashMap<String, Integer>();
 
     public RetroGravityMicrocosm(ReduxDamageEvent event, ReduxPlayer player){
         PantEnchant retrogravitymicrocosm = new PantEnchant(event, player, "rgm") {

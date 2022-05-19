@@ -23,7 +23,7 @@ public class actionbarplus {
         String colorPlayer = PlayerNameColor(defender);
         StringBuilder health = new StringBuilder();
         health.append(" ");
-        Double defenderHealth = (double) Math.round(defender.getHealth());
+        double defenderHealth = (double) Math.round(defender.getHealth());
         int red_heart = (int) event.getFinalDamage();
         int dark_red_heart = (int) (defenderHealth - event.getFinalDamage())  / 2;
         int gray_heart = (int) (((defenderHealth - defender.getMaxHealth())) - dark_red_heart) / 2;
