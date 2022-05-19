@@ -274,7 +274,7 @@ public class ReduxEvents implements Listener {
 
             event.setReduxDamage(Math.max(event.getReduxDamage() / 3, 1));
 
-            if (defender.getHealth() - (event.getReduxDamage()) <= 3) {
+            if (defender.getHealth() - event.getReduxDamage() <= 3) {
                 event.setCancelled(true);
                 try{
                     KillMan(attacker, defender);

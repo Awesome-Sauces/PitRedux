@@ -55,12 +55,12 @@ public class ReduxDamageEvent extends Event implements Cancellable {
         for(ItemStack stack : attackerArmor)
             if(stack != null && stack.getItemMeta() != null && stack.getItemMeta().getLore() != null && stack.getType().equals(Material.LEATHER_LEGGINGS)) this.attackerPantEnchants = CheckEnchantOnPant(stack.getItemMeta().getLore());
 
-        if(this.attackerSword.getItemMeta().getLore() != null) this.attackerSwordEnchants = CheckEnchantOnSword(this.attackerSword.getItemMeta().getLore());
+        if(this.attackerSword.getItemMeta() != null && this.attackerSword.getItemMeta().getLore() != null) this.attackerSwordEnchants = CheckEnchantOnSword(this.attackerSword.getItemMeta().getLore());
     }
 
     private void setDefenderEnchants(){
         for(ItemStack stack : defenderArmor)
-            if(stack.getItemMeta().getLore() != null && stack.getType().equals(Material.LEATHER_LEGGINGS)) this.defenderPantEnchants = CheckEnchantOnPant(stack.getItemMeta().getLore());
+            if(stack.getItemMeta() != null && stack.getItemMeta().getLore() != null && stack.getType().equals(Material.LEATHER_LEGGINGS)) this.defenderPantEnchants = CheckEnchantOnPant(stack.getItemMeta().getLore());
 
     }
 
