@@ -305,6 +305,8 @@ public class ReduxEvents implements Listener {
     public static void DeathEventHandler(ReduxDeathEvent event){
 
 
+        Bukkit.broadcastMessage(event.getDefender().getPlayerObject().getDisplayName() + isNPC(event.getDefender().getPlayerObject()));
+
         ReduxPlayer ReduxAttacker = event.getAttacker();
 
         if(!isNPC(ReduxAttacker.getPlayerObject())){

@@ -41,7 +41,6 @@ import static com.alpha.redux.playerdata.bounties.BountyClaimed;
 import static com.alpha.redux.playerdata.economy.*;
 import static com.alpha.redux.events.nonPermItems.ClearAndCheck;
 import static com.alpha.redux.playerdata.playerStats.deleteHologramStreak;
-import static com.alpha.redux.playerdata.playerStats.mega;
 import static com.alpha.redux.playerdata.prestiges.getPrestige;
 import static com.alpha.redux.playerdata.prestiges.hasPrestige;
 import static com.alpha.redux.playerdata.streaks.*;
@@ -53,10 +52,7 @@ import static com.alpha.redux.well.loreChecker.*;
 public class killHandler {
 
     public static boolean isNPC(Player player){
-        for (NPC npc : CitizensAPI.getNPCRegistry()) {
-            if (npc.getEntity() == player) return true;
-        }
-        return false;
+        return CitizensAPI.getNPCRegistry().isNPC(player);
     }
 
     public static NPC getNPC(Player player){

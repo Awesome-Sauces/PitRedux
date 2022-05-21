@@ -305,6 +305,9 @@ public class events implements Listener {
 
     @EventHandler
     public static void Death(PlayerDeathEvent event){
+
+        Bukkit.broadcastMessage(event.getEntity().getDisplayName() + isNPC(event.getEntity().getPlayer()));
+
         if(event.getEntity() == null) {return;}
         if(isNPC(event.getEntity())){
             NPC npc = getNPC(event.getEntity());

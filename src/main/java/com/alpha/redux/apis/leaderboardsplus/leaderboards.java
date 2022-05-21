@@ -47,7 +47,7 @@ public class leaderboards{
         String top10 = getName(topPlayers.get(0).getKey());
 
         //For every player, add their name to gui
-            hologram.appendTextLine(ChatColor.AQUA + "§lTOP ACTIVE PLAYERS");
+            hologram.appendTextLine(ChatColor.AQUA + ChatColor.translateAlternateColorCodes('&', "&lTOP ACTIVE PLAYERS"));
             hologram.appendTextLine("");
             hologram.appendTextLine(ChatColor.YELLOW + "1. " + ChatColor.RESET + ChatEventApi(top1, topPlayers.get(9).getKey()));
             hologram.appendTextLine("");

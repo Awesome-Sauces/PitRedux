@@ -82,7 +82,7 @@ public class levelcolor {
             case 67:
             case 68:
             case 69:
-                return "§6§l";
+                return ChatColor.translateAlternateColorCodes('&', "&6&l");
             case 70:
             case 71:
             case 72:
@@ -93,7 +93,7 @@ public class levelcolor {
             case 77:
             case 78:
             case 79:
-                return "§c§l";
+                return ChatColor.translateAlternateColorCodes('&', "&c&l");
             case 80:
             case 81:
             case 82:
@@ -104,7 +104,7 @@ public class levelcolor {
             case 87:
             case 88:
             case 89:
-                return "§4§l";
+                return ChatColor.translateAlternateColorCodes('&', "&4&l");
             case 90:
             case 91:
             case 92:
@@ -115,7 +115,7 @@ public class levelcolor {
             case 97:
             case 98:
             case 99:
-                return "§5§l";
+                return ChatColor.translateAlternateColorCodes('&', "&5&l");
             case 100:
             case 101:
             case 102:
@@ -126,7 +126,7 @@ public class levelcolor {
             case 107:
             case 108:
             case 109:
-                return "§d§l";
+                return ChatColor.translateAlternateColorCodes('&', "&d&l");
             case 110:
             case 111:
             case 112:
@@ -137,9 +137,9 @@ public class levelcolor {
             case 117:
             case 118:
             case 119:
-                return "§f§l";
+                return ChatColor.translateAlternateColorCodes('&', "&f&l");
             case 120:
-                return "§b§l";
+                return ChatColor.translateAlternateColorCodes('&', "&b&l");
         }
         return null;
     }

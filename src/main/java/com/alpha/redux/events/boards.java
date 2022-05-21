@@ -34,17 +34,17 @@ public class boards {
         hasMegaStreak(String.valueOf(player.getUniqueId()));
         if (Objects.equals(getMegaStreak(String.valueOf(player.getUniqueId())), "highlander")){
             select_mega = "Highlander";
-            mega_color = "§6";
+            mega_color = ChatColor.translateAlternateColorCodes('&', "&6");
         }else if (Objects.equals(getMegaStreak(String.valueOf(player.getUniqueId())), "beastmode")){
             select_mega = "Beastmode";
-            mega_color = "§a";
+            mega_color = ChatColor.translateAlternateColorCodes('&', "&a");
         }else if (Objects.equals(getMegaStreak(String.valueOf(player.getUniqueId())), "uber")){
             select_mega = "Uberstreak";
-            mega_color = "§d";
+            mega_color = ChatColor.translateAlternateColorCodes('&', "&d");
             activate_amount = 100;
         }else if (Objects.equals(getMegaStreak(String.valueOf(player.getUniqueId())), "moon")){
             select_mega = "To the Moon";
-            mega_color = "§b";
+            mega_color = ChatColor.translateAlternateColorCodes('&', "&b");
             activate_amount = 100;
         }
 

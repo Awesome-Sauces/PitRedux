@@ -45,7 +45,7 @@ public class randomROLL {
         double chanceIII = 0.0001;
 
         List<String> lore = new ArrayList<>();
-        lore.add("§7Lives: §a20§7/20");
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a20§7/20"));
 
         List<String> enchants = new ArrayList<>();
 

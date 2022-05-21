@@ -138,7 +138,7 @@ public class prestigebrackets {
             case 97:
             case 98:
             case 99:
-                prestige_bracket = "§6§l";
+                prestige_bracket = ChatColor.translateAlternateColorCodes('&', "&6&l");
                 break;
             default:
                 prestige_bracket = String.valueOf(ChatColor.DARK_RED);

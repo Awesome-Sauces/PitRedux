@@ -626,7 +626,7 @@ public class itemManager {
         meta.setColor(Color.RED);
         meta.setDisplayName("§cArmageddon Boots");
         List<String> lore = new ArrayList<>();
-        lore.add("§7Lives: §a20§7/20");
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a20§7/20"));
         lore.add("");
         lore.add("§9Evil Within");
         lore.add("§7You're invincible to venom's");
@@ -677,7 +677,7 @@ public class itemManager {
         meta.setColor(Color.BLACK);
         meta.setDisplayName("§5Tier II Dark Pants");
         List<String> lore = new ArrayList<>();
-        lore.add("§7Lives: §a20§7/20");
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a20§7/20"));
         lore.add("");
         lore.add("§9Somber");
         lore.add("§7You are unaffected by mystical");

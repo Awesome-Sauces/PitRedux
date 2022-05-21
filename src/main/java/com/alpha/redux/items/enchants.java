@@ -3,6 +3,7 @@ package com.alpha.redux.items;
 import com.alpha.redux.well.pantEnchantLores;
 import com.alpha.redux.well.swordEnchantLores;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -197,7 +198,7 @@ public class enchants {
         meta.setDisplayName("§cTier I Chestplate");
         List<String> lore = new ArrayList<>();
 
-        lore.add("§7Lives: §a20§7/20");
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a20§7/20"));
         lore.add("    ");
         lore.add("§dRARE! §9Flaming");
         lore.add("§7If the final damage of your strike");
@@ -225,7 +226,7 @@ public class enchants {
         meta.setDisplayName("§cTier I Boots");
         List<String> lore = new ArrayList<>();
 
-        lore.add("§7Lives: §a20§7/20");
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a20§7/20"));
         lore.add("    ");
         lore.add("§dRARE! §9Glamorous");
         lore.add("§7Leave a fancy trail behind you");
@@ -250,7 +251,7 @@ public class enchants {
         meta.setDisplayName("§cTier III Red Pants");
         List<String> lore = new ArrayList<>();
 
-        lore.add("§7Lives: §a20§7/20");
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a20§7/20"));
         lore.add("    ");
         lore.addAll(new pantEnchantLores("protIII").getLore());
 
@@ -273,7 +274,7 @@ public class enchants {
         meta.setDisplayName("§cTier I Sword");
         List<String> lore = new ArrayList<>();
 
-        lore.add("§7Lives: §a20§7/20");
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a20§7/20"));
         lore.add("    ");
         lore.addAll(new swordEnchantLores("sharpIII").getLore());
 
@@ -381,7 +382,7 @@ public class enchants {
         meta.setColor(Color.fromRGB(125,195,131));
         meta.setDisplayName("§3Tier I Sewer Pants");
         List<String> lore = new ArrayList<>();
-        lore.add("§7Lives: §a20§7/20");
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a20§7/20"));
         lore.add("        ");
         lore.add("§9Hidden Jewel");
         lore.add("§7Kill §c120§7 players to recycle");
@@ -407,7 +408,7 @@ public class enchants {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§cTier I Sword");
         List<String> lore = new ArrayList<>();
-        lore.add("§7Lives: §a20§7/20");
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a20§7/20"));
         lore.add("    ");
         lore.add("§9Hidden Jewel");
         lore.add("§7Kill §c120§7 players to recycle");
