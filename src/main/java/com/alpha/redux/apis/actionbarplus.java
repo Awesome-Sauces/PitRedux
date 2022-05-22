@@ -31,15 +31,15 @@ public class actionbarplus {
             gray_heart = (int) Math.abs((int) defender.getMaxHealth() - defenderHealth);
         }
         for (int i = 0; i < Math.abs(dark_red_heart); i++) {
-            health.append("&4❤");
+            health.append(ChatColor.translateAlternateColorCodes('&', "&4\u2764"));
         }
 
         for (int i = 0; i < Math.abs(red_heart); i++) {
-            health.append("&c❤");
+            health.append(ChatColor.translateAlternateColorCodes('&', "&c\u2764"));
         }
 
         for (int i = 0; i < Math.abs(gray_heart); i++) {
-            health.append("&0❤");
+            health.append(ChatColor.translateAlternateColorCodes('&', "&0\u2764"));
         }
 
 

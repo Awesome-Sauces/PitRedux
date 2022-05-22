@@ -193,7 +193,7 @@ public class itemManager {
         lore.add("");
         lore.add("§9Lifesteal III");
         lore.add("§7Heal for §c12% §7of damage dealt");
-        lore.add("§7to §c1.5❤");
+        lore.add("§7to §c1.5\u2764");
         meta.setLore(lore);
         meta.addEnchant(Enchantment.LUCK, 1, false);
         meta.addEnchant(Enchantment.DAMAGE_ALL, 2, false);
@@ -262,7 +262,7 @@ public class itemManager {
         List<String> lore = new ArrayList<>();
         lore.add("§9Lifesteal III");
         lore.add("§7Heal for §c20% §7of damage dealt up");
-        lore.add("§7to §c1.5❤");
+        lore.add("§7to §c1.5\u2764");
         meta.setLore(lore);
         meta.addEnchant(Enchantment.LUCK, 1, false);
         meta.addEnchant(Enchantment.DAMAGE_ALL, 2, false);
@@ -279,7 +279,7 @@ public class itemManager {
         List<String> lore = new ArrayList<>();
         lore.add("§dRARE! §9Combo: Perun's Wrath III");
         lore.add("§7Every §efourth §7hit strikes");
-        lore.add("§elightning §7for §c1❤ §7+ §c1❤");
+        lore.add("§elightning §7for §c1\u2764 §7+ §c1\u2764");
         lore.add("§7per §bdiamond piece §7on your");
         lore.add("§7victim");
         lore.add("§7§oLightning deals true damage");
@@ -660,7 +660,7 @@ public class itemManager {
         meta.setDisplayName("§cTier I Sword");
         List<String> lore = new ArrayList<>();
         lore.add("§dRARE! §9Gamble III");
-        lore.add("§d50% chance §7to deal§c 2❤ §7true");
+        lore.add("§d50% chance §7to deal§c 2\u2764 §7true");
         lore.add("§7damage to whoever you hit, or to");
         lore.add("§7yourself");
         meta.setLore(lore);
@@ -704,7 +704,7 @@ public class itemManager {
         meta.setDisplayName("§cTier I Sword");
         List<String> lore = new ArrayList<>();
         lore.add("§dRARE! §9Executioner III");
-        lore.add("§7Hitting an enemy to below§c 2❤");
+        lore.add("§7Hitting an enemy to below§c 2\u2764");
         lore.add("§7instantly kills them");
         lore.add("                      ");
         lore.add("§9Sweaty III");

@@ -47,7 +47,6 @@ import static com.alpha.redux.funEvents.event.endTwoTimes;
 import static com.alpha.redux.funEvents.event.twoTimesEvent;
 import static com.alpha.redux.items.tebexItems.giveDyes;
 import static com.alpha.redux.playerdata.economy.*;
-import static com.alpha.redux.playerdata.playerStats.deleteHologramStreak;
 import static com.alpha.redux.playerdata.prestiges.*;
 import static com.alpha.redux.playerdata.streaks.*;
 import static com.alpha.redux.playerdata.xpManager.GetCurrentLevel;

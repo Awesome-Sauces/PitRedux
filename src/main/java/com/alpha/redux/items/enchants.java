@@ -52,7 +52,7 @@ public class enchants {
         ItemStack item = new ItemStack(Material.LEATHER_LEGGINGS, 1);
         LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
         meta.setColor(Color.RED);
-        meta.setDisplayName("§cTier I Red Pants");
+        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cTier I Red Pants"));
         List<String> lore = new ArrayList<>();
 
 
@@ -66,7 +66,7 @@ public class enchants {
         lore.add("§7Gain §cRegen II §7(8s) when hit");
 
         lore.add("§9Boo-boo III");
-        lore.add("§7Passively regain §c1❤§7 every 4");
+        lore.add("§7Passively regain §c1\u2764§7 every 4");
         lore.add("§7seconds");
 
         lore.add("§9Fractional Reserve III");
@@ -82,9 +82,9 @@ public class enchants {
         lore.add("§dRARE! §9Retro-Gravity Microcosm III");
         lore.add("§7When a player hits you from");
         lore.add("§7above ground §e3 times§7 in a row:");
-        lore.add("§7You heal §c1.25❤");
-        lore.add("§7Gain §c+1.5❤ §7damage vs them for 30s");
-        lore.add("§7They take §c0.5❤§7 true damage");
+        lore.add("§7You heal §c1.25\u2764");
+        lore.add("§7Gain §c+1.5\u2764 §7damage vs them for 30s");
+        lore.add("§7They take §c0.5\u2764§7 true damage");
 
         lore.add("§9Sweaty III");
         lore.add("§7Earn §b+60% XP§7 from streak XP");
@@ -124,8 +124,8 @@ public class enchants {
         lore.add("§7player (max 10 players)");
 
         lore.add("§9Golden Heart III");
-        lore.add("§7Gain §6+2❤§7 absorption on kill");
-        lore.add("§7(max §6❤§7)");
+        lore.add("§7Gain §6+2\u2764§7 absorption on kill");
+        lore.add("§7(max §6\u2764§7)");
 
         lore.add("§9Spite");
         lore.add("§7Deal §c+20% damage§7 but receive");
@@ -153,9 +153,9 @@ public class enchants {
         lore.add("§7Also §apoisons §7yourself!");
 
         lore.add("§9Misery");
-        lore.add("§7Deal §c+0.5❤ §7true damage against");
+        lore.add("§7Deal §c+0.5\u2764 §7true damage against");
         lore.add("§7players wearing leather pants but");
-        lore.add("§7take §c0.3❤");
+        lore.add("§7take §c0.3\u2764");
 
         meta.spigot().setUnbreakable(true);
         meta.setLore(lore);
@@ -202,7 +202,7 @@ public class enchants {
         lore.add("    ");
         lore.add("§dRARE! §9Flaming");
         lore.add("§7If the final damage of your strike");
-        lore.add("§7deals less than §c1.5❤§7 §7damage,");
+        lore.add("§7deals less than §c1.5\u2764§7 §7damage,");
         lore.add("§7ignite opponent in §a0.1s §7for §c75%");
         lore.add("§7damage");
 

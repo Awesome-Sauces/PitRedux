@@ -16,12 +16,13 @@ import java.util.Map;
 
 public class RetroGravityMicrocosm {
 
-    public static Map<String, Integer> hitCounter = new HashMap<String, Integer>();
+    Map<String, Integer> hitCounter = new HashMap<>();
 
     public RetroGravityMicrocosm(ReduxDamageEvent event, ReduxPlayer player){
         PantEnchant retrogravitymicrocosm = new PantEnchant(event, player, "rgm") {
             @Override
             public void OneAction() {
+                Bukkit.broadcastMessage("HELLO");
                 if(criticalHit(event)){
                     runIt(event.getAttacker().getPlayerObject(), event.getDefenders().getPlayerObject(), 2, 1);
                 }
@@ -29,6 +30,7 @@ public class RetroGravityMicrocosm {
 
             @Override
             public void TwoAction() {
+                Bukkit.broadcastMessage("HELLO");
                 if(criticalHit(event)){
                     runIt(event.getAttacker().getPlayerObject(), event.getDefenders().getPlayerObject(), 3, 2);
                 }
@@ -36,6 +38,7 @@ public class RetroGravityMicrocosm {
 
             @Override
             public void ThreeAction() {
+                Bukkit.broadcastMessage("HELLO");
                 if(criticalHit(event)){
                     runIt(event.getAttacker().getPlayerObject(), event.getDefenders().getPlayerObject(), 4, 3);
                 }

@@ -41,8 +41,8 @@ public class pantJewl {
                 lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
                 lore.add("    ");
                 lore.add("&9Golden Heart III");
-                lore.add("&7Gain &6+2❤&7 absorption on kill");
-                lore.add("&7(max &6❤&7)");
+                lore.add("&7Gain &6+2\u2764&7 absorption on kill");
+                lore.add("&7(max &6\u2764&7)");
                 break;
             case 4:
             case 5:
@@ -170,9 +170,9 @@ public class pantJewl {
                 lore.add("&dRARE! &9Retro-Gravity Microcosm III");
                 lore.add("&7When a player hits you from");
                 lore.add("&7above ground &e3 times&7 in a row:");
-                lore.add("&7You heal &c1.2❤");
-                lore.add("&7Gain &c+1.5❤&f &cdamage&f vs them for &e30s");
-                lore.add("&7They take &c0.5❤&f &ftrue damage");
+                lore.add("&7You heal &c1.2\u2764");
+                lore.add("&7Gain &c+1.5\u2764&f &cdamage&f vs them for &e30s");
+                lore.add("&7They take &c0.5\u2764&f &ftrue damage");
                 hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! " + rank.getNameColor(player) + player.getDisplayName() + "&7created &cTier I Pants!"), compileListToString(lore));
                 player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 1);
                 break;
@@ -182,7 +182,7 @@ public class pantJewl {
                 lore.add("    ");
                 lore.add("&dRARE! &9Regularity III");
                 lore.add("&7If the final damage of your strike");
-                lore.add("&7deals less than &c1.5❤&7 &7damage,");
+                lore.add("&7deals less than &c1.5\u2764&7 &7damage,");
                 lore.add("&7strike again in &a0.1s &7for &c75%");
                 lore.add("&7damage");
                 hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! " + rank.getNameColor(player) + player.getDisplayName() + "&7created &cTier I Pants!"), compileListToString(lore));

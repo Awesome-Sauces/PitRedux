@@ -81,7 +81,7 @@ public class swordJewl {
                 lore.add("    ");
                 lore.add("&9Lifesteal III");
                 lore.add("&7Heal for &c13%&7 of damage dealt up");
-                lore.add("&7to &c1.5❤");
+                lore.add("&7to &c1.5\u2764");
                 break;
             case 16:
                 if (Kingbust(lore)) {
@@ -101,7 +101,7 @@ public class swordJewl {
                 lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
                 lore.add("    ");
                 lore.add("&dRARE! &9Executioner III");
-                lore.add("&7Hitting an enemy to below &c3.5❤");
+                lore.add("&7Hitting an enemy to below &c3.5\u2764");
                 lore.add("&7instantly kills them");
                 hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! " + rank.getNameColor(player) + player.getDisplayName() + "&7 created &cTier I Sword!"), compileListToString(lore));
                 player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 1);
@@ -154,7 +154,7 @@ public class swordJewl {
                 lore.add("    ");
                 lore.add("&9Shark III");
                 lore.add("&7Deal &c+7%&7 damager per other");
-                lore.add("&7player below &c6❤&7 within 12");
+                lore.add("&7player below &c6\u2764&7 within 12");
                 lore.add("&7blocks");
                 break;
             case 37:
@@ -170,7 +170,7 @@ public class swordJewl {
                 lore.add("    ");
                 lore.add("&dRARE! &9Combo: Perun's Wrath III");
                 lore.add("&7Each &efourth&7 hit strikes");
-                lore.add("&elightning&7 for &c1❤&7 + &c1❤");
+                lore.add("&elightning&7 for &c1\u2764&7 + &c1\u2764");
                 lore.add("&7per &bdiamond piece&7 on your");
                 lore.add("&7victim.");
                 lore.add("&7&oLightning deals true damage");
@@ -182,7 +182,7 @@ public class swordJewl {
                 lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
                 lore.add("    ");
                 lore.add("&dRARE! &9Gamble! III");
-                lore.add("&d50% chance &7to deal &c3❤&7 true");
+                lore.add("&d50% chance &7to deal &c3\u2764&7 true");
                 lore.add("&7damage to whoever you hit, or to");
                 lore.add("&7yourself");
                 hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! " + rank.getNameColor(player) + player.getDisplayName() + "&7 created &cTier I Sword!"), compileListToString(lore));
