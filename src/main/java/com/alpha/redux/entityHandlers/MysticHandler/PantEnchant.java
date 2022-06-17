@@ -2,6 +2,7 @@ package com.alpha.redux.entityHandlers.MysticHandler;
 
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.List;
@@ -21,12 +22,13 @@ public abstract class PantEnchant {
         this.enchant = enchant;
         this.player = player;
 
-        for(String ench : player.getPantEnchants())
-            if (ench.contains(this.enchant)) {
-                this.hasEnchant = true;
-                this.enchantTier = ench.replace(this.enchant, "");
-                break;
-            }
+        if(player.getPantEnchants() != null)
+            for(String ench : player.getPantEnchants())
+                if (ench.contains(this.enchant)) {
+                    this.hasEnchant = true;
+                    this.enchantTier = ench.replace(this.enchant, "");
+                    break;
+                }
 
         if (player.getPlayerObject().hasPotionEffect(PotionEffectType.POISON)) hasEnchant = false;
 
@@ -49,11 +51,9 @@ public abstract class PantEnchant {
         if(hasEnchant){
 
             // Making it so the attacker's damage isn't negatively affected by their own pants
-            if(event.getAttacker() == this.player && !Objects.equals(this.enchant, "reg") ||
-                    event.getAttacker() == this.player && !Objects.equals(this.enchant, "venom")) return;
+            if(event.getAttacker() == this.player && !Objects.equals(this.enchant, "reg")) return;
             // Making attack only pant enchants not trigger for defender
-            if(event.getDefenders() == this.player && this.enchant.equals("reg") ||
-                    event.getDefenders() == this.player && this.enchant.equals("venom")) return;
+            if(event.getDefenders() == this.player && this.enchant.equals("reg")) return;
 
 
             switch (this.enchantTier){

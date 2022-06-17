@@ -64,7 +64,7 @@ public class boards {
 
         String prestige_bracket = prestigebracket(player);
 
-        Score score = objective.getScore(ChatColor.GRAY + "v1.8.0"); //create a line for the board
+        Score score = objective.getScore(ChatColor.GRAY + "v1.9.0"); //create a line for the board
         Score s2 = objective.getScore(" "); //blank space
         Score s3 = objective.getScore(ChatColor.WHITE + "Prestige: " + ChatColor.YELLOW + integerToRoman(getPrestige(String.valueOf(player.getUniqueId()))));
         Score s4 = objective.getScore(ChatColor.WHITE + "Level: " + prestige_bracket + "[" + ChatColor.AQUA + getLevelColor(randomDUDE[1]) + randomDUDE[1] + prestige_bracket + "]");

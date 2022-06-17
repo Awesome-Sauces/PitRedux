@@ -12,10 +12,10 @@ public class RenownItems {
 
     public static ItemStack DamageItemIncrease(String uuid){
         return ItemMaker(Material.REDSTONE, ChatColor.YELLOW + "Damage Increase",
-                ChatColor.GRAY + "Each purchase gives you " + ChatColor.RED + "+5% damage\n" + ChatColor.GRAY +
-                "Starts dividing by" + ChatColor.YELLOW + " 40 " + ChatColor.GRAY + "past " + ChatColor.RED + "+10%\n\n" + ChatColor.GRAY +
-                "Current boost: " + ChatColor.RED +  "+" + damageIncrease.getIncrease(uuid) + "%\n\n" +
-                ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "5 Renown Tokens", 1, true);
+                ChatColor.GRAY + "Each purchase gives you " + ChatColor.RED + "+1% damage\n" + ChatColor.GRAY +
+                "Capped at " + "+10%\n\n" + ChatColor.GRAY +
+                "Current boost: " + ChatColor.RED +  "+" + Math.min(damageIncrease.getIncrease(uuid), 10) + "%\n\n" +
+                ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "16 Renown Tokens", 1, true);
     }
 
     public static ItemStack DamageItemDecrease(String uuid){

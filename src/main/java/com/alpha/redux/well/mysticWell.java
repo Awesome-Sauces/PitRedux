@@ -13,6 +13,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import java.util.List;
 
+import static com.alpha.redux.well.bowRoll.rollBowEnchants;
 import static com.alpha.redux.well.randomROLL.*;
 import static com.alpha.redux.well.swordLore.*;
 
@@ -95,6 +96,47 @@ public class mysticWell {
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
         meta.spigot().setUnbreakable(true);
         meta.setLore(TierIIISword(item.getItemMeta().getLore(), player));
+        item.setItemMeta(meta);
+        //Shaped Recipe
+
+        return item;
+    }
+
+
+    public static ItemStack createBow(Player player){
+        ItemStack item = new ItemStack(Material.BOW, 1);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cTier I Bow"));
+        item.addEnchantment(Enchantment.ARROW_INFINITE, 1);
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
+        meta.spigot().setUnbreakable(true);
+        meta.setLore(rollBowEnchants(player, true, null));
+        item.setItemMeta(meta);
+        //Shaped Recipe
+
+        return item;
+    }
+
+    public static ItemStack createBowI(ItemStack item, Player player) {
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cTier II Bow"));
+        item.addEnchantment(Enchantment.ARROW_INFINITE, 1);
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
+        meta.spigot().setUnbreakable(true);
+        meta.setLore(rollBowEnchants(player, false, item.getItemMeta().getLore()));
+        item.setItemMeta(meta);
+        //Shaped Recipe
+
+        return item;
+    }
+
+    public static ItemStack createBowII(ItemStack item, Player player) {
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cTier III Bow"));
+        item.addEnchantment(Enchantment.ARROW_INFINITE, 1);
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
+        meta.spigot().setUnbreakable(true);
+        meta.setLore(rollBowEnchants(player, false, item.getItemMeta().getLore()));
         item.setItemMeta(meta);
         //Shaped Recipe
 

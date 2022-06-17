@@ -463,9 +463,10 @@ public class itemManager {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§cTier I Boots");
         List<String> lore = new ArrayList<>();
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a5§7/5"));
         lore.add("");
         lore.add("§9Heist Master");
-        lore.add("§e50% §7chance to double §c§lSOME §7rewards!");
+        lore.add("§e25% §7chance to double §c§lSOME §7rewards!");
         lore.add("");
         meta.setLore(lore);
         meta.addEnchant(Enchantment.LUCK, 1, false);
@@ -481,9 +482,10 @@ public class itemManager {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§cTier I Boots");
         List<String> lore = new ArrayList<>();
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a5§7/5"));
         lore.add("");
         lore.add("§9Heist Master II");
-        lore.add("§e100% §7chance to double §c§lSOME §7rewards!");
+        lore.add("§e50% §7chance to double §c§lSOME §7rewards!");
         lore.add("");
         meta.setLore(lore);
         meta.addEnchant(Enchantment.LUCK, 1, false);
@@ -497,11 +499,12 @@ public class itemManager {
     private static void createHeistMasterIII() {
         ItemStack item = new ItemStack(Material.GOLD_BOOTS, 1);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName("§cTier III Boots");
+        meta.setDisplayName("§cTier I Boots");
         List<String> lore = new ArrayList<>();
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a5§7/5"));
         lore.add("");
         lore.add("§9Heist Master III");
-        lore.add("§e100% §7chance to triple §c§lSOME §7rewards!");
+        lore.add("§e75% §7chance to double §c§lSOME §7rewards!");
         lore.add("");
         meta.setLore(lore);
         meta.addEnchant(Enchantment.LUCK, 1, false);
@@ -626,7 +629,7 @@ public class itemManager {
         meta.setColor(Color.RED);
         meta.setDisplayName("§cArmageddon Boots");
         List<String> lore = new ArrayList<>();
-        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a20§7/20"));
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a5§7/5"));
         lore.add("");
         lore.add("§9Evil Within");
         lore.add("§7You're invincible to venom's");
@@ -677,7 +680,7 @@ public class itemManager {
         meta.setColor(Color.BLACK);
         meta.setDisplayName("§5Tier II Dark Pants");
         List<String> lore = new ArrayList<>();
-        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a20§7/20"));
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a5§7/5"));
         lore.add("");
         lore.add("§9Somber");
         lore.add("§7You are unaffected by mystical");

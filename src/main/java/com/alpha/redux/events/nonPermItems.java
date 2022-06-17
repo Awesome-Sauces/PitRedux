@@ -20,29 +20,29 @@ public class nonPermItems {
     public static void ClearAndCheck(Player player){
         try {
             if (player.getInventory().containsAtLeast(itemManager.feather, 1)) {
-                if(getStreak(String.valueOf(player.getUniqueId())) <= 249){
+                if(getStreak(String.valueOf(player.getUniqueId())) <= 349){
                     player.getInventory().removeItem(itemManager.feather);
                     player.sendMessage(ChatColor.AQUA + "Your funky feather just saved your items!");
                     return;
                 }else{
-                    player.sendMessage(ChatColor.GREEN + "Congrats! " + ChatColor.GRAY + "you reached a 250 kill streak and kept your" + ChatColor.DARK_AQUA + " Funky Feather" + ChatColor.GRAY + "!");
+                    player.sendMessage(ChatColor.GREEN + "Congrats! " + ChatColor.GRAY + "you reached a 350 kill streak and kept your" + ChatColor.DARK_AQUA + " Funky Feather" + ChatColor.GRAY + "!");
                 }
 
             }else if (player.getInventory().containsAtLeast(itemManager.gmc_feather, 1)) {
-                if(getStreak(String.valueOf(player.getUniqueId())) <= 249){
+                if(getStreak(String.valueOf(player.getUniqueId())) <= 349){
                     player.getInventory().removeItem(itemManager.gmc_feather);
                     player.sendMessage(ChatColor.AQUA + "Your funky feather just saved your items!");
                     return;
                 }else{
-                    player.sendMessage(ChatColor.GREEN + "Congrats! " + ChatColor.GRAY + "you reached a 250 kill streak and kept your" + ChatColor.DARK_AQUA + " Funky Feather" + ChatColor.GRAY + "!");
+                    player.sendMessage(ChatColor.GREEN + "Congrats! " + ChatColor.GRAY + "you reached a 350 kill streak and kept your" + ChatColor.DARK_AQUA + " Funky Feather" + ChatColor.GRAY + "!");
                 }
 
             }else {
 
                 hasStreak(String.valueOf(player.getUniqueId()));
 
-                if(getStreak(String.valueOf(player.getUniqueId())) > 100){
-                    player.sendMessage(ChatColor.GREEN + "Congrats! " + ChatColor.GRAY + "you reached a 100 kill streak and kept your lives!");
+                if(getStreak(String.valueOf(player.getUniqueId())) > 250){
+                    player.sendMessage(ChatColor.GREEN + "Congrats! " + ChatColor.GRAY + "you reached a 250 kill streak and kept your lives!");
                 }
 
                 try {
@@ -65,28 +65,6 @@ public class nonPermItems {
 
                 }
 
-                try {
-                    if(player.getInventory().getLeggings().getItemMeta().equals(itemManager.moctezuma_three.getItemMeta())){
-                        player.getInventory().setLeggings(null);
-                    }
-
-                    if(player.getInventory().contains(itemManager.moctezuma_three)){
-                        player.getInventory().remove(itemManager.moctezuma_three);
-                    }
-                }catch (Exception e){
-
-                }
-
-                try {
-                    if(player.getInventory().getLeggings().getItemMeta().equals(itemManager.sweaty_three.getItemMeta())){
-                        player.getInventory().setLeggings(null);
-                    }
-                    if(player.getInventory().contains(itemManager.sweaty_three)){
-                        player.getInventory().remove(itemManager.sweaty_three);
-                    }
-                }catch (Exception e){
-
-                }
 
                 try {
                     if (player.getInventory().contains(ItemMaker(Material.OBSIDIAN, "NULL", "NULL", 1, false))){
@@ -96,17 +74,6 @@ public class nonPermItems {
 
                 }
 
-                try {
-                    if(player.getInventory().contains(itemManager.Moctezuma_sword_three)){
-                        player.getInventory().remove(itemManager.Moctezuma_sword_three);
-                    }
-
-                    if(player.getInventory().contains(itemManager.sweaty_sword_three)){
-                        player.getInventory().remove(itemManager.sweaty_sword_three);
-                    }
-                }catch (Exception e){
-
-                }
 
                 try {
                     if (player.getInventory().contains(ItemMaker(Material.DIAMOND_SWORD, "NULL", "NULL", 1, false))) {

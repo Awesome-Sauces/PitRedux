@@ -39,8 +39,7 @@ import static com.alpha.redux.apis.locations.getCakeLocation;
 import static com.alpha.redux.events.boards.CreateScore;
 import static com.alpha.redux.funEvents.event.handleTwoEvent;
 import static com.alpha.redux.funEvents.event.twoTimesEvent;
-import static com.alpha.redux.questMaster.bossBattles.maldingBoss.MaldingPlayerHandlers;
-import static com.alpha.redux.questMaster.bossBattles.maldingBoss.gearNearby;
+import static com.alpha.redux.questMaster.bossBattles.maldingBoss.*;
 
 public class redux extends JavaPlugin {
 
@@ -188,7 +187,6 @@ public class redux extends JavaPlugin {
 
             NPC npc = MaldingPlayerHandlers.get(player).getBoss();
             assert npc != null;
-            npc.destroy();
             npc.despawn();
             MaldingPlayerHandlers.remove(player);
             CitizensAPI.getNPCRegistry().deregister(npc);

@@ -3,6 +3,7 @@ package com.alpha.redux.entityHandlers.MysticHandler.Pants;
 import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.chatManager.rank;
 import com.alpha.redux.entityHandlers.MysticHandler.PantEnchant;
+import com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PantMaps;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
 import org.bukkit.Bukkit;
@@ -16,13 +17,11 @@ import java.util.Map;
 
 public class RetroGravityMicrocosm {
 
-    Map<String, Integer> hitCounter = new HashMap<>();
 
     public RetroGravityMicrocosm(ReduxDamageEvent event, ReduxPlayer player){
         PantEnchant retrogravitymicrocosm = new PantEnchant(event, player, "rgm") {
             @Override
             public void OneAction() {
-                Bukkit.broadcastMessage("HELLO");
                 if(criticalHit(event)){
                     runIt(event.getAttacker().getPlayerObject(), event.getDefenders().getPlayerObject(), 2, 1);
                 }
@@ -30,7 +29,6 @@ public class RetroGravityMicrocosm {
 
             @Override
             public void TwoAction() {
-                Bukkit.broadcastMessage("HELLO");
                 if(criticalHit(event)){
                     runIt(event.getAttacker().getPlayerObject(), event.getDefenders().getPlayerObject(), 3, 2);
                 }
@@ -38,7 +36,6 @@ public class RetroGravityMicrocosm {
 
             @Override
             public void ThreeAction() {
-                Bukkit.broadcastMessage("HELLO");
                 if(criticalHit(event)){
                     runIt(event.getAttacker().getPlayerObject(), event.getDefenders().getPlayerObject(), 4, 3);
                 }
@@ -46,25 +43,23 @@ public class RetroGravityMicrocosm {
         };
         retrogravitymicrocosm.run();
     }
-
-    private boolean criticalHit(ReduxDamageEvent event){
+    public boolean criticalHit(ReduxDamageEvent event){
         Player player = event.getDefenders().getPlayerObject();
 
         if(!event.getAttacker().getPlayerObject().isOnGround()){
-            if(hitCounter.containsKey(String.valueOf(player.getUniqueId()))){
-                hitCounter.put(String.valueOf(player.getUniqueId()), hitCounter.get(String.valueOf(player.getUniqueId())) + 1);
+            if(PantMaps.hitCounter.containsKey(String.valueOf(player.getUniqueId()))){
+                PantMaps.hitCounter.put(String.valueOf(player.getUniqueId()), PantMaps.hitCounter.get(String.valueOf(player.getUniqueId())) + 1);
             }else{
-                hitCounter.put(String.valueOf(player.getUniqueId()), 1);
+                PantMaps.hitCounter.put(String.valueOf(player.getUniqueId()), 1);
             }
 
-            return hitCounter.get(String.valueOf(player)) >= 3;
+            return PantMaps.hitCounter.get(String.valueOf(player.getUniqueId())) >= 3;
         }
-
-        return !player.isOnGround();
+        return !event.getAttacker().getPlayerObject().isOnGround();
     }
 
-    private void runIt(Player attacker, Player defender, double health, double trueDmg){
-        hitCounter.put(String.valueOf(defender.getUniqueId()), 0);
+    public void runIt(Player attacker, Player defender, double health, double trueDmg){
+        PantMaps.hitCounter.put(String.valueOf(defender.getUniqueId()), 0);
         attacker.sendMessage(ChatColor.translateAlternateColorCodes('&', "&d&lRGM! &7Proc'd against " + rank.getNameColor(defender) + defender.getDisplayName() + "&7!"));
         Sounds.RGM.play(attacker.getLocation());
         Sounds.RGM.play(defender.getLocation());

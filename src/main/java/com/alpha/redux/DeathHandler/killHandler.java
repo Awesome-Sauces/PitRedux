@@ -55,28 +55,18 @@ public class killHandler {
     }
 
     public static NPC getNPC(Player player){
-        for (NPC npc : CitizensAPI.getNPCRegistry()) {
-            if (npc.getEntity() == player) return npc;
-        }
-        return null;
+        return CitizensAPI.getNPCRegistry().getNPC(player);
     }
 
     public static void tpNPC(Player player){
-        for (NPC npc : CitizensAPI.getNPCRegistry()) {
-            if (npc.getEntity() == player){
-                Random rand = new Random(); //instance of random class
-                int upperbound = 6;
-                //generate random values from 0-24
-                int tp_x = rand.nextInt(upperbound);
-                //generate random values from 0-24
-                Random e = new Random(); //instance of random class
-                int ef = 6;
-                int tp_z = e.nextInt(ef);
-                Location loc = getBotSpawnLocation();
 
-                npc.teleport(loc, PlayerTeleportEvent.TeleportCause.UNKNOWN);
-            }
-        }
+        NPC npc = getNPC(player);
+
+        Location loc = getBotSpawnLocation();
+
+        npc.getNavigator().setTarget(new Location(Bukkit.getWorld("world"), 0, 82, 0));
+        npc.teleport(loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
+
     }
 
     public static boolean processKill(ReduxPlayer ReduxAttacker, ReduxPlayer ReduxDefender) {

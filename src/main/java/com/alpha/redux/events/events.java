@@ -3,6 +3,7 @@ package com.alpha.redux.events;
 import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.chatManager.rank;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
+import com.alpha.redux.entityHandlers.TrueDamage.TrueDamageHandler;
 import com.alpha.redux.eventManagers.ReduxBowEvent;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
 import com.alpha.redux.items.enchants;
@@ -19,9 +20,7 @@ import com.alpha.redux.renownShop.damageIncrease;
 //import com.comphenix.protocol.wrappers.EnumWrappers;
 import com.nametagedit.plugin.NametagEdit;
 import net.citizensnpcs.api.CitizensAPI;
-import net.citizensnpcs.api.event.NPCClickEvent;
-import net.citizensnpcs.api.event.NPCDeathEvent;
-import net.citizensnpcs.api.event.NPCRightClickEvent;
+import net.citizensnpcs.api.event.*;
 import net.citizensnpcs.api.npc.NPC;
 import net.minecraft.server.v1_8_R3.*;
 import org.bukkit.*;
@@ -50,7 +49,7 @@ import org.bukkit.util.Vector;
 import java.util.*;
 
 import static com.alpha.redux.DeathHandler.ProccessHit.*;
-import static com.alpha.redux.DeathHandler.killHandler.getNPC;
+import static com.alpha.redux.DeathHandler.killHandler.*;
 import static com.alpha.redux.ItemEvents.pants.*;
 import static com.alpha.redux.ItemEvents.swords.*;
 import static com.alpha.redux.apis.actionbarplus.sendHealthBar;
@@ -64,7 +63,6 @@ import static com.alpha.redux.events.nonPermItems.ClearAndCheck;
 import static com.alpha.redux.gems.gemEvents.gemClickEvent;
 import static com.alpha.redux.gems.gemMain.makeGemGUI;
 import static com.alpha.redux.playerdata.economy.*;
-import static com.alpha.redux.DeathHandler.killHandler.isNPC;
 import static com.alpha.redux.playerdata.prestiges.getPrestige;
 import static com.alpha.redux.playerdata.streaks.*;
 import static com.alpha.redux.MenuClicks.InventoryEvent.*;
@@ -228,30 +226,67 @@ public class events implements Listener {
 
     }
 
+    @EventHandler
+    public void spawnProtHandler(NPCDamageEntityEvent event){
+        if(event.getNPC().getEntity() != null)
+            if(event.getNPC().getEntity().getLocation().getY() >= getSpawnProtection())
+                event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void spawnProtsHandler(NPCDamageByEntityEvent event){
+        if(event.getNPC().getEntity() != null)
+            if(event.getNPC().getEntity().getLocation().getY() >= getSpawnProtection())
+                event.setCancelled(true);
+    }
+
     @EventHandler 
     public static void MainDamageEvent(EntityDamageByEntityEvent event){
         Player defender = null;
-        if(event.getCause().equals(EntityDamageEvent.DamageCause.MAGIC)){
-            if(event.getDamager() instanceof Player && event.getEntity() instanceof Player){
-                if(((Player) event.getEntity()).getHealth() - event.getDamage() <= 2){
-                    event.setCancelled(true);
-                    escapeProc.put(String.valueOf(event.getEntity().getUniqueId()), false);
-                    KillMan((Player) event.getDamager(), (Player) event.getEntity());
-                }
+
+        if(CitizensAPI.getNPCRegistry().isNPC(event.getDamager())){
+            if(event.getDamager().getLocation().getY() >= getSpawnProtection()){
+                event.setCancelled(true);
+                return;
+
             }
 
+        }
+
+        if(CitizensAPI.getNPCRegistry().isNPC(event.getDamager()) && CitizensAPI.getNPCRegistry().isNPC(event.getEntity())){
+            defender = (Player) event.getEntity();
+
+            if(defender.getHealth() - event.getFinalDamage() <= 4){
+                event.setCancelled(true);
+
+                tpNPC(defender);
+
+                defender.setHealth(defender.getMaxHealth());
+
+            }
             return;
         }
         if(!(event.getEntity() instanceof Player)) {return;}
         if((event.getDamager() instanceof Arrow)) {
+            event.setCancelled(true);
             Arrow arrow = (Arrow) event.getDamager();
             Player player = (Player) arrow.getShooter();
+            ((Player) event.getEntity()).damage(event.getDamage(), player);
+            /*
             ReduxBowEvent mainEvent = new ReduxBowEvent(playerExists(player), playerExists((Player) event.getEntity()), event.getDamage(), event);
             Bukkit.getPluginManager().callEvent(mainEvent);
             if (!mainEvent.isCancelled()) {
-                ((Player) event.getEntity()).damage(8, player);
+                if(((Player) event.getEntity()).getHealth() - event.getFinalDamage() <= 2){
+                    event.setCancelled(true);
+                    ((Player) event.getEntity()).setHealth(((Player) event.getEntity()).getMaxHealth());
+                    KillMan((Player) event.getDamager(), (Player) event.getEntity());
+                    return;
+                }
+                ((Player) event.getEntity()).damage(mainEvent.getReduxDamage(), player);
                 mainEvent.setCancelled(true);
             }
+
+             */
             return;
 
         }else if((event.getDamager() instanceof Player)){
@@ -276,16 +311,14 @@ public class events implements Listener {
             if (!mainEvent.isCancelled()) {
                 event.setDamage(mainEvent.getReduxDamage());
 
-                // Running the true dmg
-                EntityDamageByEntityEvent truedmg = new EntityDamageByEntityEvent(mainEvent.getAttacker().getPlayerObject(), mainEvent.getDefenders().getPlayerObject(),
-                        EntityDamageEvent.DamageCause.MAGIC, mainEvent.getReduxTrueDamage());
-                Bukkit.getServer().getPluginManager().callEvent(truedmg);
-                if(!truedmg.isCancelled()) {
-                    Player player = mainEvent.getDefenders().getPlayerObject();
-                    player.setHealth(Math.max(player.getHealth() - mainEvent.getReduxTrueDamage(), 0));
+                if(((Player) event.getEntity()).getHealth() - event.getFinalDamage() <= 2){
+                    event.setCancelled(true);
+                    ((Player) event.getEntity()).setHealth(((Player) event.getEntity()).getMaxHealth());
+                    KillMan((Player) event.getDamager(), (Player) event.getEntity());
+                    return;
                 }
-                // Running the true dmg
 
+                new TrueDamageHandler(playerExists(attacker), playerExists(defender), mainEvent.getReduxTrueDamage(), event.getFinalDamage()).run();
             }else{
                 event.setCancelled(true);
             }
@@ -306,13 +339,16 @@ public class events implements Listener {
     @EventHandler
     public static void Death(PlayerDeathEvent event){
 
-        Bukkit.broadcastMessage(event.getEntity().getDisplayName() + isNPC(event.getEntity().getPlayer()));
-
         if(event.getEntity() == null) {return;}
         if(isNPC(event.getEntity())){
             NPC npc = getNPC(event.getEntity());
-            assert npc != null;
-            npc.spawn(getBotSpawnLocation());
+            if(npc != null && !npc.isSpawned()){
+                npc.spawn(getBotSpawnLocation());
+                Player player = (Player) npc.getEntity();
+                player.setHealth(20);
+                player.setMaxHealth(20);
+            }
+
             return;
         }
         Player player = event.getEntity();
@@ -623,6 +659,9 @@ public class events implements Listener {
         if(!(event.getEntity() instanceof Player)) {return;}
         Player shooter = (Player) event.getEntity();
         if (shooter.getInventory().getItemInHand().getItemMeta().equals(itemManager.megalongbow.getItemMeta())){
+            shooter.getInventory().removeItem(itemManager.megalongbow);
+            shooter.getInventory().addItem(enchants.fresh_bow);
+            /*
             event.getProjectile().remove();
 
             Location PlayerLocation = shooter.getEyeLocation();
@@ -637,13 +676,20 @@ public class events implements Listener {
             }
 
             shooter.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100, 5, true, true));
+
+             */
         }
         if (shooter.getInventory().getItemInHand().getItemMeta().equals(itemManager.ftts.getItemMeta())){
+            shooter.getInventory().removeItem(itemManager.ftts);
+            shooter.getInventory().addItem(enchants.fresh_bow);
+            /*
             if(shooter.hasPotionEffect(PotionEffectType.SPEED)){
                 shooter.removePotionEffect(PotionEffectType.SPEED);
             }
 
             shooter.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 500, 4, true, true));
+
+             */
         }
 
     }

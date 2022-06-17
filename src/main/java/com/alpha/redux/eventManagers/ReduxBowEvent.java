@@ -2,11 +2,16 @@ package com.alpha.redux.eventManagers;
 
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import net.citizensnpcs.api.npc.NPC;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
+import java.util.List;
+
+import static com.alpha.redux.well.loreChecker.CheckEnchantOnBow;
 
 public class ReduxBowEvent extends Event implements Cancellable {
     private static final HandlerList HANDLERS = new HandlerList();
@@ -46,6 +51,15 @@ public class ReduxBowEvent extends Event implements Cancellable {
 
     public EntityDamageByEntityEvent getBukkitEvent(){
         return this.event;
+    }
+
+    public List<String> getEnchants(){
+        if(this.attacker.getPlayerObject().getItemInHand() != null && this.attacker.getPlayerObject().getItemInHand().getType().equals(Material.BOW) &&
+                this.attacker.getPlayerObject().getItemInHand().getItemMeta() != null && this.attacker.getPlayerObject().getItemInHand().getItemMeta().getLore() != null){
+            return CheckEnchantOnBow(this.attacker.getPlayerObject().getItemInHand().getItemMeta().getLore());
+        }
+
+        return null;
     }
 
     public ReduxPlayer getAttacker() {

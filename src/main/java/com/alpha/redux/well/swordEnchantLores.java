@@ -307,16 +307,14 @@ public class swordEnchantLores {
 
         }
 
-
-
-
-
-
+        for(String obj : lore) {
+            if(lore.contains(obj)) lore.set(lore.indexOf(obj), ChatColor.translateAlternateColorCodes('&', obj));
+        }
 
     }
 
     public List<String> getLore() {
-        for(String obj : this.lore) if(this.lore.contains(obj)) this.lore.set(this.lore.indexOf(obj), ChatColor.translateAlternateColorCodes('&', obj));
+        for(String obj : lore) if(lore.contains(obj)) lore.set(lore.indexOf(obj), ChatColor.translateAlternateColorCodes('&', obj));
         return this.lore;
     }
 }

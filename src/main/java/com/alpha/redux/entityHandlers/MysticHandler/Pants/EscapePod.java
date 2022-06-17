@@ -40,6 +40,7 @@ public class EscapePod {
     }
 
     private void giveRegen(Player player, int power, int time){
+        player.setVelocity(player.getVelocity().add(new Vector(0, 10, 0)));
         player.removePotionEffect(PotionEffectType.REGENERATION);
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, time*20, Math.max(power-1, 0), true, true));
     }

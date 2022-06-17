@@ -11,185 +11,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class loreChecker {
-    public static List<String> CheckEnchant(Player player) {
-
-        List<String> list=new ArrayList<String>();
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Boo-boo III")){
-            list.add("boobooIII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Boo-boo II")){
-            list.add("boobooII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Boo-boo"))
-            list.add("boobooI");
-
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Peroxide III")){
-            list.add("peroxideIII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Peroxide II")){
-            list.add("peroxideII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Peroxide"))
-            list.add("peroxideI");
-
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§dRARE! §9Pit Blob III")){
-            list.add("blobIII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§dRARE! §9Pit Blob II")){
-            list.add("blobII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§dRARE! §9Pit Blob"))
-            list.add("blobI");
-
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§dRARE! §9Combo: Venom"))
-            list.add("venom");
-
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Golden Heart III")){
-            list.add("goldheartIII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Golden Heart II")){
-            list.add("goldheartII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Golden Heart"))
-            list.add("goldheartI");
-
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Moctezuma III")){
-            list.add("moctIII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Moctezuma II")){
-            list.add("moctII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Moctezuma"))
-            list.add("moctI");
-
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§dRARE! §9Escape Pod III")){
-            list.add("escapeIII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§dRARE! §9Escape Pod II")) {
-            list.add("escapeII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§dRARE! §9Escape Pod"))
-            list.add("escapeI");
-
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Gold Bump III")){
-            list.add("goldBumpIII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Gold Bump II")){
-            list.add("goldBumpII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Gold Bump"))
-            list.add("goldBumpI");
-
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§dRARE! §9Solitude III")){
-            list.add("soliIII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§dRARE! §9Solitude II")){
-            list.add("soliII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§dRARE! §9Solitude"))
-            list.add("soliI");
-
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Protection III")){
-            list.add("protIII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Protection II")){
-            list.add("protII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Protection"))
-            list.add("protI");
-
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9David and Goliath III")){
-            list.add("davidIII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9David and Goliath II")){
-            list.add("davidII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9David and Goliath"))
-            list.add("davidI");
-
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9\"Not\" Gladiator III")){
-            list.add("gladIII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9\"Not\" Gladiator II")){
-            list.add("gladII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9\"Not\" Gladiator"))
-            list.add("gladI");
-
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Critically Funky III")){
-            list.add("critIII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Critically Funky II")){
-            list.add("critII");
-        }if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Critically Funky"))
-            list.add("critI");
-
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Misery"))
-            list.add("misery");
-
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Fractional Reserve III")){
-            list.add("fracIII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Fractional Reserve II")){
-            list.add("fracII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Fractional Reserve"))
-            list.add("fracI");
-
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Mirror III")){
-            list.add("mirrorIII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Mirror II")){
-            list.add("mirrorII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Mirror"))
-            list.add("mirrorIII");
-
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§dRARE! §9Retro-Gravity Microcosm III")){
-            list.add("rgmIII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§dRARE! §9Retro-Gravity Microcosm II")){
-            list.add("rgmII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§dRARE! §9Retro-Gravity Microcosm")){
-            list.add("rgmI");
-        }
-
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Sweaty III")){
-            list.add("sweatyIII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Sweaty II")){
-            list.add("sweatyII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Sweaty"))
-            list.add("sweatyI");
-
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9XP Boost III")){
-            list.add("xpIII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9XP Boost II")){
-            list.add("xpII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9XP Boost"))
-            list.add("xpI");
-
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Gold Boost III")){
-            list.add("gbIII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Gold Boost II")){
-            list.add("gbII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Gold Boost"))
-            list.add("gbI");
-
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Diamond Allergy III")){
-            list.add("daIII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Diamond Allergy II")){
-            list.add("daII");
-        }else if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Diamond Allergy"))
-            list.add("daI");
-
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9Spite"))
-            list.add("spite");
-
-        if (player.getInventory().getLeggings().getItemMeta().getLore().contains("§9McSwimmer III"))
-            list.add("mcIII");
-
-        return list;
-    }
-
 
     public static List<String> CheckEnchantOnPant(List<String> lore) {
 
         List<String> list=new ArrayList<String>();
-
 
         if (lore.contains("§9Boo-boo III")){
             list.add("boobooIII");
@@ -512,6 +337,63 @@ public class loreChecker {
         }else if (lore.contains("§9Gold Boost"))
             list.add("gbI");
 
+
+        return list;
+    }
+
+    public static List<String> CheckEnchantOnBow(List<String> lore) {
+
+        List<String> list=new ArrayList<String>();
+
+        if (lore.contains("§dRARE! §9Mega Longbow III")){
+            list.add("mlbIII");
+        }else if (lore.contains("§dRARE! §9Mega Longbow II")){
+            list.add("mlbII");
+        }else if (lore.contains("§dRARE! §9Mega Longbow"))
+            list.add("mlbI");
+
+        if (lore.contains("§dRARE! §9Telebow III")){
+            list.add("teleIII");
+        }else if (lore.contains("§dRARE! §9Telebow II")){
+            list.add("teleII");
+        }else if (lore.contains("§dRARE! §9Telebow"))
+            list.add("teleI");
+
+        if (lore.contains("§dRARE! §9Volley III")){
+            list.add("vIII");
+        }else if (lore.contains("§dRARE! §9Volley II")){
+            list.add("vII");
+        }else if (lore.contains("§dRARE! §9Volley"))
+            list.add("vI");
+
+        if (lore.contains("§dRARE! §9Explosive III")){
+            list.add("exIII");
+        }else if (lore.contains("§dRARE! §9Explosive II")){
+            list.add("exII");
+        }else if (lore.contains("§dRARE! §9Explosive"))
+            list.add("exI");
+
+        if (lore.contains("§dRARE! §9Pullbow III")){
+            list.add("pullIII");
+        }else if (lore.contains("§dRARE! §9Pullbow II")){
+            list.add("pullII");
+        }else if (lore.contains("§dRARE! §9Pullbow"))
+            list.add("pullI");
+
+
+        if (lore.contains("§9Faster than their shadow III")){
+            list.add("fttsIII");
+        }else if (lore.contains("§9Faster than their shadow II")){
+            list.add("fttsII");
+        }else if (lore.contains("§9Faster than their shadow"))
+            list.add("fttsI");
+
+        if (lore.contains("§9Sprint Drain III")){
+            list.add("sprintIII");
+        }else if (lore.contains("§9Sprint Drain II")){
+            list.add("sprintII");
+        }else if (lore.contains("§9Sprint Drain"))
+            list.add("sprintI");
 
         return list;
     }

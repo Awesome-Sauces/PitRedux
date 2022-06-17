@@ -1,31 +1,41 @@
 package com.alpha.redux.entityHandlers.MysticHandler;
 
+import com.alpha.redux.entityHandlers.MysticHandler.Bows.Explosive;
 import com.alpha.redux.entityHandlers.MysticHandler.Pants.*;
 import com.alpha.redux.entityHandlers.MysticHandler.Swords.*;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
+import com.alpha.redux.eventManagers.ReduxBowEvent;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
 import com.alpha.redux.well.EnchantingMechanics;
 import com.alpha.redux.well.MysticType;
+import org.bukkit.Bukkit;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EnchantRuntime {
 
-    ReduxPlayer attacker;
 
     String mysticType;
 
-    List<String> mysticPants = new ArrayList<>();
-    List<String> mysticSword = new ArrayList<>();
     ReduxDamageEvent event;
+    ReduxBowEvent bowEvent;
 
-    public EnchantRuntime(ReduxPlayer attacker, ReduxPlayer defender, ReduxDamageEvent event, String mysticType){
-        this.attacker = attacker;
-        if(this.attacker.getPantEnchants() != null) mysticPants = attacker.getPantEnchants();
-        if(this.attacker.getSwordEnchants() != null) mysticSword = attacker.getSwordEnchants();
+    public EnchantRuntime(ReduxDamageEvent event, String mysticType){
         this.event = event;
         this.mysticType = mysticType;
+    }
+
+    public EnchantRuntime(ReduxBowEvent event, String mysticType){
+        this.bowEvent = event;
+        this.mysticType = mysticType;
+    }
+
+    public boolean bowRun(){
+
+        new Explosive();
+
+        return true;
     }
 
     public boolean run(){
@@ -41,7 +51,11 @@ public class EnchantRuntime {
             new Perun(event);
             new Shark(event);
             new Sharp(event);
-        }else if(MysticType.valueOf(mysticType).equals(MysticType.PANT)){
+            return false;
+        }
+
+        if(MysticType.valueOf(mysticType).equals(MysticType.PANT)){
+
             new CriticallyFunky(event, event.getDefenders());
             new EscapePod(event, event.getDefenders());
             new FractionalReserve(event, event.getDefenders());
@@ -49,10 +63,11 @@ public class EnchantRuntime {
             new NotGladiator(event, event.getDefenders());
             new Peroxide(event, event.getDefenders());
             new Protection(event, event.getDefenders());
-            new RetroGravityMicrocosm(event, event.getDefenders());
             new Solitude(event, event.getDefenders());
-            new Regularity(event, attacker);
+            new RetroGravityMicrocosm(event, event.getDefenders());
+            new Regularity(event, event.getAttacker());
 
+            return false;
 
         }
 

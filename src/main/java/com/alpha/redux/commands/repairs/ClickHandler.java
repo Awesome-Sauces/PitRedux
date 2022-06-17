@@ -36,7 +36,7 @@ public class ClickHandler implements Listener {
             if(event.getCurrentItem().equals(confirmButton)){
                 if(event.getClickedInventory().getItem(13) != null && event.getClickedInventory().getItem(13).getItemMeta() != null && event.getClickedInventory().getItem(13).getItemMeta().getLore() != null){
 
-                    if(event.getClickedInventory().getItem(13).getType().equals(Material.LEATHER_LEGGINGS) || event.getClickedInventory().getItem(13).getType().equals(Material.GOLD_SWORD)){
+                    if(event.getClickedInventory().getItem(13).getType().equals(Material.LEATHER_LEGGINGS) || event.getClickedInventory().getItem(13).getType().equals(Material.GOLD_SWORD) || event.getClickedInventory().getItem(13).getType().equals(Material.BOW)){
 
                         Player player = (Player) event.getWhoClicked();
 
@@ -46,7 +46,7 @@ public class ClickHandler implements Listener {
 
                             String lives = meta.getLore().get(0);
 
-                            if(ChatColor.stripColor(lives).contains("Lives: 20/20")){
+                            if(ChatColor.stripColor(lives).contains("Lives: 5/5")){
                                 player.sendMessage(ChatColor.RED + "This mystic has the max lives!");
                                 return;
                             }

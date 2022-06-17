@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 
+import static com.alpha.redux.DeathHandler.killHandler.isNPC;
 import static com.alpha.redux.ItemEvents.sharkCalc.getSharkPlayers;
 
 public class Executioner {
@@ -31,6 +32,8 @@ public class Executioner {
 
 
     private void triggerExecutioner(ReduxDamageEvent event, double tier){
+
+        if(isNPC(event.getDefenders().getPlayerObject())) tier+=5;
 
         double damage = event.getReduxTrueDamage() + event.getReduxTrueDamage();
 

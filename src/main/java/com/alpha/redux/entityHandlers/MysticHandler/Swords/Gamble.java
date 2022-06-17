@@ -2,6 +2,7 @@ package com.alpha.redux.entityHandlers.MysticHandler.Swords;
 
 import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.entityHandlers.MysticHandler.SwordEnchant;
+import com.alpha.redux.entityHandlers.TrueDamage.TrueDamageHandler;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
 import com.alpha.redux.items.enchants;
 import org.bukkit.Bukkit;
@@ -12,6 +13,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 
 import java.util.Random;
+
+import static com.alpha.redux.entityHandlers.ReduxPlayerHandler.playerExists;
 
 public class Gamble {
     public Gamble(ReduxDamageEvent event){
@@ -73,12 +76,7 @@ public class Gamble {
     }
 
     private void gambleCalc(Player player, double trueAmount){
-        EntityDamageByEntityEvent events = new EntityDamageByEntityEvent(player, player,
-                EntityDamageEvent.DamageCause.MAGIC, trueAmount);
-        Bukkit.getServer().getPluginManager().callEvent(events);
-        if(!events.isCancelled()) {
-            player.setHealth(Math.max(player.getHealth() - trueAmount, 0));
-        }
+        new TrueDamageHandler(playerExists(player), playerExists(player), trueAmount, 0).run();
     }
 
 }

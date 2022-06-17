@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import java.util.List;
 import java.util.Random;
 
+import static com.alpha.redux.commands.command.booster;
 import static com.alpha.redux.funEvents.event.twoTimesEvent;
 import static com.alpha.redux.playerdata.streaks.*;
 import static com.alpha.redux.renownShop.xpIncrease.getXpIncrease;
@@ -129,9 +130,9 @@ public class ReduxPlayerUtils {
         double final_xp_amount = (xp_Amount * XP_MULTIPLIER)*twoTimesEvent;
 
         hasMegaStreak(player.uuid);
-        if(getMegaStreak(player.uuid).equalsIgnoreCase("beastmode")) return (int) (Math.round((Math.min((final_xp_amount + getXpIncrease(player.uuid) * twoTimesEvent), (XP_CAP + 100 + getXpIncrease(player.uuid)) * twoTimesEvent))*player.getPlayerXpBooster())) * master;
-        else if(getMegaStreak(player.uuid).equalsIgnoreCase("moon")) return (int) (Math.round((Math.min((final_xp_amount + getXpIncrease(player.uuid)) * twoTimesEvent, (XP_CAP + 7000 + getXpIncrease(player.uuid) )* twoTimesEvent))*player.getPlayerXpBooster())) * master;
-        else return (int) (((int) (Math.round(Math.min((final_xp_amount + getXpIncrease(player.uuid)) * twoTimesEvent, (XP_CAP + getXpIncrease(player.uuid))*twoTimesEvent))) * player.getPlayerXpBooster())) * master;
+        if(getMegaStreak(player.uuid).equalsIgnoreCase("beastmode")) return ((int) (Math.round((Math.min((final_xp_amount + getXpIncrease(player.uuid) * twoTimesEvent), (XP_CAP + 100 + getXpIncrease(player.uuid)) * twoTimesEvent))*player.getPlayerXpBooster())) * master)* booster;
+        else if(getMegaStreak(player.uuid).equalsIgnoreCase("moon")) return ((int) (Math.round((Math.min((final_xp_amount + getXpIncrease(player.uuid)) * twoTimesEvent, (XP_CAP + 7000 + getXpIncrease(player.uuid) )* twoTimesEvent))*player.getPlayerXpBooster())) * master) * booster;
+        else return (int) ((((int) (Math.round(Math.min((final_xp_amount + getXpIncrease(player.uuid)) * twoTimesEvent, (XP_CAP + getXpIncrease(player.uuid))*twoTimesEvent))) * player.getPlayerXpBooster())) * master) * booster;
 
 
     }
@@ -227,7 +228,7 @@ public class ReduxPlayerUtils {
         if (player.getBoots() != null && player.getBoots().getItemMeta().equals(itemManager.heistMasterIII.getItemMeta())) master = 3;
 
 
-        return ((int) (((Gold_Amount + (Gold_Amount *GOLD_MULTIPLIER)) * twoTimesEvent) * player.getPlayerGoldBooster())) * master;
+        return (((int) (((Gold_Amount + (Gold_Amount *GOLD_MULTIPLIER)) * twoTimesEvent) * player.getPlayerGoldBooster())) * master) * booster;
     }
 
 }

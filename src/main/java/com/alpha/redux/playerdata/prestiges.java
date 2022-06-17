@@ -129,22 +129,22 @@ public class prestiges {
                 DivideValue = 67;
                 return DivideValue;
             case 30:
-                DivideValue = 89;
+                DivideValue = 100;
                 return DivideValue;
             case 31:
-                DivideValue = 120;
+                DivideValue = 135;
                 return DivideValue;
             case 32:
-                DivideValue = 140;
-                return DivideValue;
-            case 33:
                 DivideValue = 145;
                 return DivideValue;
+            case 33:
+                DivideValue = 155;
+                return DivideValue;
             case 34:
-                DivideValue = 150;
+                DivideValue = 165;
                 return DivideValue;
             case 35:
-                DivideValue = 200;
+                DivideValue = 235;
                 return DivideValue;
             case 36:
                 DivideValue = 300;
@@ -162,7 +162,7 @@ public class prestiges {
                 DivideValue = 850;
                 return DivideValue;
             case 41:
-                DivideValue = 900;
+                DivideValue = 950;
                 return DivideValue;
             case 42:
                 DivideValue = 1000;
@@ -189,43 +189,43 @@ public class prestiges {
                 DivideValue = 2000;
                 return DivideValue;
             case 50:
-                DivideValue = 5000;
+                DivideValue = 7000;
                 return DivideValue;
             case 51:
-                DivideValue = 5100;
+                DivideValue = 7100;
                 return DivideValue;
             case 52:
-                DivideValue = 5300;
+                DivideValue = 7300;
                 return DivideValue;
             case 53:
-                DivideValue = 5400;
+                DivideValue = 7400;
                 return DivideValue;
             case 54:
-                DivideValue = 5500;
+                DivideValue = 7500;
                 return DivideValue;
             case 55:
-                DivideValue = 5600;
+                DivideValue = 7600;
                 return DivideValue;
             case 56:
-                DivideValue = 5700;
+                DivideValue = 7700;
                 return DivideValue;
             case 57:
-                DivideValue = 5800;
+                DivideValue = 7800;
                 return DivideValue;
             case 58:
-                DivideValue = 5900;
+                DivideValue = 7900;
                 return DivideValue;
             case 59:
-                DivideValue = 6000;
+                DivideValue = 8000;
                 return DivideValue;
             case 60:
-                DivideValue = 7000;
+                DivideValue = 9000;
                 return DivideValue;
             case 61:
                 DivideValue = 8000;
                 return DivideValue;
             case 62:
-                DivideValue = 9000;
+                DivideValue = 10000;
                 return DivideValue;
             case 63:
                 DivideValue = 10000;
@@ -279,7 +279,7 @@ public class prestiges {
             case 98:
             case 99:
             case 100:
-                DivideValue = 17000;
+                DivideValue = 25000;
                 return DivideValue;
         }
         return 1;

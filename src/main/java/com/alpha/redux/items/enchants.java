@@ -31,6 +31,7 @@ public class enchants {
     public static ItemStack malding_sword;
     public static ItemStack reaper_scythe;
     public static ItemStack playerSoul;
+    public static ItemStack fresh_bow;
 
     public static void init(){
         createLores();
@@ -46,6 +47,7 @@ public class enchants {
         createMaldingSword();
         createReaperScythe();
         createPlayerSoul();
+        createFreshBow();
     }
 
     private static void createLores() {
@@ -198,7 +200,7 @@ public class enchants {
         meta.setDisplayName("§cTier I Chestplate");
         List<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a20§7/20"));
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a5§7/5"));
         lore.add("    ");
         lore.add("§dRARE! §9Flaming");
         lore.add("§7If the final damage of your strike");
@@ -226,7 +228,7 @@ public class enchants {
         meta.setDisplayName("§cTier I Boots");
         List<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a20§7/20"));
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a5§7/5"));
         lore.add("    ");
         lore.add("§dRARE! §9Glamorous");
         lore.add("§7Leave a fancy trail behind you");
@@ -251,7 +253,7 @@ public class enchants {
         meta.setDisplayName("§cTier III Red Pants");
         List<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a20§7/20"));
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a5§7/5"));
         lore.add("    ");
         lore.addAll(new pantEnchantLores("protIII").getLore());
 
@@ -274,7 +276,7 @@ public class enchants {
         meta.setDisplayName("§cTier I Sword");
         List<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a20§7/20"));
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a5§7/5"));
         lore.add("    ");
         lore.addAll(new swordEnchantLores("sharpIII").getLore());
 
@@ -335,6 +337,27 @@ public class enchants {
         Bukkit.getServer().addRecipe(sr);
     }
 
+    private static void createFreshBow() {
+        ItemStack item = new ItemStack(Material.BOW, 1);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName("§bMystic Bow");
+        List<String> lore = new ArrayList<>();
+        lore.add("§7Kept on death");
+        lore.add("");
+        lore.add("§7Used in the mystic well");
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
+        meta.spigot().setUnbreakable(true);
+        meta.addEnchant(Enchantment.ARROW_INFINITE, 1, false);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        fresh_bow = item;
+        //Shaped Recipe
+        ShapedRecipe sr = new ShapedRecipe(item);
+        sr.shape("SSS", "SSS", "SSS");
+        sr.setIngredient('S', Material.GHAST_TEAR);
+        Bukkit.getServer().addRecipe(sr);
+    }
+
     private static void createPlayerSoul() {
         ItemStack item = new ItemStack(Material.GHAST_TEAR, 1);
         ItemMeta meta = item.getItemMeta();
@@ -382,7 +405,7 @@ public class enchants {
         meta.setColor(Color.fromRGB(125,195,131));
         meta.setDisplayName("§3Tier I Sewer Pants");
         List<String> lore = new ArrayList<>();
-        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a20§7/20"));
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a5§7/5"));
         lore.add("        ");
         lore.add("§9Hidden Jewel");
         lore.add("§7Kill §c120§7 players to recycle");
@@ -408,7 +431,7 @@ public class enchants {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§cTier I Sword");
         List<String> lore = new ArrayList<>();
-        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a20§7/20"));
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a5§7/5"));
         lore.add("    ");
         lore.add("§9Hidden Jewel");
         lore.add("§7Kill §c120§7 players to recycle");

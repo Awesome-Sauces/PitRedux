@@ -1,5 +1,6 @@
 package com.alpha.redux.well;
 
+import com.alpha.redux.playerdata.Renown;
 import com.alpha.redux.playerdata.prestiges;
 import com.alpha.redux.playerdata.xpManager;
 import org.bukkit.ChatColor;
@@ -392,9 +393,10 @@ public class gui {
 
         ItemStack Prestige_Shop = ItemMaker(Material.BEACON, ChatColor.YELLOW + "Renown shop",
                 ChatColor.GRAY + "Use " + ChatColor.YELLOW + "Renown Tokens " + ChatColor.GRAY + "earned from\n" +
-                     ChatColor.AQUA + "Prestige " + ChatColor.GRAY + "to unlock unique\n" + ChatColor.GRAY + "upgrades!\n" +
-                     ChatColor.GRAY + ChatColor.ITALIC + "These upgrades are safe from prestige reset.\n\n" + ChatColor.YELLOW +
-                     "Click to browse!"
+                     ChatColor.AQUA + "Prestige " + ChatColor.GRAY + "to unlock unique\n" + ChatColor.GRAY + "upgrades!\n\n" +
+                     ChatColor.GRAY + ChatColor.ITALIC + "These upgrades are safe\n" + ChatColor.GRAY + ChatColor.ITALIC + "from prestige reset.\n\n" +
+                     ChatColor.GRAY + "Renown " + ChatColor.YELLOW + Renown.getRenown(String.valueOf(player.getUniqueId())) + " Renown\n\n" +
+                     ChatColor.YELLOW + "Click to browse!"
                 , 1, true);
 
         for (int i = 0; i < 10; i++) {

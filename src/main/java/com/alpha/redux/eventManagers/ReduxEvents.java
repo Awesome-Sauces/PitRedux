@@ -50,21 +50,22 @@ public class ReduxEvents implements Listener {
         ReduxPlayer ReduxAttacker = event.getAttacker();
         ReduxPlayer ReduxDefender = event.getDefenders();
 
+        if(isNPC(attacker)){
+            event.setReduxDamage(5);
+        }
 
-        double damage = event.getReduxDamage();
+        //double damage = event.getReduxDamage();
         double true_dmg = 0;
         double sword_true = 0;
 
-        if (damageIncrease.getIncrease(ReduxAttacker.getPlayerUUID()) > 10){
-            event.addReduxDamage(event.getReduxDamage() * (((double) damageIncrease.getIncrease(ReduxAttacker.getPlayerUUID()) / 40) / 100));
-        }else{
-            event.addReduxDamage(damage * ((double) damageIncrease.getIncrease(ReduxAttacker.getPlayerUUID()) / 100));
-        }
+        event.addReduxDamage(Math.min(event.getReduxDamage() * damageIncrease.getIncrease(ReduxAttacker.getPlayerUUID()), event.getReduxDamage()*.1));
 
-
+        /*
         if(true_damage_amount.containsKey(ReduxDefender.getPlayerUUID())){
             true_dmg += true_damage_amount.get(ReduxDefender.getPlayerUUID());
         }
+
+         */
 
         try {
             if (attacker.getInventory().getItemInHand().getItemMeta().getDisplayName().contains("Tier III")) {
@@ -123,20 +124,7 @@ public class ReduxEvents implements Listener {
 
         // Pant enchants
 
-        try{
-            if(attacker.getInventory().getItemInHand().getType().equals(Material.GOLD_SWORD)){
-                try{
-                    if(defender.getLocation().getY() <= getSpawnProtection()){
-                        sword_true += Perun(attacker, defender, attacker.getInventory().getItemInHand().getItemMeta().getLore());
-                    }
 
-                }catch (Exception e){
-
-                }
-            }
-        }catch (Exception e){
-
-        }
 
         try{
             if(attacker.getInventory().getLeggings().getType().equals(Material.LEATHER_LEGGINGS)){
@@ -154,7 +142,7 @@ public class ReduxEvents implements Listener {
 
         if(defender.getInventory().getLeggings() != null){
             if(defender.getInventory().getLeggings().getType().equals(Material.LEATHER_LEGGINGS)){
-                event.subtractReduxDamage(damage * .3);
+                event.subtractReduxDamage(event.getReduxDamage() * .3);
 
             }
         }
@@ -220,7 +208,7 @@ public class ReduxEvents implements Listener {
 
         try{
             if(isNPC(defender)){
-                if(Objects.requireNonNull(getNPC(defender)).getName().contains(ChatColor.GRAY + "[lvl 1]")){
+                if(Objects.requireNonNull(getNPC(defender)).getName().contains(maldingName)){
                     event.setReduxDamage(event.getReduxDamage()/100);
                 }
             }
@@ -229,7 +217,7 @@ public class ReduxEvents implements Listener {
         }
 
         if (attacker.getInventory().getChestplate() != null && attacker.getInventory().getChestplate().equals(enchants.malding_chestplate)) {
-            triggerChestplateMalding(attacker, defender, damage);
+            triggerChestplateMalding(attacker, defender, event.getReduxDamage());
         }
 
         try{
@@ -265,16 +253,12 @@ public class ReduxEvents implements Listener {
         sendHealthBar(event.getBukkitEvent());
 
 
-
-        if(isNPC(attacker)){
-            event.setReduxDamage(5);
-        }
-
         if(isNPC(defender)){
 
-            event.setReduxDamage(Math.max(event.getReduxDamage() / 3, 1));
+            event.setReduxDamage(event.getReduxDamage() / 2);
 
-            if (defender.getHealth() - event.getReduxDamage() <= 3) {
+            if (defender.getHealth() - (event.getReduxDamage() + event.getReduxTrueDamage()) <= 3) {
+                event.getBukkitEvent().setCancelled(true);
                 event.setCancelled(true);
                 try{
                     KillMan(attacker, defender);
@@ -282,10 +266,11 @@ public class ReduxEvents implements Listener {
 
                 }
             }else{
-                event.setReduxDamage(Math.max(damage, 0));
+                event.setReduxDamage(Math.max(event.getReduxDamage(), 0));
                 //defender.setHealth(Math.max(defender.getHealth()-true_dmg, 0));
             }
         }else if (defender.getHealth() - 2 >= -2 && defender.getHealth() - 2 <= 1.5) {
+            event.getBukkitEvent().setCancelled(true);
             event.setCancelled(true);
             try{
                 escapeProc.put(String.valueOf(defender.getUniqueId()), false);
@@ -293,19 +278,11 @@ public class ReduxEvents implements Listener {
             } catch (Exception ignored) {
 
             }
-        }else{
-            try{
-                defender.setHealth(Math.max(defender.getHealth()-true_dmg, 1));
-                event.setReduxDamage(Math.max(damage, 0));
-            }catch (Exception e){}
         }
     }
 
     @EventHandler
     public static void DeathEventHandler(ReduxDeathEvent event){
-
-
-        Bukkit.broadcastMessage(event.getDefender().getPlayerObject().getDisplayName() + isNPC(event.getDefender().getPlayerObject()));
 
         ReduxPlayer ReduxAttacker = event.getAttacker();
 
@@ -341,19 +318,47 @@ public class ReduxEvents implements Listener {
 
 
         //-7.5, 123, 5.5
-        int minX = -7;
-        int minY = 123;
-        int minZ = 5;
+        //int minX = -7;
+        //int minY = 123;
+        //int minZ = 5;
 
         // 3.5, 145, 18.5
-        int maxX = 3;
-        int maxY = 145;
-        int maxZ = 18;
+        //int maxX = 3;
+        //int maxY = 145;
+        //int maxZ = 18;
 
-        if (playerloc.getX() >= minX && playerloc.getX() <= maxX && playerloc.getZ() >= minZ && playerloc.getZ() <= maxZ && playerloc.getY() >= minY && playerloc.getY() <= maxY){
+        int minX = 4;
+        int minY = 82;
+        int minZ = -5;
+
+        int maxX = -3;
+        int maxY = 99;
+        int maxZ = 6;
+
+        int tminX = 7;
+        int tminY = 82;
+        int tminZ = -4;
+
+        int tmaxX = 5;
+        int tmaxY = 99;
+        int tmaxZ = 5;
+
+        int OminX = -6;
+        int OminY = 82;
+        int OminZ = -4;
+
+        int OmaxX = -4;
+        int OmaxY = 99;
+        int OmaxZ = 5;
+
+
+        if (playerloc.getX() >= minX && playerloc.getX() <= maxX && playerloc.getZ() >= minZ && playerloc.getZ() <= maxZ && playerloc.getY() >= minY && playerloc.getY() <= maxY
+        || playerloc.getX() >= tminX && playerloc.getX() <= tmaxX && playerloc.getZ() >= tminZ && playerloc.getZ() <= tmaxZ && playerloc.getY() >= tminY && playerloc.getY() <= tmaxY
+        || playerloc.getX() >= OminX && playerloc.getX() <= OmaxX && playerloc.getZ() >= OminZ && playerloc.getZ() <= OmaxZ && playerloc.getY() >= OminY && playerloc.getY() <= OmaxY){
             event.setCancelled(true);
             return;
         }
+
 
 
         Block replaced = event.getBlockReplacedState().getBlock();

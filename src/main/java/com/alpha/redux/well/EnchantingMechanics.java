@@ -1,17 +1,14 @@
 package com.alpha.redux.well;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.alpha.redux.well.loreChecker.CheckEnchantOnPant;
-import static com.alpha.redux.well.loreChecker.CheckEnchantOnSword;
+import static com.alpha.redux.well.loreChecker.*;
 
 public class EnchantingMechanics {
 
@@ -33,6 +30,7 @@ public class EnchantingMechanics {
 
             lore.add("    ");
             if(MysticType.valueOf(mysticType).equals(MysticType.SWORD)) lore.addAll(new swordEnchantLores( this.enchant + "III").lore);
+            else if(MysticType.valueOf(mysticType).equals(MysticType.BOW)) lore.addAll(new bowEnchantLores( this.enchant + "III").lore);
             else lore.addAll(new pantEnchantLores( this.enchant + "III").lore);
 
         }
@@ -45,6 +43,7 @@ public class EnchantingMechanics {
             lore.add("    ");
 
             if(MysticType.valueOf(mysticType).equals(MysticType.SWORD)) lore.addAll(new swordEnchantLores( this.enchant + "II").lore);
+            else if(MysticType.valueOf(mysticType).equals(MysticType.BOW)) lore.addAll(new bowEnchantLores( this.enchant + "II").lore);
             else lore.addAll(new pantEnchantLores( this.enchant + "II").lore);
         }
         else {
@@ -55,6 +54,7 @@ public class EnchantingMechanics {
 
             lore.add("    ");
             if(MysticType.valueOf(mysticType).equals(MysticType.SWORD)) lore.addAll(new swordEnchantLores( this.enchant + "I").lore);
+            else if(MysticType.valueOf(mysticType).equals(MysticType.BOW)) lore.addAll(new bowEnchantLores( this.enchant + "I").lore);
             else lore.addAll(new pantEnchantLores( this.enchant + "I").lore);
         }
     }
@@ -72,7 +72,7 @@ public class EnchantingMechanics {
 
             if(MysticType.valueOf(mysticType).equals(MysticType.SWORD)) list = CheckEnchantOnSword(lore);
             if(MysticType.valueOf(mysticType).equals(MysticType.PANT)) list = CheckEnchantOnPant(lore);
-
+            if(MysticType.valueOf(mysticType).equals(MysticType.BOW)) list = CheckEnchantOnBow(lore);
 
             assert list != null;
             for (String s : list) {
@@ -88,6 +88,18 @@ public class EnchantingMechanics {
 
                         tempList.add("    ");
                         tempList.addAll(new swordEnchantLores(tierIII).lore);
+
+                        lore = tempList;
+                    }else if(MysticType.valueOf(mysticType).equals(MysticType.BOW)){
+                        List<String> temp = getEnchants("BOW", tierIII);
+
+                        for(String obj : temp){
+                            tempList.add("    ");
+                            tempList.addAll(new bowEnchantLores(obj).lore);
+                        }
+
+                        tempList.add("    ");
+                        tempList.addAll(new bowEnchantLores(tierIII).lore);
 
                         lore = tempList;
                     }else {
@@ -118,6 +130,18 @@ public class EnchantingMechanics {
                         tempList.addAll(new swordEnchantLores(tierIII).lore);
 
                         lore = tempList;
+                    }else if(MysticType.valueOf(mysticType).equals(MysticType.BOW)){
+                        List<String> temp = getEnchants("BOW", tierII);
+
+                        for(String obj : temp){
+                            tempList.add("    ");
+                            tempList.addAll(new bowEnchantLores(obj).lore);
+                        }
+
+                        tempList.add("    ");
+                        tempList.addAll(new bowEnchantLores(tierIII).lore);
+
+                        lore = tempList;
                     }else {
                         List<String> temp = getEnchants("PANT", tierII);
 
@@ -143,6 +167,18 @@ public class EnchantingMechanics {
 
                         tempList.add("    ");
                         tempList.addAll(new swordEnchantLores(tierII).lore);
+
+                        lore = tempList;
+                    }else if(MysticType.valueOf(mysticType).equals(MysticType.BOW)){
+                        List<String> temp = getEnchants("BOW", tierI);
+
+                        for(String obj : temp){
+                            tempList.add("    ");
+                            tempList.addAll(new bowEnchantLores(obj).lore);
+                        }
+
+                        tempList.add("    ");
+                        tempList.addAll(new bowEnchantLores(tierII).lore);
 
                         lore = tempList;
                     }else {
@@ -191,7 +227,12 @@ public class EnchantingMechanics {
             List<String> list = CheckEnchantOnSword(lore);
 
             for(String obj : list) if(!obj.contains(exclude)) totalEnchants.add(obj);
+        }else if(MysticType.valueOf(mystic).equals(MysticType.BOW)){
+            List<String> list = CheckEnchantOnBow(lore);
+
+            for(String obj : list) if(!obj.contains(exclude)) totalEnchants.add(obj);
         }
+
 
 
         return totalEnchants;
@@ -205,6 +246,8 @@ public class EnchantingMechanics {
             list = CheckEnchantOnPant(lore);
         }else if(MysticType.valueOf(mysticType).equals(MysticType.SWORD)){
             list = CheckEnchantOnSword(lore);
+        }else if(MysticType.valueOf(mysticType).equals(MysticType.BOW)){
+            list = CheckEnchantOnBow(lore);
         }
 
 
@@ -239,6 +282,8 @@ public class EnchantingMechanics {
             list = CheckEnchantOnPant(lore);
         }else if(MysticType.valueOf(mysticType).equals(MysticType.SWORD)){
             list = CheckEnchantOnSword(lore);
+        }else if(MysticType.valueOf(mysticType).equals(MysticType.BOW)){
+            list = CheckEnchantOnBow(lore);
         }
         int hasEnchants = 0;
 
@@ -251,8 +296,6 @@ public class EnchantingMechanics {
         }
 
         if(hasEnchants == list.size()) accepted = ChatColor.RED + " REJECTED";
-
-        Bukkit.broadcastMessage(ChatColor.RED + mysticType + ChatColor.WHITE + " enchants: " + String.valueOf(list) + accepted + " " +  ChatColor.GREEN + hasEnchants + " " + ChatColor.DARK_GRAY + !(hasEnchants == list.size()));
 
         return !(hasEnchants == list.size());
     }
@@ -287,6 +330,8 @@ public class EnchantingMechanics {
             list = CheckEnchantOnPant(lore);
         }else if(MysticType.valueOf(mysticType).equals(MysticType.SWORD)){
             list = CheckEnchantOnSword(lore);
+        }else if(MysticType.valueOf(mysticType).equals(MysticType.BOW)){
+            list = CheckEnchantOnBow(lore);
         }
 
 

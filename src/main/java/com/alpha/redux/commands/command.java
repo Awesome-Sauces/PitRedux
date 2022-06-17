@@ -53,7 +53,6 @@ import static com.alpha.redux.playerdata.xpManager.GetCurrentLevel;
 import static com.alpha.redux.playerdata.xpManager.getXp;
 import static com.alpha.redux.questMaster.bossBattles.maldingBoss.summonBoss;
 import static com.alpha.redux.well.gui.*;
-import static com.alpha.redux.well.loreChecker.CheckEnchant;
 
 public class command implements CommandExecutor {
     public static HashMap<String, Boolean> KillMessages = new HashMap<>();
@@ -63,6 +62,8 @@ public class command implements CommandExecutor {
     public static Map<String, Long> ShowCD = new HashMap<String, Long>();
 
     List<Integer> runnables = new ArrayList<>();
+
+    public static int booster = 1;
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
@@ -93,14 +94,14 @@ public class command implements CommandExecutor {
                     return true;
                 }
 
-                if(twoTimesEvent >= 2){
+                if(booster > 1){
                     Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&e&lBOOSTER &c&lENDED!"));
 
                     for (Integer task : runnables) {
                         runnables.remove(task);
                     }
 
-                    twoTimesEvent = 1;
+                    booster = 1;
                     return true;
                 }
 
@@ -113,12 +114,13 @@ public class command implements CommandExecutor {
                 }
 
                 Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&e&lBOOSTER!!! &7There is currently an active booster for &e&l" + time + "m&7."));
-                twoTimesEvent += 2;
+                booster += 2;
                 int runnable = Bukkit.getScheduler().scheduleSyncDelayedTask(economy.getPlugin(), new Runnable() {
                     @Override
                     public void run() {
+                        for (Integer task : runnables) runnables.remove(task);
                         Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&e&lBOOSTER &c&lENDED!"));
-                        twoTimesEvent = 1;
+                        booster = 1;
                     }
                 }, (time * 60L) * 20);
 
@@ -181,7 +183,7 @@ public class command implements CommandExecutor {
 
                     if(success){
                         Location playerLocation = checkedPlayer.getLocation();
-                        checkedPlayer.setVelocity(new Vector(0, 100, 0));
+                        checkedPlayer.setVelocity(checkedPlayer.getVelocity().add(new Vector(0, 100, 0)));
                         checkedPlayer.teleport(playerLocation);
                     }
                 }
@@ -323,6 +325,7 @@ public class command implements CommandExecutor {
             if(player.isOp()){
                 changeName(player.getDisplayName(), player);
                 Inventory inv = player.getInventory();
+                inv.addItem(enchants.fresh_bow);
                 inv.addItem(enchants.malding_boots);
                 inv.addItem(enchants.malding_chestplate);
                 inv.addItem(enchants.malding_pants);
@@ -367,8 +370,6 @@ public class command implements CommandExecutor {
 
         if(BaseChecks(player, cmd.getName(), "checkPants", true, false, "null")){
             endTwoTimes();
-            List<String> lists = CheckEnchant(player);
-            player.sendMessage(String.valueOf(lists));
             return true;
         }
 
@@ -423,6 +424,7 @@ public class command implements CommandExecutor {
                         long timeleft = (freshPantsCD.get(String.valueOf(player.getUniqueId())) - System.currentTimeMillis()) / 1000;
                         player.sendMessage(ChatColor.RED + "Please wait a little before doing that!");
                     }else{
+                        player.getInventory().addItem(enchants.fresh_bow);
                         player.getInventory().addItem(enchants.fresh_reds);
                         player.getInventory().addItem(enchants.fresh_sword);
                         player.getInventory().addItem(enchants.jewl_sword);
@@ -431,6 +433,7 @@ public class command implements CommandExecutor {
                     }
 
                 }else{
+                    player.getInventory().addItem(enchants.fresh_bow);
                     player.getInventory().addItem(enchants.fresh_reds);
                     player.getInventory().addItem(enchants.fresh_sword);
                     player.getInventory().addItem(enchants.jewl_sword);
