@@ -23,7 +23,7 @@ public class swordJewl {
 
         ItemStack item = new ItemStack(Material.GOLD_SWORD, 1);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName("&cTier I Sword");
+        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',"&cTier I Sword"));
 
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
         meta.spigot().setUnbreakable(true);
@@ -41,7 +41,7 @@ public class swordJewl {
                 if (Billion(lore)) {
                     break;
                 }
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&dRARE! &9Billionaire III");
                 lore.add("&7Hits with this swords deal &c2x");
@@ -54,7 +54,7 @@ public class swordJewl {
             case 6:
             case 7:
                 if(Moctezuma(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&9Moctezuma III");
                 lore.add("&7Earn &6+18g&7 on kill (assists");
@@ -66,7 +66,7 @@ public class swordJewl {
             case 11:
             case 12:
                 if(GoldBump(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&9Gold Bump III");
                 lore.add("&7Earn &6+12g&7 on kill");
@@ -77,7 +77,7 @@ public class swordJewl {
                 if (lifesteal(lore)) {
                     break;
                 }
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&9Lifesteal III");
                 lore.add("&7Heal for &c13%&7 of damage dealt up");
@@ -87,7 +87,7 @@ public class swordJewl {
                 if (Kingbust(lore)) {
                     break;
                 }
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&9King Buster III");
                 lore.add("&7Deal &c+20%&7 damage vs. players");
@@ -98,7 +98,7 @@ public class swordJewl {
                 if (execution(lore)) {
                     break;
                 }
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&dRARE! &9Executioner III");
                 lore.add("&7Hitting an enemy to below &c3.5\u2764");
@@ -110,7 +110,7 @@ public class swordJewl {
             case 21:
             case 22:
                 if(Sweaty(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&9Sweaty III");
                 lore.add("&7Earn &b+60% XP&7 from streak XP");
@@ -121,7 +121,7 @@ public class swordJewl {
             case 25:
             case 26:
                 if(XPBoost(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&9XP Boost III");
                 lore.add("&7Earn &b+30% XP&7 from kills");
@@ -130,7 +130,7 @@ public class swordJewl {
             case 28:
             case 29:
                 if(XPBump(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&9XP Bump III");
                 lore.add("&7Earn &b+6 XP &7per");
@@ -141,7 +141,7 @@ public class swordJewl {
             case 32:
             case 33:
                 if(GoldBoost(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&9Gold Boost III");
                 lore.add("&7Earn &6+45% gold (g)&7 from kill");
@@ -150,7 +150,7 @@ public class swordJewl {
             case 35:
             case 36:
                 if(shark(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&9Shark III");
                 lore.add("&7Deal &c+7%&7 damager per other");
@@ -159,14 +159,14 @@ public class swordJewl {
                 break;
             case 37:
                 if(sharp(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&9Sharp III");
                 lore.add("&7Deal &c+12%&7 melee damage");
                 break;
             case 38:
                 if(PerunWrath(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&dRARE! &9Combo: Perun's Wrath III");
                 lore.add("&7Each &efourth&7 hit strikes");
@@ -179,7 +179,7 @@ public class swordJewl {
                 break;
             case 39:
                 if(gamble(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&dRARE! &9Gamble! III");
                 lore.add("&d50% chance &7to deal &c3\u2764&7 true");

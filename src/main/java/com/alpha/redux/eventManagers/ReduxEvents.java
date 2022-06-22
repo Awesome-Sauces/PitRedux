@@ -19,6 +19,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.Objects;
 import java.util.Random;
@@ -51,12 +52,8 @@ public class ReduxEvents implements Listener {
         ReduxPlayer ReduxDefender = event.getDefenders();
 
         if(isNPC(attacker)){
-            event.setReduxDamage(5);
+            event.setReduxDamage(10);
         }
-
-        //double damage = event.getReduxDamage();
-        double true_dmg = 0;
-        double sword_true = 0;
 
         event.addReduxDamage(Math.min(event.getReduxDamage() * damageIncrease.getIncrease(ReduxAttacker.getPlayerUUID()), event.getReduxDamage()*.1));
 
@@ -112,11 +109,7 @@ public class ReduxEvents implements Listener {
 
             }
 
-            if (StrengthCheck(attacker) <= 0){
-                event.addReduxDamage(0);
-            }else{
-                event.addReduxDamage(event.getReduxDamage() * StrengthCheck(attacker));
-            }
+            if (StrengthCheck(attacker) > 0) event.addReduxDamage(event.getReduxDamage() * StrengthCheck(attacker));
 
         } catch (Exception e){
             event.addReduxDamage(0);
@@ -194,14 +187,17 @@ public class ReduxEvents implements Listener {
         }
 
 
-        event.subtractReduxDamage(event.getReduxDamage() * ((double) damageDecrease.getDecrease(String.valueOf(defender.getUniqueId())) / 100));
+        if(!isNPC(defender)) event.subtractReduxDamage(event.getReduxDamage() * ((double) damageDecrease.getDecrease(String.valueOf(defender.getUniqueId())) / 100));
 
         try {
-            if(getPrestige(String.valueOf(attacker.getUniqueId())) <= 1){
-                event.addReduxDamage(event.getReduxDamage() *.1);
-            }else if(getPrestige(String.valueOf(defender.getUniqueId())) <= 1){
-                event.subtractReduxDamage(event.getReduxDamage()*.5);
+            if(!isNPC(defender) || !isNPC(attacker)){
+                if(getPrestige(String.valueOf(attacker.getUniqueId())) <= 1){
+                    event.addReduxDamage(event.getReduxDamage() *.1);
+                }else if(getPrestige(String.valueOf(defender.getUniqueId())) <= 1){
+                    event.subtractReduxDamage(event.getReduxDamage()*.5);
+                }
             }
+
         }catch (Exception e){
 
         }
@@ -249,36 +245,18 @@ public class ReduxEvents implements Listener {
 
         }
 
+        if(isNPC(defender)){
+            event.setReduxDamage(event.getReduxDamage() / 1.5);
+        }
+
+        event.getBukkitEvent().setDamage(event.getReduxDamage());
+
 
         sendHealthBar(event.getBukkitEvent());
 
 
-        if(isNPC(defender)){
 
-            event.setReduxDamage(event.getReduxDamage() / 2);
 
-            if (defender.getHealth() - (event.getReduxDamage() + event.getReduxTrueDamage()) <= 3) {
-                event.getBukkitEvent().setCancelled(true);
-                event.setCancelled(true);
-                try{
-                    KillMan(attacker, defender);
-                } catch (Exception ignored) {
-
-                }
-            }else{
-                event.setReduxDamage(Math.max(event.getReduxDamage(), 0));
-                //defender.setHealth(Math.max(defender.getHealth()-true_dmg, 0));
-            }
-        }else if (defender.getHealth() - 2 >= -2 && defender.getHealth() - 2 <= 1.5) {
-            event.getBukkitEvent().setCancelled(true);
-            event.setCancelled(true);
-            try{
-                escapeProc.put(String.valueOf(defender.getUniqueId()), false);
-                KillMan(attacker, defender);
-            } catch (Exception ignored) {
-
-            }
-        }
     }
 
     @EventHandler
@@ -293,7 +271,7 @@ public class ReduxEvents implements Listener {
                     ReduxAttacker.getPlayerObject().sendMessage(ChatColor.translateAlternateColorCodes('&', "&a&lWOW! &7you found a &3Player Soul&7!"));
                     ReduxAttacker.getPlayerObject().getInventory().addItem(enchants.playerSoul);
                 }
-            }else if (r < 0.0005) {
+            }else if (r < 0.005) {
                 ReduxAttacker.getPlayerObject().sendMessage(ChatColor.translateAlternateColorCodes('&', "&a&lWOW! &7you found a &3Player Soul&7!"));
                 ReduxAttacker.getPlayerObject().getInventory().addItem(enchants.playerSoul);
             }
@@ -305,6 +283,7 @@ public class ReduxEvents implements Listener {
     @EventHandler
     public void onPlace(BlockPlaceEvent event) {
 
+
         if(event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) return;
 
         if(event.getPlayer().getLocation().getY() >= getSpawnProtection()-13){
@@ -315,50 +294,6 @@ public class ReduxEvents implements Listener {
         Location playerloc = event.getBlock().getLocation();
 
         ReduxPlayer reduxPlayer = playerExists(event.getPlayer());
-
-
-        //-7.5, 123, 5.5
-        //int minX = -7;
-        //int minY = 123;
-        //int minZ = 5;
-
-        // 3.5, 145, 18.5
-        //int maxX = 3;
-        //int maxY = 145;
-        //int maxZ = 18;
-
-        int minX = 4;
-        int minY = 82;
-        int minZ = -5;
-
-        int maxX = -3;
-        int maxY = 99;
-        int maxZ = 6;
-
-        int tminX = 7;
-        int tminY = 82;
-        int tminZ = -4;
-
-        int tmaxX = 5;
-        int tmaxY = 99;
-        int tmaxZ = 5;
-
-        int OminX = -6;
-        int OminY = 82;
-        int OminZ = -4;
-
-        int OmaxX = -4;
-        int OmaxY = 99;
-        int OmaxZ = 5;
-
-
-        if (playerloc.getX() >= minX && playerloc.getX() <= maxX && playerloc.getZ() >= minZ && playerloc.getZ() <= maxZ && playerloc.getY() >= minY && playerloc.getY() <= maxY
-        || playerloc.getX() >= tminX && playerloc.getX() <= tmaxX && playerloc.getZ() >= tminZ && playerloc.getZ() <= tmaxZ && playerloc.getY() >= tminY && playerloc.getY() <= tmaxY
-        || playerloc.getX() >= OminX && playerloc.getX() <= OmaxX && playerloc.getZ() >= OminZ && playerloc.getZ() <= OmaxZ && playerloc.getY() >= OminY && playerloc.getY() <= OmaxY){
-            event.setCancelled(true);
-            return;
-        }
-
 
 
         Block replaced = event.getBlockReplacedState().getBlock();

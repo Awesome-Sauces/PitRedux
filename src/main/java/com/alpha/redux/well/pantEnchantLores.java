@@ -31,6 +31,17 @@ public class pantEnchantLores {
                 lore.add("&7Gain &6+0.5\u2764&7 absorption on kill");
                 lore.add("&7(max &6\u2764&7)");
                 break;
+
+            case "blobIII":
+            case "blobII":
+            case "blobI":
+                lore.add("&dRARE! &9Pit Blob III");
+                lore.add("&7Kills respawn &aThe Blob&7. This");
+                lore.add("&7slimy pet will follow you around");
+                lore.add("&7and kill your enemies. &aThe Blob");
+                lore.add("&7grows and gains health for every");
+                lore.add("&7enemy you kill.");
+
             case "gbIII":
                 
                 lore.add("&9Gold Boost III");

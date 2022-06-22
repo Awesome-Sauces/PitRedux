@@ -1,6 +1,6 @@
 package com.alpha.redux.entityHandlers.MysticHandler;
 
-import com.alpha.redux.entityHandlers.MysticHandler.Bows.Explosive;
+import com.alpha.redux.entityHandlers.MysticHandler.Bows.*;
 import com.alpha.redux.entityHandlers.MysticHandler.Pants.*;
 import com.alpha.redux.entityHandlers.MysticHandler.Swords.*;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
@@ -9,6 +9,7 @@ import com.alpha.redux.eventManagers.ReduxDamageEvent;
 import com.alpha.redux.well.EnchantingMechanics;
 import com.alpha.redux.well.MysticType;
 import org.bukkit.Bukkit;
+import org.bukkit.event.entity.EntityShootBowEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class EnchantRuntime {
 
     ReduxDamageEvent event;
     ReduxBowEvent bowEvent;
+    EntityShootBowEvent shootEvent;
 
     public EnchantRuntime(ReduxDamageEvent event, String mysticType){
         this.event = event;
@@ -31,9 +33,24 @@ public class EnchantRuntime {
         this.mysticType = mysticType;
     }
 
+    public EnchantRuntime(EntityShootBowEvent event){
+        this.shootEvent = event;
+    }
+
     public boolean bowRun(){
 
-        new Explosive();
+        new SprintDrain(this.bowEvent);
+        new Explosive(this.bowEvent);
+        new FasterThanTheirShadow(this.bowEvent);
+        new PullBow(this.bowEvent);
+        new Telebow(this.bowEvent);
+
+        return true;
+    }
+
+    public boolean bowShoot(){
+        new MegaLongBow(this.shootEvent);
+        new Volley(this.shootEvent);
 
         return true;
     }

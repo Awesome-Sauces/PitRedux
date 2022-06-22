@@ -21,8 +21,8 @@ public class pantJewl {
 
         ItemStack item = new ItemStack(Material.LEATHER_LEGGINGS, 1);
         LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
-        meta.setColor(Color.fromRGB(255, 51, 51));
-        meta.setDisplayName("&cTier I Red Pants");
+        meta.setColor(Color.RED);
+        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',"&cTier I Red Pants"));
 
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
         meta.spigot().setUnbreakable(true);
@@ -38,7 +38,7 @@ public class pantJewl {
             case 2:
             case 3:
                 if(GoldHeart(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&9Golden Heart III");
                 lore.add("&7Gain &6+2\u2764&7 absorption on kill");
@@ -49,7 +49,7 @@ public class pantJewl {
             case 6:
             case 7:
                 if(Moctezuma(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&9Moctezuma III");
                 lore.add("&7Earn &6+18g&7 on kill (assists");
@@ -61,7 +61,7 @@ public class pantJewl {
             case 11:
             case 12:
                 if(GoldBump(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&9Gold Bump III");
                 lore.add("&7Earn &6+12g&7 on kill");
@@ -70,14 +70,14 @@ public class pantJewl {
             case 14:
             case 15:
                  if(Protection(lore)){break;}
-                 lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                 lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                  lore.add("    ");
                  lore.add("&9Protection III");
                  lore.add("&7Receive &9-10%&7 damage");
                  break;
             case 16:
                  if(CritFunky(lore)){break;}
-                 lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                 lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                  lore.add("    ");
                  lore.add("&9Critically Funky III");
                  lore.add("&7Critical hits against you deal");
@@ -88,7 +88,7 @@ public class pantJewl {
             case 17:
             case 18:
                  if(Peroxide(lore)){break;}
-                 lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                 lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                  lore.add("    ");
                  lore.add("&9Peroxide III");
                  lore.add("&7Gain &cRegen II &7(8s) when hit");
@@ -97,7 +97,7 @@ public class pantJewl {
             case 21:
             case 22:
                  if(Sweaty(lore)){break;}
-                 lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                 lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                  lore.add("    ");
                  lore.add("&9Sweaty III");
                  lore.add("&7Earn &b+60% XP&7 from streak XP");
@@ -108,7 +108,7 @@ public class pantJewl {
             case 25:
             case 26:
                 if(XPBoost(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&9XP Boost III");
                 lore.add("&7Earn &b+30% XP&7 from kills");
@@ -117,7 +117,7 @@ public class pantJewl {
             case 28:
             case 29:
                 if(XPBump(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&9XP Bump III");
                 lore.add("&7Earn &b+6 XP &7per");
@@ -128,7 +128,7 @@ public class pantJewl {
             case 32:
             case 33:
                 if(GoldBoost(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&9Gold Boost III");
                 lore.add("&7Earn &6+45% gold (g)&7 from kill");
@@ -137,7 +137,7 @@ public class pantJewl {
             case 35:
             case 36:
                 if(NotGladiator(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&9\"Not\" Gladiator III");
                 lore.add("&7Receive &9-2% damage per nearby");
@@ -145,14 +145,14 @@ public class pantJewl {
                 break;
             case 37:
                 if(Mirror(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&9Mirror III");
                 lore.add("&7You are immune to true damage");
                 break;
             case 38:
                 if(EscapePod(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&dRARE! &9Escape Pod III");
                 lore.add("&7When hit below &c2 &7, launch");
@@ -165,7 +165,7 @@ public class pantJewl {
                 break;
             case 39:
                 if(rgm(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&dRARE! &9Retro-Gravity Microcosm III");
                 lore.add("&7When a player hits you from");
@@ -178,7 +178,7 @@ public class pantJewl {
                 break;
             case 40:
                 if(reg(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a20&7/20"));
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
                 lore.add("    ");
                 lore.add("&dRARE! &9Regularity III");
                 lore.add("&7If the final damage of your strike");

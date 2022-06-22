@@ -87,16 +87,21 @@ public class streaks {
     public static int Uber(Player player){
         hasStreak(String.valueOf(player.getUniqueId()));
         if (getStreak(String.valueOf(player.getUniqueId())) == 100){
-            Bukkit.broadcastMessage(ChatColor.GRAY + player.getDisplayName() + ChatColor.LIGHT_PURPLE + " Is on a 100 Uber Streak, 300 more kills!");
+            Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+                    "&c&lSTREAK! &7of &c100 &7kills by " + rank.getNameColor(player) + ChatColor.stripColor(player.getDisplayName())));
         }else if (getStreak(String.valueOf(player.getUniqueId())) == 200){
             NametagEdit.getApi().setNametag(player, "§d§lUBER 200 " + rank.getNameColor(player), "");
-            Bukkit.broadcastMessage(ChatColor.GRAY + player.getDisplayName() + ChatColor.LIGHT_PURPLE + " Is on a 200 Uber Streak, 200 more kills!");
+            Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+                    "&c&lSTREAK! &7of &c200 &7kills by " + rank.getNameColor(player) + ChatColor.stripColor(player.getDisplayName())));
         }else if (getStreak(String.valueOf(player.getUniqueId())) == 300) {
             NametagEdit.getApi().setNametag(player, "§d§lUBER 300 " + rank.getNameColor(player), "");
-            Bukkit.broadcastMessage(ChatColor.GRAY + player.getDisplayName() + ChatColor.LIGHT_PURPLE + " Is on a 300 Uber Streak, 100 more kills!");
-            if (getStreak(String.valueOf(player.getUniqueId())) <= 1) {
-                player.sendMessage(ChatColor.RED + "You have started the Uberstreak, Good Luck!");
-            }}
+            Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+                    "&c&lSTREAK! &7of &c300 &7kills by " + rank.getNameColor(player) + ChatColor.stripColor(player.getDisplayName())));
+            }else if (getStreak(String.valueOf(player.getUniqueId())) == 400) {
+            NametagEdit.getApi().setNametag(player, "§d§lUBER 400 " + rank.getNameColor(player), "");
+            Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+                    "&c&lSTREAK! &7of &c400 &7kills by " + rank.getNameColor(player) + ChatColor.stripColor(player.getDisplayName())));
+        }
 
         UberRewardClaimDeath(player);
 
@@ -107,7 +112,7 @@ public class streaks {
 
     public static void UberRewardClaimDeath(Player player){
         if(Objects.equals(getMegaStreak(String.valueOf(player.getUniqueId())), "uber")){
-            if (getStreak(String.valueOf(player.getUniqueId())) >= 400){
+            if (getStreak(String.valueOf(player.getUniqueId())) >= 500){
                 player.setMaxHealth(20);
                 player.setHealth(player.getMaxHealth());
                 player.removePotionEffect(PotionEffectType.SLOW);
@@ -182,6 +187,10 @@ public class streaks {
 
         if (Objects.equals(getMegaStreak(String.valueOf(player.getUniqueId())), "beastmode")){
             if(getStreak(String.valueOf(player.getUniqueId())) > 49 && getStreak(String.valueOf(player.getUniqueId())) < 51){
+                if(!player.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE)){
+                    player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 600*20, 0, true, true));
+                }
                 NametagEdit.getApi().setNametag(player, "§a§lBEAST " + rank.getNameColor(player), "");
                 xp_amount_mega.put(String.valueOf(player.getUniqueId()), 1);
                 mega_damage_amount.put(String.valueOf(player.getUniqueId()), 0.3);
@@ -190,6 +199,10 @@ public class streaks {
             return Beast(player);
         }if (Objects.equals(getMegaStreak(String.valueOf(player.getUniqueId())), "moon")){
             if(getStreak(String.valueOf(player.getUniqueId())) > 99 && getStreak(String.valueOf(player.getUniqueId())) < 101){
+                if(!player.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE)){
+                    player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 600*20, 0, true, true));
+                }
                 NametagEdit.getApi().setNametag(player, "§b§lMOON " + rank.getNameColor(player), "");
                 xp_amount_mega.put(String.valueOf(player.getUniqueId()), 10);
                 mega_damage_amount.put(String.valueOf(player.getUniqueId()), .5);
@@ -208,6 +221,10 @@ public class streaks {
             return Uber(player);
         }else if (Objects.equals(getMegaStreak(String.valueOf(player.getUniqueId())), "highlander")){
             if(getStreak(String.valueOf(player.getUniqueId())) > 49 && getStreak(String.valueOf(player.getUniqueId())) < 51){
+                if(!player.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE)){
+                    player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 600*20, 0, true, true));
+                }
                 NametagEdit.getApi().setNametag(player, "§6§lHIGH " + rank.getNameColor(player), "");
                 mega_damage_amount.put(String.valueOf(player.getUniqueId()), 0.01);
                 strikeLightningForPlayers(player.getLocation(), player);

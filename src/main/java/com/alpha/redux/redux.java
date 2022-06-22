@@ -7,6 +7,7 @@ import com.alpha.redux.apis.skyblock.skyblockItems;
 import com.alpha.redux.commands.command;
 import com.alpha.redux.commands.repairs.ClickHandler;
 import com.alpha.redux.entityHandlers.MysticHandler.MysticEventHandler.MysticEventHandlers;
+import com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap;
 import com.alpha.redux.entityHandlers.ReduxPlayerHandler;
 import com.alpha.redux.eventManagers.ReduxEvents;
 import com.alpha.redux.playerdata.economy;
@@ -36,6 +37,8 @@ import static com.alpha.redux.DeathHandler.killHandler.isNPC;
 import static com.alpha.redux.apis.chatManager.rank.ChatEventApiGetLevelColor;
 import static com.alpha.redux.apis.leaderboardsplus.leaderboards.*;
 import static com.alpha.redux.apis.locations.getCakeLocation;
+import static com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap.blob;
+import static com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap.blobStreak;
 import static com.alpha.redux.events.boards.CreateScore;
 import static com.alpha.redux.funEvents.event.handleTwoEvent;
 import static com.alpha.redux.funEvents.event.twoTimesEvent;
@@ -118,6 +121,7 @@ public class redux extends JavaPlugin {
             }
         }.runTaskTimer(plugin, 1, 1);
 
+
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             @Override
             public void run() {
@@ -137,6 +141,7 @@ public class redux extends JavaPlugin {
                     for (Entity e : w.getEntities()) {
                         if (e instanceof Arrow) {
                             e.remove();
+
                         }
                     }
 
@@ -183,6 +188,19 @@ public class redux extends JavaPlugin {
 
     @Override
     public void onDisable() {
+
+        for(Player player : blob.keySet()){
+            Slime slime = blob.get(player);
+
+            PitBlobMap.runnable.get(player).cancel();
+            PitBlobMap.runnable.remove(player);
+
+            blob.remove(player);
+            blobStreak.remove(player);
+
+            slime.remove();
+        }
+
         for (Player player : MaldingPlayerHandlers.keySet()){
 
             NPC npc = MaldingPlayerHandlers.get(player).getBoss();
@@ -212,6 +230,7 @@ public class redux extends JavaPlugin {
 
     private void commandRegistration(){
         command commands = new command();
+        getCommand("crategive").setExecutor(commands);
         getCommand("enchantPant").setExecutor(commands);
         getCommand("activateBooster").setExecutor(commands);
         getCommand("purchaseDyes").setExecutor(commands);

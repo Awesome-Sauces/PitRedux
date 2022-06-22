@@ -71,7 +71,7 @@ public class ReduxPlayerUtils {
                 }
             }
 
-        if(player.getSwordEnchants() != null) enchants = player.getSwordEnchants();
+        if(player != null && player.getSwordEnchants() != null) enchants = player.getSwordEnchants();
 
         if(enchants != null)
             for (String sw : enchants) {

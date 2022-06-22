@@ -1,6 +1,7 @@
 package com.alpha.redux.commands;
 
 import com.alpha.redux.apis.chatManager.rank;
+import com.alpha.redux.commands.crates.crate;
 import com.alpha.redux.commands.repairs.menu;
 import com.alpha.redux.events.boards;
 import com.alpha.redux.items.enchants;
@@ -69,6 +70,11 @@ public class command implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
         if(!(sender instanceof Player)) {
 
+            if(cmd.getName().equalsIgnoreCase("crategive")){
+                crate Crate = new crate(args[0], args[1]);
+
+                Crate.broadcastMessage();
+            }
 
 
             if (cmd.getName().equalsIgnoreCase("makemonersrankers")) {
@@ -301,19 +307,33 @@ public class command implements CommandExecutor {
         }
 
         if(cmd.getName().equalsIgnoreCase("KillMessageToggle")) {
-            if(!KillMessages.containsKey(String.valueOf(player.getUniqueId()))){
-                KillMessages.put(String.valueOf(player.getUniqueId()), false);
-                player.sendMessage(ChatColor.RED + "Death messages off!");
-            }else{
-                if(KillMessages.get(String.valueOf(player.getUniqueId())).equals(true)){
+
+            if(!player.hasPermission("VIP") ||
+                    !player.hasPermission("VIP+") ||
+                    !player.hasPermission("MVP") ||
+                    !player.hasPermission("MVP+") ||
+                    !player.hasPermission("MVP++")){
+
+                if(!KillMessages.containsKey(String.valueOf(player.getUniqueId()))){
                     KillMessages.put(String.valueOf(player.getUniqueId()), false);
                     player.sendMessage(ChatColor.RED + "Death messages off!");
                 }else{
-                    KillMessages.put(String.valueOf(player.getUniqueId()), true);
-                    player.sendMessage(ChatColor.GREEN + "Death messages on!");
+                    if(KillMessages.get(String.valueOf(player.getUniqueId())).equals(true)){
+                        KillMessages.put(String.valueOf(player.getUniqueId()), false);
+                        player.sendMessage(ChatColor.RED + "Death messages off!");
+                    }else{
+                        KillMessages.put(String.valueOf(player.getUniqueId()), true);
+                        player.sendMessage(ChatColor.GREEN + "Death messages on!");
+                    }
                 }
+
+
+                return true;
             }
 
+
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                    "&cYou need VIP or higher to use that command!"));
             return true;
         }
 
@@ -354,8 +374,21 @@ public class command implements CommandExecutor {
         }
 
         if(cmd.getName().equalsIgnoreCase("well")) {
-            base(player);
+            if(!player.hasPermission("VIP") ||
+                    !player.hasPermission("VIP+") ||
+                    !player.hasPermission("MVP") ||
+                    !player.hasPermission("MVP+") ||
+                    !player.hasPermission("MVP++")){
+
+                base(player);
+                return true;
+
+            }
+
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                    "&cYou need VIP or higher to use that command!"));
             return true;
+
         }
 
         if(BaseChecks(player, cmd.getName(), "getXp", true, false, "null")){
@@ -374,8 +407,19 @@ public class command implements CommandExecutor {
         }
 
         if(cmd.getName().equalsIgnoreCase("prestige")){
-            PrestigeMenu(player);
+            if(
+                    player.hasPermission("VIP+") ||
+                    player.hasPermission("MVP") ||
+                    player.hasPermission("MVP+") ||
+                    player.hasPermission("MVP++")){
+                PrestigeMenu(player);
+                return true;
+            }
+
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                    "&cYou need VIP+ or higher to use that command!"));
             return true;
+
         }
 
         if(BaseChecks(player, cmd.getName(), "prestiges", false, true, "SetPrestige")){
@@ -394,7 +438,7 @@ public class command implements CommandExecutor {
             }
         }
 
-        if(BaseChecks(player, cmd.getName(), "malding", false, true, "malding")){
+        if(BaseChecks(player, cmd.getName(), "malding", true, true, "malding")){
             summonBoss(player);
             Bukkit.broadcastMessage(ChatColor.GRAY + "A wild " + ChatColor.RED + "Malding " + ChatColor.GRAY + "has appeared!");
         }
@@ -416,7 +460,7 @@ public class command implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("pants")){
-            if(player.hasPermission("pantsCommand")){
+            if(player.hasPermission("opP2W")){
                 if (freshPantsCD.containsKey(String.valueOf(player.getUniqueId()))){
                     // player is inside mute map
                     if (freshPantsCD.get(String.valueOf(player.getUniqueId())) > System.currentTimeMillis()){
@@ -424,6 +468,7 @@ public class command implements CommandExecutor {
                         long timeleft = (freshPantsCD.get(String.valueOf(player.getUniqueId())) - System.currentTimeMillis()) / 1000;
                         player.sendMessage(ChatColor.RED + "Please wait a little before doing that!");
                     }else{
+                        player.getInventory().addItem(enchants.cactus);
                         player.getInventory().addItem(enchants.fresh_bow);
                         player.getInventory().addItem(enchants.fresh_reds);
                         player.getInventory().addItem(enchants.fresh_sword);
@@ -433,6 +478,7 @@ public class command implements CommandExecutor {
                     }
 
                 }else{
+                    player.getInventory().addItem(enchants.cactus);
                     player.getInventory().addItem(enchants.fresh_bow);
                     player.getInventory().addItem(enchants.fresh_reds);
                     player.getInventory().addItem(enchants.fresh_sword);
@@ -448,30 +494,43 @@ public class command implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("show")){
-            if (ShowCD.containsKey(String.valueOf(player.getUniqueId()))){
+            if(!player.hasPermission("VIP") ||
+                    !player.hasPermission("VIP+") ||
+                    !player.hasPermission("MVP") ||
+                    !player.hasPermission("MVP+") ||
+                    !player.hasPermission("MVP++")){
+
+
+                if (ShowCD.containsKey(String.valueOf(player.getUniqueId()))){
                     // player is inside mute map
-                if (ShowCD.get(String.valueOf(player.getUniqueId())) > System.currentTimeMillis()){
+                    if (ShowCD.get(String.valueOf(player.getUniqueId())) > System.currentTimeMillis()){
                         // They still have time left on mute
-                    long timeleft = (ShowCD.get(String.valueOf(player.getUniqueId())) - System.currentTimeMillis()) / 1000;
-                    player.sendMessage(ChatColor.RED + "Please wait a little before doing that!");
+                        long timeleft = (ShowCD.get(String.valueOf(player.getUniqueId())) - System.currentTimeMillis()) / 1000;
+                        player.sendMessage(ChatColor.RED + "Please wait a little before doing that!");
+                    }else{
+                        try{
+                            hoverText(ChatColor.translateAlternateColorCodes('&', "&a&lSHOWOFF! " +  rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " has: " + ChatColor.RED + "Mystic item"), compileListToString(player.getItemInHand().getItemMeta().getLore()));
+                        }catch (Exception e){
+                            player.sendMessage(ChatColor.RED + "Please hold a mystic item!");
+                        }
+                        ShowCD.put(String.valueOf(player.getUniqueId()), System.currentTimeMillis() + (30 * 1000));
+                    }
+
                 }else{
                     try{
-                        hoverText(ChatColor.translateAlternateColorCodes('&', "&a&lSHOWOFF! " +  rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " has: " + ChatColor.RED + "Mystic item"), compileListToString(player.getItemInHand().getItemMeta().getLore()));
+                        hoverText(ChatColor.translateAlternateColorCodes('&', "&a&lSHOWOFF! " + rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " has: " + ChatColor.RED + "Mystic item"), compileListToString(player.getItemInHand().getItemMeta().getLore()));
                     }catch (Exception e){
                         player.sendMessage(ChatColor.RED + "Please hold a mystic item!");
                     }
+
                     ShowCD.put(String.valueOf(player.getUniqueId()), System.currentTimeMillis() + (30 * 1000));
                 }
-
-            }else{
-                try{
-                    hoverText(ChatColor.translateAlternateColorCodes('&', "&a&lSHOWOFF! " + rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " has: " + ChatColor.RED + "Mystic item"), compileListToString(player.getItemInHand().getItemMeta().getLore()));
-                }catch (Exception e){
-                    player.sendMessage(ChatColor.RED + "Please hold a mystic item!");
-                }
-
-                ShowCD.put(String.valueOf(player.getUniqueId()), System.currentTimeMillis() + (30 * 1000));
+                return true;
             }
+
+
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                    "&cYou need VIP or higher to use that command!"));
             return true;
         }
 

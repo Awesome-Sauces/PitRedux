@@ -7,9 +7,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import java.util.ArrayList;
@@ -51,7 +53,46 @@ public class CrateItems {
         return itemManager.feather;
     }
 
+    public ItemStack getVile(){
+        return enchants.vile;
+    }
+
     public ItemStack getUber(){
         return RenownItems.UberDrop();
     }
+
+    public ItemStack getDiamondHelmet() {
+        ItemStack item = new ItemStack(Material.DIAMOND_HELMET, 1);
+        List<String> lore = new ArrayList<>();
+        ItemMeta meta = item.getItemMeta();
+        meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, false);
+        meta.spigot().setUnbreakable(true);
+        item.setItemMeta(meta);
+        return item;
+    }
+    public ItemStack getDiamondChestplate() {
+        ItemStack item = new ItemStack(Material.DIAMOND_CHESTPLATE, 1);
+        ItemMeta meta = item.getItemMeta();
+        meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, false);
+        meta.spigot().setUnbreakable(true);
+        item.setItemMeta(meta);
+        return item;
+    }
+    public ItemStack getDiamondLeggings() {
+        ItemStack item = new ItemStack(Material.DIAMOND_LEGGINGS, 1);
+        ItemMeta meta = item.getItemMeta();
+        meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, false);
+        meta.spigot().setUnbreakable(true);
+        item.setItemMeta(meta);
+        return item;
+    }
+    public ItemStack getDiamondBoots() {
+        ItemStack item = new ItemStack(Material.DIAMOND_BOOTS, 1);
+        ItemMeta meta = item.getItemMeta();
+        meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, false);
+        meta.spigot().setUnbreakable(true);
+        item.setItemMeta(meta);
+        return item;
+    }
+    
 }

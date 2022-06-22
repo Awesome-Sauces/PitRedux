@@ -14,25 +14,44 @@ public class ArmorJoin {
 
         try{
             if(CheckChainBoots(player)){
-                player.getInventory().setBoots(itemManager.DiamondBoots);
+                player.getInventory().setBoots(itemManager.IronBoots);
             }
 
             if(CheckChainChestplate(player)){
-                player.getInventory().setChestplate(itemManager.DiamondChestplate);
+                player.getInventory().setChestplate(itemManager.IronChestplate);
             }
 
 
             if(CheckIronLeggings(player)){
-                player.getInventory().setLeggings(itemManager.DiamondLeggings);
+                player.getInventory().setLeggings(itemManager.IronLeggings);
             }
 
-            if (!player.getInventory().containsAtLeast(itemManager.DiamondSword, 1)) {
-                player.getInventory().addItem(itemManager.DiamondSword);
+            if(CheckIronHelmet(player)){
+                player.getInventory().setHelmet(itemManager.IronHelmet);
+            }
+
+            if (!player.getInventory().containsAtLeast(itemManager.IronSword, 1)) {
+                player.getInventory().addItem(itemManager.IronSword);
             }
         }catch (Exception e){
 
         }
 
+    }
+
+    public static boolean CheckIronHelmet(Player player){
+        try{
+            if(player.getInventory().getHelmet() == null){
+                return true;
+            }else if (player.getInventory().containsAtLeast(itemManager.DiamondHelmet, 1)) {
+                return false;
+            }
+
+            return false;
+
+        }catch (Exception e){
+            return false;
+        }
     }
 
     public static boolean CheckChainBoots(Player player){

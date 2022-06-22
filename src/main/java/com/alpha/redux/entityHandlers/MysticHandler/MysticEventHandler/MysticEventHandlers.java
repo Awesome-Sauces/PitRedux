@@ -4,8 +4,10 @@ import com.alpha.redux.entityHandlers.MysticHandler.EnchantRuntime;
 import com.alpha.redux.eventManagers.ReduxBowEvent;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
@@ -36,15 +38,20 @@ public class MysticEventHandlers implements Listener {
     }
 
     @EventHandler
-    public static void callMeleeEvent(ReduxBowEvent event){
+    public static void callBowEvent(ReduxBowEvent event){
 
-        List<String> DefenderPants = event.getEnchants();
+        new EnchantRuntime(event, "BOW").bowRun();
 
-        if(DefenderPants != null && !DefenderPants.isEmpty()) {
 
-            new EnchantRuntime(event, "BOW").bowRun();
+    }
+
+    @EventHandler
+    public void callShootEvent(EntityShootBowEvent event){
+        if(event.getEntity() instanceof Player){
+
+            new EnchantRuntime(event).bowShoot();
+
         }
-
     }
 
 

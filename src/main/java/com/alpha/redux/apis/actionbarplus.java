@@ -8,6 +8,8 @@ import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
+import static com.alpha.redux.DeathHandler.killHandler.isNPC;
+
 public class actionbarplus {
     public static void sendActionBar(Player player, String message) {
         PacketPlayOutChat packet = new PacketPlayOutChat(IChatBaseComponent.ChatSerializer.a("{\"text\":\"" +
@@ -16,6 +18,7 @@ public class actionbarplus {
     }
 
     public static void sendHealthBar(EntityDamageByEntityEvent event){
+
 
 
         Player player = (Player) event.getDamager();

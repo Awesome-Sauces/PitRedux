@@ -27,18 +27,17 @@ public class bowRoll {
 
         enchants.add("sprint");
         enchants.add("sprint");
+        enchants.add("sprint");
+        enchants.add("sprint");
+        enchants.add("ftts");
         enchants.add("ftts");
         enchants.add("ftts");
         enchants.add("ftts");
         enchants.add("mlb");
-        enchants.add("mlb");
         enchants.add("volley");
-        enchants.add("volley");
-        enchants.add("pull");
-        enchants.add("pull");
         enchants.add("tele");
         enchants.add("ex");
-        enchants.add("ex");
+        enchants.add("pull");
 
         Collections.shuffle(enchants);
 

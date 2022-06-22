@@ -14,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
@@ -260,5 +261,38 @@ public class InventoryEventManager implements Listener {
         event.setCancelled(true);
     }
 
+    @EventHandler
+    public void cactus(InventoryClickEvent event){
+        if(event.getClickedInventory().getTitle() != null && event.getClickedInventory().getTitle().equals(ChatColor.GRAY + "Philosopher's Cactus")){
+            event.setCancelled(true);
+            Player player = (Player) event.getWhoClicked();
+            Inventory inventory = player.getInventory();
+
+            if(event.getCurrentItem().equals(enchants.fresh_reds)){
+                player.closeInventory();
+                event.getWhoClicked().getInventory().removeItem(enchants.cactus);
+                player.getInventory().addItem(enchants.fresh_reds);
+            }else if(event.getCurrentItem().equals(enchants.fresh_blues)){
+                player.closeInventory();
+                event.getWhoClicked().getInventory().removeItem(enchants.cactus);
+                player.getInventory().addItem(enchants.fresh_blues);
+            }else if(event.getCurrentItem().equals(enchants.fresh_greens)){
+                player.closeInventory();
+                event.getWhoClicked().getInventory().removeItem(enchants.cactus);
+                player.getInventory().addItem(enchants.fresh_greens);
+            }else if(event.getCurrentItem().equals(enchants.fresh_yellows)){
+                player.closeInventory();
+                player.getInventory().removeItem(enchants.cactus);
+                player.getInventory().addItem(enchants.fresh_yellows);
+            }else if(event.getCurrentItem().equals(enchants.fresh_oranges)){
+                player.closeInventory();
+                event.getWhoClicked().getInventory().removeItem(enchants.cactus);
+                player.getInventory().addItem(enchants.fresh_oranges);
+            }
+
+
+
+        }
+    }
 
 }

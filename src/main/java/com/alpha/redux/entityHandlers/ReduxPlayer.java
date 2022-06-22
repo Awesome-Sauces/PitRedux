@@ -26,7 +26,7 @@ public class ReduxPlayer {
     double damageDecrease;
     double xpBooster = 1;
     double goldBooster = 1;
-    int obbyTime = 2400;
+    int obbyTime = 2400*5;
 
     public ReduxPlayer(Player player) {
         this.player = player;
@@ -193,7 +193,7 @@ public class ReduxPlayer {
     }
 
     public List<String> getSwordEnchants(){
-        if(getMainHand() != null && getMainHand().getItemMeta().getLore() != null) return CheckEnchantOnSword(getMainHand().getItemMeta().getLore());
+        if(getMainHand() != null && getMainHand().getItemMeta() != null && getMainHand().getItemMeta().getLore() != null) return CheckEnchantOnSword(getMainHand().getItemMeta().getLore());
         else return null;
     }
 

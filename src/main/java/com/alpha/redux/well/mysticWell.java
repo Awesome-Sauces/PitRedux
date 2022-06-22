@@ -22,7 +22,7 @@ public class mysticWell {
     public static ItemStack createDrop(Player player){
         ItemStack item = new ItemStack(Material.LEATHER_LEGGINGS, 1);
         LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
-        meta.setColor(Color.fromRGB(255, 51, 51));
+        meta.setColor(Color.RED);
         meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cTier I Red Pants"));
 
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
@@ -36,7 +36,7 @@ public class mysticWell {
 
     public static ItemStack createDropI(ItemStack item, Player player) {
         LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
-        meta.setColor(Color.fromRGB(255, 51, 51));
+        meta.setColor(Color.RED);
         meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',"&cTier II Red Pants"));
 
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
@@ -50,7 +50,7 @@ public class mysticWell {
 
     public static ItemStack createDropII(ItemStack item, Player player) {
         LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
-        meta.setColor(Color.fromRGB(255, 51, 51));
+        meta.setColor(Color.RED);
         meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cTier III Red Pants"));
 
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);

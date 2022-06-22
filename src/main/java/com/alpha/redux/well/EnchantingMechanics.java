@@ -208,6 +208,9 @@ public class EnchantingMechanics {
         } else if(MysticType.valueOf(mystic).equals(MysticType.SWORD)){
             List<String> list = CheckEnchantOnSword(lore);
             return list.contains(this.enchant + "III") || list.contains(this.enchant + "II") || list.contains(this.enchant + "I");
+        }else if(MysticType.valueOf(mystic).equals(MysticType.BOW)){
+            List<String> list = CheckEnchantOnBow(lore);
+            return list.contains(this.enchant + "III") || list.contains(this.enchant + "II") || list.contains(this.enchant + "I");
         }
 
 

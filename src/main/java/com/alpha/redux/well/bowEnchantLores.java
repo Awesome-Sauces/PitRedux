@@ -34,19 +34,19 @@ public class bowEnchantLores {
             case "fttsIII":
                 assert false;
                 this.lore.add("&9Faster than their shadow III");
-                lore.add("&7Hitting &f0 &7shots without");
+                lore.add("&7Hitting &f1 &7shot without");
                 lore.add("&7missing grants &eSpeed III &7(7s)");
                 break;
             case "fttsII":
                 assert false;
                 this.lore.add("&9Faster than their shadow II");
-                lore.add("&7Hitting &f0 &7shots without");
+                lore.add("&7Hitting &f1 &7shot without");
                 lore.add("&7missing grants &eSpeed II &7(5s)");
                 break;
             case "fttsI":
                 assert false;
                 this.lore.add("&9Faster than their shadow");
-                lore.add("&7Hitting &f0 &7shots without");
+                lore.add("&7Hitting &f1 &7shot without");
                 lore.add("&7missing grants &eSpeed I &7(5s)");
                 break;
                 

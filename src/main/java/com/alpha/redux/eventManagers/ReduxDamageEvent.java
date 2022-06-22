@@ -127,16 +127,23 @@ public class ReduxDamageEvent extends Event implements Cancellable {
         return this.damage;
     }
 
+    public Double getFinalDamage(){
+        return this.event.getFinalDamage();
+    }
+
     public void setReduxDamage(double damage) {
+        this.event.setDamage(damage);
         this.damage = damage;
     }
 
     public void addReduxDamage(double damage) {
         this.damage += damage;
+        this.event.setDamage(damage);
     }
 
     public void subtractReduxDamage(double damage){
         this.damage -= damage;
+        this.event.setDamage(damage);
     }
 
 

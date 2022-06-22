@@ -119,3 +119,7 @@ commands:
     description: Activates a booster for Better Pit!!
     usage: /<command> <timeInMinutes>
     aliases: p2wCommand
+  crategive:
+    description: Gives crate for losers!
+    usage: /<command> <crateItem> <player>
+    aliases: p2wwCommand
