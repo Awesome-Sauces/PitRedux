@@ -15,7 +15,7 @@ import static com.alpha.redux.apis.locations.getBotSpawnLocation;
 
 public class event {
 
-    private static Hologram hologram = HologramsAPI.createHologram(economy.getPlugin(), getBotSpawnLocation().add(0, 32, 0));
+    private static Hologram hologram = HologramsAPI.createHologram(economy.getPlugin(), new Location(Bukkit.getWorld("world"), 0.5, 100, 0.5).add(0, 32, 0));
     public static int twoTimesEvent = 1;
 
     public static void twoTimesEvent(){
@@ -37,9 +37,7 @@ public class event {
         hologram.appendTextLine(ChatColor.translateAlternateColorCodes('&', "&e2x &bXP &d/&6gold&e!"));
         hologram.appendTextLine(ChatColor.translateAlternateColorCodes('&', "&ein Pit Area"));
 
-
-        if(twoTimesEvent > 2) twoTimesEvent += 1;
-        else twoTimesEvent = 2;
+        twoTimesEvent = 2;
 
     }
 
@@ -61,12 +59,11 @@ public class event {
         Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&d&lMINOR EVENT! &e2x in &e&lPit Area &c&lENDED"));
         hologram.delete();
 
-        if(twoTimesEvent > 2) twoTimesEvent -= 1;
-        else twoTimesEvent = 1;
+        twoTimesEvent = 1;
 
     }
 
     public static void refreshHoloGram(){
-        hologram = HologramsAPI.createHologram(economy.getPlugin(), getBotSpawnLocation().add(0, 21 ,0));
+        hologram = HologramsAPI.createHologram(economy.getPlugin(), new Location(Bukkit.getWorld("world"), 0.5, 100, 0.5).add(0, 21 ,0));
     }
 }

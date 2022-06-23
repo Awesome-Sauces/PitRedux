@@ -173,10 +173,6 @@ public class rank {
             rank = ChatColor.RED + "[OWNER] ";
             chatcolor = String.valueOf(ChatColor.WHITE);
             namecolor = String.valueOf(ChatColor.RED);
-        }else if(player.hasPermission("ROMY")){
-            rank = ChatColor.translateAlternateColorCodes('&', "&d[ROMY] ");
-            namecolor = String.valueOf(ChatColor.LIGHT_PURPLE);
-            chatcolor = String.valueOf(ChatColor.WHITE);
         }else if(player.hasPermission("NARDUPE")){
             rank = ChatColor.RED + "[OWNER"  + ChatColor.RED + "] ";
             namecolor = String.valueOf(ChatColor.RED);

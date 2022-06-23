@@ -1,8 +1,11 @@
 package com.alpha.redux.events;
 
+import com.alpha.redux.MenuClicks.Cactus.CactusRunTime;
 import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.chatManager.rank;
+import com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
+import com.alpha.redux.entityHandlers.TrueDamage.TrueDamageHandler;
 import com.alpha.redux.eventManagers.ReduxBowEvent;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
 import com.alpha.redux.items.enchants;
@@ -19,9 +22,7 @@ import com.alpha.redux.renownShop.damageIncrease;
 //import com.comphenix.protocol.wrappers.EnumWrappers;
 import com.nametagedit.plugin.NametagEdit;
 import net.citizensnpcs.api.CitizensAPI;
-import net.citizensnpcs.api.event.NPCClickEvent;
-import net.citizensnpcs.api.event.NPCDeathEvent;
-import net.citizensnpcs.api.event.NPCRightClickEvent;
+import net.citizensnpcs.api.event.*;
 import net.citizensnpcs.api.npc.NPC;
 import net.minecraft.server.v1_8_R3.*;
 import org.bukkit.*;
@@ -50,7 +51,7 @@ import org.bukkit.util.Vector;
 import java.util.*;
 
 import static com.alpha.redux.DeathHandler.ProccessHit.*;
-import static com.alpha.redux.DeathHandler.killHandler.getNPC;
+import static com.alpha.redux.DeathHandler.killHandler.*;
 import static com.alpha.redux.ItemEvents.pants.*;
 import static com.alpha.redux.ItemEvents.swords.*;
 import static com.alpha.redux.apis.actionbarplus.sendHealthBar;
@@ -58,13 +59,14 @@ import static com.alpha.redux.apis.chatManager.levelcolor.getLevelColor;
 import static com.alpha.redux.apis.chatManager.prestigebrackets.prestigebracket;
 import static com.alpha.redux.apis.chatManager.rank.*;
 import static com.alpha.redux.apis.locations.*;
+import static com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap.deleteBlob;
+import static com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap.getPlayerFromBlob;
 import static com.alpha.redux.entityHandlers.ReduxPlayerHandler.playerExists;
 import static com.alpha.redux.events.ArmorJoin.GiveChain;
 import static com.alpha.redux.events.nonPermItems.ClearAndCheck;
 import static com.alpha.redux.gems.gemEvents.gemClickEvent;
 import static com.alpha.redux.gems.gemMain.makeGemGUI;
 import static com.alpha.redux.playerdata.economy.*;
-import static com.alpha.redux.DeathHandler.killHandler.isNPC;
 import static com.alpha.redux.playerdata.prestiges.getPrestige;
 import static com.alpha.redux.playerdata.streaks.*;
 import static com.alpha.redux.MenuClicks.InventoryEvent.*;
@@ -205,6 +207,8 @@ public class events implements Listener {
 
         Player player = event.getPlayer();
 
+        deleteBlob(player);
+
         String uuid = String.valueOf(player.getUniqueId());
 
         if(cooldowns.containsKey(uuid)){
@@ -213,6 +217,7 @@ public class events implements Listener {
                 long timeleft = (cooldowns.get(String.valueOf(player.getUniqueId())) - System.currentTimeMillis()) / 1000;
                 player.removePotionEffect(PotionEffectType.WEAKNESS);
                 ClearAndCheck(player);
+
                 setStreak(String.valueOf(player.getUniqueId()), 0);
                 xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
                 Strength.put(String.valueOf(player.getUniqueId()), 0.0);
@@ -228,19 +233,70 @@ public class events implements Listener {
 
     }
 
+    @EventHandler
+    public void spawnProtHandler(NPCDamageEntityEvent event){
+        if(event.getNPC().getEntity() != null)
+            if(event.getNPC().getEntity().getLocation().getY() >= getSpawnProtection())
+                event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void spawnProtsHandler(NPCDamageByEntityEvent event){
+        if(event.getNPC().getEntity() != null)
+            if(event.getNPC().getEntity().getLocation().getY() >= getSpawnProtection())
+                event.setCancelled(true);
+    }
+
     @EventHandler 
     public static void MainDamageEvent(EntityDamageByEntityEvent event){
+
+        if(event.getEntity().getType().equals(EntityType.SLIME)){
+            event.setCancelled(true);
+
+            Player player = getPlayerFromBlob((Slime) event.getEntity());
+
+            if(player.getLocation().getY() >= getSpawnProtection()) deleteBlob(player);
+
+            PitBlobMap.removeBlobHealth(player);
+
+            if(PitBlobMap.getBlobHealth(player) <= 0) deleteBlob(player);
+
+            return;
+        }
+
+        if(event.getDamager().getType().equals(EntityType.SLIME)){
+            if(!(event.getEntity() instanceof Player)){
+                event.setCancelled(true);
+                return;
+            }
+
+            event.setCancelled(true);
+            Player player = getPlayerFromBlob((Slime) event.getDamager());
+            ((Player) event.getEntity()).damage(10, player);
+            return;
+        }
+
         Player defender = null;
+
+        if(CitizensAPI.getNPCRegistry().isNPC(event.getDamager())){
+            if(event.getDamager().getLocation().getY() >= getSpawnProtection()){
+                event.setCancelled(true);
+                return;
+
+            }
+
+        }
         if(!(event.getEntity() instanceof Player)) {return;}
         if((event.getDamager() instanceof Arrow)) {
+            event.setCancelled(true);
             Arrow arrow = (Arrow) event.getDamager();
             Player player = (Player) arrow.getShooter();
+            ((Player) event.getEntity()).damage(event.getDamage(), player);
+
             ReduxBowEvent mainEvent = new ReduxBowEvent(playerExists(player), playerExists((Player) event.getEntity()), event.getDamage(), event);
             Bukkit.getPluginManager().callEvent(mainEvent);
-            if (!mainEvent.isCancelled()) {
-                ((Player) event.getEntity()).damage(8, player);
-                mainEvent.setCancelled(true);
-            }
+
+
             return;
 
         }else if((event.getDamager() instanceof Player)){
@@ -263,7 +319,27 @@ public class events implements Listener {
             ReduxDamageEvent mainEvent = new ReduxDamageEvent(playerExists(attacker), playerExists(defender), event.getDamage(), event);
             Bukkit.getPluginManager().callEvent(mainEvent);
             if (!mainEvent.isCancelled()) {
-                mainEvent.setCancelled(true);
+
+                if(isNPC(defender)){
+                    if(((LivingEntity) event.getEntity()).getHealth() - event.getFinalDamage() <= 3){
+                        event.setCancelled(true);
+                        ((LivingEntity) event.getEntity()).setHealth(((LivingEntity) event.getEntity()).getMaxHealth());
+                        KillMan((Player) event.getDamager(), (Player) event.getEntity());
+                        return;
+                    }
+                }else{
+                    if(((LivingEntity) event.getEntity()).getHealth() - event.getFinalDamage() <= 2){
+                        event.setCancelled(true);
+                        ((LivingEntity) event.getEntity()).setHealth(((LivingEntity) event.getEntity()).getMaxHealth());
+                        KillMan((Player) event.getDamager(), (Player) event.getEntity());
+                        return;
+                    }
+                }
+
+
+                new TrueDamageHandler(playerExists(attacker), playerExists(defender), mainEvent.getReduxTrueDamage(), event.getFinalDamage()).run();
+            }else{
+                event.setCancelled(true);
             }
         }else{
             event.setCancelled(true);
@@ -281,11 +357,16 @@ public class events implements Listener {
 
     @EventHandler
     public static void Death(PlayerDeathEvent event){
+
         if(event.getEntity() == null) {return;}
         if(isNPC(event.getEntity())){
             NPC npc = getNPC(event.getEntity());
-            assert npc != null;
-            npc.spawn(getBotSpawnLocation());
+            if(npc != null){
+                Player player = (Player) npc.getEntity();
+                player.setHealth(20);
+                player.setMaxHealth(20);
+            }
+
             return;
         }
         Player player = event.getEntity();
@@ -418,6 +499,10 @@ public class events implements Listener {
     @EventHandler
     public static void onRightClick(PlayerInteractEvent event) {
         Player player = event.getPlayer();
+
+        if(event.getItem() != null && player.getItemInHand().getType().equals(Material.CACTUS)){
+            player.openInventory(CactusRunTime.inventoryConstructor(player));
+        }
 
         if (event.getAction() == Action.LEFT_CLICK_AIR) {
             if (event.getItem() != null) {
@@ -596,6 +681,9 @@ public class events implements Listener {
         if(!(event.getEntity() instanceof Player)) {return;}
         Player shooter = (Player) event.getEntity();
         if (shooter.getInventory().getItemInHand().getItemMeta().equals(itemManager.megalongbow.getItemMeta())){
+            shooter.getInventory().removeItem(itemManager.megalongbow);
+            shooter.getInventory().addItem(enchants.fresh_bow);
+            /*
             event.getProjectile().remove();
 
             Location PlayerLocation = shooter.getEyeLocation();
@@ -610,13 +698,20 @@ public class events implements Listener {
             }
 
             shooter.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100, 5, true, true));
+
+             */
         }
         if (shooter.getInventory().getItemInHand().getItemMeta().equals(itemManager.ftts.getItemMeta())){
+            shooter.getInventory().removeItem(itemManager.ftts);
+            shooter.getInventory().addItem(enchants.fresh_bow);
+            /*
             if(shooter.hasPotionEffect(PotionEffectType.SPEED)){
                 shooter.removePotionEffect(PotionEffectType.SPEED);
             }
 
             shooter.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 500, 4, true, true));
+
+             */
         }
 
     }

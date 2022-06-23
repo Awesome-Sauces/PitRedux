@@ -20,7 +20,7 @@ import static com.alpha.redux.playerdata.streaks.GiveUberItems;
 public class uber {
     public static void claimUberReward(Player player){
         Random rand = new Random(); //instance of random class
-        int upperbound = 39;
+        int upperbound = 40;
         //generate random values from 0-24
         int int_random = rand.nextInt(upperbound);
 
@@ -41,15 +41,15 @@ public class uber {
         sharpness.add(ChatColor.BLUE + "Unbreakable");
 
         String FeatherLore = compileListToStringWithTitle(String.valueOf(itemManager.feather.getItemMeta().getDisplayName()) + "\n", itemManager.feather.getItemMeta().getLore());
-        String FreshRedsLore = compileListToStringWithTitle(String.valueOf(enchants.fresh_reds.getItemMeta().getDisplayName()) + "\n", enchants.fresh_reds.getItemMeta().getLore());
+        String FreshRedsLore = compileListToStringWithTitle(String.valueOf(enchants.cactus.getItemMeta().getDisplayName()) + "\n", enchants.cactus.getItemMeta().getLore());
         String VileLore = compileListToStringWithTitle(String.valueOf(enchants.vile.getItemMeta().getDisplayName()) + "\n", enchants.vile.getItemMeta().getLore());
         String BootLore = compileListToStringWithTitle(ChatColor.WHITE + "Diamond Boots"  + "\n", protection);
         String LegLore = compileListToStringWithTitle(ChatColor.WHITE + "Diamond Leggings" + "\n", protection);
         String ChestLore = compileListToStringWithTitle(ChatColor.WHITE + "Diamond Chestplate"  + "\n", protection);
         String HeadLore = compileListToStringWithTitle(ChatColor.WHITE + "Diamond Helmet" + "\n", protection);
         String DiamondSwordLore = compileListToStringWithTitle(ChatColor.WHITE + "Diamond Sword" + "\n", sharpness);
-        String fttsLore = compileListToStringWithTitle(String.valueOf(itemManager.ftts.getItemMeta().getDisplayName()) + "\n", itemManager.ftts.getItemMeta().getLore());
-        String MLBLore = compileListToStringWithTitle(String.valueOf(itemManager.megalongbow.getItemMeta().getDisplayName()) + "\n", itemManager.megalongbow.getItemMeta().getLore());
+        String fttsLore = compileListToStringWithTitle(String.valueOf(enchants.fresh_bow.getItemMeta().getDisplayName()) + "\n", enchants.fresh_bow.getItemMeta().getLore());
+        String MLBLore = compileListToStringWithTitle(String.valueOf(enchants.fresh_bow.getItemMeta().getDisplayName()) + "\n", enchants.fresh_bow.getItemMeta().getLore());
         String GhelmLore = compileListToStringWithTitle(String.valueOf(itemManager.goldHelm.getItemMeta().getDisplayName()) + "\n", itemManager.goldHelm.getItemMeta().getLore());
         String ArchLore = compileListToStringWithTitle(String.valueOf(itemManager.arch.getItemMeta().getDisplayName()) + "\n", itemManager.arch.getItemMeta().getLore());
         String JewelSwordLore = compileListToStringWithTitle(String.valueOf(enchants.jewl_sword.getItemMeta().getDisplayName()) + "\n", enchants.jewl_sword.getItemMeta().getLore());
@@ -67,12 +67,32 @@ public class uber {
             case 2:
             case 11:
             case 12:
-                player.getInventory().addItem(enchants.fresh_reds);
-                player.getInventory().addItem(enchants.fresh_reds);
-                player.getInventory().addItem(enchants.fresh_reds);
-                player.getInventory().addItem(enchants.fresh_reds);
-                player.getInventory().addItem(enchants.fresh_reds);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x5 Fresh Red!", FreshRedsLore);
+                player.getInventory().addItem(enchants.cactus);
+                player.getInventory().addItem(enchants.cactus);
+                player.getInventory().addItem(enchants.cactus);
+                player.getInventory().addItem(enchants.cactus);
+                player.getInventory().addItem(enchants.cactus);
+                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x5 Cactus!", FreshRedsLore);
+                break;
+
+            case 39:
+                player.getInventory().addItem(enchants.cactus);
+                player.getInventory().addItem(enchants.cactus);
+                player.getInventory().addItem(enchants.cactus);
+                player.getInventory().addItem(enchants.cactus);
+                player.getInventory().addItem(enchants.cactus);
+                player.getInventory().addItem(enchants.cactus);
+                player.getInventory().addItem(enchants.cactus);
+                player.getInventory().addItem(enchants.cactus);
+                player.getInventory().addItem(enchants.cactus);
+                player.getInventory().addItem(enchants.cactus);
+                player.getInventory().addItem(enchants.cactus);
+                player.getInventory().addItem(enchants.cactus);
+                player.getInventory().addItem(enchants.cactus);
+                player.getInventory().addItem(enchants.cactus);
+                player.getInventory().addItem(enchants.cactus);
+                player.getInventory().addItem(enchants.cactus);
+                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x16 Cactus!", FreshRedsLore);
                 break;
             case 3:
             case 13:

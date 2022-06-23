@@ -37,7 +37,8 @@ public class maldingBoss {
 
 
     public static Map<Player, BossMalding> MaldingPlayerHandlers = new HashMap<Player, BossMalding>();
-    public static String maldingName = ChatColor.GRAY + "[lvl 1]-" + ChatColor.RED + "Malding";
+    public static String maldingName = ChatColor.RED + "Malding";
+    public static String nonMaldingColor = "Malding";
 
     public static boolean summonBoss(Player player){
 
@@ -50,7 +51,7 @@ public class maldingBoss {
                 @Override
                 public void run() {
 
-                    NPC npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.GRAY + "[lvl 1]-" + ChatColor.RED + "Malding");
+                    NPC npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.RED + "Malding");
                     citizensUtils.skin(npc, "BiggestPotato");
 
                     npc.getOrAddTrait(Equipment.class).set(Equipment.EquipmentSlot.BOOTS, enchants.malding_boots);

@@ -11,32 +11,10 @@ import java.util.*;
 import static com.alpha.redux.apis.FancyText.compileListToString;
 import static com.alpha.redux.apis.FancyText.hoverText;
 import static com.alpha.redux.well.enchanters.*;
-import static com.alpha.redux.well.loreChecker.CheckEnchant;
 import static com.alpha.redux.well.loreChecker.CheckEnchantOnPant;
 
 public class randomROLL {
 
-
-    public static List<String> makeEnchant(List<String> lore){
-
-        Random rand = new Random(); //instance of random class
-        boolean fresh;
-        int upperbound = 41;
-        int int_random = rand.nextInt(upperbound);
-        List<String> new_lore = new ArrayList<>();
-
-        List<String> list = CheckEnchantOnPant(lore);
-
-        if(list.size() <= 0){fresh=true;}
-
-        switch (int_random){
-            case 1:
-
-        }
-
-
-        return new_lore;
-    }
 
     public static List<String> randomRoll(Player player){
         Random rand = new Random(); //instance of random class
@@ -45,7 +23,7 @@ public class randomROLL {
         double chanceIII = 0.0001;
 
         List<String> lore = new ArrayList<>();
-        lore.add("§7Lives: §a20§7/20");
+        lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
 
         List<String> enchants = new ArrayList<>();
 

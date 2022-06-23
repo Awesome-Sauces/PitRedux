@@ -1,5 +1,6 @@
 package com.alpha.redux.well;
 
+import com.alpha.redux.playerdata.Renown;
 import com.alpha.redux.playerdata.prestiges;
 import com.alpha.redux.playerdata.xpManager;
 import org.bukkit.ChatColor;
@@ -16,6 +17,7 @@ import static com.alpha.redux.apis.advancedInventory.*;
 import static com.alpha.redux.apis.chatManager.prestigebrackets.prestigebracket;
 import static com.alpha.redux.events.boards.integerToRoman;
 import static com.alpha.redux.playerdata.economy.getGoldRequireMentAmount;
+import static com.alpha.redux.playerdata.goldReq.getGoldRequirement;
 import static com.alpha.redux.playerdata.prestiges.*;
 import static com.alpha.redux.playerdata.streaks.getMegaStreak;
 import static com.alpha.redux.playerdata.streaks.hasMegaStreak;
@@ -212,7 +214,7 @@ public class gui {
                         ChatColor.GREEN + "⚫ " + ChatColor.GRAY + "Deal " + ChatColor.RED + "+25% damage \n" +
                         ChatColor.GREEN + "⚫ " + ChatColor.GRAY + "Earn " + ChatColor.AQUA + "+50% XP" + ChatColor.GRAY + "from kills.\n" +
                         ChatColor.GREEN + "⚫ " + ChatColor.GRAY + "Earn " + ChatColor.GOLD + "+75% gold" + ChatColor.GRAY + "from kills.\n\n" +
-                        ChatColor.GRAY + "BUT:\n" + ChatColor.RED + "⚫" + ChatColor.GRAY + " Receive " + ChatColor.RED + "+0.1❤ " + ChatColor.GRAY + "damage per 5 kills above 50.\n\n" +
+                        ChatColor.GRAY + "BUT:\n" + ChatColor.RED + "⚫" + ChatColor.GRAY + " Receive " + ChatColor.RED + "+0.1\u2764 " + ChatColor.GRAY + "damage per 5 kills above 50.\n\n" +
                         ChatColor.DARK_AQUA + "Selected Mega Streak: " + ChatColor.GREEN + getMegaStreak(String.valueOf(player.getUniqueId())), 1, true);
 
         ItemStack Highlander = ItemMaker(Material.GOLD_BOOTS, ChatColor.YELLOW + "Highlander",
@@ -229,7 +231,7 @@ public class gui {
                 ChatColor.GRAY + "Triggers on: " + ChatColor.RED + "100 kills\n\n"  + ChatColor.GRAY + "On trigger:\n" + ChatColor.GREEN + "⚫ " + ChatColor.GRAY + "Perma " + ChatColor.YELLOW + "Speed I" + ChatColor.GRAY + ".\n" +
                         ChatColor.GREEN + "⚫ " + ChatColor.GRAY + "Earn " + ChatColor.AQUA + "+50% XP" + ChatColor.GRAY + " from kills.\n" +
                         ChatColor.GREEN + "⚫ " + ChatColor.GRAY + "Get " + ChatColor.AQUA + "7x xp cap" + ChatColor.GRAY + " from kills.\n\n" +
-                        ChatColor.GRAY + "BUT:\n" + ChatColor.RED + "⚫" + ChatColor.GRAY + " Receive " + ChatColor.RED + "+.5❤ " + ChatColor.GRAY + "damage per kill above 100.\n\n" +
+                        ChatColor.GRAY + "BUT:\n" + ChatColor.RED + "⚫" + ChatColor.GRAY + " Receive " + ChatColor.RED + "+.5\u2764 " + ChatColor.GRAY + "damage per kill above 100.\n\n" +
                         ChatColor.RED + "Requires prestige 20 to use!\n" + ChatColor.RED + "Requires level 50 to select!\n" +
                         ChatColor.DARK_AQUA + "Selected Mega Streak: " + ChatColor.GREEN + getMegaStreak(String.valueOf(player.getUniqueId())), 1, true);
 
@@ -275,7 +277,7 @@ public class gui {
         ItemStack base_glass = cGlass();
 
         ItemStack Vampire = ItemMaker(Material.FERMENTED_SPIDER_EYE, ChatColor.AQUA + "Vampire",
-                ChatColor.GRAY + "Gain " +  ChatColor.RED + "+.5❤ " + ChatColor.GRAY +"per hit (40% max)\n "+ ChatColor.GRAY + "Regeneration 1 (2s) on kill!\n\n" +
+                ChatColor.GRAY + "Gain " +  ChatColor.RED + "+.5\u2764 " + ChatColor.GRAY +"per hit (40% max)\n "+ ChatColor.GRAY + "Regeneration 1 (2s) on kill!\n\n" +
                         ChatColor.RED + "Don't worry it's always selected!", 1, true);
 
         ItemStack Strength = ItemMaker(Material.REDSTONE, ChatColor.AQUA + "Strength Chaining",
@@ -378,7 +380,7 @@ public class gui {
 
         if (randomDUDE[0] >= 120){
             DecimalFormat formatter = new DecimalFormat("#,###");
-            req_level = ChatColor.translateAlternateColorCodes('&', "&7Costs:" + "\n" +"&c&l⚫ Resets &blevel &c to 1" + "\n" + "&c&l⚫ Resets &6gold &c to 0" + "\n" + "&c&l⚫ Resets &cALL &aperks and upgrades" + "\n" + "&c&l⚫ Need minimum &6" + formatter.format(getGoldRequireMentAmount(String.valueOf(player.getUniqueId()))) + "&6g" + "\n\n" + "&7Reward: &e" + GetByPrestige(getPrestige(String.valueOf(player.getUniqueId()))) + " &eRenown Tokens" + "\n\n" + "&7New prestige: &e" + integerToRoman(getPrestige(String.valueOf(player.getUniqueId())) + 1) + "\n" + ChatColor.AQUA + "+" + ((int) PrestigeXpAmount(getPrestige(String.valueOf(player.getUniqueId()))) * 10) + "%" + ChatColor.GRAY + " needed xp than normal!\n\n" + "&eClick to purchase!");
+            req_level = ChatColor.translateAlternateColorCodes('&', "&7Costs:" + "\n" +"&c&l⚫ Resets &blevel &c to 1" + "\n" + "&c&l⚫ Resets &6gold &c to 0" + "\n" + "&c&l⚫ Resets &cALL &aperks and upgrades" + "\n" + "&c&l⚫ Need minimum &6" + formatter.format(getGoldRequirement(getPrestige(String.valueOf(player.getUniqueId())))) + "&6g" + "\n\n" + "&7Reward: &e" + GetByPrestige(getPrestige(String.valueOf(player.getUniqueId()))) + " &eRenown Tokens" + "\n\n" + "&7New prestige: &e" + integerToRoman(getPrestige(String.valueOf(player.getUniqueId())) + 1) + "\n" + ChatColor.AQUA + "+" + ((int) PrestigeXpAmount(getPrestige(String.valueOf(player.getUniqueId()))) * 10) + "%" + ChatColor.GRAY + " needed xp than normal!\n\n" + "&eClick to purchase!");
         }else{
             req_level  = ChatColor.AQUA + "+" + ((int) PrestigeXpAmount(getPrestige(String.valueOf(player.getUniqueId()))) * 10) + "%" + ChatColor.GRAY + " needed xp than normal!\n\n" + ChatColor.GRAY + "Required Level: " + prestigebracket(player) + "[" + ChatColor.AQUA + ChatColor.BOLD + "120" + prestigebracket(player) + "]" + "\n\n" + ChatColor.GRAY + "Level up to prestige!";
         }
@@ -391,9 +393,10 @@ public class gui {
 
         ItemStack Prestige_Shop = ItemMaker(Material.BEACON, ChatColor.YELLOW + "Renown shop",
                 ChatColor.GRAY + "Use " + ChatColor.YELLOW + "Renown Tokens " + ChatColor.GRAY + "earned from\n" +
-                     ChatColor.AQUA + "Prestige " + ChatColor.GRAY + "to unlock unique\n" + ChatColor.GRAY + "upgrades!\n" +
-                     ChatColor.GRAY + ChatColor.ITALIC + "These upgrades are safe from prestige reset.\n\n" + ChatColor.YELLOW +
-                     "Click to browse!"
+                     ChatColor.AQUA + "Prestige " + ChatColor.GRAY + "to unlock unique\n" + ChatColor.GRAY + "upgrades!\n\n" +
+                     ChatColor.GRAY + ChatColor.ITALIC + "These upgrades are safe\n" + ChatColor.GRAY + ChatColor.ITALIC + "from prestige reset.\n\n" +
+                     ChatColor.GRAY + "Renown " + ChatColor.YELLOW + Renown.getRenown(String.valueOf(player.getUniqueId())) + " Renown\n\n" +
+                     ChatColor.YELLOW + "Click to browse!"
                 , 1, true);
 
         for (int i = 0; i < 10; i++) {

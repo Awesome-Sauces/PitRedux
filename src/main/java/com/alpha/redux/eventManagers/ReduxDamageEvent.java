@@ -1,6 +1,8 @@
 package com.alpha.redux.eventManagers;
 
 import com.alpha.redux.entityHandlers.ReduxPlayer;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -28,6 +30,7 @@ public class ReduxDamageEvent extends Event implements Cancellable {
     private List<String> defenderPantEnchants = new ArrayList<>();
 
     private double damage;
+    private double trueDamage = 0;
     private final EntityDamageByEntityEvent event;
     private boolean isCancelled;
 
@@ -50,12 +53,23 @@ public class ReduxDamageEvent extends Event implements Cancellable {
     }
 
     private void setAttackerEnchants(){
-        if(this.attackerArmor.get(2).getItemMeta().getLore() != null) this.attackerPantEnchants = CheckEnchantOnPant(this.attackerArmor.get(2).getItemMeta().getLore());
-        if(this.attackerSword.getItemMeta().getLore() != null) this.attackerSwordEnchants = CheckEnchantOnSword(this.attackerSword.getItemMeta().getLore());
+
+        ItemStack stack = attacker.getLeggings();
+
+        if(stack != null && stack.getItemMeta() != null && stack.getItemMeta().getLore() != null && stack.getType().equals(Material.LEATHER_LEGGINGS)) {
+            this.attackerPantEnchants = CheckEnchantOnPant(stack.getItemMeta().getLore());
+        }
+        if(this.attackerSword.getItemMeta() != null && this.attackerSword.getItemMeta().getLore() != null) this.attackerSwordEnchants = CheckEnchantOnSword(this.attackerSword.getItemMeta().getLore());
     }
 
     private void setDefenderEnchants(){
-        if(this.defenderArmor.get(2).getItemMeta().getLore() != null) this.defenderPantEnchants = CheckEnchantOnPant(this.defenderArmor.get(2).getItemMeta().getLore());
+
+        ItemStack stack = defender.getLeggings();
+
+        if(stack != null && stack.getItemMeta() != null && stack.getItemMeta().getLore() != null && stack.getType().equals(Material.LEATHER_LEGGINGS)) {
+            this.defenderPantEnchants = CheckEnchantOnPant(stack.getItemMeta().getLore());
+        }
+
     }
 
     public ReduxDamageEvent(ReduxPlayer attacker, ReduxPlayer defender, double damage, EntityDamageByEntityEvent event) {
@@ -103,19 +117,49 @@ public class ReduxDamageEvent extends Event implements Cancellable {
 
     public List<ItemStack> getAttackerArmor(){return this.attackerArmor;}
 
+    public List<String> getAttackerPantEnchants(){return this.attackerPantEnchants;}
+    public List<String> getAttackerSwordEnchants(){return this.attackerSwordEnchants;}
+
+    public List<String> getDefenderPantEnchants(){return this.defenderPantEnchants;}
+    public List<String> getDefenderSwordEnchants(){return this.defenderSwordEnchants;}
+
     public Double getReduxDamage() {
         return this.damage;
     }
 
+    public Double getFinalDamage(){
+        return this.event.getFinalDamage();
+    }
+
     public void setReduxDamage(double damage) {
+        this.event.setDamage(damage);
         this.damage = damage;
     }
 
     public void addReduxDamage(double damage) {
         this.damage += damage;
+        this.event.setDamage(damage);
     }
 
     public void subtractReduxDamage(double damage){
         this.damage -= damage;
+        this.event.setDamage(damage);
+    }
+
+
+    public Double getReduxTrueDamage() {
+        return this.trueDamage;
+    }
+
+    public void setReduxTrueDamage(double damage) {
+        this.trueDamage = damage;
+    }
+
+    public void addReduxTrueDamage(double damage) {
+        this.trueDamage += damage;
+    }
+
+    public void subtractReduxTrueDamage(double damage){
+        this.trueDamage -= damage;
     }
 }

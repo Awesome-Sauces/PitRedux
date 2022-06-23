@@ -11,8 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import static com.alpha.redux.apis.advancedInventory.ItemMaker;
 import static com.alpha.redux.events.boards.integerToRoman;
 import static com.alpha.redux.playerdata.prestiges.getPrestige;
-import static com.alpha.redux.renownShop.damageIncrease.addIncrease;
-import static com.alpha.redux.renownShop.damageIncrease.hasIncrease;
+import static com.alpha.redux.renownShop.damageIncrease.*;
 import static com.alpha.redux.renownShop.shopGUI.mainMenu;
 import static com.alpha.redux.renownShop.xpIncrease.*;
 
@@ -27,16 +26,16 @@ public class RenownStorage {
         if (event.getClickedInventory().getTitle().equals(ChatColor.YELLOW + "Renown Shop")){
             if (event.getCurrentItem().getType().equals(Material.REDSTONE)){
                 ItemStack token = getToken();
-                if (player.getInventory().containsAtLeast(token, 5)){
+                if (player.getInventory().containsAtLeast(token, 16) && getIncrease(uuid) <= 10){
                     if(hasIncrease(uuid)){
-                            for (int i = 0; i < 5; i++) {
+                            for (int i = 0; i < 16; i++) {
                                 player.getInventory().removeItem(token);
                             }
 
-                            player.sendMessage(ChatColor.GREEN + "Damage increase purchased! " + ChatColor.RED + "+5% damage!");
+                            player.sendMessage(ChatColor.GREEN + "Damage increase purchased! " + ChatColor.RED + "+1% damage!");
 
 
-                            addIncrease(uuid, 5);
+                            addIncrease(uuid, 1);
                             player.openInventory(mainMenu(player));
                     }else{
                         player.sendMessage(ChatColor.RED + "You can't afford this!");

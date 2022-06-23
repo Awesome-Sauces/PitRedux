@@ -54,6 +54,18 @@ public class gemMain {
                         }
                     }
                 }
+
+                if (itemStack.getType().equals(Material.BOW)) {
+                    if (ChatColor.stripColor(itemStack.getItemMeta().getDisplayName()).contains("Tier")) {
+                        for (int i = 0; i < gui.getSize(); i++) {
+                            if (gui.getItem(i) == null) {
+                                if(getEnchants(itemStack.getItemMeta().getLore(), "BOW", false))
+                                    gui.setItem(i, itemStack);
+                                break;
+                            }
+                        }
+                    }
+                }
             }
 
 

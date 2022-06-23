@@ -3,8 +3,6 @@ package com.alpha.redux.entityHandlers;
 import com.alpha.redux.DeathHandler.ProccessHit;
 import com.alpha.redux.commands.commandUtils;
 import com.alpha.redux.events.boards;
-import com.alpha.redux.items.itemManager;
-import com.alpha.redux.playerdata.streaks;
 
 import com.alpha.redux.playerdata.xpManager;
 import org.bukkit.entity.Player;
@@ -15,9 +13,6 @@ import java.util.List;
 import static com.alpha.redux.funEvents.event.twoTimesEvent;
 import static com.alpha.redux.playerdata.economy.*;
 import static com.alpha.redux.playerdata.prestiges.*;
-import static com.alpha.redux.playerdata.streaks.*;
-import static com.alpha.redux.playerdata.streaks.getMegaStreak;
-import static com.alpha.redux.renownShop.xpIncrease.getXpIncrease;
 import static com.alpha.redux.well.loreChecker.CheckEnchantOnPant;
 import static com.alpha.redux.well.loreChecker.CheckEnchantOnSword;
 
@@ -25,11 +20,13 @@ public class ReduxPlayer {
 
     Player player;
     String uuid;
+    boolean regCD = true;
+    boolean escape = true;
     double damageIncrease;
     double damageDecrease;
     double xpBooster = 1;
     double goldBooster = 1;
-    int obbyTime = 2400;
+    int obbyTime = 2400*5;
 
     public ReduxPlayer(Player player) {
         this.player = player;
@@ -84,6 +81,24 @@ public class ReduxPlayer {
         hasEconomy(this.uuid);
         addEconomy(this.uuid, amount);
     }
+
+    public boolean getEscape(){
+        if (this.escape){
+            if(this.player.getHealth() / 2 == 10){
+                this.escape = false;
+                return true;
+            }else return false;
+        }
+        return false;
+    }
+
+    public void setEscape(boolean set){this.escape = set;}
+
+    public void resetEscape(){this.escape = true;}
+
+    public boolean getRegCD(){return this.regCD;}
+
+    public void setRegCD(){this.regCD = !this.regCD;}
 
     public double getPlayerGoldBooster(){
         return this.goldBooster;
@@ -178,7 +193,7 @@ public class ReduxPlayer {
     }
 
     public List<String> getSwordEnchants(){
-        if(getMainHand() != null && getMainHand().getItemMeta().getLore() != null) return CheckEnchantOnSword(getMainHand().getItemMeta().getLore());
+        if(getMainHand() != null && getMainHand().getItemMeta() != null && getMainHand().getItemMeta().getLore() != null) return CheckEnchantOnSword(getMainHand().getItemMeta().getLore());
         else return null;
     }
 

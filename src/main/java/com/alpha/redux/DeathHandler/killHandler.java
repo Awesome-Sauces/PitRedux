@@ -1,20 +1,17 @@
 package com.alpha.redux.DeathHandler;
 
+import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.chatManager.rank;
+import com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.events.boards;
 import com.alpha.redux.items.enchants;
-import com.alpha.redux.items.itemManager;
-import com.alpha.redux.playerdata.xpManager;
+import com.alpha.redux.playerdata.economy;
 import com.alpha.redux.renownShop.MysticismChance;
-import com.alpha.redux.renownShop.RenownStorage;
-import com.alpha.redux.well.pantEnchantLores;
-import com.alpha.redux.well.swordEnchantLores;
 import com.nametagedit.plugin.NametagEdit;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.minecraft.server.v1_8_R3.EntityHuman;
-import net.minecraft.server.v1_8_R3.EntityLiving;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
 import org.bukkit.*;
@@ -23,78 +20,62 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 import static com.alpha.redux.DeathHandler.ProccessHit.StrengthPerk;
 import static com.alpha.redux.DeathHandler.jewls.PlayerFinishedJewl;
-import static com.alpha.redux.ItemEvents.ghearts.*;
 import static com.alpha.redux.apis.chatManager.rank.ChatEventApiGetLevelColor;
 import static com.alpha.redux.apis.locations.getBotSpawnLocation;
 import static com.alpha.redux.apis.locations.getSpawnLocation;
 import static com.alpha.redux.commands.command.KillMessages;
+import static com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap.deleteBlob;
 import static com.alpha.redux.events.events.Strength;
-import static com.alpha.redux.funEvents.event.twoTimesEvent;
 import static com.alpha.redux.playerdata.bounties.BountyClaimed;
 import static com.alpha.redux.playerdata.economy.*;
 import static com.alpha.redux.events.nonPermItems.ClearAndCheck;
-import static com.alpha.redux.playerdata.playerStats.deleteHologramStreak;
-import static com.alpha.redux.playerdata.playerStats.mega;
-import static com.alpha.redux.playerdata.prestiges.getPrestige;
-import static com.alpha.redux.playerdata.prestiges.hasPrestige;
 import static com.alpha.redux.playerdata.streaks.*;
 import static com.alpha.redux.playerdata.streaks.setStreak;
-import static com.alpha.redux.renownShop.xpIncrease.addXpIncrease;
-import static com.alpha.redux.renownShop.xpIncrease.getXpIncrease;
-import static com.alpha.redux.well.loreChecker.*;
 
 public class killHandler {
 
     public static boolean isNPC(Player player){
-        for (NPC npc : CitizensAPI.getNPCRegistry()) {
-            if (npc.getEntity() == player) return true;
-        }
-        return false;
+        return CitizensAPI.getNPCRegistry().isNPC(player);
     }
 
     public static NPC getNPC(Player player){
-        for (NPC npc : CitizensAPI.getNPCRegistry()) {
-            if (npc.getEntity() == player) return npc;
-        }
-        return null;
+        return CitizensAPI.getNPCRegistry().getNPC(player);
     }
 
     public static void tpNPC(Player player){
-        for (NPC npc : CitizensAPI.getNPCRegistry()) {
-            if (npc.getEntity() == player){
-                Random rand = new Random(); //instance of random class
-                int upperbound = 6;
-                //generate random values from 0-24
-                int tp_x = rand.nextInt(upperbound);
-                //generate random values from 0-24
-                Random e = new Random(); //instance of random class
-                int ef = 6;
-                int tp_z = e.nextInt(ef);
-                Location loc = getBotSpawnLocation();
 
-                npc.teleport(loc, PlayerTeleportEvent.TeleportCause.UNKNOWN);
-            }
-        }
+        NPC npc = getNPC(player);
+
+        Location loc = getBotSpawnLocation();
+
+        npc.teleport(loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
+
     }
 
     public static boolean processKill(ReduxPlayer ReduxAttacker, ReduxPlayer ReduxDefender) {
 
-        int Gold_Amount = 18;
-        double xp_Amount = 18;
-        int useless_var = 0;
-        int XP_CAP = 80;
+        if(!isNPC(ReduxDefender.getPlayerObject())) {
+            deleteBlob(ReduxDefender.getPlayerObject());
+            ClearAndCheck(ReduxDefender.getPlayerObject());
+
+
+            ReduxDefender.getPlayerObject().removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
+
+        }
+
+
 
         CraftPlayer craftAttacker = (CraftPlayer) ReduxAttacker.getPlayerObject(); //CraftBukkit
         EntityHuman entityAttacker = craftAttacker.getHandle(); //NMS
-        CraftPlayer craftDefender = (CraftPlayer) ReduxDefender.getPlayerObject(); //CraftBukkit
-        EntityHuman entityDefender = craftDefender.getHandle(); //NMS
+
+        //EntityHuman entityDefender = craftDefender.getHandle(); //NMS
         double abs = entityAttacker.getAbsorptionHearts();
 
 
@@ -104,6 +85,14 @@ public class killHandler {
         if(list != null){
             for (String s : list) {
                 switch (s) {
+
+                    case "blobIII":
+                    case "blobII":
+                    case "blobI":
+                        PitBlobMap.blobTick(ReduxAttacker.getPlayerObject());
+                        break;
+
+
                     case "goldheartIII":
                         ReduxAttacker.getPlayerObject().removePotionEffect(PotionEffectType.ABSORPTION);
                         entityAttacker.setAbsorptionHearts((float) Math.min(abs + 4, 12.0));
@@ -122,6 +111,13 @@ public class killHandler {
         
 
         if (isNPC(ReduxAttacker.getPlayerObject())) {
+
+            if(isNPC(ReduxDefender.getPlayerObject())){
+                NPC npc = getNPC(ReduxDefender.getPlayerObject());
+                npc.teleport(getBotSpawnLocation(), PlayerTeleportEvent.TeleportCause.PLUGIN);
+                return true;
+            }
+
             xp_amount_mega.put(ReduxDefender.getPlayerUUID(), 0);
             Strength.put(ReduxDefender.getPlayerUUID(), 0.0);
             mega_damage_amount.put(ReduxDefender.getPlayerUUID(), 0.0);
@@ -137,12 +133,11 @@ public class killHandler {
             ReduxDefender.getPlayerObject().teleport(loc);
             hasStreak(ReduxDefender.getPlayerObject().getDisplayName());
             //setStreak(ReduxDefender.getPlayerUUID(), 0);
-            boards.CreateScore(ReduxDefender.getPlayerObject());
+            if(!isNPC(ReduxDefender.getPlayerObject())) boards.CreateScore(ReduxDefender.getPlayerObject());
             ReduxDefender.getPlayerObject().removePotionEffect(PotionEffectType.SLOW);
             PacketPlayOutTitle title = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TITLE,
                     IChatBaseComponent.ChatSerializer.a("{\"text\":\"YOU DIED\",\"color\":\"red\"}"), 100, 20, 20);
             ((CraftPlayer) ReduxDefender.getPlayerObject()).getHandle().playerConnection.sendPacket(title);
-            ClearAndCheck(ReduxDefender.getPlayerObject());
             hasStreak(ReduxDefender.getPlayerObject().getDisplayName());
             setStreak(ReduxDefender.getPlayerUUID(), 0);
             BountyClaimed(ReduxDefender.getPlayerObject(), ReduxAttacker.getPlayerObject());
@@ -191,8 +186,8 @@ public class killHandler {
                 NametagEdit.getApi().setNametag(ReduxAttacker.getPlayerObject(), ChatEventApiGetLevelColor(ReduxAttacker.getPlayerObject().getDisplayName(), ReduxAttacker.getPlayerUUID())+ rank.getNameColor(ReduxAttacker.getPlayerObject()), "");
             }
 
-
-            ReduxAttacker.getPlayerObject().playSound(ReduxAttacker.getPlayerObject().getLocation(), Sound.LEVEL_UP, 1.0F, 7.0F);
+            multiKill(ReduxAttacker.getPlayerObject());
+            //ReduxAttacker.getPlayerObject().playSound(ReduxAttacker.getPlayerObject().getLocation(), Sound.LEVEL_UP, 1.0F, 7.0F);
             ReduxDefender.getPlayerObject().removePotionEffect(PotionEffectType.SLOW);
             ReduxAttacker.getPlayerObject().removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
             if (!ReduxAttacker.getPlayerObject().hasPotionEffect(PotionEffectType.REGENERATION)) {
@@ -214,10 +209,6 @@ public class killHandler {
                 ReduxAttacker.getPlayerObject().playSound(ReduxAttacker.getPlayerObject().getLocation(), Sound.NOTE_PLING, 1.0F, 1.0F);
             }
             xp_amount_mega.put(ReduxDefender.getPlayerUUID(), 0);
-
-            if (xp_amount_mega.containsKey(ReduxAttacker.getPlayerUUID())) {
-                xp_Amount += xp_amount_mega.get(ReduxAttacker.getPlayerUUID());
-            }
 
             mega_damage_amount.put(ReduxDefender.getPlayerUUID(), 0.0);
             true_damage_amount.put(ReduxDefender.getPlayerUUID(), 0.0);
@@ -265,4 +256,36 @@ public class killHandler {
         }
         return true;
     }
+
+    public static void multiKill(Player player) {
+
+        new BukkitRunnable() {
+            int count = 0;
+
+            @Override
+            public void run() {
+
+                switch(count) {
+                    case 0:
+                        Sounds.MULTI_1.play(player);
+                        break;
+                    case 1:
+                        Sounds.MULTI_2.play(player);
+                        break;
+                    case 2:
+                        Sounds.MULTI_3.play(player);
+                        break;
+                    case 3:
+                        Sounds.MULTI_4.play(player);
+                        break;
+                    case 4:
+                        Sounds.MULTI_5.play(player);
+                        break;
+                }
+
+                if(++count > 5) cancel();
+            }
+        }.runTaskTimer(economy.getPlugin(), 0L, 2L);
+    }
+
 }

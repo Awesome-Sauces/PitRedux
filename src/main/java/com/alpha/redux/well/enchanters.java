@@ -2,6 +2,7 @@ package com.alpha.redux.well;
 
 import java.util.List;
 
+import static com.alpha.redux.well.loreChecker.CheckEnchantOnBow;
 import static com.alpha.redux.well.loreChecker.CheckEnchantOnPant;
 
 public class enchanters {
@@ -278,6 +279,53 @@ public class enchanters {
         return false;
     }
 
+    public static boolean MegaBow(List<String> lore){
+        List<String> list = CheckEnchantOnBow(lore);
+
+        for (String s : list) {
+            switch (s) {
+                case "mlbIII":
+                case "mlbII":
+                case "mlbI":
+                    return true;
+            }
+        }
+
+
+        return false;
+    }
+
+    public static boolean ArrowVolley(List<String> lore){
+        List<String> list = CheckEnchantOnBow(lore);
+
+        for (String s : list) {
+            switch (s) {
+                case "volleyIII":
+                case "volleyII":
+                case "volleyI":
+                    return true;
+            }
+        }
+
+
+        return false;
+    }
+
+    public static boolean DrainSprint(List<String> lore){
+        List<String> list = CheckEnchantOnBow(lore);
+
+        for (String s : list) {
+            switch (s) {
+                case "sprintIII":
+                case "sprintII":
+                case "sprintI":
+                    return true;
+            }
+        }
+
+
+        return false;
+    }
 
     public static boolean Jewel(List<String> lore){
         List<String> list = CheckEnchantOnPant(lore);

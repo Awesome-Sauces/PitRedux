@@ -14,16 +14,20 @@ public class ArmorJoin {
 
         try{
             if(CheckChainBoots(player)){
-                player.getInventory().setBoots(itemManager.ChainBoots);
+                player.getInventory().setBoots(itemManager.IronBoots);
             }
 
             if(CheckChainChestplate(player)){
-                player.getInventory().setChestplate(itemManager.ChainChestplate);
+                player.getInventory().setChestplate(itemManager.IronChestplate);
             }
 
 
             if(CheckIronLeggings(player)){
                 player.getInventory().setLeggings(itemManager.IronLeggings);
+            }
+
+            if(CheckIronHelmet(player)){
+                player.getInventory().setHelmet(itemManager.IronHelmet);
             }
 
             if (!player.getInventory().containsAtLeast(itemManager.IronSword, 1)) {
@@ -35,11 +39,26 @@ public class ArmorJoin {
 
     }
 
+    public static boolean CheckIronHelmet(Player player){
+        try{
+            if(player.getInventory().getHelmet() == null){
+                return true;
+            }else if (player.getInventory().containsAtLeast(itemManager.DiamondHelmet, 1)) {
+                return false;
+            }
+
+            return false;
+
+        }catch (Exception e){
+            return false;
+        }
+    }
+
     public static boolean CheckChainBoots(Player player){
         try{
             if(player.getInventory().getBoots() == null){
                 return true;
-            }else if (player.getInventory().containsAtLeast(itemManager.ChainBoots, 1)) {
+            }else if (player.getInventory().containsAtLeast(itemManager.DiamondBoots, 1)) {
                 return false;
             }
 
@@ -54,7 +73,7 @@ public class ArmorJoin {
         try{
             if(player.getInventory().getChestplate() == null){
                 return true;
-            }else if (player.getInventory().containsAtLeast(itemManager.ChainChestplate, 1)) {
+            }else if (player.getInventory().containsAtLeast(itemManager.DiamondChestplate, 1)) {
                 return false;
             }
 
@@ -69,7 +88,7 @@ public class ArmorJoin {
         try{
             if(player.getInventory().getLeggings() == null){
                 return true;
-            }else if (player.getInventory().containsAtLeast(itemManager.IronLeggings, 1)) {
+            }else if (player.getInventory().containsAtLeast(itemManager.DiamondLeggings, 1)) {
                 return false;
             }
 

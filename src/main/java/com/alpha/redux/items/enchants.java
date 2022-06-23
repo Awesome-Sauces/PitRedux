@@ -3,6 +3,7 @@ package com.alpha.redux.items;
 import com.alpha.redux.well.pantEnchantLores;
 import com.alpha.redux.well.swordEnchantLores;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -19,6 +20,10 @@ import java.util.List;
 public class enchants {
     public static ItemStack lores;
     public static ItemStack fresh_reds;
+    public static ItemStack fresh_blues;
+    public static ItemStack fresh_greens;
+    public static ItemStack fresh_oranges;
+    public static ItemStack fresh_yellows;
     public static ItemStack fresh_sword;
     public static ItemStack vile;
     public static ItemStack jewl_pant;
@@ -30,10 +35,16 @@ public class enchants {
     public static ItemStack malding_sword;
     public static ItemStack reaper_scythe;
     public static ItemStack playerSoul;
+    public static ItemStack fresh_bow;
+    public static ItemStack cactus;
 
     public static void init(){
         createLores();
         createFreshReds();
+        createFreshBlues();
+        createFreshGreens();
+        createFreshOranges();
+        createFreshYellows();
         createFreshSword();
         createVile();
         createJewlPant();
@@ -45,13 +56,15 @@ public class enchants {
         createMaldingSword();
         createReaperScythe();
         createPlayerSoul();
+        createFreshBow();
+        createCactus();
     }
 
     private static void createLores() {
         ItemStack item = new ItemStack(Material.LEATHER_LEGGINGS, 1);
         LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
         meta.setColor(Color.RED);
-        meta.setDisplayName("§cTier I Red Pants");
+        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cTier I Red Pants"));
         List<String> lore = new ArrayList<>();
 
 
@@ -65,7 +78,7 @@ public class enchants {
         lore.add("§7Gain §cRegen II §7(8s) when hit");
 
         lore.add("§9Boo-boo III");
-        lore.add("§7Passively regain §c1❤§7 every 4");
+        lore.add("§7Passively regain §c1\u2764§7 every 4");
         lore.add("§7seconds");
 
         lore.add("§9Fractional Reserve III");
@@ -81,9 +94,9 @@ public class enchants {
         lore.add("§dRARE! §9Retro-Gravity Microcosm III");
         lore.add("§7When a player hits you from");
         lore.add("§7above ground §e3 times§7 in a row:");
-        lore.add("§7You heal §c1.25❤");
-        lore.add("§7Gain §c+1.5❤ §7damage vs them for 30s");
-        lore.add("§7They take §c0.5❤§7 true damage");
+        lore.add("§7You heal §c1.25\u2764");
+        lore.add("§7Gain §c+1.5\u2764 §7damage vs them for 30s");
+        lore.add("§7They take §c0.5\u2764§7 true damage");
 
         lore.add("§9Sweaty III");
         lore.add("§7Earn §b+60% XP§7 from streak XP");
@@ -123,8 +136,8 @@ public class enchants {
         lore.add("§7player (max 10 players)");
 
         lore.add("§9Golden Heart III");
-        lore.add("§7Gain §6+2❤§7 absorption on kill");
-        lore.add("§7(max §6❤§7)");
+        lore.add("§7Gain §6+2\u2764§7 absorption on kill");
+        lore.add("§7(max §6\u2764§7)");
 
         lore.add("§9Spite");
         lore.add("§7Deal §c+20% damage§7 but receive");
@@ -152,9 +165,9 @@ public class enchants {
         lore.add("§7Also §apoisons §7yourself!");
 
         lore.add("§9Misery");
-        lore.add("§7Deal §c+0.5❤ §7true damage against");
+        lore.add("§7Deal §c+0.5\u2764 §7true damage against");
         lore.add("§7players wearing leather pants but");
-        lore.add("§7take §c0.3❤");
+        lore.add("§7take §c0.3\u2764");
 
         meta.spigot().setUnbreakable(true);
         meta.setLore(lore);
@@ -170,11 +183,11 @@ public class enchants {
     private static void createFreshReds() {
         ItemStack item = new ItemStack(Material.LEATHER_LEGGINGS, 1);
         LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
-        meta.setColor(Color.fromRGB(255, 51, 51));
+        meta.setColor(Color.RED);
         meta.setDisplayName("§cFresh Red Pants");
         List<String> lore = new ArrayList<>();
         lore.add("§7Kept on death");
-
+        lore.add("   ");
         lore.add("§cUsed in the mystic well");
         lore.add("§cAlso, a fashion statement");
 
@@ -190,6 +203,130 @@ public class enchants {
         Bukkit.getServer().addRecipe(sr);
     }
 
+    private static void createFreshBlues() {
+        ItemStack item = new ItemStack(Material.LEATHER_LEGGINGS, 1);
+        LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
+        meta.setColor(Color.fromRGB(85, 85, 255));
+        meta.setDisplayName("§9Fresh Blue Pants");
+        List<String> lore = new ArrayList<>();
+        lore.add("§7Kept on death");
+        lore.add("   ");
+        lore.add("§9Used in the mystic well");
+        lore.add("§9Also, a fashion statement");
+
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
+        meta.spigot().setUnbreakable(true);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        fresh_blues = item;
+        //Shaped Recipe
+        ShapedRecipe sr = new ShapedRecipe(item);
+        sr.shape("S S", "S S", "S S");
+        sr.setIngredient('S', Material.STICK);
+        Bukkit.getServer().addRecipe(sr);
+    }
+
+    private static void createFreshOranges() {
+        ItemStack item = new ItemStack(Material.LEATHER_LEGGINGS, 1);
+        LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
+        meta.setColor(Color.ORANGE);
+        meta.setDisplayName("§6Fresh Orange Pants");
+        List<String> lore = new ArrayList<>();
+        lore.add("§7Kept on death");
+        lore.add("   ");
+        lore.add("§6Used in the mystic well");
+        lore.add("§6Also, a fashion statement");
+
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
+        meta.spigot().setUnbreakable(true);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        fresh_oranges = item;
+        //Shaped Recipe
+        ShapedRecipe sr = new ShapedRecipe(item);
+        sr.shape("S S", "S S", "S S");
+        sr.setIngredient('S', Material.STICK);
+        Bukkit.getServer().addRecipe(sr);
+    }
+
+    private static void createFreshGreens() {
+        ItemStack item = new ItemStack(Material.LEATHER_LEGGINGS, 1);
+        LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
+        meta.setColor(Color.LIME);
+        meta.setDisplayName("§aFresh Green Pants");
+        List<String> lore = new ArrayList<>();
+        lore.add("§7Kept on death");
+        lore.add("   ");
+        lore.add("§aUsed in the mystic well");
+        lore.add("§aAlso, a fashion statement");
+
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
+        meta.spigot().setUnbreakable(true);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        fresh_greens = item;
+        //Shaped Recipe
+        ShapedRecipe sr = new ShapedRecipe(item);
+        sr.shape("S S", "S S", "S S");
+        sr.setIngredient('S', Material.STICK);
+        Bukkit.getServer().addRecipe(sr);
+    }
+
+    private static void createFreshYellows() {
+        ItemStack item = new ItemStack(Material.LEATHER_LEGGINGS, 1);
+        LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
+        meta.setColor(Color.YELLOW);
+        meta.setDisplayName("§eFresh Yellow Pants");
+        List<String> lore = new ArrayList<>();
+        lore.add("§7Kept on death");
+        lore.add("   ");
+        lore.add("§eUsed in the mystic well");
+        lore.add("§eAlso, a fashion statement");
+
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
+        meta.spigot().setUnbreakable(true);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        fresh_yellows = item;
+        //Shaped Recipe
+        ShapedRecipe sr = new ShapedRecipe(item);
+        sr.shape("S S", "S S", "S S");
+        sr.setIngredient('S', Material.STICK);
+        Bukkit.getServer().addRecipe(sr);
+    }
+
+    private static void createCactus() {
+        ItemStack item = new ItemStack(Material.CACTUS, 1);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',
+                "&aPhilosopher's Cactus"));
+        List<String> lore = new ArrayList<>();
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                "&eSpecial Item"));
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                "&7Right-click while holding"));
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                "&7this item to summon fresh"));
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                "&cP&6a&en&at&9s &7of your"));
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                "&7choice."));
+        lore.add("   ");
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                "&7(Special pants excluded)"));
+
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
+        meta.spigot().setUnbreakable(true);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        cactus = item;
+        //Shaped Recipe
+        ShapedRecipe sr = new ShapedRecipe(item);
+        sr.shape("SSS", "SSS", "SSS");
+        sr.setIngredient('S', Material.CACTUS);
+        Bukkit.getServer().addRecipe(sr);
+    }
+
     private static void createMaldingChestplate() {
         ItemStack item = new ItemStack(Material.LEATHER_CHESTPLATE, 1);
         LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
@@ -197,11 +334,11 @@ public class enchants {
         meta.setDisplayName("§cTier I Chestplate");
         List<String> lore = new ArrayList<>();
 
-        lore.add("§7Lives: §a20§7/20");
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a5§7/5"));
         lore.add("    ");
         lore.add("§dRARE! §9Flaming");
         lore.add("§7If the final damage of your strike");
-        lore.add("§7deals less than §c1.5❤§7 §7damage,");
+        lore.add("§7deals less than §c1.5\u2764§7 §7damage,");
         lore.add("§7ignite opponent in §a0.1s §7for §c75%");
         lore.add("§7damage");
 
@@ -225,7 +362,7 @@ public class enchants {
         meta.setDisplayName("§cTier I Boots");
         List<String> lore = new ArrayList<>();
 
-        lore.add("§7Lives: §a20§7/20");
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a5§7/5"));
         lore.add("    ");
         lore.add("§dRARE! §9Glamorous");
         lore.add("§7Leave a fancy trail behind you");
@@ -250,7 +387,7 @@ public class enchants {
         meta.setDisplayName("§cTier III Red Pants");
         List<String> lore = new ArrayList<>();
 
-        lore.add("§7Lives: §a20§7/20");
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a5§7/5"));
         lore.add("    ");
         lore.addAll(new pantEnchantLores("protIII").getLore());
 
@@ -273,7 +410,7 @@ public class enchants {
         meta.setDisplayName("§cTier I Sword");
         List<String> lore = new ArrayList<>();
 
-        lore.add("§7Lives: §a20§7/20");
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a5§7/5"));
         lore.add("    ");
         lore.addAll(new swordEnchantLores("sharpIII").getLore());
 
@@ -334,6 +471,27 @@ public class enchants {
         Bukkit.getServer().addRecipe(sr);
     }
 
+    private static void createFreshBow() {
+        ItemStack item = new ItemStack(Material.BOW, 1);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName("§bMystic Bow");
+        List<String> lore = new ArrayList<>();
+        lore.add("§7Kept on death");
+        lore.add("");
+        lore.add("§7Used in the mystic well");
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
+        meta.spigot().setUnbreakable(true);
+        meta.addEnchant(Enchantment.ARROW_INFINITE, 1, false);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        fresh_bow = item;
+        //Shaped Recipe
+        ShapedRecipe sr = new ShapedRecipe(item);
+        sr.shape("SSS", "SSS", "SSS");
+        sr.setIngredient('S', Material.GHAST_TEAR);
+        Bukkit.getServer().addRecipe(sr);
+    }
+
     private static void createPlayerSoul() {
         ItemStack item = new ItemStack(Material.GHAST_TEAR, 1);
         ItemMeta meta = item.getItemMeta();
@@ -381,7 +539,7 @@ public class enchants {
         meta.setColor(Color.fromRGB(125,195,131));
         meta.setDisplayName("§3Tier I Sewer Pants");
         List<String> lore = new ArrayList<>();
-        lore.add("§7Lives: §a20§7/20");
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a5§7/5"));
         lore.add("        ");
         lore.add("§9Hidden Jewel");
         lore.add("§7Kill §c120§7 players to recycle");
@@ -407,7 +565,7 @@ public class enchants {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§cTier I Sword");
         List<String> lore = new ArrayList<>();
-        lore.add("§7Lives: §a20§7/20");
+        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a5§7/5"));
         lore.add("    ");
         lore.add("§9Hidden Jewel");
         lore.add("§7Kill §c120§7 players to recycle");

@@ -41,8 +41,8 @@ public class gemEvents {
             if(event.getCurrentItem() != null){
                 if(event.getCurrentItem().getType() != base_glass.getType()){
                     storedMystic.put(String.valueOf(event.getWhoClicked().getUniqueId()), event.getCurrentItem());
-                    if(storedMystic.get(String.valueOf(event.getWhoClicked().getUniqueId())).getItemMeta().getLore().get(0).contains(ChatColor.GREEN + "♦")){
-                        event.getWhoClicked().sendMessage(ChatColor.RED + "You can't gem this item!");
+                    if(storedMystic.get(String.valueOf(event.getWhoClicked().getUniqueId())).getItemMeta().getLore().get(0).contains("♦")){
+                        event.getWhoClicked().sendMessage(ChatColor.RED + "You can't gem this item twice!");
                         return;
                     }
                     event.getWhoClicked().openInventory(confirmationGui((Player) event.getWhoClicked()));
@@ -68,12 +68,15 @@ public class gemEvents {
                 List<String> upgrades = null;
                 if(mystic.getType().equals(Material.GOLD_SWORD)) upgrades = getUpgradeableEnchants(mysticMeta.getLore(), "SWORD");
                 if(mystic.getType().equals(Material.LEATHER_LEGGINGS)) upgrades = getUpgradeableEnchants(mysticMeta.getLore(), "PANT");
+                if(mystic.getType().equals(Material.BOW)) upgrades = getUpgradeableEnchants(mysticMeta.getLore(), "BOW");
                 assert upgrades != null;
                 Collections.shuffle(upgrades);
 
                 if(mystic.getType().equals(Material.GOLD_SWORD)) lore = new EnchantingMechanics(mysticMeta.getLore(), upgrades.get(0), .50, .75, "SWORD").getLore();
 
                 if(mystic.getType().equals(Material.LEATHER_LEGGINGS)) lore = new EnchantingMechanics(mysticMeta.getLore(), upgrades.get(0), .50, .75, "PANT").getLore();
+
+                if(mystic.getType().equals(Material.BOW)) lore = new EnchantingMechanics(mysticMeta.getLore(), upgrades.get(0), .50, .75, "BOW").getLore();
 
                 assert lore != null;
                 lore.set(0, lore.get(0) + ChatColor.GREEN + " ♦");

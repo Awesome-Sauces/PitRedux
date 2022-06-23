@@ -88,16 +88,11 @@ public class skyblockEvents implements Listener {
             }
 
             //Perks(player);
-        }else if(event.getNPC().getName().contains("TheAlpha64")){
+        }else if(event.getNPC().getName().contains("Merchant")){
             player.sendMessage(ChatColor.LIGHT_PURPLE + "Hey welcome to Better Pit!");
-            player.sendMessage(ChatColor.GRAY + "Do /kit to get the starter kit!");
-            player.sendMessage(ChatColor.GRAY + "Also check out the store at: " + ChatColor.AQUA + "https://betterpit-store.tebex.io/");
-            player.sendMessage(ChatColor.AQUA + "Join the discord at: " + ChatColor.DARK_AQUA + "https://discord.gg/eZkkNxVR");
+            player.sendMessage(ChatColor.GRAY + "Check out the store at: " + ChatColor.AQUA + "https://betterpit.tebex.io/");
+            player.sendMessage(ChatColor.AQUA + "Join the discord at: " + ChatColor.DARK_AQUA + "https://discord.gg/mBNBbePF");
             //Perks(player);
-        }else if(event.getNPC().getName().contains("Tinykloon")){
-            player.sendMessage(ChatColor.BLUE + "https://discord.gg/eZkkNxVR");
-        }else if(event.getNPC().getName().contains("lkjv")){
-            player.sendMessage(ChatColor.BLUE + "https://betterpit-store.tebex.io/");
         }
     }
 
