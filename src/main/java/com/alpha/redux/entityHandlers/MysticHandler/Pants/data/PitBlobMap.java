@@ -120,7 +120,7 @@ public class PitBlobMap {
             @Override
             public void run() {
 
-                for(Entity entity : slime.getNearbyEntities(3, 3, 3)){
+                for(Entity entity : slime.getNearbyEntities(7, 7, 7)){
                     LivingEntity livingEntity = (LivingEntity) entity;
 
                     if(livingEntity instanceof Player && isNPC((Player) livingEntity)){

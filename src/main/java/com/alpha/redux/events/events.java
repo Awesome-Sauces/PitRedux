@@ -271,8 +271,6 @@ public class events implements Listener {
             }
 
             event.setCancelled(true);
-            Player player = getPlayerFromBlob((Slime) event.getDamager());
-            ((Player) event.getEntity()).damage(10, player);
             return;
         }
 

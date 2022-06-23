@@ -23,9 +23,12 @@ public class gemEvents {
     private static HashMap<String, ItemStack> storedMystic = new HashMap<>();
 
     public static void gemClickEvent(InventoryClickEvent event){
-        gemRunTime(event);
-        acceptMenu(event);
+        try{
+            gemRunTime(event);
+            acceptMenu(event);
+        } catch (Exception ignored) {
 
+        }
 
 
     }
