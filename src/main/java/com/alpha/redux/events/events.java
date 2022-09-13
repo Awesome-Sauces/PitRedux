@@ -218,6 +218,7 @@ public class events implements Listener {
                 player.removePotionEffect(PotionEffectType.WEAKNESS);
                 ClearAndCheck(player);
 
+
                 setStreak(String.valueOf(player.getUniqueId()), 0);
                 xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
                 Strength.put(String.valueOf(player.getUniqueId()), 0.0);
@@ -265,10 +266,6 @@ public class events implements Listener {
         }
 
         if(event.getDamager().getType().equals(EntityType.SLIME)){
-            if(!(event.getEntity() instanceof Player)){
-                event.setCancelled(true);
-                return;
-            }
 
             event.setCancelled(true);
             return;
@@ -677,7 +674,12 @@ public class events implements Listener {
     @EventHandler 
     public void onPlayerShootArrow(EntityShootBowEvent event){
         if(!(event.getEntity() instanceof Player)) {return;}
+
+
         Player shooter = (Player) event.getEntity();
+
+        shooter.getInventory().addItem(new ItemStack(Material.ARROW, 1));
+
         if (shooter.getInventory().getItemInHand().getItemMeta().equals(itemManager.megalongbow.getItemMeta())){
             shooter.getInventory().removeItem(itemManager.megalongbow);
             shooter.getInventory().addItem(enchants.fresh_bow);

@@ -34,19 +34,62 @@ public class leaderboards{
     private static Hologram hologram = HologramsAPI.createHologram(economy.getPlugin(), getLeaderBoardLocation());
 
     public static void TopPlayers(){
-        List<Map.Entry<String, Integer>> topPlayers = mainGetTop();
-        String top1 = getName(topPlayers.get(9).getKey());
-        String top2 = getName(topPlayers.get(8).getKey());
-        String top3 = getName(topPlayers.get(7).getKey());
-        String top4 = getName(topPlayers.get(6).getKey());
-        String top5 = getName(topPlayers.get(5).getKey());
-        String top6 = getName(topPlayers.get(4).getKey());
-        String top7 = getName(topPlayers.get(3).getKey());
-        String top8 = getName(topPlayers.get(2).getKey());
-        String top9 = getName(topPlayers.get(1).getKey());
-        String top10 = getName(topPlayers.get(0).getKey());
+        try {
+            List<Map.Entry<String, Integer>> topPlayers = mainGetTop();
 
-        //For every player, add their name to gui
+            String top1 = "null";
+            String top2 = "null";
+            String top3 = "null";
+            String top4 = "null";
+            String top5 = "null";
+            String top6 = "null";
+            String top7 = "null";
+            String top8 = "null";
+            String top9 = "null";
+            String top10 = "null";
+
+            if (topPlayers.get(9).getKey() != null){
+                top1 = getName(topPlayers.get(9).getKey());
+            }
+
+            if (topPlayers.get(8).getKey() != null){
+                top2 = getName(topPlayers.get(8).getKey());
+            }
+
+            if (topPlayers.get(7).getKey() != null){
+                top3 = getName(topPlayers.get(7).getKey());
+            }
+
+            if (topPlayers.get(6).getKey() != null){
+                top4 = getName(topPlayers.get(6).getKey());
+            }
+
+            if (topPlayers.get(5).getKey() != null){
+                top5 = getName(topPlayers.get(5).getKey());
+            }
+
+            if (topPlayers.get(4).getKey() != null){
+                top6 = getName(topPlayers.get(4).getKey());
+            }
+
+            if (topPlayers.get(3).getKey() != null){
+                top7 = getName(topPlayers.get(3).getKey());
+            }
+
+            if (topPlayers.get(2).getKey() != null){
+                top8 = getName(topPlayers.get(2).getKey());
+            }
+
+            if (topPlayers.get(1).getKey() != null){
+                top9 = getName(topPlayers.get(1).getKey());
+            }
+
+            if (topPlayers.get(0).getKey() != null){
+                top10 = getName(topPlayers.get(0).getKey());
+            }
+
+
+            //For every player, add their name to gui
             hologram.appendTextLine(ChatColor.AQUA + ChatColor.translateAlternateColorCodes('&', "&lTOP ACTIVE PLAYERS"));
             hologram.appendTextLine("");
             hologram.appendTextLine(ChatColor.YELLOW + "1. " + ChatColor.RESET + ChatEventApi(top1, topPlayers.get(9).getKey()));
@@ -71,6 +114,7 @@ public class leaderboards{
             hologram.appendTextLine("");
 
 
+        }catch (Exception ignored){}
     }
 
     public static void RefreshBoard(){

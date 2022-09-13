@@ -16,6 +16,7 @@ import static com.alpha.redux.DeathHandler.killHandler.getNPC;
 import static com.alpha.redux.DeathHandler.killHandler.isNPC;
 import static com.alpha.redux.apis.leaderboardsplus.leaderboards.RefreshBoard;
 import static com.alpha.redux.apis.locations.getBotSpawnLocation;
+import static com.alpha.redux.apis.locations.getSpawnProtection;
 import static com.alpha.redux.funEvents.event.handleTwoEvent;
 import static com.alpha.redux.playerdata.prestiges.getPrestigeMap;
 
@@ -120,11 +121,15 @@ public class PitBlobMap {
             @Override
             public void run() {
 
-                for(Entity entity : slime.getNearbyEntities(7, 7, 7)){
+                if(player.getLocation().getY() >= getSpawnProtection()) deleteBlob(player);
+
+                for(Entity entity : slime.getNearbyEntities(10, 10, 10)){
                     LivingEntity livingEntity = (LivingEntity) entity;
 
                     if(livingEntity instanceof Player && isNPC((Player) livingEntity)){
                         Player living = (Player) livingEntity;
+
+                        getNPC(living);
 
                         getNPC(living).teleport(getBotSpawnLocation(), PlayerTeleportEvent.TeleportCause.PLUGIN);
 
@@ -137,7 +142,7 @@ public class PitBlobMap {
                 }
 
             }
-        }.runTaskTimer(economy.getPlugin(), 100, 100);
+        }.runTaskTimer(economy.getPlugin(), 200, 200);
 
         runnable.put(player, task);
 

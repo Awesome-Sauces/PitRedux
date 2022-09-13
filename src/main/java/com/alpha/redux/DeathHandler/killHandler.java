@@ -220,7 +220,7 @@ public class killHandler {
             ReduxDefender.getPlayerObject().setHealth(Math.min(20, ReduxDefender.getPlayerObject().getMaxHealth()));
             //attacker.getWorld().playSound(attacker.getLocation(), Sound.LEVEL_UP, 1, 20);
 
-            ClearAndCheck(ReduxDefender.getPlayerObject());
+            //ClearAndCheck(ReduxDefender.getPlayerObject());
             ReduxAttacker.addPlayerEXP(ReduxAttacker.calculateExperience());
             hasEconomy(ReduxAttacker.getPlayerUUID());
             addEconomy(ReduxAttacker.getPlayerUUID(), ReduxAttacker.calculateGold());

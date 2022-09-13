@@ -12,10 +12,11 @@ import org.bukkit.entity.Player;
 import java.io.BufferedReader;
 
 import static com.alpha.redux.apis.locations.getBotSpawnLocation;
+import static com.alpha.redux.apis.locations.getEventNotifyLocation;
 
 public class event {
 
-    private static Hologram hologram = HologramsAPI.createHologram(economy.getPlugin(), new Location(Bukkit.getWorld("world"), 0.5, 100, 0.5).add(0, 32, 0));
+    private static Hologram hologram = HologramsAPI.createHologram(economy.getPlugin(), getEventNotifyLocation());
     public static int twoTimesEvent = 1;
 
     public static void twoTimesEvent(){

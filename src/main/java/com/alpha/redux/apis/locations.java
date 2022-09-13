@@ -9,7 +9,9 @@ import java.util.Random;
 
 public class locations {
 
+    /*
     private static Location cake = new Location(Bukkit.getWorld("world"), 57.5, 86, 66.5);
+
 
     public static Location getSpawnLocation(){
         return new Location(Bukkit.getWorld("world"), 0.5, 114, 10.5);
@@ -25,13 +27,19 @@ public class locations {
 
     public static int getSpawnProtection() {return 112;}
 
-    /* Metor Map Locations
+    */
+
+    // Metor Map Locations
     public static Location getSpawnLocation(){
         return new Location(Bukkit.getWorld("world"), -2.5, 161, 4.5);
     }
 
+    public static Location getEventNotifyLocation(){
+        return new Location(Bukkit.getWorld("world"), -2.5, 164, 12.5);
+    }
+
     public static Location getBotSpawnLocation(){
-        return new Location(Bukkit.getWorld("world"), -2.5, 132, 12.5);
+        return new Location(Bukkit.getWorld("world"), -2.5, 145, 12.5);
     }
     public static Location getLeaderBoardLocation(){
         return new Location(Bukkit.getWorld("world"), -14.5, 167, 12.5);
@@ -39,12 +47,14 @@ public class locations {
 
     public static int getSpawnProtection() {return 156;}
 
-     */
 
-    public static Location getCakeLocation(){
+    /*public static Location getCakeLocation(){
         return cake;
     }
 
+     */
+
+    /*
     public static void changeCakeLocation(){
         Random rand = new Random(); //instance of random class
         int upperbound = 10;
@@ -114,11 +124,20 @@ public class locations {
         }
     }
 
-    /* Metor Map Cake locations
+     */
+
+    // Metor Map Cake locations
 
 
     private static Location cake = new Location(Bukkit.getWorld("world"), -9.5, 137, 38.5);
 
+    public static Location perm_upgrades_loc = new Location(Bukkit.getWorld("world"), -1.5, 161, 1.5);
+    public static Location non_perm_upgrades_loc = new Location(Bukkit.getWorld("world"), -4.5, 161, 1.5);
+
+    public static Location leaderboard_npc_loc = new Location(Bukkit.getWorld("world"), -12.5, 161, 8.5);
+    public static Location quest_npc_loc = new Location(Bukkit.getWorld("world"), -12.5, 161, 16.5);
+
+    public static Location prestige_npc_loc = new Location(Bukkit.getWorld("world"), -2.5, 162, 23.5);
 
     public static Location getCakeLocation(){
         return cake;
@@ -193,5 +212,5 @@ public class locations {
         }
     }
 
-     */
+     //
 }

@@ -2,6 +2,7 @@ package com.alpha.redux;
 
 import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.chatManager.rank;
+import com.alpha.redux.apis.locations;
 import com.alpha.redux.apis.skyblock.skyblockEvents;
 import com.alpha.redux.apis.skyblock.skyblockItems;
 import com.alpha.redux.commands.command;
@@ -18,7 +19,10 @@ import com.alpha.redux.items.itemManager;
 import com.alpha.redux.items.enchants;
 import com.alpha.redux.questMaster.bossBattles.bossEvents;
 import com.alpha.redux.renownShop.atomizer.InventoryEventManager;
+import com.alpha.redux.startup.CreateVillagers;
 import com.nametagedit.plugin.NametagEdit;
+import me.alpha.hunter.api.HunterAPI;
+import me.alpha.hunter.api.hunterTrait;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.minecraft.server.v1_8_R3.*;
@@ -29,9 +33,12 @@ import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.*;
 import org.bukkit.entity.Entity;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+
+import java.util.logging.Level;
 
 import static com.alpha.redux.DeathHandler.killHandler.isNPC;
 import static com.alpha.redux.apis.chatManager.rank.ChatEventApiGetLevelColor;
@@ -48,12 +55,19 @@ public class redux extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
+        redux plugin = this;
+
         new prestiges(this);
         new economy(this);
         new xpManager(this);
+
+
         skyblockItems.initializeItemstack();
         itemManager.init();
         enchants.init();
+
+
         getServer().getPluginManager().registerEvents(new events(),this);
         getServer().getPluginManager().registerEvents(new bossEvents(), this);
         getServer().getPluginManager().registerEvents(new ReduxEvents(), this);
@@ -77,21 +91,18 @@ public class redux extends JavaPlugin {
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[Redux] plugin is enabled");
 
 
-        redux plugin = this;
+
 
         new BukkitRunnable() {
 
             @Override
             public void run() {
-
-
                 if(twoTimesEvent >= 3){
                     for (Player player : Bukkit.getOnlinePlayers()){
                         if(!isNPC(player)){
                             Sounds.BOOSTER_REMIND.play(player.getLocation(), 1);
                         }
                     }
-
                     Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&e&lBOOSTER! &7There is currently an active &e&l3x &7booster!"));
 
                 }
@@ -162,6 +173,21 @@ public class redux extends JavaPlugin {
             }
         }, 50L);
 
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
 
         new BukkitRunnable() {
 
@@ -184,10 +210,32 @@ public class redux extends JavaPlugin {
 
         getCakeLocation().getBlock().setType(Material.CAKE_BLOCK);
 
+        CreateVillagers.loadNPC();
+
     }
 
     @Override
     public void onDisable() {
+        getCakeLocation().getBlock().setType(Material.AIR);
+        SLAPI.savePrestige();
+        SLAPI.saveXp();
+        SLAPI.saveDmgInc();
+        SLAPI.saveXPInc();
+        SLAPI.saveDmgDec();
+        SLAPI.saveMystic();
+        CreateVillagers.unloadNPC();
+        delBoard();
+        getServer().getConsoleSender().sendMessage(ChatColor.RED + "[Redux] plugin is disabled");
+
+        for (Player player : MaldingPlayerHandlers.keySet()){
+
+            NPC npc = MaldingPlayerHandlers.get(player).getBoss();
+            assert npc != null;
+            npc.despawn();
+            MaldingPlayerHandlers.remove(player);
+            CitizensAPI.getNPCRegistry().deregister(npc);
+
+        }
 
         for(Player player : blob.keySet()){
             Slime slime = blob.get(player);
@@ -200,32 +248,6 @@ public class redux extends JavaPlugin {
 
             slime.remove();
         }
-
-        for (Player player : MaldingPlayerHandlers.keySet()){
-
-            NPC npc = MaldingPlayerHandlers.get(player).getBoss();
-            assert npc != null;
-            npc.despawn();
-            MaldingPlayerHandlers.remove(player);
-            CitizensAPI.getNPCRegistry().deregister(npc);
-
-        }
-        getCakeLocation().getBlock().setType(Material.AIR);
-        SLAPI.savePrestige();
-        SLAPI.saveXp();
-        delBoard();
-        SLAPI.saveDmgInc();
-        SLAPI.saveXPInc();
-        SLAPI.saveDmgDec();
-        SLAPI.saveMystic();
-        getServer().getConsoleSender().sendMessage(ChatColor.RED + "[Redux] plugin is disabled");
-
-    }
-
-    public static Vector getVelocity(double x, double z) {
-        double y = 0.533; // this way, like normal knockback, it hits a player a little bit up
-        double multiplier = Math.sqrt((0.25 * 0.25) / ((x*x)  + y + (z*z))); // get a constant that, when multiplied by the vector, results in the speed we want
-        return new Vector(x, y, z).multiply(multiplier).setY(y);
     }
 
     private void commandRegistration(){
@@ -261,6 +283,10 @@ public class redux extends JavaPlugin {
         getCommand("getXp").setExecutor(commands);
         getCommand("pants").setExecutor(commands);
         getCommand("malding").setExecutor(commands);
+    }
+
+    private Plugin getPlugin() {
+        return this;
     }
 
 }

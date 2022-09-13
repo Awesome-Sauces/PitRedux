@@ -42,6 +42,7 @@ import static com.alpha.redux.apis.leaderboardsplus.leaderboards.*;
 import static com.alpha.redux.apis.locations.getSpawnLocation;
 import static com.alpha.redux.apis.skyblock.skyblockItems.termy;
 import static com.alpha.redux.commands.repairs.ClickHandler.repairItem;
+import static com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap.deleteBlob;
 import static com.alpha.redux.events.events.*;
 import static com.alpha.redux.events.nonPermItems.ClearAndCheck;
 import static com.alpha.redux.funEvents.event.endTwoTimes;
@@ -543,6 +544,8 @@ public class command implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("spawn")) {
+
+            deleteBlob(player);
             //deleteHologramStreak(player);
             hasStreak(String.valueOf(player.getUniqueId()));
 

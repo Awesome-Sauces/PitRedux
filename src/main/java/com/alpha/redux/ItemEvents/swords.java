@@ -18,7 +18,6 @@ import java.util.Objects;
 import static com.alpha.redux.DeathHandler.ProccessHit.StrengthCheck;
 import static com.alpha.redux.DeathHandler.killHandler.getNPC;
 import static com.alpha.redux.DeathHandler.killHandler.isNPC;
-import static com.alpha.redux.ItemEvents.executioner.playParticle;
 import static com.alpha.redux.ItemEvents.sharkCalc.getSharkPlayers;
 import static com.alpha.redux.apis.strikeLight.strikeLightningForPlayers;
 import static com.alpha.redux.playerdata.economy.getEconomy;

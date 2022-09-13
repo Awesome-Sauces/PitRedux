@@ -1,8 +1,14 @@
 package com.alpha.redux.eventManagers;
 
 import com.alpha.redux.entityHandlers.ReduxPlayer;
+import com.alpha.redux.items.enchants;
+import com.alpha.redux.items.itemManager;
+import com.alpha.redux.renownShop.damageDecrease;
+import com.alpha.redux.renownShop.damageIncrease;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -11,7 +17,18 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import static com.alpha.redux.DeathHandler.ProccessHit.StrengthCheck;
+import static com.alpha.redux.DeathHandler.killHandler.getNPC;
+import static com.alpha.redux.DeathHandler.killHandler.isNPC;
+import static com.alpha.redux.ItemEvents.pants.VenomEvent;
+import static com.alpha.redux.ItemEvents.pants.triggerChestplateMalding;
+import static com.alpha.redux.apis.actionbarplus.sendHealthBar;
+import static com.alpha.redux.apis.locations.getSpawnProtection;
+import static com.alpha.redux.playerdata.prestiges.getPrestige;
+import static com.alpha.redux.playerdata.streaks.mega_damage_amount;
+import static com.alpha.redux.questMaster.bossBattles.maldingBoss.maldingName;
 import static com.alpha.redux.well.loreChecker.CheckEnchantOnPant;
 import static com.alpha.redux.well.loreChecker.CheckEnchantOnSword;
 
@@ -83,6 +100,8 @@ public class ReduxDamageEvent extends Event implements Cancellable {
         setAttackerArmor();
         setAttackerEnchants();
         setDefenderEnchants();
+
+        run();
     }
 
 
@@ -161,5 +180,212 @@ public class ReduxDamageEvent extends Event implements Cancellable {
 
     public void subtractReduxTrueDamage(double damage){
         this.trueDamage -= damage;
+    }
+
+    private void run(){
+        Player attacker = this.getAttacker().getPlayerObject();
+        Player defender = this.getDefenders().getPlayerObject();
+
+        ReduxPlayer ReduxAttacker = this.getAttacker();
+        ReduxPlayer ReduxDefender = this.getDefenders();
+
+        if(isNPC(attacker)){
+            this.setReduxDamage(10);
+        }
+
+        this.addReduxDamage(Math.min(this.getReduxDamage() * damageIncrease.getIncrease(ReduxAttacker.getPlayerUUID()), this.getReduxDamage()*.1));
+
+        /*
+        if(true_damage_amount.containsKey(ReduxDefender.getPlayerUUID())){
+            true_dmg += true_damage_amount.get(ReduxDefender.getPlayerUUID());
+        }
+
+         */
+
+        try {
+            if (attacker.getInventory().getItemInHand().getItemMeta().getDisplayName().contains("Tier III")) {
+                ItemStack sword = attacker.getItemInHand();
+                if(!attacker.getInventory().getItemInHand().getEnchantments().containsKey(Enchantment.DAMAGE_ALL)){
+                    sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+                }else if (attacker.getInventory().getItemInHand().getEnchantments().get(Enchantment.DAMAGE_ALL) == 2){
+                    sword.removeEnchantment(Enchantment.DAMAGE_ALL);
+                    sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+                }
+
+
+
+            }
+
+            if (attacker.getInventory().getItemInHand().equals(enchants.jewl_sword)) {
+                ItemStack sword = attacker.getItemInHand();
+                if(!attacker.getInventory().getItemInHand().getEnchantments().containsKey(Enchantment.DAMAGE_ALL)){
+                    sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
+                }
+
+            }
+        } catch (Exception e){
+
+        }
+
+        try {
+
+            if(attacker.getInventory().getItemInHand().getType().equals(Material.DIAMOND_SPADE)){
+
+                try {
+                    if(defender.getInventory().getChestplate().getType().equals(Material.DIAMOND_LEGGINGS)){
+                        this.addReduxDamage(4);
+                    }else if(defender.getInventory().getLeggings().getType().equals(Material.DIAMOND_CHESTPLATE)){
+                        this.addReduxDamage(4);
+                    }else if(defender.getInventory().getBoots().getType().equals(Material.DIAMOND_BOOTS)){
+                        this.addReduxDamage(4);
+                    }
+
+                    this.addReduxDamage(5);
+                }catch (Exception e){
+                    this.addReduxDamage(4);
+                }
+
+            }
+
+            if (StrengthCheck(attacker) > 0) this.addReduxDamage(this.getReduxDamage() * StrengthCheck(attacker));
+
+        } catch (Exception e){
+            this.addReduxDamage(0);
+        }
+
+        // Pant enchants
+
+
+
+        try{
+            if(attacker.getInventory().getLeggings().getType().equals(Material.LEATHER_LEGGINGS)){
+                try{
+                    VenomEvent(attacker, defender);
+                } catch (Exception e) {
+
+                }
+            }
+        } catch (Exception e) {
+
+        }
+
+
+
+        if(defender.getInventory().getLeggings() != null){
+            if(defender.getInventory().getLeggings().getType().equals(Material.LEATHER_LEGGINGS)){
+                this.subtractReduxDamage(this.getReduxDamage() * .3);
+
+            }
+        }
+
+
+        /*
+        try{
+            if(attacker.getInventory().getItemInHand().getType().equals(Material.GOLD_SWORD)){
+                ItemStack sword = attacker.getInventory().getItemInHand();
+                if (!(attacker.getLocation().getY() >= getSpawnProtection())){damage += Billionaire(attacker, damage, sword.getItemMeta().getLore());}
+                if (!(attacker.getLocation().getY() >= getSpawnProtection())){damage += GambleSword(attacker, damage, sword.getItemMeta().getLore());}
+                damage += damage * criticalFunkyDamageCalculation(attacker, 0.0, true);
+                damage += KingBuster(attacker, defender ,damage, sword.getItemMeta().getLore());
+                damage += Sharker(attacker, defender ,damage, sword.getItemMeta().getLore());
+                damage += Sharpness(attacker,damage, sword.getItemMeta().getLore());
+                attacker.setHealth(Math.min(attacker.getHealth() + Lifesteals(attacker, damage, sword.getItemMeta().getLore()), attacker.getMaxHealth()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+         */
+
+
+        if(mega_damage_amount.containsKey(String.valueOf(defender.getUniqueId()))){
+            this.addReduxDamage(Math.round(mega_damage_amount.get(String.valueOf(defender.getUniqueId()))));
+        }
+
+        attacker.setHealth(Math.min(attacker.getHealth() +.5, attacker.getMaxHealth()));
+
+
+        if(defender.getInventory().getHelmet() != null && defender.getInventory().getHelmet().equals(itemManager.goldHelm)){
+            this.subtractReduxDamage(this.getReduxDamage() * .20);
+        }
+
+        if(defender.getInventory().getChestplate() != null && defender.getInventory().getChestplate().equals(itemManager.arch)){
+            this.subtractReduxDamage(this.getReduxDamage() * .10);
+        }
+
+        if(isNPC(defender)){
+            if(Objects.requireNonNull(getNPC(defender)).getId() == 41){
+                this.setReduxDamage(this.getReduxDamage()/1000);
+            }
+        }
+
+        if (attacker.getLocation().getY() >= getSpawnProtection()){
+            this.setCancelled(true);
+            return;
+        }
+
+
+        if(!isNPC(defender)) this.subtractReduxDamage(this.getReduxDamage() * ((double) damageDecrease.getDecrease(String.valueOf(defender.getUniqueId())) / 100));
+
+        if(!isNPC(defender) || !isNPC(attacker)){
+            if(getPrestige(String.valueOf(attacker.getUniqueId())) <= 1){
+                this.addReduxDamage(this.getReduxDamage() *.1);
+            }else if(getPrestige(String.valueOf(defender.getUniqueId())) <= 1){
+                this.subtractReduxDamage(this.getReduxDamage()*.5);
+            }
+        }
+
+
+        if(isNPC(defender)){
+            if(Objects.requireNonNull(getNPC(defender)).getName().contains(maldingName)){
+                this.setReduxDamage(this.getReduxDamage()/100);
+            }
+        }
+
+        if (attacker.getInventory().getChestplate() != null && attacker.getInventory().getChestplate().equals(enchants.malding_chestplate)) {
+            triggerChestplateMalding(attacker, defender, this.getReduxDamage());
+        }
+
+        try{
+            this.addReduxDamage(this.getReduxDamage()*ReduxAttacker.getPlayerIncrease());
+            ReduxAttacker.setPlayerIncrease(.0001);
+            this.subtractReduxDamage(this.getReduxDamage()*ReduxDefender.getPlayerDecrease());
+            ReduxDefender.setPlayerDecrease(.0001);
+        }catch (Exception e){
+
+        }
+
+        try {
+            if(defender.getInventory().getChestplate() != null){
+                if(defender.getInventory().getChestplate().equals(enchants.malding_chestplate)){
+                    this.subtractReduxDamage(this.getReduxDamage()*.10);
+                }
+            }
+            if(defender.getInventory().getLeggings() != null){
+                if(defender.getInventory().getLeggings().equals(enchants.malding_pants)){
+                    this.subtractReduxDamage(this.getReduxDamage()*.10);
+                }
+            }
+            if(defender.getInventory().getBoots() != null){
+                if(defender.getInventory().getBoots().equals(enchants.malding_boots)){
+                    this.subtractReduxDamage(this.getReduxDamage()*.10);
+                }
+            }
+        } catch (Exception e) {
+
+        }
+
+        if(isNPC(defender)){
+            this.setReduxDamage(this.getReduxDamage() / 1.5);
+        }
+
+        this.getBukkitEvent().setDamage(this.getReduxDamage());
+
+
+        sendHealthBar(this.getBukkitEvent());
+
+
+
+
     }
 }

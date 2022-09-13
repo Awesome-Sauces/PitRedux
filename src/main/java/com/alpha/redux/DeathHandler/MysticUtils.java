@@ -52,7 +52,7 @@ public class MysticUtils {
             lore.set(0, lore.get(0).replaceAll("§7Lives: §a5§7/5", "§7Lives: §a4§7/5"));
             return lore;
         }else if(ChatColor.stripColor(lives).contains("Lives: 4/5")){
-            lore.set(0, lore.get(0).replaceAll("§7Lives: §a5§7/5", "§7Lives: §a3§7/5"));
+            lore.set(0, lore.get(0).replaceAll("§7Lives: §a4§7/5", "§7Lives: §a3§7/5"));
             return lore;
         }else if(ChatColor.stripColor(lives).contains("Lives: 3/5")){
             lore.set(0, lore.get(0).replaceAll("§7Lives: §a3§7/5", "§7Lives: §a2§7/5"));

@@ -6,8 +6,7 @@ import net.minecraft.server.v1_8_R3.*;
 
 public class citizensUtils {
     public static void skin(NPC npc, String name) {
-        npc.data().setPersistent(NPC.PLAYER_SKIN_UUID_METADATA, name);
-        npc.data().setPersistent(NPC.PLAYER_SKIN_USE_LATEST, false);
+        npc.data().setPersistent(name, npc);
 
         // send skin change to online players by removing and adding this fake player
         if (npc.isSpawned()) {
