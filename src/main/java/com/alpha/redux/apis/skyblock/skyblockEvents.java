@@ -1,6 +1,7 @@
 package com.alpha.redux.apis.skyblock;
 
 import com.alpha.redux.redux;
+import com.alpha.redux.startup.CreateVillagers;
 import net.citizensnpcs.api.event.NPCClickEvent;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import org.bukkit.Bukkit;
@@ -17,6 +18,8 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.Objects;
 
 import static com.alpha.redux.apis.skyblock.skyblockItems.termy;
 import static com.alpha.redux.playerdata.prestiges.getPrestige;
@@ -69,31 +72,6 @@ public class skyblockEvents implements Listener {
 
     }
 
-    @EventHandler
-    public static void NpcShop(NPCRightClickEvent event){
 
-        Player player = event.getClicker();
-
-        if (event.getNPC().getId() == 2){
-            NonPermanentItems(player);
-        }else if (event.getNPC().getId() == 4){
-            PrestigeMenu(player);
-        }else if (event.getNPC().getId() == 3){
-            megaStreak(player);
-        }else if(event.getNPC().getId() == 1){
-            if(getPrestige(String.valueOf(player.getUniqueId())) >= 15){
-                player.openInventory(makeMainMenu(player));
-            }else{
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &7Hey you need at least prestige &eXV&7 to talk to me!"));
-            }
-
-            //Perks(player);
-        }else if(event.getNPC().getName().contains("Merchant")){
-            player.sendMessage(ChatColor.LIGHT_PURPLE + "Hey welcome to Better Pit!");
-            player.sendMessage(ChatColor.GRAY + "Check out the store at: " + ChatColor.AQUA + "https://betterpit.tebex.io/");
-            player.sendMessage(ChatColor.AQUA + "Join the discord at: " + ChatColor.DARK_AQUA + "https://discord.gg/mBNBbePF");
-            //Perks(player);
-        }
-    }
 
 }

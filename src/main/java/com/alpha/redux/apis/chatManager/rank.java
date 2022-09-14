@@ -17,6 +17,10 @@ import static com.alpha.redux.playerdata.xpManager.*;
 
 public class rank {
 
+    public static String colorCode(String text){
+        return ChatColor.translateAlternateColorCodes('&', text);
+    }
+
     public static HashMap<String, Boolean> muted = new HashMap<>();
 
     public static void ChatEvent(AsyncPlayerChatEvent event){

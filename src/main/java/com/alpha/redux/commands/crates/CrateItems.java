@@ -18,6 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CrateItems {
+
+    public String colorCode(String text){
+        return ChatColor.translateAlternateColorCodes('&', text);
+    }
     public ItemStack getJewelPant(){
         return enchants.jewl_pant;
     }
@@ -30,16 +34,16 @@ public class CrateItems {
         ItemStack item = new ItemStack(Material.LEATHER_LEGGINGS, 1);
         LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
         meta.setColor(Color.AQUA);
-        meta.setDisplayName("§cTier I Aqua Pants");
+        meta.setDisplayName(colorCode("&cTier I Aqua Pants"));
         List<String> lore = new ArrayList<>();
-        lore.add(ChatColor.translateAlternateColorCodes('&', "§7Lives: §a5§7/5"));
+        lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
         lore.add(" ");
-        lore.add("§dRARE! §9Pit Blob III");
-        lore.add("§7Kills respawn §aThe Blob§7. This");
-        lore.add("§7slimy pet will follow you around");
-        lore.add("§7and kill your enemies. §aThe Blob");
-        lore.add("§7grows and gains health for every");
-        lore.add("§7enemy you kill.");
+        lore.add(colorCode("&dRARE! &9Pit Blob III"));
+        lore.add(colorCode("&7Kills respawn &aThe Blob&7. This"));
+        lore.add(colorCode("&7slimy pet will follow you around"));
+        lore.add(colorCode("&7and kill your enemies. &aThe Blob"));
+        lore.add(colorCode("&7grows and gains health for every"));
+        lore.add(colorCode("&7enemy you kill."));
 
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
         meta.spigot().setUnbreakable(true);

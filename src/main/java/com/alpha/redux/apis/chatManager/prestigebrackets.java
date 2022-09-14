@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 import static com.alpha.redux.playerdata.prestiges.getPrestige;
 
 public class prestigebrackets {
+
+
     public static String prestigebracket(Player player){
         String prestige_bracket;
         switch (getPrestige(String.valueOf(player.getUniqueId()))){

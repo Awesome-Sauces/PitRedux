@@ -9,6 +9,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 import static com.alpha.redux.apis.advancedInventory.ItemMaker;
+import static com.alpha.redux.apis.chatManager.rank.colorCode;
 import static com.alpha.redux.events.boards.integerToRoman;
 import static com.alpha.redux.playerdata.prestiges.getPrestige;
 import static com.alpha.redux.renownShop.damageIncrease.*;
@@ -363,7 +364,7 @@ public class RenownStorage {
 
     public static ItemStack getUberDrop(){
         return ItemMaker(Material.ENDER_CHEST, ChatColor.LIGHT_PURPLE + "Uberdrop",
-                ChatColor.GRAY + "Kept on death\n" + ChatColor.GRAY + "Contains: " + ChatColor.LIGHT_PURPLE + "§kUberdrop!\n\n" +
+                ChatColor.GRAY + "Kept on death\n" + ChatColor.GRAY + "Contains: " + ChatColor.LIGHT_PURPLE + colorCode("&kUberdrop!\n\n") +
                         ChatColor.YELLOW + "Hold and click to open!", 1, true);
     }
 

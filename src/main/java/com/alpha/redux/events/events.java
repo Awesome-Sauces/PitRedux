@@ -20,6 +20,7 @@ import com.alpha.redux.renownShop.RenownStorage;
 import com.alpha.redux.renownShop.damageDecrease;
 import com.alpha.redux.renownShop.damageIncrease;
 //import com.comphenix.protocol.wrappers.EnumWrappers;
+import com.alpha.redux.startup.CreateVillagers;
 import com.nametagedit.plugin.NametagEdit;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.event.*;
@@ -250,6 +251,11 @@ public class events implements Listener {
 
     @EventHandler 
     public static void MainDamageEvent(EntityDamageByEntityEvent event){
+
+        if (event.getEntity().getType().equals(EntityType.VILLAGER)){
+            event.setCancelled(true);
+            return;
+        }
 
         if(event.getEntity().getType().equals(EntityType.SLIME)){
             event.setCancelled(true);
@@ -881,5 +887,41 @@ public class events implements Listener {
         }
         }
 
+
+    @EventHandler
+    public static void NpcShop(PlayerInteractEntityEvent event){
+
+        if (event.getRightClicked().getType() != EntityType.VILLAGER &&
+                event.getPlayer().getType() != EntityType.PLAYER){
+            event.setCancelled(true);
+            return;
+        }
+
+
+
+        Player player = (Player) event.getPlayer();
+        NPC npc = CitizensAPI.getNPCRegistry().getNPC(event.getRightClicked());
+
+        if (Objects.equals(npc, CreateVillagers.non_perm_upgrades_npc)){
+            NonPermanentItems(player);
+        }else if (Objects.equals(npc, CreateVillagers.prestige_npc)){
+            PrestigeMenu(player);
+        }else if (Objects.equals(npc, CreateVillagers.perm_upgrades_npc)){
+            megaStreak(player);
+        }else if(Objects.equals(npc, CreateVillagers.quest_npc)){
+            if(getPrestige(String.valueOf(player.getUniqueId())) >= 15){
+                player.openInventory(makeMainMenu(player));
+            }else{
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &7Hey you need at least prestige &eXV&7 to talk to me!"));
+            }
+
+            //Perks(player);
+        }else if(npc.getName().contains("Merchant")){
+            player.sendMessage(ChatColor.LIGHT_PURPLE + "Hey welcome to Better Pit!");
+            player.sendMessage(ChatColor.GRAY + "Check out the store at: " + ChatColor.AQUA + "https://betterpit.tebex.io/");
+            player.sendMessage(ChatColor.AQUA + "Join the discord at: " + ChatColor.DARK_AQUA + "https://discord.gg/mBNBbePF");
+            //Perks(player);
+        }
+    }
 
     }

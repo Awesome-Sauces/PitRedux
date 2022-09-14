@@ -28,6 +28,7 @@ import java.util.Random;
 import static com.alpha.redux.DeathHandler.ProccessHit.StrengthPerk;
 import static com.alpha.redux.DeathHandler.jewls.PlayerFinishedJewl;
 import static com.alpha.redux.apis.chatManager.rank.ChatEventApiGetLevelColor;
+import static com.alpha.redux.apis.chatManager.rank.colorCode;
 import static com.alpha.redux.apis.locations.getBotSpawnLocation;
 import static com.alpha.redux.apis.locations.getSpawnLocation;
 import static com.alpha.redux.commands.command.KillMessages;
@@ -128,7 +129,7 @@ public class killHandler {
             // Runs only when Entity is Player
             ReduxDefender.getPlayerObject().setHealth(Math.min(20, ReduxDefender.getPlayerObject().getMaxHealth()));
             //attacker.getWorld().playSound(attacker.getLocation(), Sound.LEVEL_UP, 1, 20);
-            ReduxDefender.getPlayerObject().sendMessage(ChatColor.RED + "§lDEATH! " + ChatColor.GRAY + "by " + ReduxDefender.getPlayerObject().getDisplayName());
+            ReduxDefender.getPlayerObject().sendMessage(ChatColor.RED + colorCode("&lDEATH! ") + ChatColor.GRAY + "by " + ReduxDefender.getPlayerObject().getDisplayName());
             Location loc = getSpawnLocation();
             ReduxDefender.getPlayerObject().teleport(loc);
             hasStreak(ReduxDefender.getPlayerObject().getDisplayName());
@@ -177,7 +178,7 @@ public class killHandler {
             if(!KillMessages.containsKey(ReduxAttacker.getPlayerUUID())){
                 KillMessages.put(ReduxAttacker.getPlayerUUID(), true);
             }else if(KillMessages.get(ReduxAttacker.getPlayerUUID()).equals(true)){
-                ReduxAttacker.getPlayerObject().sendMessage(ChatColor.GREEN + "§lKILL! " + ChatColor.GRAY + "on " + ReduxDefender.getPlayerObject().getDisplayName() + ChatColor.RESET + ChatColor.AQUA + " +" + ReduxAttacker.calculateExperience() + "XP" + ChatColor.GOLD + " +" + ReduxAttacker.calculateGold() + "g");
+                ReduxAttacker.getPlayerObject().sendMessage(ChatColor.GREEN + colorCode("&lKILL! ") + ChatColor.GRAY + "on " + ReduxDefender.getPlayerObject().getDisplayName() + ChatColor.RESET + ChatColor.AQUA + " +" + ReduxAttacker.calculateExperience() + "XP" + ChatColor.GOLD + " +" + ReduxAttacker.calculateGold() + "g");
             }
             hasStreak(ReduxAttacker.getPlayerUUID());
             addStreak(ReduxAttacker.getPlayerUUID(), 1);
@@ -224,8 +225,8 @@ public class killHandler {
             ReduxAttacker.addPlayerEXP(ReduxAttacker.calculateExperience());
             hasEconomy(ReduxAttacker.getPlayerUUID());
             addEconomy(ReduxAttacker.getPlayerUUID(), ReduxAttacker.calculateGold());
-            ReduxAttacker.getPlayerObject().sendMessage(ChatColor.GREEN + "§lKILL! " + ChatColor.GRAY + "on " + ReduxDefender.getPlayerObject().getDisplayName() + ChatColor.RESET + ChatColor.AQUA + " +" + ReduxAttacker.calculateExperience() + "XP" + ChatColor.GOLD + " +" + ReduxAttacker.calculateGold() + "g");
-            ReduxDefender.getPlayerObject().sendMessage(ChatColor.RED + "§lDEATH! " + ChatColor.GRAY + "by " + ReduxAttacker.getPlayerObject().getDisplayName());
+            ReduxAttacker.getPlayerObject().sendMessage(ChatColor.GREEN + colorCode("&lKILL! ") + ChatColor.GRAY + "on " + ReduxDefender.getPlayerObject().getDisplayName() + ChatColor.RESET + ChatColor.AQUA + " +" + ReduxAttacker.calculateExperience() + "XP" + ChatColor.GOLD + " +" + ReduxAttacker.calculateGold() + "g");
+            ReduxDefender.getPlayerObject().sendMessage(ChatColor.RED + colorCode("&lDEATH! ") + ChatColor.GRAY + "by " + ReduxAttacker.getPlayerObject().getDisplayName());
             Location loc = getSpawnLocation();
             ReduxDefender.getPlayerObject().teleport(loc);
             hasStreak(ReduxAttacker.getPlayerUUID());

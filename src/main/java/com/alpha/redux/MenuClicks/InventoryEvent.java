@@ -20,8 +20,7 @@ import java.io.BufferedReader;
 
 import static com.alpha.redux.apis.HeadNames.headnames.changeName;
 import static com.alpha.redux.apis.advancedInventory.addInv;
-import static com.alpha.redux.apis.chatManager.rank.ChatEventApi;
-import static com.alpha.redux.apis.chatManager.rank.ChatEventApiGetLevelColor;
+import static com.alpha.redux.apis.chatManager.rank.*;
 import static com.alpha.redux.events.boards.integerToRoman;
 import static com.alpha.redux.events.events.Strength;
 import static com.alpha.redux.playerdata.economy.*;
@@ -398,7 +397,7 @@ public class InventoryEvent {
                 addXp(String.valueOf(player.getUniqueId()), (int) (15 + (15* PrestigeXpAmount(getPrestige(String.valueOf(player.getUniqueId()))))));
                 addXp(String.valueOf(player.getUniqueId()), 1);
                 randomDUDE = GetCurrentLevel(String.valueOf(player.getUniqueId()), xpManager.getXp(String.valueOf(player.getUniqueId())), prestiges.getPrestige(String.valueOf(player.getUniqueId())), player);
-                Bukkit.broadcastMessage(ChatColor.YELLOW + "§lPRESTIGE! " + ChatColor.GOLD + player.getDisplayName() + ChatColor.GRAY + " unlocked prestige " + ChatColor.YELLOW + getPrestige(String.valueOf(player.getUniqueId())) + ChatColor.GRAY + " gg!");
+                Bukkit.broadcastMessage(ChatColor.YELLOW + colorCode("&lPRESTIGE! ") + ChatColor.GOLD + player.getDisplayName() + ChatColor.GRAY + " unlocked prestige " + ChatColor.YELLOW + getPrestige(String.valueOf(player.getUniqueId())) + ChatColor.GRAY + " gg!");
                 boards.CreateScore(player);
                 player.closeInventory();
                 player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 0);

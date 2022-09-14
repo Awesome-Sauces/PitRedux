@@ -55,6 +55,7 @@ public class CreateVillagers {
         prestige_npc.setBukkitEntityType(EntityType.VILLAGER);
         prestige_npc.setProtected(true);
 
+
         moveNPC();
         makeHolograms();
     }

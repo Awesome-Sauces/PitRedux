@@ -37,6 +37,7 @@ import static com.alpha.redux.apis.HeadNames.headnames.changeName;
 import static com.alpha.redux.apis.TebexMoners.tebexmoners.ColorfulBoxers;
 import static com.alpha.redux.apis.TebexMoners.tebexmoners.onRankBuy;
 import static com.alpha.redux.apis.chatManager.rank.ChatEventApiGetLevelColor;
+import static com.alpha.redux.apis.chatManager.rank.colorCode;
 import static com.alpha.redux.apis.commandBuilder.BaseChecks;
 import static com.alpha.redux.apis.leaderboardsplus.leaderboards.*;
 import static com.alpha.redux.apis.locations.getSpawnLocation;
@@ -539,7 +540,7 @@ public class command implements CommandExecutor {
         if (cmd.getName().equalsIgnoreCase("balance")) {
             hasEconomy(String.valueOf(player.getUniqueId()));
             int balance = getEconomy(String.valueOf(player.getUniqueId()));
-            player.sendMessage(ChatColor.AQUA + "§lBALANCE: " + ChatColor.RESET + ChatColor.GOLD + balance + " gold");
+            player.sendMessage(ChatColor.AQUA + colorCode("&lBALANCE: ") + ChatColor.RESET + ChatColor.GOLD + balance + " gold");
             return true;
         }
 

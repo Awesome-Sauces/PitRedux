@@ -14,6 +14,7 @@ import static com.alpha.redux.apis.HeadNames.headnames.changeName;
 import static com.alpha.redux.apis.chatManager.levelcolor.getLevelColor;
 import static com.alpha.redux.apis.chatManager.prestigebrackets.prestigebracket;
 import static com.alpha.redux.apis.chatManager.rank.ChatEventApi;
+import static com.alpha.redux.apis.chatManager.rank.colorCode;
 import static com.alpha.redux.playerdata.economy.getEconomy;
 import static com.alpha.redux.playerdata.economy.hasEconomy;
 import static com.alpha.redux.events.events.Has_Strength;
@@ -53,7 +54,7 @@ public class boards {
 
         Objective objective = scoreboard.registerNewObjective("Title", "dummy");
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-        objective.setDisplayName(ChatColor.YELLOW + "§lTHE BETTER PIT");
+        objective.setDisplayName(ChatColor.YELLOW + colorCode("&lTHE BETTER PIT"));
 
         hasStreak(String.valueOf(player.getUniqueId()));
         hasEconomy(String.valueOf(player.getUniqueId()));
