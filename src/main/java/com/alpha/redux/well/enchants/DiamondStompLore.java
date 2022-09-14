@@ -15,6 +15,8 @@ public class DiamondStompLore extends PitEnchant{
             multiplier += (level * 8) + 1;
         }else {multiplier += level*6;}
 
+        multiplier = multiplier / 100;
+
         if(event.getDefenders().getHelmet() != null && event.getDefenders().getHelmet().getType().equals(Material.DIAMOND_HELMET)
                 || event.getDefenders().getChestplate() != null &&  event.getDefenders().getChestplate().getType().equals(Material.DIAMOND_CHESTPLATE)
                 || event.getDefenders().getLeggings() != null && event.getDefenders().getLeggings().getType().equals(Material.DIAMOND_LEGGINGS)

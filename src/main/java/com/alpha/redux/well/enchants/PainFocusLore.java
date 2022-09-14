@@ -9,6 +9,16 @@ public class PainFocusLore extends PitEnchant{
     @Override
     public void run(ReduxDamageEvent event, int level) {
 
+        int multiplier = 0;
+
+        if (level > 2) {
+            multiplier = level+2;
+        }else{multiplier = level;}
+
+        multiplier = multiplier / 100;
+
+        event.addReduxDamage(Math.min((event.getAttacker().getPlayerObject().getMaxHealth() -
+                event.getAttacker().getPlayerObject().getHealth()) / 2, 2) * multiplier);
     }
 
     @Override

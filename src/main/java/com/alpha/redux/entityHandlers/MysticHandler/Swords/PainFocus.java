@@ -2,22 +2,25 @@ package com.alpha.redux.entityHandlers.MysticHandler.Swords;
 
 import com.alpha.redux.entityHandlers.MysticHandler.SwordEnchant;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
+import com.alpha.redux.well.enchants.PainFocusLore;
 
 public class PainFocus {
+
+    PainFocusLore painFocusLore = new PainFocusLore();
+
     public PainFocus(ReduxDamageEvent event){
         SwordEnchant painfocus = new SwordEnchant(event, "pf") {
             @Override
             public void ThreeAction() {
-                this.event.addReduxDamage(Math.min((event.getAttacker().getPlayerObject().getMaxHealth() - event.getAttacker().getPlayerObject().getHealth()) / 2, 2) * .08);
+                painFocusLore.run(event, 3);
             }
             @Override
             public void TwoAction() {
-                this.event.addReduxDamage(Math.min((event.getAttacker().getPlayerObject().getMaxHealth() - event.getAttacker().getPlayerObject().getHealth()) / 2, 2) * .05);
-
+                painFocusLore.run(event, 2);
             }
             @Override
             public void OneAction() {
-                this.event.addReduxDamage(Math.min((event.getAttacker().getPlayerObject().getMaxHealth() - event.getAttacker().getPlayerObject().getHealth()) / 2, 2) * .03);
+                painFocusLore.run(event, 1);
             }
         };
 
