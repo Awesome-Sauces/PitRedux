@@ -28,6 +28,7 @@ public class ClickHandler implements Listener {
     @EventHandler
     public static void repairLife(InventoryClickEvent event){
         if(event == null) return;
+        if (event.getClickedInventory() == null) return;
         if(event.getClickedInventory().getTitle() == null) return;
         if(event.getClickedInventory().getTitle().equals(ChatColor.GRAY + "Mystic Repair")) {
 

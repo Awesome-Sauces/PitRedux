@@ -31,6 +31,11 @@ public class BillionaireLore extends PitEnchant{
     }
 
     @Override
+    public void init() {
+        rarity = EnchantRarity.RARE;
+    }
+
+    @Override
     public String lore(int level) {
 
         String tier = "";
@@ -49,7 +54,7 @@ public class BillionaireLore extends PitEnchant{
         }else{gold+=String.valueOf(level*100);}
 
         String lore = "&dRARE! &9Billionaire" + tier + "\n" +
-                        "&7Hits with this sword deal &c" + multiplier + "x" +
+                        "&7Hits with this sword deal &c" + multiplier + "x\n" +
                         "&cdamage&7 but cost &6" + gold + "g";
 
         return colorCode(lore);

@@ -18,7 +18,7 @@ import static com.alpha.redux.DeathHandler.killHandler.getNPC;
 import static com.alpha.redux.DeathHandler.killHandler.isNPC;
 import static com.alpha.redux.ItemEvents.notgladiator.*;
 import static com.alpha.redux.playerdata.prestiges.getPrestige;
-import static com.alpha.redux.well.enchanters.*;
+import static com.alpha.redux.well.enchanterrs.*;
 import static com.alpha.redux.well.loreChecker.CheckEnchantOnPant;
 
 public class pants {

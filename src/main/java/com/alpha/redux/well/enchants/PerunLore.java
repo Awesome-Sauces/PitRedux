@@ -40,6 +40,11 @@ public class PerunLore extends PitEnchant{
     }
 
     @Override
+    public void init() {
+        rarity = EnchantRarity.RARE;
+    }
+
+    @Override
     public String lore(int level) {
 
         String tier = "";

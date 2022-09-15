@@ -20,6 +20,7 @@ import com.alpha.redux.items.enchants;
 import com.alpha.redux.questMaster.bossBattles.bossEvents;
 import com.alpha.redux.renownShop.atomizer.InventoryEventManager;
 import com.alpha.redux.startup.CreateVillagers;
+import com.alpha.redux.well.enchants.*;
 import com.nametagedit.plugin.NametagEdit;
 import me.alpha.hunter.api.HunterAPI;
 import me.alpha.hunter.api.hunterTrait;
@@ -52,6 +53,16 @@ import static com.alpha.redux.funEvents.event.twoTimesEvent;
 import static com.alpha.redux.questMaster.bossBattles.maldingBoss.*;
 
 public class redux extends JavaPlugin {
+
+    public static BillionaireLore billionaireLore = new BillionaireLore();
+    public static PerunLore perunLore = new PerunLore();
+    public static ExecutionerLore executionerLore = new ExecutionerLore();
+    public static GambleLore gambleLore = new GambleLore();
+    public static KingBusterLore kingBusterLore = new KingBusterLore();
+    public static LifestealLore lifestealLore = new LifestealLore();
+    public static PainFocusLore painFocusLore = new PainFocusLore();
+    public static SharkLore sharkLore = new SharkLore();
+    public static SharpLore sharpLore = new SharpLore();
 
     @Override
     public void onEnable() {

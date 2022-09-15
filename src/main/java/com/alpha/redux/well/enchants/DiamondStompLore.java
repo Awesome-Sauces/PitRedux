@@ -25,6 +25,11 @@ public class DiamondStompLore extends PitEnchant{
     }
 
     @Override
+    public void init() {
+        rarity = EnchantRarity.NORMAL;
+    }
+
+    @Override
     public String lore(int level) {
         String tier = "";
         if (level > 1){tier += " " + integerToRoman(level);}

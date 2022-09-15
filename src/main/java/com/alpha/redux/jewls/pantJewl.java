@@ -13,8 +13,8 @@ import java.util.Random;
 
 import static com.alpha.redux.apis.FancyText.compileListToString;
 import static com.alpha.redux.apis.FancyText.hoverText;
-import static com.alpha.redux.well.enchanters.*;
-import static com.alpha.redux.well.enchanters.Mirror;
+import static com.alpha.redux.well.enchanterrs.*;
+import static com.alpha.redux.well.enchanterrs.Mirror;
 
 public class pantJewl {
     public static ItemStack generateJewlPants(Player player){

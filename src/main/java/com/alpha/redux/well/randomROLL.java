@@ -1,16 +1,10 @@
 package com.alpha.redux.well;
 
-import com.alpha.redux.apis.chatManager.rank;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.util.*;
 
-import static com.alpha.redux.apis.FancyText.compileListToString;
-import static com.alpha.redux.apis.FancyText.hoverText;
-import static com.alpha.redux.well.enchanters.*;
 import static com.alpha.redux.well.loreChecker.CheckEnchantOnPant;
 
 public class randomROLL {

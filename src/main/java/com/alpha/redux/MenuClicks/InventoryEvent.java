@@ -5,6 +5,9 @@ import com.alpha.redux.events.boards;
 import com.alpha.redux.playerdata.prestiges;
 import com.alpha.redux.playerdata.xpManager;
 import com.alpha.redux.items.itemManager;
+import com.alpha.redux.well.enchanters.FreshPants;
+import com.alpha.redux.well.enchanters.MysticBow;
+import com.alpha.redux.well.enchanters.MysticSword;
 import com.nametagedit.plugin.NametagEdit;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
@@ -40,160 +43,45 @@ import static com.alpha.redux.well.mysticWell.*;
 public class InventoryEvent {
 
     public static void main(InventoryClickEvent event) {
+
         Player player = (Player) event.getWhoClicked();
         String uuid = String.valueOf(player.getUniqueId());
+
         if (event.getClickedInventory().getTitle().equalsIgnoreCase(ChatColor.GRAY + "Mystic Well")){
             event.setCancelled(true);
             if (event.getCurrentItem().getType() == Material.ENCHANTMENT_TABLE) {
-                event.setCancelled(true);
                 ItemStack items = event.getClickedInventory().getItem(20);
                 hasEconomy(uuid);
-                event.setCancelled(true);
+
                 if (items.getType().equals(Material.LEATHER_LEGGINGS)) {
-                    event.setCancelled(true);
-                    if (items.getItemMeta().getDisplayName().contains("Tier III")){
-                        return;
-                    } else if (items.getItemMeta().getDisplayName().contains("Tier II")) {
-                        if (getEconomy(uuid) >= 8000){
-                            removeEconomy(uuid, 8000);
-                            boards.CreateScore(player);
-                            event.getClickedInventory().setItem(20, createDropII(event.getClickedInventory().getItem(20), player));
-                        } else {
-                            player.sendMessage(ChatColor.RED + "You can't afford this!");
-                            player.sendMessage(ChatColor.GRAY + "Reminder: You need 8000 gold to enchant this item!");
-                        }
-                    }else if (items.getItemMeta().getDisplayName().contains("Tier I")) {
-                        if (getEconomy(uuid) >= 4000) {
-                            removeEconomy(uuid, 4000);
-                            boards.CreateScore(player);
-                            event.getClickedInventory().setItem(20, createDropI(event.getClickedInventory().getItem(20), player));
-                        } else {
-                            player.sendMessage(ChatColor.RED + "You can't afford this!");
-                            player.sendMessage(ChatColor.GRAY + "Reminder: You need 4000 gold to enchant this item!");
-                        }
-                    } else if (items.getItemMeta().getDisplayName().contains("Fresh")) {
-                        if (getEconomy(uuid) >= 1000){
-                            removeEconomy(uuid, 1000);
-                            boards.CreateScore(player);
-                            event.getClickedInventory().setItem(20, createDrop(player));
-                        }else{
-                            player.sendMessage(ChatColor.RED + "You can't afford this!");
-                            player.sendMessage(ChatColor.GRAY + "Reminder: You need 1000 gold to enchant this item!");
-                        }
-                    }
-                    }
+                    FreshPants.clickFresh(event);
+                }
 
                 if (items.getType().equals(Material.GOLD_SWORD)) {
-                    event.setCancelled(true);
-                    if (items.getItemMeta().getDisplayName().contains("Tier III")){
-                        return;
-                    } else if (items.getItemMeta().getDisplayName().contains("Tier II")) {
-                        if (getEconomy(uuid) >= 8000){
-                            removeEconomy(uuid, 8000);
-                            boards.CreateScore(player);
-                            event.getClickedInventory().setItem(20, createSwordII(event.getClickedInventory().getItem(20), player));
-                        } else {
-                            player.sendMessage(ChatColor.RED + "You can't afford this!");
-                            player.sendMessage(ChatColor.GRAY + "Reminder: You need 8000 gold to enchant this item!");
-                        }
-                    }else if (items.getItemMeta().getDisplayName().contains("Tier I")) {
-                        if (getEconomy(uuid) >= 4000) {
-                            removeEconomy(uuid, 4000);
-                            boards.CreateScore(player);
-                            event.getClickedInventory().setItem(20, createSwordI(event.getClickedInventory().getItem(20), player));
-                        } else {
-                            player.sendMessage(ChatColor.RED + "You can't afford this!");
-                            player.sendMessage(ChatColor.GRAY + "Reminder: You need 4000 gold to enchant this item!");
-                        }
-                    } else if (items.getItemMeta().getDisplayName().contains("Mystic Sword")) {
-                        if (getEconomy(uuid) >= 1000){
-                            removeEconomy(uuid, 1000);
-                            boards.CreateScore(player);
-                            event.getClickedInventory().setItem(20, createSword(player));
-                        }else{
-                            player.sendMessage(ChatColor.RED + "You can't afford this!");
-                            player.sendMessage(ChatColor.GRAY + "Reminder: You need 1000 gold to enchant this item!");
-                        }
-
-                    }
-
+                    MysticSword.clickSword(event);
+                    return;
                 }
 
                 if (items.getType().equals(Material.BOW)) {
-                    event.setCancelled(true);
-                    if (items.getItemMeta().getDisplayName().contains("Tier III")){
-                        return;
-                    } else if (ChatColor.stripColor(items.getItemMeta().getDisplayName()).contains("Tier II")) {
-                        if (getEconomy(uuid) >= 8000){
-                            removeEconomy(uuid, 8000);
-                            boards.CreateScore(player);
-                            event.getClickedInventory().setItem(20, createBowII(event.getClickedInventory().getItem(20), player));
-                        } else {
-                            player.sendMessage(ChatColor.RED + "You can't afford this!");
-                            player.sendMessage(ChatColor.GRAY + "Reminder: You need 8000 gold to enchant this item!");
-                        }
-                    }else if (ChatColor.stripColor(items.getItemMeta().getDisplayName()).contains("Tier I")) {
-                        if (getEconomy(uuid) >= 4000) {
-                            removeEconomy(uuid, 4000);
-                            boards.CreateScore(player);
-                            event.getClickedInventory().setItem(20, createBowI(event.getClickedInventory().getItem(20), player));
-                        } else {
-                            player.sendMessage(ChatColor.RED + "You can't afford this!");
-                            player.sendMessage(ChatColor.GRAY + "Reminder: You need 4000 gold to enchant this item!");
-                        }
-                    } else if (ChatColor.stripColor(items.getItemMeta().getDisplayName()).contains("Mystic Bow")) {
-                        if (getEconomy(uuid) >= 1000){
-                            removeEconomy(uuid, 1000);
-                            boards.CreateScore(player);
-                            event.getClickedInventory().setItem(20, createBow(player));
-                        }else{
-                            player.sendMessage(ChatColor.RED + "You can't afford this!");
-                            player.sendMessage(ChatColor.GRAY + "Reminder: You need 1000 gold to enchant this item!");
-                        }
+                    MysticBow.clickBow(event);
+                }
+
+            }else if (event.getClickedInventory().getTitle().equalsIgnoreCase(ChatColor.GRAY + "Mystic Well")){
+                    if (event.getCurrentItem().getType().equals(Material.LEATHER_LEGGINGS) ||
+                            event.getCurrentItem().getType().equals(Material.GOLD_SWORD) ||
+                            event.getCurrentItem().getType().equals(Material.BOW)) {
+
+                        player.getInventory().addItem(event.getClickedInventory().getItem(20));
+                        event.getClickedInventory().setItem(20, null);
 
                     }
-
-                }
-                }else if (event.getClickedInventory().getTitle().equalsIgnoreCase(ChatColor.GRAY + "Mystic Well")){
-                    if (event.getCurrentItem().getType().equals(Material.LEATHER_LEGGINGS)) {
-                        player.getInventory().addItem(event.getClickedInventory().getItem(20));
-                        event.getClickedInventory().setItem(20, null);
-                    }else if (event.getCurrentItem().getType().equals(Material.GOLD_SWORD)) {
-                        player.getInventory().addItem(event.getClickedInventory().getItem(20));
-                        event.getClickedInventory().setItem(20, null);
-                    }else if (event.getCurrentItem().getType().equals(Material.BOW)) {
-                        player.getInventory().addItem(event.getClickedInventory().getItem(20));
-                        event.getClickedInventory().setItem(20, null);
-                    }else if (event.getCurrentItem().getType() == Material.AIR){
-                        event.setCancelled(true);
-                    }else if (event.getCurrentItem().getType() == Material.STAINED_GLASS_PANE){
-                        event.setCancelled(true);
-                    }else{
-                        event.setCancelled(true);
-                    }
-                }else {
-                    event.setCancelled(true);
-                }
+            }
 
             }
         if (event.getClickedInventory().getTitle().equalsIgnoreCase(player.getInventory().getTitle())){
-            if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Fresh")){
-                Inventory gui = enchanting(player);
-
-                addInv(gui, event.getCurrentItem(), 3, 3, false);
-
-                player.getInventory().removeItem(event.getCurrentItem());
-                event.setCancelled(true);
-
-            }else if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Mystic Sword")){
-                Inventory gui = enchanting(player);
-
-                addInv(gui, event.getCurrentItem(), 3, 3, false);
-
-                player.getInventory().removeItem(event.getCurrentItem());
-                event.setCancelled(true);
-
-            }else if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Mystic Bow")){
+            if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Fresh") ||
+                    event.getCurrentItem().getItemMeta().getDisplayName().contains("Mystic Sword") ||
+                    event.getCurrentItem().getItemMeta().getDisplayName().contains("Mystic Bow")){
                 Inventory gui = enchanting(player);
 
                 addInv(gui, event.getCurrentItem(), 3, 3, false);

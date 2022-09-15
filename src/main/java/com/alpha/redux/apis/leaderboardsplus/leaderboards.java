@@ -6,6 +6,7 @@ import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -34,7 +35,7 @@ public class leaderboards{
     private static Hologram hologram = HologramsAPI.createHologram(economy.getPlugin(), getLeaderBoardLocation());
 
     public static void TopPlayers(){
-        try {
+
             List<Map.Entry<String, Integer>> topPlayers = mainGetTop();
 
             String top1 = "null";
@@ -113,8 +114,6 @@ public class leaderboards{
             hologram.appendTextLine(ChatColor.YELLOW + "10. " + ChatEventApi(top10, topPlayers.get(0).getKey()));
             hologram.appendTextLine("");
 
-
-        }catch (Exception ignored){}
     }
 
     public static void RefreshBoard(){
@@ -131,19 +130,28 @@ public class leaderboards{
         }
     }
 
-    public static String getName(String uuid) {
-        String url = "https://api.mojang.com/user/profiles/"+uuid.replace("-", "")+"/names";
-        try {
-            @SuppressWarnings("deprecation")
-            String nameJson = IOUtils.toString(new URL(url));
-            JSONArray nameValue = (JSONArray) JSONValue.parseWithException(nameJson);
-            String playerSlot = nameValue.get(nameValue.size()-1).toString();
-            JSONObject nameObject = (JSONObject) JSONValue.parseWithException(playerSlot);
-            return nameObject.get("name").toString();
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-        }
-        return "error";
+/*    public static String getName(String id) {
+        OfflinePlayer player = Bukkit.getOfflinePlayer(id);
+        if(player == null) return null;
+        return player.getName();
     }
+
+ */
+
+
+    public static String getName(String uuid) {
+        String url = "https://api.mojang.com/user/profile/" + uuid;
+        try{
+            String nameJson = IOUtils.toString(new URL(url));
+
+            String[] list = nameJson.split(":");
+
+            return list[2].replaceAll("\"", "").replaceAll("}", "");
+        }catch (Exception ignored){
+            return "ERROR";
+        }
+    }
+
+
 
 }

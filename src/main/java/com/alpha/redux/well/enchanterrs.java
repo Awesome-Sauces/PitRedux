@@ -5,7 +5,7 @@ import java.util.List;
 import static com.alpha.redux.well.loreChecker.CheckEnchantOnBow;
 import static com.alpha.redux.well.loreChecker.CheckEnchantOnPant;
 
-public class enchanters {
+public class enchanterrs {
 
     public static boolean GoldBoost(List<String> lore){
         List<String> list = CheckEnchantOnPant(lore);

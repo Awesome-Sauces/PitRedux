@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 import static com.alpha.redux.jewls.pantJewl.generateJewlPants;
 import static com.alpha.redux.jewls.swordJewl.generateJewelSword;
-import static com.alpha.redux.well.enchanters.Jewel;
+import static com.alpha.redux.well.enchanterrs.Jewel;
 
 public class jewls {
     public static HashMap<String, Integer> jewl_pant_counter = new HashMap<>();
