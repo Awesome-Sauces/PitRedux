@@ -64,6 +64,8 @@ public class redux extends JavaPlugin {
     public static SharkLore sharkLore = new SharkLore();
     public static SharpLore sharpLore = new SharpLore();
 
+    public static DiamondStompLore diamondStompLore = new DiamondStompLore();
+
     @Override
     public void onEnable() {
 

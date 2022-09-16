@@ -14,10 +14,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static com.alpha.redux.apis.chatManager.rank.colorCode;
 import static com.alpha.redux.events.boards.integerToRoman;
@@ -109,12 +106,16 @@ public class MysticSword {
 
         lore.add(" ");
 
+        lore.addAll(enchants);
+
         String ench;
         int tokens = 0;
         boolean looping = true;
 
         while (looping){
             ench = getEnchant();
+
+            Bukkit.broadcastMessage(ench);
 
             for (String str : enchants){
                 tokens += str.length() - str.replaceAll("I", "").length();
@@ -126,24 +127,29 @@ public class MysticSword {
             float tier2 = ((float) ((tokens / 2) * 10) / 100);
             float tier3 = ((float) ((tokens / 3) * 10) / 100);
 
+            tokens = 0;
+
             if (d <= tier1){
 
+                lore.addAll(Arrays.asList(enchantTier(ench, 1).split("\n")));
 
                 looping = false;
-                continue;
             }else if (d <= tier2){
 
+                lore.addAll(Arrays.asList(enchantTier(ench, 2).split("\n")));
 
                 looping = false;
-                continue;
             }else if (d <= tier3){
 
+                lore.addAll(Arrays.asList(enchantTier(ench, 3).split("\n")));
 
                 looping = false;
-                continue;
-            }
+            }else{
 
-            tokens = 0;
+                lore.addAll(Arrays.asList(enchantTier(ench, 1).split("\n")));
+
+                looping = false;
+            }
         }
 
         /*
@@ -160,83 +166,107 @@ public class MysticSword {
          */
 
 
-        lore.addAll(Arrays.asList(redux.billionaireLore.lore(tier).split("\n")));
-
         return lore;
 
        // return new EnchantingMechanics(lore, enchants.get(0), chanceIII, chanceII, "SWORD").getLore();
 
     }
 
-    public static String getEnchant(){
-        double d = Math.random();
-        if (d <= 0.01){
-            // Billionaire
-            // 1% chance of being here
-            return "billionaire";
-        } else if (d <= 0.02){
-            // Perun
-            // 2% chance of being here
-            return "perun";
-        }else if (d <= 0.0250){
-            // Executioner
-            // 2.5% chance of being here
-            return "executioner";
-        }else if (d <= 0.0325){
-            // Gamble
-            // 3.25% chance of being here
-            return "gamble";
-        }else if (d <= 0.05){
-            // Xp Boost
-            // 5% chance of being here
-            return "xpboost";
-        }else if (d <= 0.0525){
-            // Pain Focus
-            // 5.25% chance of being here
-            return "painfocus";
-        }else if (d <= 0.0625){
-            // Lifesteal
-            // 6.25% chance of being here
-            return "lifesteal";
-        }else if (d <= 0.0650){
-            // Gold Boost
-            // 6.5% chance of being here
-            return "goldboost";
-        }else if (d <= 0.0675){
-            // Sharp
-            // 6.75% chance of being here
-            return "sharp";
-        }else if (d <= 0.0725){
-            // Shark
-            // 7.25% chance of being here
-            return "shark";
-        }else if (d <= 0.0750){
-            // Xp Bump
-            // 7.50% chance of being here
-            return "xpbump";
-        }else if (d <= 0.0775){
-            // Gold Bump
-            // 7.75% chance of being here
-            return "goldbump";
-        }else if (d <= 0.0825){
-            // Diamond Stomp
-            // 8.25% chance of being here
-            return "diamondstomp";
-        }else if (d <= 0.0925){
-            // Sweaty
-            // 9.25% chance of being here
-            return "sweaty";
-        }else if (d <= 0.1025){
-            // Moctezuma
-            // 10.25% chance of being here
-            return "moctezuma";
-        }else if (d <= 0.1125){
-            // King Buster
-            // 11.25% chance of being here
-            return "kingbuster";
+    public static String enchantTier(String enchant, int tier){
+        if (Objects.equals(enchant, "billionaire")) {
+            return redux.billionaireLore.lore(tier);
+        }else if (Objects.equals(enchant, "perun")) {
+            return redux.perunLore.lore(tier);
+        }else if (Objects.equals(enchant, "executioner")) {
+            return redux.executionerLore.lore(tier);
+        }else if (Objects.equals(enchant, "gamble")) {
+            return redux.gambleLore.lore(tier);
+        }else if (Objects.equals(enchant, "painfocus")) {
+            return redux.painFocusLore.lore(tier);
+        }else if (Objects.equals(enchant, "lifesteal")) {
+            return redux.lifestealLore.lore(tier);
+        }else if (Objects.equals(enchant, "sharp")) {
+            return redux.sharpLore.lore(tier);
+        }else if (Objects.equals(enchant, "shark")) {
+            return redux.sharkLore.lore(tier);
+        }else if (Objects.equals(enchant, "diamondstomp")) {
+            return redux.diamondStompLore.lore(tier);
+        }else if (Objects.equals(enchant, "kingbuster")) {
+            return redux.kingBusterLore.lore(tier);
+        }else{
+            return "ERROR";
         }
+    }
 
-        return "error";
+    public static String getEnchant(){
+        while (true) {
+            double d = Math.random();
+            if (d <= 0.01){
+                // Billionaire
+                // 1% chance of being here
+                return "billionaire";
+            } else if (d <= 0.02){
+                // Perun
+                // 2% chance of being here
+                return "perun";
+            }else if (d <= 0.0250){
+                // Executioner
+                // 2.5% chance of being here
+                return "executioner";
+            }else if (d <= 0.0325){
+                // Gamble
+                // 3.25% chance of being here
+                return "gamble";
+            }else if (d <= 0.05){
+                // Xp Boost
+                // 5% chance of being here
+                return "xpboost";
+            }else if (d <= 0.0525){
+                // Pain Focus
+                // 5.25% chance of being here
+                return "painfocus";
+            }else if (d <= 0.0625){
+                // Lifesteal
+                // 6.25% chance of being here
+                return "lifesteal";
+            }else if (d <= 0.0650){
+                // Gold Boost
+                // 6.5% chance of being here
+                return "goldboost";
+            }else if (d <= 0.0675){
+                // Sharp
+                // 6.75% chance of being here
+                return "sharp";
+            }else if (d <= 0.0725){
+                // Shark
+                // 7.25% chance of being here
+                return "shark";
+            }else if (d <= 0.0750){
+                // Xp Bump
+                // 7.50% chance of being here
+                return "xpbump";
+            }else if (d <= 0.0775){
+                // Gold Bump
+                // 7.75% chance of being here
+                return "goldbump";
+            }else if (d <= 0.0825){
+                // Diamond Stomp
+                // 8.25% chance of being here
+                return "diamondstomp";
+            }else if (d <= 0.0925){
+                // Sweaty
+                // 9.25% chance of being here
+                return "sweaty";
+            }else if (d <= 0.1025){
+                // Moctezuma
+                // 10.25% chance of being here
+                return "moctezuma";
+            }else if (d <= 0.1125){
+                // King Buster
+                // 11.25% chance of being here
+                return "kingbuster";
+            }
+        }
     }
 
 
