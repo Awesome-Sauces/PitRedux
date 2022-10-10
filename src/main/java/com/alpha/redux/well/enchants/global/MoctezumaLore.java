@@ -1,19 +1,20 @@
-package com.alpha.redux.well.enchants;
+package com.alpha.redux.well.enchants.global;
 
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
+import com.alpha.redux.well.enchants.EnchantRarity;
+import com.alpha.redux.well.enchants.PitEnchant;
 
 import static com.alpha.redux.events.boards.integerToRoman;
 
-public class SharpLore extends PitEnchant{
-
+public class MoctezumaLore extends PitEnchant {
     @Override
     public void run(ReduxDamageEvent event, int level) {
-        event.addReduxDamage(event.getReduxDamage() * ((float) (level * 4) / 100));
+
     }
 
     @Override
     public void init() {
-        rarity = EnchantRarity.NORMAL;
+        EnchantRarity rarity = EnchantRarity.NORMAL;
     }
 
     @Override
@@ -21,7 +22,7 @@ public class SharpLore extends PitEnchant{
         String tier = "";
         if (level > 1){tier += " " + integerToRoman(level);}
 
-        return "&9Sharp" + tier;
+        return "&9Moctezuma" + tier;
     }
 
     @Override
@@ -29,10 +30,11 @@ public class SharpLore extends PitEnchant{
         String tier = "";
         if (level > 1){tier += " " + integerToRoman(level);}
 
-        String multiplier = String.valueOf(level*4);
+        String multiplier = String.valueOf(6*level);
 
-        String lore = "&9Sharp" + tier + "\n" +
-                "&7Deal &c" + multiplier + "%&7 melee damage";
+        String lore = "&9Moctezuma" + tier + "\n" +
+                "&7Earn &6+" + multiplier + "g&7 on kill (assists\n" +
+                "&7excluded)";
 
         return colorCode(lore);
     }

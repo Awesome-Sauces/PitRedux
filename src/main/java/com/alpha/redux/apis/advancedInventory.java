@@ -31,7 +31,7 @@ public class advancedInventory {
             ItemStack item = new ItemStack(material, amount);
             ItemMeta null_meta = item.getItemMeta();
             if (!"NULL".equalsIgnoreCase(name)) {
-                String[] lines = lore.split("\\n");
+                String[] lines = lore.split("\n");
                 ArrayList<String> table_lore = new ArrayList<>(Arrays.asList(lines));
                 null_meta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES);
                 null_meta.setDisplayName(name);

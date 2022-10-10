@@ -30,6 +30,14 @@ public class DiamondStompLore extends PitEnchant{
     }
 
     @Override
+    public String title(int level) {
+        String tier = "";
+        if (level > 1){tier += " " + integerToRoman(level);}
+
+        return "&9Diamond Stomp" + tier;
+    }
+
+    @Override
     public String lore(int level) {
         String tier = "";
         if (level > 1){tier += " " + integerToRoman(level);}

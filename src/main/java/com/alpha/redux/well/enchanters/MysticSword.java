@@ -86,6 +86,18 @@ public class MysticSword {
         }
     }
 
+    private static List<String> translateList(List<String> lore){
+        for(String text : lore){
+            lore.set(lore.indexOf(text), colorCode(text));
+        }
+
+        return lore;
+    }
+
+    public static Boolean percentChance(double chance) {
+        return Math.random() <= chance;
+    }
+
     public static List<String> enchantSword(Player player, ItemStack sword, int tier) {
 
         double chanceII = 0.0001;
@@ -106,16 +118,26 @@ public class MysticSword {
 
         lore.add(" ");
 
-        lore.addAll(enchants);
+        for (String bench : enchants){
+            int ether = bench.length() - bench.replaceAll("I", "").length();
+
+            lore.addAll(Arrays.asList(enchantTier(convertEnchant(bench.replaceAll("I", "")), ether).split("\n")));
+            lore.add(" ");
+        }
+
+     //   lore.addAll(enchants);
 
         String ench;
         int tokens = 0;
         boolean looping = true;
 
         while (looping){
-            ench = getEnchant();
+            ench = getEnchant(enchants);
+
+            Bukkit.broadcastMessage(ChatColor.RED + ench);
 
             Bukkit.broadcastMessage(ench);
+            Bukkit.broadcastMessage("CURRENT ENCHANTS:\n" + String.valueOf(enchants));
 
             for (String str : enchants){
                 tokens += str.length() - str.replaceAll("I", "").length();
@@ -123,33 +145,79 @@ public class MysticSword {
 
             double d = Math.random();
 
-            float tier1 = ((float) ((tokens / 1) * 10) / 100);
+            if (tokens <= 0){
+                tokens = 1;
+            }
+
+            float tier1 = ((float) ((tokens) * 10) / 100);
             float tier2 = ((float) ((tokens / 2) * 10) / 100);
             float tier3 = ((float) ((tokens / 3) * 10) / 100);
 
+            Bukkit.broadcastMessage("TOKENS:" + ChatColor.RED + String.valueOf(tokens));
+
             tokens = 0;
 
-            if (d <= tier1){
 
-                lore.addAll(Arrays.asList(enchantTier(ench, 1).split("\n")));
+            if (percentChance(tier1)){
 
-                looping = false;
-            }else if (d <= tier2){
+                if (lore.contains(colorCode(getEnchantTitle(ench, 3)))){
+                    continue;
+                }else if (lore.contains(colorCode(getEnchantTitle(ench, 1)))){
+                    lore.remove(" ");
+                    lore.removeAll(translateList(Arrays.asList(enchantTier(ench, 1).split("\n"))));
+                    lore.addAll(Arrays.asList(enchantTier(ench, 2).split("\n")));
+                }else if (lore.contains(colorCode(getEnchantTitle(ench, 2)))){
+                    lore.remove(" ");
+                    lore.removeAll(translateList(Arrays.asList(enchantTier(ench, 2).split("\n"))));
+                    lore.addAll(Arrays.asList(enchantTier(ench, 3).split("\n")));
+                }else{
+                    lore.addAll(Arrays.asList(enchantTier(ench, 1).split("\n")));
+                    looping = false;
+                }
+            }else if (percentChance(tier2)){
 
-                lore.addAll(Arrays.asList(enchantTier(ench, 2).split("\n")));
+                if (lore.contains(colorCode(getEnchantTitle(ench, 3)))){
+                    continue;
+                }else if (lore.contains(colorCode(getEnchantTitle(ench, 2)))){
+                    //lore.remove(" ");
+                    lore.removeAll(translateList(Arrays.asList(enchantTier(ench, 2).split("\n"))));
+                    lore.addAll(Arrays.asList(enchantTier(ench, 3).split("\n")));
+                    Bukkit.broadcastMessage("WE DID IT BOYS");
+                }else if (lore.contains(colorCode(getEnchantTitle(ench, 1)))){
+                    //lore.remove(" ");
+                    lore.removeAll(translateList(Arrays.asList(enchantTier(ench, 1).split("\n"))));
+                    lore.addAll(Arrays.asList(enchantTier(ench, 3).split("\n")));
+                    Bukkit.broadcastMessage("WE DID IT BOYS");
+                }else{
+                    Bukkit.broadcastMessage("WE DIDNT IT BOYS");
+                    lore.addAll(Arrays.asList(enchantTier(ench, 2).split("\n")));
+                    looping = false;
+                }
+            }else if (percentChance(tier3)){
 
-                looping = false;
-            }else if (d <= tier3){
+                if (!lore.contains(colorCode(getEnchantTitle(ench, 3))) &&
+                        !lore.contains(colorCode(getEnchantTitle(ench, 2))) &&
+                        !lore.contains(colorCode(getEnchantTitle(ench, 1)))){
+                    lore.addAll(Arrays.asList(enchantTier(ench, 3).split("\n")));
+                    looping = false;
+                }else if(lore.contains(colorCode(getEnchantTitle(ench, 2))) || lore.contains(colorCode(getEnchantTitle(ench, 1)))){
 
-                lore.addAll(Arrays.asList(enchantTier(ench, 3).split("\n")));
+                    //if (lore.contains(colorCode(getEnchantTitle(ench, 2)))){lore.remove(" ");}
 
-                looping = false;
-            }else{
+                    lore.removeAll(translateList(Arrays.asList(enchantTier(ench, 2).split("\n"))));
+
+                    //if (lore.contains(colorCode(getEnchantTitle(ench, 1)))){lore.remove(" ");}
+
+                    lore.removeAll(translateList(Arrays.asList(enchantTier(ench, 1).split("\n"))));
+                    lore.addAll(Arrays.asList(enchantTier(ench, 3).split("\n")));
+                }
+            }/*else{
 
                 lore.addAll(Arrays.asList(enchantTier(ench, 1).split("\n")));
 
                 looping = false;
             }
+            */
         }
 
         /*
@@ -170,6 +238,74 @@ public class MysticSword {
 
        // return new EnchantingMechanics(lore, enchants.get(0), chanceIII, chanceII, "SWORD").getLore();
 
+    }
+
+    public static String getEnchantTitle(String enchant, int tier){
+        if (Objects.equals(enchant, "billionaire")) {
+            return colorCode(redux.billionaireLore.title(tier));
+        }else if (Objects.equals(enchant, "perun")) {
+            return colorCode(redux.perunLore.title(tier));
+        }else if (Objects.equals(enchant, "executioner")) {
+            return colorCode(redux.executionerLore.title(tier));
+        }else if (Objects.equals(enchant, "gamble")) {
+            return colorCode(redux.gambleLore.title(tier));
+        }else if (Objects.equals(enchant, "painfocus")) {
+            return colorCode(redux.painFocusLore.title(tier));
+        }else if (Objects.equals(enchant, "lifesteal")) {
+            return colorCode(redux.lifestealLore.title(tier));
+        }else if (Objects.equals(enchant, "sharp")) {
+            return colorCode(redux.sharpLore.title(tier));
+        }else if (Objects.equals(enchant, "shark")) {
+            return colorCode(redux.sharkLore.title(tier));
+        }else if (Objects.equals(enchant, "diamondstomp")) {
+            return colorCode(redux.diamondStompLore.title(tier));
+        }else if (Objects.equals(enchant, "kingbuster")) {
+            return colorCode(redux.kingBusterLore.title(tier));
+        }else if (Objects.equals(enchant, "moctezuma")){
+            return colorCode(redux.moctezumaLore.title(tier));
+        }else if (Objects.equals(enchant, "goldbump")){
+            return colorCode(redux.goldbumpLore.title(tier));
+        }else if (Objects.equals(enchant, "goldboost")){
+            return colorCode(redux.goldboostLore.title(tier));
+        }else if (Objects.equals(enchant, "sweaty")){
+            return colorCode(redux.sweatyLore.title(tier));
+        }else if (Objects.equals(enchant, "xpbump")){
+            return colorCode(redux.xpbumpLore.title(tier));
+        }else if (Objects.equals(enchant, "xpboost")){
+            return colorCode(redux.xpboostLore.title(tier));
+        }else{
+            return "ERROR";
+        }
+    }
+
+    public static String convertEnchant(String enchant) {
+        if (Objects.equals(enchant, "bill")){
+            return "billionaire";
+        }else if (Objects.equals(enchant, "pf")){
+            return "painfocus";
+        }else if (Objects.equals(enchant, "ls")){
+            return "lifesteal";
+        }else if (Objects.equals(enchant, "diamond")){
+            return "diamondstomp";
+        }else if (Objects.equals(enchant, "gamb")){
+            return "gamble";
+        }else if (Objects.equals(enchant, "king")){
+            return "kingbuster";
+        }else if (Objects.equals(enchant, "exe")){
+            return "executioner";
+        }else if (Objects.equals(enchant, "moct")){
+            return "moctezuma";
+        }else if (Objects.equals(enchant, "goldBump")){
+            return "goldbump";
+        }else if (Objects.equals(enchant, "xp")){
+            return "xpboost";
+        }else if (Objects.equals(enchant, "xpb")){
+            return "xpbump";
+        }else if (Objects.equals(enchant, "gb")){
+            return "goldboost";
+        }else{
+            return enchant;
+        }
     }
 
     public static String enchantTier(String enchant, int tier){
@@ -193,75 +329,113 @@ public class MysticSword {
             return redux.diamondStompLore.lore(tier);
         }else if (Objects.equals(enchant, "kingbuster")) {
             return redux.kingBusterLore.lore(tier);
+        }else if (Objects.equals(enchant, "moctezuma")){
+            return redux.moctezumaLore.lore(tier);
+        }else if (Objects.equals(enchant, "goldbump")){
+            return redux.goldbumpLore.lore(tier);
+        }else if (Objects.equals(enchant, "goldboost")){
+            return redux.goldboostLore.lore(tier);
+        }else if (Objects.equals(enchant, "sweaty")){
+            return redux.sweatyLore.lore(tier);
+        }else if (Objects.equals(enchant, "xpbump")){
+            return redux.xpbumpLore.lore(tier);
+        }else if (Objects.equals(enchant, "xpboost")){
+            return redux.xpboostLore.lore(tier);
         }else{
             return "ERROR";
         }
     }
 
-    public static String getEnchant(){
+    private static double calcEnchant(List<String> lore, String name){
+        if (lore.contains(name)) return 3;
+        return 1;
+    }
+
+    public static String getEnchant(List<String> lore){
+
+        for (String ench : lore){
+            lore.set(lore.indexOf(ench), convertEnchant(ench.replaceAll("I", "")));
+        }
+
+        double billionaire = .01 * calcEnchant(lore, "billionaire");
+        double perun = .02 * calcEnchant(lore, "perun");
+        double executioner = .0250 * calcEnchant(lore, "executioner");
+        double gamble = .0325 * calcEnchant(lore, "gamble");
+        double xpboost = .05 * calcEnchant(lore, "xpboost");
+        double painfocus = .0525 * calcEnchant(lore, "painfocus");
+        double lifesteal = .0625 * calcEnchant(lore, "lifesteal");
+        double goldboost = .0650 * calcEnchant(lore, "goldboost");
+        double sharp = .0675 * calcEnchant(lore, "sharp");
+        double shark = .0725 * calcEnchant(lore, "shark");
+        double xpbump = .0750 * calcEnchant(lore, "xpbump");
+        double goldbump = .0775 * calcEnchant(lore, "goldbump");
+        double diamondstomp = .0825 * calcEnchant(lore, "diamondstomp");
+        double sweaty = .0925 * calcEnchant(lore, "sweaty");
+        double moctezuma = .1025 * calcEnchant(lore, "moctezuma");
+        double kingbuster = .1125 * calcEnchant(lore, "kingbuster");
+
         while (true) {
-            double d = Math.random();
-            if (d <= 0.01){
+            if (percentChance(billionaire)){
                 // Billionaire
                 // 1% chance of being here
                 return "billionaire";
-            } else if (d <= 0.02){
+            } else if (percentChance(perun)){
                 // Perun
                 // 2% chance of being here
                 return "perun";
-            }else if (d <= 0.0250){
+            }else if (percentChance(executioner)){
                 // Executioner
                 // 2.5% chance of being here
                 return "executioner";
-            }else if (d <= 0.0325){
+            }else if (percentChance(gamble)){
                 // Gamble
                 // 3.25% chance of being here
                 return "gamble";
-            }else if (d <= 0.05){
+            }else if (percentChance(xpboost)){
                 // Xp Boost
                 // 5% chance of being here
                 return "xpboost";
-            }else if (d <= 0.0525){
+            }else if (percentChance(painfocus)){
                 // Pain Focus
                 // 5.25% chance of being here
                 return "painfocus";
-            }else if (d <= 0.0625){
+            }else if (percentChance(lifesteal)){
                 // Lifesteal
                 // 6.25% chance of being here
                 return "lifesteal";
-            }else if (d <= 0.0650){
+            }else if (percentChance(goldboost)){
                 // Gold Boost
                 // 6.5% chance of being here
                 return "goldboost";
-            }else if (d <= 0.0675){
+            }else if (percentChance(sharp)){
                 // Sharp
                 // 6.75% chance of being here
                 return "sharp";
-            }else if (d <= 0.0725){
+            }else if (percentChance(shark)){
                 // Shark
                 // 7.25% chance of being here
                 return "shark";
-            }else if (d <= 0.0750){
+            }else if (percentChance(xpbump)){
                 // Xp Bump
                 // 7.50% chance of being here
                 return "xpbump";
-            }else if (d <= 0.0775){
+            }else if (percentChance(goldbump)){
                 // Gold Bump
                 // 7.75% chance of being here
                 return "goldbump";
-            }else if (d <= 0.0825){
+            }else if (percentChance(diamondstomp)){
                 // Diamond Stomp
                 // 8.25% chance of being here
                 return "diamondstomp";
-            }else if (d <= 0.0925){
+            }else if (percentChance(sweaty)){
                 // Sweaty
                 // 9.25% chance of being here
                 return "sweaty";
-            }else if (d <= 0.1025){
+            }else if (percentChance(moctezuma)){
                 // Moctezuma
                 // 10.25% chance of being here
                 return "moctezuma";
-            }else if (d <= 0.1125){
+            }else if (percentChance(kingbuster)){
                 // King Buster
                 // 11.25% chance of being here
                 return "kingbuster";

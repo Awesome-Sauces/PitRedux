@@ -14,6 +14,8 @@ public abstract class PitEnchant {
 
     public abstract void run(ReduxDamageEvent event, int level);
 
+    public abstract String title(int level);
+
     public abstract void init();
 
     public abstract String lore(int level);

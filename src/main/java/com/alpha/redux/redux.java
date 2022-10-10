@@ -21,6 +21,7 @@ import com.alpha.redux.questMaster.bossBattles.bossEvents;
 import com.alpha.redux.renownShop.atomizer.InventoryEventManager;
 import com.alpha.redux.startup.CreateVillagers;
 import com.alpha.redux.well.enchants.*;
+import com.alpha.redux.well.enchants.global.*;
 import com.nametagedit.plugin.NametagEdit;
 import me.alpha.hunter.api.HunterAPI;
 import me.alpha.hunter.api.hunterTrait;
@@ -53,6 +54,13 @@ import static com.alpha.redux.funEvents.event.twoTimesEvent;
 import static com.alpha.redux.questMaster.bossBattles.maldingBoss.*;
 
 public class redux extends JavaPlugin {
+
+    public static XpboostLore xpboostLore = new XpboostLore();
+    public static XpbumpLore xpbumpLore = new XpbumpLore();
+    public static SweatyLore sweatyLore = new SweatyLore();
+    public static GoldboostLore goldboostLore = new GoldboostLore();
+    public static GoldbumpLore goldbumpLore = new GoldbumpLore();
+    public static MoctezumaLore moctezumaLore = new MoctezumaLore();
 
     public static BillionaireLore billionaireLore = new BillionaireLore();
     public static PerunLore perunLore = new PerunLore();

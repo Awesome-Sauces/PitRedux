@@ -27,6 +27,14 @@ public class SharkLore extends PitEnchant{
     }
 
     @Override
+    public String title(int level) {
+        String tier = "";
+        if (level > 1){tier += " " + integerToRoman(level);}
+
+        return "&9Shark" + tier;
+    }
+
+    @Override
     public String lore(int level) {
         String tier = "";
         if (level > 1){tier += " " + integerToRoman(level);}
