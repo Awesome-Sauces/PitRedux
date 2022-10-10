@@ -50,7 +50,7 @@ public class DiamondStompLore extends PitEnchant{
 
         String lore = "&9Diamond Stomp" + tier + "\n" +
                 "&7Deal &c" + multiplier + "%&7 damage vs. players" +
-                "\n&7wearing diamond armor";
+                "\n&7wearing diamond armor" + "\n&7";
 
         return colorCode(lore);
     }

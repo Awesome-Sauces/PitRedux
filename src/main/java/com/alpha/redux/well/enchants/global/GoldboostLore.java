@@ -33,7 +33,7 @@ public class GoldboostLore extends PitEnchant {
         String multiplier = String.valueOf(15*level);
 
         String lore = "&9Gold Boost" + tier + "\n" +
-                "&7Earn &6+" + multiplier + "% gold (g)&7 from kill";
+                "&7Earn &6+" + multiplier + "% gold (g)&7 from kill" + "\n&7";
 
         return colorCode(lore);
     }

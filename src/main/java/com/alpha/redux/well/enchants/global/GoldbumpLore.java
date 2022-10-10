@@ -33,7 +33,7 @@ public class GoldbumpLore extends PitEnchant {
         String multiplier = String.valueOf((2*level)+2);
 
         String lore = "&9Gold Bump" + tier + "\n" +
-                "&7Earn &6+" + multiplier + "g&7 on kill";
+                "&7Earn &6+" + multiplier + "g&7 on kill" + "\n&7";
 
         return colorCode(lore);
     }

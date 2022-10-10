@@ -57,7 +57,7 @@ public class GambleLore extends PitEnchant{
 
         String lore = "&dRARE! &9Gamble!" + tier + "\n" +
                 "&d50% chance &7to deal &c"+multiplier+"\u2764&7 true\n" +
-                "&7damage to whoever you hit, or to\n" + "&7yourself";
+                "&7damage to whoever you hit, or to\n" + "&7yourself" + "\n&7";
 
         return colorCode(lore);
     }

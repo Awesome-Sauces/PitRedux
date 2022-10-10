@@ -122,7 +122,7 @@ public class MysticSword {
             int ether = bench.length() - bench.replaceAll("I", "").length();
 
             lore.addAll(Arrays.asList(enchantTier(convertEnchant(bench.replaceAll("I", "")), ether).split("\n")));
-            lore.add(" ");
+            //lore.add(" ");
         }
 
      //   lore.addAll(enchants);
@@ -136,8 +136,6 @@ public class MysticSword {
 
             Bukkit.broadcastMessage(ChatColor.RED + ench);
 
-            Bukkit.broadcastMessage(ench);
-            Bukkit.broadcastMessage("CURRENT ENCHANTS:\n" + String.valueOf(enchants));
 
             for (String str : enchants){
                 tokens += str.length() - str.replaceAll("I", "").length();
@@ -163,17 +161,21 @@ public class MysticSword {
                 if (lore.contains(colorCode(getEnchantTitle(ench, 3)))){
                     continue;
                 }else if (lore.contains(colorCode(getEnchantTitle(ench, 1)))){
-                    lore.remove(" ");
+                    //lore.remove(" ");
                     lore.removeAll(translateList(Arrays.asList(enchantTier(ench, 1).split("\n"))));
-                    lore.addAll(Arrays.asList(enchantTier(ench, 2).split("\n")));
+                    lore = renewEnchant(lore, translateList(Arrays.asList(enchantTier(ench, 2).split("\n"))));
+                    looping = false;
                 }else if (lore.contains(colorCode(getEnchantTitle(ench, 2)))){
-                    lore.remove(" ");
+                    //lore.remove(" ");
                     lore.removeAll(translateList(Arrays.asList(enchantTier(ench, 2).split("\n"))));
-                    lore.addAll(Arrays.asList(enchantTier(ench, 3).split("\n")));
+                    lore = renewEnchant(lore, translateList(Arrays.asList(enchantTier(ench, 3).split("\n"))));
+                    looping = false;
                 }else{
                     lore.addAll(Arrays.asList(enchantTier(ench, 1).split("\n")));
                     looping = false;
                 }
+
+                Bukkit.broadcastMessage("Tier I");
             }else if (percentChance(tier2)){
 
                 if (lore.contains(colorCode(getEnchantTitle(ench, 3)))){
@@ -181,18 +183,19 @@ public class MysticSword {
                 }else if (lore.contains(colorCode(getEnchantTitle(ench, 2)))){
                     //lore.remove(" ");
                     lore.removeAll(translateList(Arrays.asList(enchantTier(ench, 2).split("\n"))));
-                    lore.addAll(Arrays.asList(enchantTier(ench, 3).split("\n")));
-                    Bukkit.broadcastMessage("WE DID IT BOYS");
+                    lore = renewEnchant(lore, translateList(Arrays.asList(enchantTier(ench, 3).split("\n"))));
+                    looping = false;
                 }else if (lore.contains(colorCode(getEnchantTitle(ench, 1)))){
                     //lore.remove(" ");
                     lore.removeAll(translateList(Arrays.asList(enchantTier(ench, 1).split("\n"))));
-                    lore.addAll(Arrays.asList(enchantTier(ench, 3).split("\n")));
-                    Bukkit.broadcastMessage("WE DID IT BOYS");
+                    lore = renewEnchant(lore, translateList(Arrays.asList(enchantTier(ench, 3).split("\n"))));
+                    looping = false;
                 }else{
-                    Bukkit.broadcastMessage("WE DIDNT IT BOYS");
                     lore.addAll(Arrays.asList(enchantTier(ench, 2).split("\n")));
                     looping = false;
                 }
+
+                Bukkit.broadcastMessage("Tier II");
             }else if (percentChance(tier3)){
 
                 if (!lore.contains(colorCode(getEnchantTitle(ench, 3))) &&
@@ -202,15 +205,18 @@ public class MysticSword {
                     looping = false;
                 }else if(lore.contains(colorCode(getEnchantTitle(ench, 2))) || lore.contains(colorCode(getEnchantTitle(ench, 1)))){
 
-                    //if (lore.contains(colorCode(getEnchantTitle(ench, 2)))){lore.remove(" ");}
+                    if (lore.contains(colorCode(getEnchantTitle(ench, 2)))){
+                        lore.removeAll(translateList(Arrays.asList(enchantTier(ench, 2).split("\n"))));
+                        lore = renewEnchant(lore, translateList(Arrays.asList(enchantTier(ench, 3).split("\n"))));
+                    }else if (lore.contains(colorCode(getEnchantTitle(ench, 1)))){
+                        lore.removeAll(translateList(Arrays.asList(enchantTier(ench, 1).split("\n"))));
+                        lore = renewEnchant(lore, translateList(Arrays.asList(enchantTier(ench, 3).split("\n"))));
+                    }
 
-                    lore.removeAll(translateList(Arrays.asList(enchantTier(ench, 2).split("\n"))));
-
-                    //if (lore.contains(colorCode(getEnchantTitle(ench, 1)))){lore.remove(" ");}
-
-                    lore.removeAll(translateList(Arrays.asList(enchantTier(ench, 1).split("\n"))));
-                    lore.addAll(Arrays.asList(enchantTier(ench, 3).split("\n")));
+                    looping = false;
                 }
+
+                Bukkit.broadcastMessage("Tier III");
             }/*else{
 
                 lore.addAll(Arrays.asList(enchantTier(ench, 1).split("\n")));
@@ -233,11 +239,35 @@ public class MysticSword {
 
          */
 
+        lore.add(ChatColor.BLUE + "+6.5 Attack Damage");
 
         return lore;
 
        // return new EnchantingMechanics(lore, enchants.get(0), chanceIII, chanceII, "SWORD").getLore();
 
+    }
+
+    private static List<String> renewEnchant(List<String> lore, List<String> enchant){
+
+        List<String> enchants = CheckEnchantOnSword(lore);
+
+        // Bukkit.broadcastMessage(enchants.toString());
+
+        lore = new ArrayList<>();
+        lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
+
+        lore.add(" ");
+
+        for (String bench : enchants){
+            int ether = bench.length() - bench.replaceAll("I", "").length();
+
+            lore.addAll(Arrays.asList(enchantTier(convertEnchant(bench.replaceAll("I", "")), ether).split("\n")));
+            //lore.add(" ");
+        }
+
+        lore.addAll(enchant);
+
+        return lore;
     }
 
     public static String getEnchantTitle(String enchant, int tier){
@@ -347,7 +377,7 @@ public class MysticSword {
     }
 
     private static double calcEnchant(List<String> lore, String name){
-        if (lore.contains(name)) return 3;
+        if (lore.contains(name)) return 7;
         return 1;
     }
 

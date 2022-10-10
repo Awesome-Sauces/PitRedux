@@ -46,7 +46,7 @@ public class PainFocusLore extends PitEnchant{
         }else{multiplier = String.valueOf(level);}
 
         String lore = "&9Pain Focus" + tier + "\n" +
-                "&7Deal &c+" + multiplier +  "%&7 damage per &c\u2764" + "\n&7you're missing";
+                "&7Deal &c+" + multiplier +  "%&7 damage per &c\u2764" + "\n&7you're missing" + "\n&7";
 
         return colorCode(lore);
     }

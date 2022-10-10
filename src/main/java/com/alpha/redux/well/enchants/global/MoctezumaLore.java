@@ -34,7 +34,7 @@ public class MoctezumaLore extends PitEnchant {
 
         String lore = "&9Moctezuma" + tier + "\n" +
                 "&7Earn &6+" + multiplier + "g&7 on kill (assists\n" +
-                "&7excluded)";
+                "&7excluded)" + "\n&7";
 
         return colorCode(lore);
     }

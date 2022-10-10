@@ -32,7 +32,7 @@ public class SharpLore extends PitEnchant{
         String multiplier = String.valueOf(level*4);
 
         String lore = "&9Sharp" + tier + "\n" +
-                "&7Deal &c" + multiplier + "%&7 melee damage";
+                "&7Deal &c" + multiplier + "%&7 melee damage" + "\n&7";
 
         return colorCode(lore);
     }

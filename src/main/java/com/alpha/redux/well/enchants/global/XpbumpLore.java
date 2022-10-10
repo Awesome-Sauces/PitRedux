@@ -34,7 +34,7 @@ public class XpbumpLore extends PitEnchant {
 
         String lore = "&9XP Bump" + tier + "\n" +
                 "&7Earn &b+" + multiplier + " XP &7per\n" +
-                "&7kill";
+                "&7kill" + "\n&7";
 
         return colorCode(lore);
     }

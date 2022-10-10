@@ -39,7 +39,7 @@ public class KingBusterLore extends PitEnchant{
         String multiplier = String.valueOf(Math.max((level*7)-1, 7));
 
         String lore = "&9King Buster" + tier + "\n" +
-                "&7Deal &c+" + multiplier + "%&7 damage vs. players" +  "\n&7above 50% HP";
+                "&7Deal &c+" + multiplier + "%&7 damage vs. players" +  "\n&7above 50% HP" + "\n&7";
 
         return colorCode(lore);
     }

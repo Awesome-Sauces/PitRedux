@@ -63,7 +63,7 @@ public class BillionaireLore extends PitEnchant{
 
         String lore = "&dRARE! &9Billionaire" + tier + "\n" +
                         "&7Hits with this sword deal &c" + multiplier + "x\n" +
-                        "&cdamage&7 but cost &6" + gold + "g";
+                        "&cdamage&7 but cost &6" + gold + "g" + "\n&7";
 
         return colorCode(lore);
     }

@@ -36,7 +36,7 @@ public class SweatyLore extends PitEnchant {
 
         String lore = "&9Sweaty" + tier + "\n" +
                 "&7Earn &b+" + multiplier + "% XP&7 from streak XP\n" +
-                "&bbonus and &b+" + max + " max XP&7 per kill";
+                "&bbonus and &b+" + max + " max XP&7 per kill" + "\n&7";
 
         return colorCode(lore);
     }

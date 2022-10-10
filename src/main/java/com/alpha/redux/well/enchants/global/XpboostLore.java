@@ -33,7 +33,7 @@ public class XpboostLore extends PitEnchant {
         String multiplier = String.valueOf(10*level);
 
         String lore = "&9XP Boost" + tier + "\n" +
-                "&7Earn &b+" + multiplier + "% XP&7 from kills";
+                "&7Earn &b+" + multiplier + "% XP&7 from kills" + "\n&7";
 
         return colorCode(lore);
     }
