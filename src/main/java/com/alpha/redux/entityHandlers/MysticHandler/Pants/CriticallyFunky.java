@@ -26,16 +26,10 @@ public class CriticallyFunky {
 
             @Override
             public void ThreeAction() {
-                if(criticalHit(event.getAttacker().getPlayerObject())){
-                    event.getDefenders().setPlayerIncrease(.3);
-                    this.event.subtractReduxDamage(this.event.getReduxDamage() *.05);
-                }
+                CriticallyFunkyLore.run(event, 3);
             }
         };
         criticallyFunky.run();
     }
 
-    private boolean criticalHit(Player player){
-        return !player.isOnGround();
-    }
 }

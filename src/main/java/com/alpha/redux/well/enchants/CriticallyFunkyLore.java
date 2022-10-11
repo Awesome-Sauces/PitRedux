@@ -8,7 +8,22 @@ public class CriticallyFunkyLore extends PitEnchant{
 
     @Override
     public void run(ReduxDamageEvent event, int level) {
-        event.subtractReduxDamage(event.getReduxDamage()*((float)(80-((level-1)*15))/100));
+      
+        double damage = .0001;
+
+        if (level > 2) {
+            damage += (level*7) + 9;
+        }else {damage += level*7;}
+
+        if(criticalHit(event.getAttacker().getPlayerObject())){
+            event.getDefenders().setPlayerIncrease(damage/100);
+            this.event.subtractReduxDamage(this.event.getReduxDamage() * ((float)(80-((level-1)*15))/100));
+        }
+    
+    }
+
+    private boolean criticalHit(Player player){
+        return !player.isOnGround();
     }
 
     @Override
