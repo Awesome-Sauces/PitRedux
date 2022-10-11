@@ -8,7 +8,20 @@ public class PeroxideLore extends PitEnchant{
 
     @Override
     public void run(ReduxDamageEvent event, int level) {
-        event.subtractReduxDamage(event.getReduxDamage()*((float)(1+((level-1)*.5))/100));
+        int time = 1;
+
+        if (level > 1) {time = 8;}else{time=5;}
+
+        giveRegen(event.getDefenders().getPlayerObject(), Math.max(level-1, 1), time);
+
+        if (level==1) event.getDefenders().getPlayerObject().setHealth(Math.min(event.getDefenders().getPlayerObject().getHealth()+.5, event.getDefenders().getPlayerObject().getMaxHealth()));
+    }
+
+    private void giveRegen(Player player, int power, int time){
+        if(!player.hasPotionEffect(PotionEffectType.REGENERATION)){
+            player.removePotionEffect(PotionEffectType.REGENERATION);
+            player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, time*20, Math.max(power-1, 0), true, true));
+        }
     }
 
     @Override
@@ -29,7 +42,7 @@ public class PeroxideLore extends PitEnchant{
         String tier = "";
         if (level > 1){tier += " " + integerToRoman(level);}
 
-        String multiplier = String.valueOf(integerToRoman(Math.max(level, 0)));
+        String multiplier = String.valueOf(integerToRoman(Math.max(level-1, 1)));
 
         String time = "";
 

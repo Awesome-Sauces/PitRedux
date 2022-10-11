@@ -3,36 +3,34 @@ package com.alpha.redux.entityHandlers.MysticHandler.Pants;
 import com.alpha.redux.entityHandlers.MysticHandler.PantEnchant;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
+import com.alpha.redux.well.enchants.PeroxideLore;
+
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class Peroxide {
+
+    PeroxideLore peroxidel = new PeroxideLore(); 
+
     public Peroxide(ReduxDamageEvent event, ReduxPlayer player){
         PantEnchant peroxide = new PantEnchant(event, player, "peroxide") {
             @Override
             public void OneAction() {
-                giveRegen(event.getDefenders().getPlayerObject(), 1, 10);
-                event.getDefenders().getPlayerObject().setHealth(Math.min(event.getDefenders().getPlayerObject().getHealth()+.5, event.getDefenders().getPlayerObject().getMaxHealth()));
+               peroxidel.run(event, 1);
             }
 
             @Override
             public void TwoAction() {
-                giveRegen(event.getDefenders().getPlayerObject(), 1, 5);
+                peroxidel.run(event, 2);
             }
 
             @Override
             public void ThreeAction() {
-                giveRegen(event.getDefenders().getPlayerObject(), 2, 10);
+                peroxidel.run(event, 3);
             }
         };
         peroxide.run();
     }
 
-    private void giveRegen(Player player, int power, int time){
-        if(!player.hasPotionEffect(PotionEffectType.REGENERATION)){
-            player.removePotionEffect(PotionEffectType.REGENERATION);
-            player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, time*20, Math.max(power-1, 0), true, true));
-        }
-    }
 }

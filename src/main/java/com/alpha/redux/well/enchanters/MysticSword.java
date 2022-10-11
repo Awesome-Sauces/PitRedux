@@ -268,6 +268,9 @@ public class MysticSword {
             //lore.add(" ");
         }
 
+        hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! " + rank.getNameColor(player) + player.getDisplayName() + "&7 created &cTier I Sword!"), compileListToString(lore));
+        player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 1);
+
         lore.addAll(enchant);
 
         return lore;

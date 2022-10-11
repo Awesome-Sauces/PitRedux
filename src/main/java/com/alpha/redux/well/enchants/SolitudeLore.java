@@ -8,7 +8,19 @@ public class SolitudeLore extends PitEnchant{
 
     @Override
     public void run(ReduxDamageEvent event, int level) {
-        event.subtractReduxDamage(event.getReduxDamage()*((float)(40+((level-1)*10))/100));
+
+        if (solitaryCheck()) this.event.subtractReduxDamage(this.event.getReduxDamage() * ((float)(40+((level-1)*10))/100));
+
+    }
+
+    private boolean solitaryCheck(){
+        Player location = player.getPlayerObject();
+        int playerAmount = 0;
+
+        for(Entity entity : location.getNearbyEntities(7, 7, 7))
+            if(entity instanceof Player) playerAmount += 1;
+
+        return playerAmount <= 2;
     }
 
     @Override

@@ -3,23 +3,27 @@ package com.alpha.redux.entityHandlers.MysticHandler.Pants;
 import com.alpha.redux.entityHandlers.MysticHandler.PantEnchant;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
+import com.alpha.redux.well.enchants.FractionalReserveLore;
 
 public class FractionalReserve {
+
+    FractionalReserveLore fractionalreserve = new FractionalReserveLore();
+
     public FractionalReserve(ReduxDamageEvent event, ReduxPlayer player){
         PantEnchant fractionalReserve = new PantEnchant(event, player, "frac") {
             @Override
             public void OneAction() {
-                this.event.subtractReduxDamage(this.event.getReduxDamage() * (Math.min((event.getDefenders().getPlayerGold() / 50000)*.01, .15)/100));
+                fractionalreserve.run(event, 1);
             }
 
             @Override
             public void TwoAction() {
-                this.event.subtractReduxDamage(this.event.getReduxDamage() * (Math.min((event.getDefenders().getPlayerGold() / 50000)*.01, .21)/100));
+                fractionalreserve.run(event, 2);
             }
 
             @Override
             public void ThreeAction() {
-                this.event.subtractReduxDamage(this.event.getReduxDamage() * (Math.min((event.getDefenders().getPlayerGold() / 50000)*.01, .30)/100));
+                fractionalreserve.run(event, 3);
             }
         };
         fractionalReserve.run();

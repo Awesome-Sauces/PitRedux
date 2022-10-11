@@ -8,7 +8,24 @@ public class RegularityLore extends PitEnchant{
 
     @Override
     public void run(ReduxDamageEvent event, int level) {
-        event.subtractReduxDamage(event.getReduxDamage()*((float)(25+((level-1)*25))/100));
+
+        triggerAttack(event, ((float)(25+((level-1)*25))/100));
+
+    }
+
+    public void triggerAttack(ReduxDamageEvent event, double multiplier){
+        if (event.getAttacker().getRegCD()){
+            event.getDefenders().getPlayerObject().damage(0);
+            event.getAttacker().setRegCD();
+            event.getDefenders().getPlayerObject().setNoDamageTicks(0);
+            event.getDefenders().getPlayerObject().damage((event.getReduxDamage()) * multiplier, event.getAttacker().getPlayerObject());
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    event.getAttacker().setRegCD();
+                }
+            }.runTaskLater(economy.getPlugin(), 11L);
+        }
     }
 
     @Override

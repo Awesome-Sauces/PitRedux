@@ -3,23 +3,27 @@ package com.alpha.redux.entityHandlers.MysticHandler.Pants;
 import com.alpha.redux.entityHandlers.MysticHandler.PantEnchant;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
+import com.alpha.redux.well.enchants.MirrorLore;
 
 public class Mirror {
+
+    MirrorLore mirror = new MirrorLore();
+
     public Mirror(ReduxDamageEvent event, ReduxPlayer player){
         PantEnchant mirror = new PantEnchant(event, player, "mirror") {
             @Override
             public void OneAction() {
-                this.event.subtractReduxTrueDamage(this.event.getReduxTrueDamage() * .75);
+                mirror.run(event, 1);
             }
 
             @Override
             public void TwoAction() {
-                this.event.subtractReduxTrueDamage(this.event.getReduxTrueDamage() * .50);
+                mirror.run(event, 1);
             }
 
             @Override
             public void ThreeAction() {
-                this.event.setReduxTrueDamage(0);
+                mirror.run(event, 1);
             }
         };
         mirror.run();

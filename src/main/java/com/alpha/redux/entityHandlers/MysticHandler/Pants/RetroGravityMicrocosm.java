@@ -6,6 +6,8 @@ import com.alpha.redux.entityHandlers.MysticHandler.PantEnchant;
 import com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PantMaps;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
+import com.alpha.redux.well.enchants.RetroGravityMicrocosmLore;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -17,28 +19,23 @@ import java.util.Map;
 
 public class RetroGravityMicrocosm {
 
+    RetroGravityMicrocosmLore retro = new RetroGravityMicrocosmLore();
 
     public RetroGravityMicrocosm(ReduxDamageEvent event, ReduxPlayer player){
         PantEnchant retrogravitymicrocosm = new PantEnchant(event, player, "rgm") {
             @Override
             public void OneAction() {
-                if(criticalHit(event)){
-                    runIt(event.getAttacker().getPlayerObject(), event.getDefenders().getPlayerObject(), 1, 1);
-                }
+                retro.run(event, 1);
             }
 
             @Override
             public void TwoAction() {
-                if(criticalHit(event)){
-                    runIt(event.getAttacker().getPlayerObject(), event.getDefenders().getPlayerObject(), 2, 2);
-                }
+                retro.run(event, 2);
             }
 
             @Override
             public void ThreeAction() {
-                if(criticalHit(event)){
-                    runIt(event.getAttacker().getPlayerObject(), event.getDefenders().getPlayerObject(), 3, 3);
-                }
+                retro.run(event, 3);
             }
         };
         retrogravitymicrocosm.run();

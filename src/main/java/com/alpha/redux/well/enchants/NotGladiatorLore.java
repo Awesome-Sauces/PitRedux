@@ -8,7 +8,19 @@ public class NotGladiatorLore extends PitEnchant{
 
     @Override
     public void run(ReduxDamageEvent event, int level) {
-        event.subtractReduxDamage(event.getReduxDamage()*((float)(1+((level-1)*.5))/100));
+
+        event.subtractReduxDamage(event.getReduxDamage() * (getMultiplier(event.getDefenders().getPlayerObject(), ((float)(1+((level-1)*.5))/100))/10));
+
+    }
+
+    private double getMultiplier(Player player, double multiplier){
+
+        double power = 0;
+
+        for(Entity entity : player.getNearbyEntities(15, 15, 15))
+            if(entity instanceof Player) power += multiplier;
+
+        return Math.min(power, multiplier * 10);
     }
 
     @Override

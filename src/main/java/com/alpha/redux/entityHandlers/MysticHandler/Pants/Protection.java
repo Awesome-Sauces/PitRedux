@@ -5,21 +5,24 @@ import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
 
 public class Protection {
+
+    ProtectionLore protectionL = new ProtectionLore();
+
     public Protection(ReduxDamageEvent event, ReduxPlayer player){
         PantEnchant protection = new PantEnchant(event, player, "prot") {
             @Override
             public void OneAction() {
-                this.event.subtractReduxDamage(this.event.getReduxDamage() *.004);
+                protectionL.run(event, 1);
             }
 
             @Override
             public void TwoAction() {
-                this.event.subtractReduxDamage(this.event.getReduxDamage() *.006);
+                protectionL.run(event, 1);
             }
 
             @Override
             public void ThreeAction() {
-                this.event.subtractReduxDamage(this.event.getReduxDamage() *.010);
+                protectionL.run(event, 1);
             }
         };
         protection.run();

@@ -8,7 +8,15 @@ public class EscapePodLore extends PitEnchant{
 
     @Override
     public void run(ReduxDamageEvent event, int level) {
-        event.subtractReduxDamage(event.getReduxDamage()*((float)(25+((level-1)*25))/100));
+        if(event.getDefenders().getEscape()){
+            giveRegen(event.getDefenders().getPlayerObject(), 4, 15+((level-1)*15));
+        }
+    }
+
+    private void giveRegen(Player player, int power, int time){
+        player.setVelocity(player.getVelocity().add(new Vector(0, 10, 0)));
+        player.removePotionEffect(PotionEffectType.REGENERATION);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, time*20, Math.max(power-1, 0), true, true));
     }
 
     @Override

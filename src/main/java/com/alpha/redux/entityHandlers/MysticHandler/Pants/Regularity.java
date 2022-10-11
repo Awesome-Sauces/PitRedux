@@ -4,11 +4,15 @@ import com.alpha.redux.entityHandlers.MysticHandler.PantEnchant;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
 import com.alpha.redux.playerdata.economy;
+import com.alpha.redux.well.enchants.RegularityLore;
+
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
 
 public class Regularity {
+
+    RegularityLore regularityL = new RegularityLore();
 
 
     public Regularity(ReduxDamageEvent event, ReduxPlayer player){
@@ -17,36 +21,22 @@ public class Regularity {
         PantEnchant regularity = new PantEnchant(event, player, "reg") {
             @Override
             public void OneAction() {
-                triggerAttack(event, .10);
+                regularityL.run(event, 3);
             }
 
             @Override
             public void TwoAction() {
-                triggerAttack(event, .08);
+                regularityL.run(event, 2);
             }
 
             @Override
             public void ThreeAction() {
-                triggerAttack(event, .06);
+
+                regularityL.run(event, 1);
+
             }
         };
         regularity.run();
-    }
-
-
-    public void triggerAttack(ReduxDamageEvent event, double multiplier){
-        if (event.getAttacker().getRegCD()){
-            event.getDefenders().getPlayerObject().damage(0);
-            event.getAttacker().setRegCD();
-            event.getDefenders().getPlayerObject().setNoDamageTicks(0);
-            event.getDefenders().getPlayerObject().damage((event.getReduxDamage()) * multiplier, event.getAttacker().getPlayerObject());
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    event.getAttacker().setRegCD();
-                }
-            }.runTaskLater(economy.getPlugin(), 11L);
-        }
     }
 
 }

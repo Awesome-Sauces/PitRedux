@@ -8,7 +8,42 @@ public class RetroGravityMicrocosmLore extends PitEnchant{
 
     @Override
     public void run(ReduxDamageEvent event, int level) {
-        event.subtractReduxDamage(event.getReduxDamage()*((float)(25+((level-1)*25))/100));
+
+        if(criticalHit(event)){
+            runIt(event.getAttacker().getPlayerObject(), event.getDefenders().getPlayerObject(), .5+((level-1)*.25), .5+((level-1)*.5));
+        }
+
+    }
+
+    public boolean criticalHit(ReduxDamageEvent event){
+        Player player = event.getDefenders().getPlayerObject();
+
+        if(!event.getAttacker().getPlayerObject().isOnGround()){
+            if(PantMaps.hitCounter.containsKey(String.valueOf(player.getUniqueId()))){
+                PantMaps.hitCounter.put(String.valueOf(player.getUniqueId()), PantMaps.hitCounter.get(String.valueOf(player.getUniqueId())) + 1);
+            }else{
+                PantMaps.hitCounter.put(String.valueOf(player.getUniqueId()), 1);
+            }
+
+            return PantMaps.hitCounter.get(String.valueOf(player.getUniqueId())) >= 3;
+        }
+        return !event.getAttacker().getPlayerObject().isOnGround();
+    }
+
+    public void runIt(Player attacker, Player defender, double health, double trueDmg){
+        PantMaps.hitCounter.put(String.valueOf(defender.getUniqueId()), 0);
+        attacker.sendMessage(ChatColor.translateAlternateColorCodes('&', "&d&lRGM! &7Proc'd against " + rank.getNameColor(defender) + defender.getDisplayName() + "&7!"));
+        Sounds.RGM.play(attacker.getLocation());
+        Sounds.RGM.play(defender.getLocation());
+        defender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&d&lRGM! &7Procced against " + rank.getNameColor(attacker) + attacker.getDisplayName() + "&7!"));
+        defender.setHealth(Math.min(defender.getHealth() + health, defender.getMaxHealth()));
+
+        EntityDamageByEntityEvent events = new EntityDamageByEntityEvent(defender, attacker,
+                EntityDamageEvent.DamageCause.MAGIC, trueDmg);
+        Bukkit.getServer().getPluginManager().callEvent(events);
+        if(!events.isCancelled()) {
+            attacker.setHealth(Math.max(attacker.getHealth() - trueDmg, 0));
+        }
     }
 
     @Override
