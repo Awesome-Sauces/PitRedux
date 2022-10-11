@@ -15,17 +15,17 @@ public class Solitude {
         PantEnchant solitude = new PantEnchant(event, player, "soli") {
             @Override
             public void OneAction() {
-                if (solitaryCheck()) this.event.subtractReduxDamage(this.event.getReduxDamage() *.40);
+                if (solitaryCheck()) this.event.subtractReduxDamage(this.event.getReduxDamage() *.040);
             }
 
             @Override
             public void TwoAction() {
-                if (solitaryCheck()) this.event.subtractReduxDamage(this.event.getReduxDamage() *.50);
+                if (solitaryCheck()) this.event.subtractReduxDamage(this.event.getReduxDamage() *.050);
             }
 
             @Override
             public void ThreeAction() {
-                if (solitaryCheck()) this.event.subtractReduxDamage(this.event.getReduxDamage() *.60);
+                if (solitaryCheck()) this.event.subtractReduxDamage(this.event.getReduxDamage() *.060);
             }
         };
 

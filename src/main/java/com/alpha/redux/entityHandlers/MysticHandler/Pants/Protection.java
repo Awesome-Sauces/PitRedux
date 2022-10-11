@@ -9,17 +9,17 @@ public class Protection {
         PantEnchant protection = new PantEnchant(event, player, "prot") {
             @Override
             public void OneAction() {
-                this.event.subtractReduxDamage(this.event.getReduxDamage() *.04);
+                this.event.subtractReduxDamage(this.event.getReduxDamage() *.004);
             }
 
             @Override
             public void TwoAction() {
-                this.event.subtractReduxDamage(this.event.getReduxDamage() *.06);
+                this.event.subtractReduxDamage(this.event.getReduxDamage() *.006);
             }
 
             @Override
             public void ThreeAction() {
-                this.event.subtractReduxDamage(this.event.getReduxDamage() *.10);
+                this.event.subtractReduxDamage(this.event.getReduxDamage() *.010);
             }
         };
         protection.run();

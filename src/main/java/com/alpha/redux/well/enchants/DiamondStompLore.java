@@ -9,7 +9,7 @@ public class DiamondStompLore extends PitEnchant{
 
     @Override
     public void run(ReduxDamageEvent event, int level) {
-        int multiplier = 0;
+        double multiplier = 0;
 
         if (level > 2) {
             multiplier += (level * 8) + 1;

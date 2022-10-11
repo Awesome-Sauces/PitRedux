@@ -9,17 +9,17 @@ public class FractionalReserve {
         PantEnchant fractionalReserve = new PantEnchant(event, player, "frac") {
             @Override
             public void OneAction() {
-                this.event.subtractReduxDamage(this.event.getReduxDamage() * Math.min((event.getDefenders().getPlayerGold() / 50000)*.01, .15));
+                this.event.subtractReduxDamage(this.event.getReduxDamage() * (Math.min((event.getDefenders().getPlayerGold() / 50000)*.01, .15)/100));
             }
 
             @Override
             public void TwoAction() {
-                this.event.subtractReduxDamage(this.event.getReduxDamage() * Math.min((event.getDefenders().getPlayerGold() / 50000)*.01, .21));
+                this.event.subtractReduxDamage(this.event.getReduxDamage() * (Math.min((event.getDefenders().getPlayerGold() / 50000)*.01, .21)/100));
             }
 
             @Override
             public void ThreeAction() {
-                this.event.subtractReduxDamage(this.event.getReduxDamage() * Math.min((event.getDefenders().getPlayerGold() / 50000)*.01, .30));
+                this.event.subtractReduxDamage(this.event.getReduxDamage() * (Math.min((event.getDefenders().getPlayerGold() / 50000)*.01, .30)/100));
             }
         };
         fractionalReserve.run();

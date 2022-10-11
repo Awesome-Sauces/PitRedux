@@ -111,7 +111,7 @@ public class MysticSword {
 
         }catch (Exception ignored){}
 
-       // Bukkit.broadcastMessage(enchants.toString());
+
 
         List<String> lore = new ArrayList<>();
         lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
@@ -131,10 +131,11 @@ public class MysticSword {
         int tokens = 0;
         boolean looping = true;
 
-        while (looping){
-            ench = getEnchant(enchants);
+        int loopnum = 0;
 
-            Bukkit.broadcastMessage(ChatColor.RED + ench);
+        while (looping){
+            loopnum++;
+            ench = getEnchant(enchants);
 
 
             for (String str : enchants){
@@ -147,11 +148,9 @@ public class MysticSword {
                 tokens = 1;
             }
 
-            float tier1 = ((float) ((tokens) * 10) / 100);
-            float tier2 = ((float) ((tokens / 2) * 10) / 100);
-            float tier3 = ((float) ((tokens / 3) * 10) / 100);
-
-            Bukkit.broadcastMessage("TOKENS:" + ChatColor.RED + String.valueOf(tokens));
+            float tier1 = ((float) ((tokens) * 15) / 100);
+            float tier2 = ((float) ((tokens / 2) * 30) / 100);
+            float tier3 = ((float) ((tokens / 3) * 50) / 100);
 
             tokens = 0;
 
@@ -170,12 +169,13 @@ public class MysticSword {
                     lore.removeAll(translateList(Arrays.asList(enchantTier(ench, 2).split("\n"))));
                     lore = renewEnchant(lore, translateList(Arrays.asList(enchantTier(ench, 3).split("\n"))));
                     looping = false;
-                }else{
+                }else if (!lore.contains(colorCode(getEnchantTitle(ench, 3))) &&
+                        !lore.contains(colorCode(getEnchantTitle(ench, 2))) &&
+                        !lore.contains(colorCode(getEnchantTitle(ench, 1)))){
                     lore.addAll(Arrays.asList(enchantTier(ench, 1).split("\n")));
                     looping = false;
                 }
 
-                Bukkit.broadcastMessage("Tier I");
             }else if (percentChance(tier2)){
 
                 if (lore.contains(colorCode(getEnchantTitle(ench, 3)))){
@@ -190,12 +190,13 @@ public class MysticSword {
                     lore.removeAll(translateList(Arrays.asList(enchantTier(ench, 1).split("\n"))));
                     lore = renewEnchant(lore, translateList(Arrays.asList(enchantTier(ench, 3).split("\n"))));
                     looping = false;
-                }else{
+                }else if(!lore.contains(colorCode(getEnchantTitle(ench, 3))) &&
+                        !lore.contains(colorCode(getEnchantTitle(ench, 2))) &&
+                        !lore.contains(colorCode(getEnchantTitle(ench, 1)))){
                     lore.addAll(Arrays.asList(enchantTier(ench, 2).split("\n")));
                     looping = false;
                 }
 
-                Bukkit.broadcastMessage("Tier II");
             }else if (percentChance(tier3)){
 
                 if (!lore.contains(colorCode(getEnchantTitle(ench, 3))) &&
@@ -216,7 +217,7 @@ public class MysticSword {
                     looping = false;
                 }
 
-                Bukkit.broadcastMessage("Tier III");
+
             }/*else{
 
                 lore.addAll(Arrays.asList(enchantTier(ench, 1).split("\n")));
@@ -240,6 +241,8 @@ public class MysticSword {
          */
 
         lore.add(ChatColor.BLUE + "+6.5 Attack Damage");
+
+
 
         return lore;
 

@@ -19,17 +19,20 @@ public class actionbarplus {
 
     public static void sendHealthBar(EntityDamageByEntityEvent event){
 
-
-
         Player player = (Player) event.getDamager();
+
+        if(isNPC(player)) return;
+
         Player defender = (Player) event.getEntity();
         String colorPlayer = PlayerNameColor(defender);
         StringBuilder health = new StringBuilder();
         health.append(" ");
+
         double defenderHealth = (double) Math.round(defender.getHealth());
-        int red_heart = (int) event.getFinalDamage();
-        int dark_red_heart = (int) (defenderHealth - event.getFinalDamage())  / 2;
-        int gray_heart = (int) (((defenderHealth - defender.getMaxHealth())) - dark_red_heart) / 2;
+        int red_heart = Math.min((int) event.getFinalDamage()/2, 10);
+        int dark_red_heart = Math.min((int) (defenderHealth - event.getFinalDamage())  / 2, 10);
+        int gray_heart = Math.min((int) (((defenderHealth - defender.getMaxHealth())) - dark_red_heart) / 2, 10);
+
         if (gray_heart == 0){
             gray_heart = (int) Math.abs((int) defender.getMaxHealth() - defenderHealth);
         }

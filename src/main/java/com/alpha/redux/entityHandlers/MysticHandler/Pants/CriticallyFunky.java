@@ -12,7 +12,7 @@ public class CriticallyFunky {
             public void OneAction() {
                 if(criticalHit(event.getAttacker().getPlayerObject())){
                     event.getDefenders().setPlayerIncrease(.07);
-                    this.event.subtractReduxDamage(this.event.getReduxDamage() *.15);
+                    this.event.subtractReduxDamage(this.event.getReduxDamage() *.015);
                 }
             }
 
@@ -20,7 +20,7 @@ public class CriticallyFunky {
             public void TwoAction() {
                 if(criticalHit(event.getAttacker().getPlayerObject())){
                     event.getDefenders().setPlayerIncrease(.14);
-                    this.event.subtractReduxDamage(this.event.getReduxDamage() *.35);
+                    this.event.subtractReduxDamage(this.event.getReduxDamage() *.035);
                 }
             }
 
@@ -28,7 +28,7 @@ public class CriticallyFunky {
             public void ThreeAction() {
                 if(criticalHit(event.getAttacker().getPlayerObject())){
                     event.getDefenders().setPlayerIncrease(.3);
-                    this.event.subtractReduxDamage(this.event.getReduxDamage() *.5);
+                    this.event.subtractReduxDamage(this.event.getReduxDamage() *.05);
                 }
             }
         };

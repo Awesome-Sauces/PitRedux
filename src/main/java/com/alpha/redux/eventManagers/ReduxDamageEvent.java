@@ -6,6 +6,7 @@ import com.alpha.redux.items.itemManager;
 import com.alpha.redux.renownShop.damageDecrease;
 import com.alpha.redux.renownShop.damageIncrease;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -273,7 +274,7 @@ public class ReduxDamageEvent extends Event implements Cancellable {
 
         if(defender.getInventory().getLeggings() != null){
             if(defender.getInventory().getLeggings().getType().equals(Material.LEATHER_LEGGINGS)){
-                this.subtractReduxDamage(this.getReduxDamage() * .3);
+                this.subtractReduxDamage(this.getReduxDamage() * .05);
 
             }
         }
@@ -313,38 +314,10 @@ public class ReduxDamageEvent extends Event implements Cancellable {
             this.subtractReduxDamage(this.getReduxDamage() * .10);
         }
 
-        if(isNPC(defender)){
-            if(Objects.requireNonNull(getNPC(defender)).getId() == 41){
-                this.setReduxDamage(this.getReduxDamage()/1000);
-            }
-        }
 
         if (attacker.getLocation().getY() >= getSpawnProtection()){
             this.setCancelled(true);
             return;
-        }
-
-
-        if(!isNPC(defender)) this.subtractReduxDamage(this.getReduxDamage() * ((double) damageDecrease.getDecrease(String.valueOf(defender.getUniqueId())) / 100));
-
-        if(!isNPC(defender)){
-            if(getPrestige(String.valueOf(defender.getUniqueId())) <= 1){
-                this.subtractReduxDamage(this.getReduxDamage()*.5);
-            }
-        }
-
-        if (!isNPC(attacker)) {
-            if(getPrestige(String.valueOf(attacker.getUniqueId())) <= 1){
-                this.addReduxDamage(this.getReduxDamage() *.1);
-            }
-        }
-
-
-
-        if(isNPC(defender)){
-            if(Objects.requireNonNull(getNPC(defender)).getName().contains(maldingName)){
-                this.setReduxDamage(this.getReduxDamage()/100);
-            }
         }
 
         if (attacker.getInventory().getChestplate() != null && attacker.getInventory().getChestplate().equals(enchants.malding_chestplate)) {
@@ -379,12 +352,14 @@ public class ReduxDamageEvent extends Event implements Cancellable {
         } catch (Exception e) {
 
         }
-
+/*
         if(isNPC(defender)){
-            this.setReduxDamage(this.getReduxDamage() / 1.5);
+            this.setReduxDamage(this.getReduxDamage() * .75);
         }
 
-        this.getBukkitEvent().setDamage(this.getReduxDamage());
+
+ */
+        this.getBukkitEvent().setDamage(Math.min(this.getReduxDamage(), 20));
 
 
         sendHealthBar(this.getBukkitEvent());

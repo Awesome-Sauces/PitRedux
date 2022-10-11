@@ -23,21 +23,21 @@ public class RetroGravityMicrocosm {
             @Override
             public void OneAction() {
                 if(criticalHit(event)){
-                    runIt(event.getAttacker().getPlayerObject(), event.getDefenders().getPlayerObject(), 2, 1);
+                    runIt(event.getAttacker().getPlayerObject(), event.getDefenders().getPlayerObject(), 1, 1);
                 }
             }
 
             @Override
             public void TwoAction() {
                 if(criticalHit(event)){
-                    runIt(event.getAttacker().getPlayerObject(), event.getDefenders().getPlayerObject(), 3, 2);
+                    runIt(event.getAttacker().getPlayerObject(), event.getDefenders().getPlayerObject(), 2, 2);
                 }
             }
 
             @Override
             public void ThreeAction() {
                 if(criticalHit(event)){
-                    runIt(event.getAttacker().getPlayerObject(), event.getDefenders().getPlayerObject(), 4, 3);
+                    runIt(event.getAttacker().getPlayerObject(), event.getDefenders().getPlayerObject(), 3, 3);
                 }
             }
         };

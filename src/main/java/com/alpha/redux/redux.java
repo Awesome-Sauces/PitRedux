@@ -62,6 +62,17 @@ public class redux extends JavaPlugin {
     public static GoldbumpLore goldbumpLore = new GoldbumpLore();
     public static MoctezumaLore moctezumaLore = new MoctezumaLore();
 
+    public static CriticallyFunkyLore criticallyFunkyLore = new CriticallyFunkyLore();
+    public static ProtectionLore protectionLore = new ProtectionLore();
+    public static SolitudeLore solitudeLore = new SolitudeLore();
+    public static RetroGravityMicrocosmLore retroGravityMicrocosmLore = new RetroGravityMicrocosmLore();
+    public static RegularityLore regularityLore = new RegularityLore();
+    public static NotGladiatorLore notGladiatorLore = new NotGladiatorLore();
+    public static MirrorLore mirrorLore = new MirrorLore();
+    public static FractionalReserveLore fractionalReserveLore = new FractionalReserveLore();
+    public static EscapePodLore escapePodLore = new EscapePodLore();
+    public static PeroxideLore peroxideLore = new PeroxideLore();
+
     public static BillionaireLore billionaireLore = new BillionaireLore();
     public static PerunLore perunLore = new PerunLore();
     public static ExecutionerLore executionerLore = new ExecutionerLore();
@@ -194,6 +205,36 @@ public class redux extends JavaPlugin {
             }
         }, 50L);
 
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
         HunterAPI.createHunterNon(locations.getBotSpawnLocation());
         HunterAPI.createHunterNon(locations.getBotSpawnLocation());
         HunterAPI.createHunterNon(locations.getBotSpawnLocation());

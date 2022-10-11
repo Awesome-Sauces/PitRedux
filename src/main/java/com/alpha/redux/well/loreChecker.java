@@ -240,13 +240,6 @@ public class loreChecker {
         }else if (lore.contains(colorCode("&9Diamond Stomp")))
             list.add("diamondI");
 
-        if (lore.contains(colorCode("&9Pain Focus III"))){
-            list.add("lsIII");
-        }else if (lore.contains(colorCode("&9Pain Focus II"))){
-            list.add("lsII");
-        }else if (lore.contains(colorCode("&9Pain Focus")))
-            list.add("lsI");
-
         if (lore.contains(colorCode("&dRARE! &9Gamble! III"))){
             list.add("gambIII");
         }else if (lore.contains(colorCode("&dRARE! &9Gamble! II"))){
@@ -275,13 +268,6 @@ public class loreChecker {
             list.add("sharkII");
         }else if (lore.contains(colorCode("&9Shark")))
             list.add("sharkI");
-
-        if (lore.contains(colorCode("&9King Buster III"))){
-            list.add("kingIII");
-        }else if (lore.contains(colorCode("&9King Buster II"))){
-            list.add("kingII");
-        }else if (lore.contains(colorCode("&9King Buster")))
-            list.add("kingI");
 
         if (lore.contains(colorCode("&dRARE! &9Executioner III"))){
             list.add("exeIII");

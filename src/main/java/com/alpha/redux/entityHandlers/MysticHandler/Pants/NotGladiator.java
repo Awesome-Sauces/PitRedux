@@ -11,17 +11,17 @@ public class NotGladiator {
         PantEnchant notGladiator = new PantEnchant(event, player, "glad") {
             @Override
             public void OneAction() {
-                this.event.subtractReduxDamage(this.event.getReduxDamage() * getMultiplier(event.getDefenders().getPlayerObject(), .010));
+                this.event.subtractReduxDamage(this.event.getReduxDamage() * (getMultiplier(event.getDefenders().getPlayerObject(), .010)/10));
             }
 
             @Override
             public void TwoAction() {
-                this.event.subtractReduxDamage(this.event.getReduxDamage() * getMultiplier(event.getDefenders().getPlayerObject(), .015));
+                this.event.subtractReduxDamage(this.event.getReduxDamage() * (getMultiplier(event.getDefenders().getPlayerObject(), .015)/10));
             }
 
             @Override
             public void ThreeAction() {
-                this.event.subtractReduxDamage(this.event.getReduxDamage() * getMultiplier(event.getDefenders().getPlayerObject(), .02));
+                this.event.subtractReduxDamage(this.event.getReduxDamage() * (getMultiplier(event.getDefenders().getPlayerObject(), .02)/10));
             }
         };
         notGladiator.run();
