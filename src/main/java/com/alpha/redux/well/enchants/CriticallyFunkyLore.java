@@ -1,6 +1,7 @@
 package com.alpha.redux.well.enchants;
 
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
+import org.bukkit.entity.Player;
 
 import static com.alpha.redux.events.boards.integerToRoman;
 
@@ -15,11 +16,11 @@ public class CriticallyFunkyLore extends PitEnchant{
             damage += (level*7) + 9;
         }else {damage += level*7;}
 
-        
+        double dmg = 80-((level-1)*15);
 
-        if(criticalHit(event.getAttacker().getPlayerObject())){
-            event.getDefenders().setPlayerIncrease(damage/100);
-            event.subtractReduxDamage(event.getReduxDamage() * ((float)(80-((level-1)*15))/100));
+        if(criticalHit(event.getAttacker().getPlayerObject().getPlayer())){
+            event.getDefenders().setPlayerIncrease(damage/10);
+            event.subtractReduxDamage(event.getReduxDamage() * (dmg/100));
         }
     
     }

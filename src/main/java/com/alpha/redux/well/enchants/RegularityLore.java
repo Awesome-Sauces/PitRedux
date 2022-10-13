@@ -1,6 +1,8 @@
 package com.alpha.redux.well.enchants;
 
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
+import com.alpha.redux.playerdata.economy;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import static com.alpha.redux.events.boards.integerToRoman;
 
@@ -9,7 +11,7 @@ public class RegularityLore extends PitEnchant{
     @Override
     public void run(ReduxDamageEvent event, int level) {
 
-        triggerAttack(event, ((float)(25+((level-1)*25))/100));
+        triggerAttack(event, ((double) (25+((level-1)*25))/100));
 
     }
 

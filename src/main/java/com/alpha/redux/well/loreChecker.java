@@ -22,7 +22,7 @@ public class loreChecker {
         }else if (lore.contains(colorCode("&9Boo-boo")))
             list.add("boobooI");
 
-        if (lore.contains(colorCode("&9Boo-boo")))
+        if (lore.contains(colorCode("&9Hidden Jewel")))
             list.add("jewel");
 
         if (lore.contains(colorCode("&9Peroxide III"))){

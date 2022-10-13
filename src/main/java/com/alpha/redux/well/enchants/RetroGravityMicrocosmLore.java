@@ -1,6 +1,14 @@
 package com.alpha.redux.well.enchants;
 
+import com.alpha.redux.apis.Sounds;
+import com.alpha.redux.apis.chatManager.rank;
+import com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PantMaps;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 
 import static com.alpha.redux.events.boards.integerToRoman;
 

@@ -33,23 +33,21 @@ public class crate {
         Inventory inventory = player.getInventory();
 
         if(this.crate.equals("HJP")){
-            this.broadcast = rank.getNameColor(player) + ChatColor.stripColor(player.getDisplayName()) + " &7has won &e&l5x Hidden Jewel Pants!";
+            this.broadcast = rank.getNameColor(player) + ChatColor.stripColor(player.getDisplayName()) + " &7has won &e&l3x Hidden Jewel Pants!";
 
             ItemStack pants = items.getJewelPant();
 
-            inventory.addItem(pants);
-            inventory.addItem(pants);
+
             inventory.addItem(pants);
             inventory.addItem(pants);
             inventory.addItem(pants);
 
         }else if(this.crate.equals("HJS")){
-            this.broadcast = rank.getNameColor(player) + ChatColor.stripColor(player.getDisplayName()) + " &7has won &e&l5x Hidden Jewel Swords!";
+            this.broadcast = rank.getNameColor(player) + ChatColor.stripColor(player.getDisplayName()) + " &7has won &e&l3x Hidden Jewel Swords!";
 
             ItemStack sword = items.getJewelSword();
 
-            inventory.addItem(sword);
-            inventory.addItem(sword);
+
             inventory.addItem(sword);
             inventory.addItem(sword);
             inventory.addItem(sword);
@@ -62,9 +60,9 @@ public class crate {
             inventory.addItem(blob);
 
         }else if(this.crate.equals("PPP")){
-            this.broadcast = rank.getNameColor(player) + ChatColor.stripColor(player.getDisplayName()) + " &7has won &e&l64x Philosopher's Cactus!";
+            this.broadcast = rank.getNameColor(player) + ChatColor.stripColor(player.getDisplayName()) + " &7has won &e&l16x Philosopher's Cactus!";
 
-            for (int i = 0; i < 64; i++) {
+            for (int i = 0; i < 16; i++) {
                 inventory.addItem(enchants.cactus);
             }
 

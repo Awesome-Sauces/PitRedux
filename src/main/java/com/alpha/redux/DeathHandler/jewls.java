@@ -22,7 +22,7 @@ public class jewls {
                     jewl_pant_counter.put(String.valueOf(player.getUniqueId()), jewl_pant_counter.get(String.valueOf(player.getUniqueId())) + 1);
                 }
 
-                if(jewl_pant_counter.get(String.valueOf(player.getUniqueId())) >= 120){
+                if(jewl_pant_counter.get(String.valueOf(player.getUniqueId())) >= 42){
                     player.getInventory().setLeggings(generateJewlPants(player));
                     jewl_pant_counter.put(String.valueOf(player.getUniqueId()), 0);
                 }
@@ -41,7 +41,7 @@ public class jewls {
                     jewl_sword_counter.put(String.valueOf(player.getUniqueId()), jewl_sword_counter.get(String.valueOf(player.getUniqueId())) + 1);
                 }
 
-                if(jewl_sword_counter.get(String.valueOf(player.getUniqueId())) >= 120){
+                if(jewl_sword_counter.get(String.valueOf(player.getUniqueId())) >= 42){
                     player.getInventory().setItemInHand(generateJewelSword(player));
                     jewl_sword_counter.put(String.valueOf(player.getUniqueId()), 0);
                 }

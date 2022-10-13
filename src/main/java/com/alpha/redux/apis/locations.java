@@ -45,6 +45,9 @@ public class locations {
         return new Location(Bukkit.getWorld("world"), -14.5, 167, 12.5);
     }
 
+    public static Location getEnderChestLocation(){return new Location(Bukkit.getWorld("world"), 8.5,163.5,7.5);}
+    public static Location getMysticWellLocation(){return new Location(Bukkit.getWorld("world"), 9.5,164.5,12.5);}
+
     public static int getSpawnProtection() {return 156;}
 
 

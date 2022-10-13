@@ -9,7 +9,10 @@ public class KingBusterLore extends PitEnchant{
     @Override
     public void run(ReduxDamageEvent event, int level) {
         if(halfHealth(event)){
-            event.addReduxDamage(event.getReduxDamage()  * ((float) Math.max((level * 7) - 1, 7) / 100));
+
+            double damage = Math.max((level * 7) - 1, 7);
+
+            event.addReduxDamage(event.getReduxDamage()  * (damage/100));
         }
     }
 

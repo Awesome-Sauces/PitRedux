@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 
 import static com.alpha.redux.events.boards.integerToRoman;
 
-public class NotGladiatorLore extends PitEnchant{
+public class GoldenHeartLore extends PitEnchant{
 
     @Override
     public void run(ReduxDamageEvent event, int level) {
@@ -37,7 +37,7 @@ public class NotGladiatorLore extends PitEnchant{
         String tier = "";
         if (level > 1){tier += " " + integerToRoman(level);}
 
-        return "&9\"Not\" Gladiator" + tier;
+        return "&9Golden Heart" + tier;
     }
 
     @Override
@@ -47,9 +47,9 @@ public class NotGladiatorLore extends PitEnchant{
 
         String multiplier = String.valueOf(1+((level-1)*.5));
 
-        String lore = "&9\"Not\" Gladiator" + tier + "\n" +
-                "&7Receive &9-"+multiplier+"% damage per nearby\n" +
-                "&7player (max 10 players)" + "\n&7";
+        String lore = "&9Golden Heart" + tier + "\n" +
+                "&7Gain &6+"+multiplier+"\u2764&7 absorption on kill\n" +
+                "&7(max &6\u2764&7)" + "\n&7";
 
         return colorCode(lore);
     }

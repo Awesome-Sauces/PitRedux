@@ -544,7 +544,7 @@ public class enchants {
         lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
         lore.add("        ");
         lore.add(colorCode("&9Hidden Jewel"));
-        lore.add(colorCode("&7Kill &c120&7 players to recycle"));
+        lore.add(colorCode("&7Kill &c42&7 players to recycle"));
         lore.add(colorCode("&7into Tier I pants with a Tier III"));
         lore.add(colorCode("&7enchant."));
         lore.add("          ");
@@ -570,7 +570,7 @@ public class enchants {
         lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
         lore.add("    ");
         lore.add(colorCode("&9Hidden Jewel"));
-        lore.add(colorCode("&7Kill &c120&7 players to recycle"));
+        lore.add(colorCode("&7Kill &c42&7 players to recycle"));
         lore.add(colorCode("&7into Tier I sword with a Tier III"));
         lore.add(colorCode("&7enchant."));
 

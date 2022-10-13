@@ -208,8 +208,8 @@ public class InventoryEvent {
                 }
             case OBSIDIAN:
                 if (hasEconomy(String.valueOf(player.getUniqueId()))) {
-                    if (getEconomy(String.valueOf(player.getUniqueId())) >= 10000) {
-                        removeEconomy(String.valueOf(player.getUniqueId()), 10000);
+                    if (getEconomy(String.valueOf(player.getUniqueId())) >= 40) {
+                        removeEconomy(String.valueOf(player.getUniqueId()), 40);
                         player.getInventory().addItem(ItemMaker(Material.OBSIDIAN, "NULL", "NULL", 8, false));
 
                         player.getWorld().playSound(player.getLocation(), Sound.LEVEL_UP, 1, 20);

@@ -1,6 +1,9 @@
 package com.alpha.redux.well.enchants;
 
+import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 
 import static com.alpha.redux.events.boards.integerToRoman;
 
@@ -9,11 +12,13 @@ public class SolitudeLore extends PitEnchant{
     @Override
     public void run(ReduxDamageEvent event, int level) {
 
-        if (solitaryCheck()) this.event.subtractReduxDamage(this.event.getReduxDamage() * ((float)(40+((level-1)*10))/100));
+        double damage = 40+((level-1)*10);
+
+        if (solitaryCheck(event.getDefenders())) event.subtractReduxDamage(event.getReduxDamage() * (damage/100));
 
     }
 
-    private boolean solitaryCheck(){
+    private boolean solitaryCheck(ReduxPlayer player){
         Player location = player.getPlayerObject();
         int playerAmount = 0;
 

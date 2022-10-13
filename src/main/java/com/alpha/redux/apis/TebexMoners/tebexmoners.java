@@ -17,7 +17,7 @@ import static com.alpha.redux.playerdata.streaks.GiveUberItems;
 
 public class tebexmoners {
     public static void onRankBuy(String player, String rank){
-        Bukkit.broadcastMessage(ChatColor.GREEN + ChatColor.translateAlternateColorCodes('&', "&lCONGRATS!") + ChatColor.GOLD + player + " has purchased: " + ChatColor.YELLOW + ChatColor.BOLD + rank);
+        Bukkit.broadcastMessage(ChatColor.GREEN + ChatColor.translateAlternateColorCodes('&', "&lCONGRATS! ") + ChatColor.GOLD + player + " has purchased: " + ChatColor.YELLOW + ChatColor.BOLD + rank);
 
         Location loc = new Location(Bukkit.getWorld("world"), 0.5, 95, 0.5, 0, 0);
         Bukkit.getWorld("world").strikeLightningEffect(loc);

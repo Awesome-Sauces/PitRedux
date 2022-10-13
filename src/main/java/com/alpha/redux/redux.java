@@ -63,6 +63,8 @@ public class redux extends JavaPlugin {
     public static MoctezumaLore moctezumaLore = new MoctezumaLore();
 
     public static CriticallyFunkyLore criticallyFunkyLore = new CriticallyFunkyLore();
+
+    public static GoldenHeartLore goldenHeartLore = new GoldenHeartLore();
     public static ProtectionLore protectionLore = new ProtectionLore();
     public static SolitudeLore solitudeLore = new SolitudeLore();
     public static RetroGravityMicrocosmLore retroGravityMicrocosmLore = new RetroGravityMicrocosmLore();
@@ -345,6 +347,7 @@ public class redux extends JavaPlugin {
         getCommand("getXp").setExecutor(commands);
         getCommand("pants").setExecutor(commands);
         getCommand("malding").setExecutor(commands);
+       // getCommand("trade").setExecutor(commands);
     }
 
     private Plugin getPlugin() {

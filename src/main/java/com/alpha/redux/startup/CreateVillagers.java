@@ -33,6 +33,12 @@ public class CreateVillagers {
 
     private static Hologram prestige_hologram;
 
+    private static Hologram ender_chest;
+    private static Hologram ender_chest_lore;
+
+    private static Hologram mystic_well;
+    private static Hologram mystic_well_lore;
+
     public static void loadNPC(){
 
         perm_upgrades_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.GRAY + "Permanent");
@@ -109,6 +115,19 @@ public class CreateVillagers {
         prestige_hologram = HologramsAPI.createHologram(economy.getPlugin(), locations.prestige_npc_loc.add(0,2.75,1));
         prestige_hologram.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&ePRESTIGE"));
 
+        ender_chest = HologramsAPI.createHologram(economy.getPlugin(), locations.getEnderChestLocation());
+        ender_chest.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&5ENDER CHEST"));
+
+        ender_chest_lore = HologramsAPI.createHologram(economy.getPlugin(), locations.getEnderChestLocation().add(0,-1,0));
+        ender_chest_lore.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7Store items forever"));
+
+        mystic_well = HologramsAPI.createHologram(economy.getPlugin(), locations.getMysticWellLocation());
+        mystic_well.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&dMYSTIC WELL"));
+
+        mystic_well_lore = HologramsAPI.createHologram(economy.getPlugin(), locations.getMysticWellLocation().add(0,-1,0));
+        mystic_well_lore.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7item enchants"));
+
+
     }
 
     private static void deleteHolograms(){
@@ -117,6 +136,10 @@ public class CreateVillagers {
         leaderboard_hologram.delete();
         quest_hologram.delete();
         prestige_hologram.delete();
+        ender_chest.delete();
+        ender_chest_lore.delete();
+        mystic_well.delete();
+        mystic_well_lore.delete();
     }
 
     private static void deleteNPC(){

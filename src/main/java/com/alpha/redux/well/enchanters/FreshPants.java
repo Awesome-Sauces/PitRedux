@@ -51,7 +51,7 @@ public class FreshPants {
             event.getClickedInventory().setItem(20, createPant(player,3, event.getClickedInventory().getItem(20)));
         }else if (items.getItemMeta().getDisplayName().contains("Tier I") && removeGold(player, uuid, 4000)) {
             event.getClickedInventory().setItem(20, createPant(player,2, event.getClickedInventory().getItem(20)));
-        } else if (items.getItemMeta().getDisplayName().contains("Fresh Red") && removeGold(player, uuid, 1000)) {
+        } else if (items.getItemMeta().getDisplayName().contains("Fresh") && removeGold(player, uuid, 1000)) {
             event.getClickedInventory().setItem(20, createPant(player,1, null));
         }
 
@@ -147,9 +147,9 @@ public class FreshPants {
                 tokens = 1;
             }
 
-            float tier1 = ((float) ((tokens) * 15) / 100);
-            float tier2 = ((float) ((tokens / 2) * 30) / 100);
-            float tier3 = ((float) ((tokens / 3) * 50) / 100);
+            double tier1 = ((double) ((tokens) * 15) / 100);
+            double tier2 = ((double) ((tokens / 2) * 30) / 100);
+            double tier3 = ((double) ((tokens / 3) * 50) / 100);
 
             tokens = 0;
 
@@ -279,6 +279,8 @@ public class FreshPants {
             return colorCode(redux.retroGravityMicrocosmLore.title(tier));
         }else if (Objects.equals(enchant, "criticallyfunky")) {
             return colorCode(redux.criticallyFunkyLore.title(tier));
+        }else if (Objects.equals(enchant, "goldenheart")) {
+            return colorCode(redux.goldenHeartLore.title(tier));
         }else if (Objects.equals(enchant, "regularity")) {
             return colorCode(redux.regularityLore.title(tier));
         }else if (Objects.equals(enchant, "protection")) {
@@ -343,6 +345,8 @@ public class FreshPants {
             return "xpbump";
         }else if (Objects.equals(enchant, "gb")){
             return "goldboost";
+        }else if (Objects.equals(enchant, "goldheart")){
+            return "goldenheart";
         }else{
             return enchant;
         }
@@ -353,6 +357,8 @@ public class FreshPants {
             return colorCode(redux.retroGravityMicrocosmLore.lore(tier));
         }else if (Objects.equals(enchant, "criticallyfunky")) {
             return colorCode(redux.criticallyFunkyLore.lore(tier));
+        }else if (Objects.equals(enchant, "goldenheart")) {
+            return colorCode(redux.goldenHeartLore.lore(tier));
         }else if (Objects.equals(enchant, "regularity")) {
             return colorCode(redux.regularityLore.lore(tier));
         }else if (Objects.equals(enchant, "protection")) {
@@ -413,6 +419,7 @@ public class FreshPants {
         double sweaty = .0925 * calcEnchant(lore, "sweaty");
         double moctezuma = .1025 * calcEnchant(lore, "moctezuma");
         double fractionalReserve = .1125 * calcEnchant(lore, "fractionalreserve");
+        double goldenHeart = .0735 * calcEnchant(lore, "goldenheart");
 
         while (true) {
             if (percentChance(retroGravityMicrocosm)){
@@ -430,6 +437,10 @@ public class FreshPants {
             }else if (percentChance(protection)){
                 // Gamble
                 // 3.25% chance of being here
+                return "protection";
+            }else if (percentChance(goldenHeart)){
+                // Golden Heart
+                // 7.35% chance of being here
                 return "protection";
             }else if (percentChance(xpboost)){
                 // Xp Boost

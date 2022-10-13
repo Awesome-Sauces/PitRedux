@@ -3,6 +3,7 @@ package com.alpha.redux.entityHandlers.MysticHandler.Pants;
 import com.alpha.redux.entityHandlers.MysticHandler.PantEnchant;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
+import com.alpha.redux.well.enchants.ProtectionLore;
 
 public class Protection {
 
@@ -17,12 +18,12 @@ public class Protection {
 
             @Override
             public void TwoAction() {
-                protectionL.run(event, 1);
+                protectionL.run(event, 2);
             }
 
             @Override
             public void ThreeAction() {
-                protectionL.run(event, 1);
+                protectionL.run(event, 3);
             }
         };
         protection.run();

@@ -1,6 +1,10 @@
 package com.alpha.redux.well.enchants;
 
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
+import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
 import static com.alpha.redux.events.boards.integerToRoman;
 

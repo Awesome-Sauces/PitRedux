@@ -10,15 +10,45 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import static com.alpha.redux.apis.FancyText.compileListToString;
 import static com.alpha.redux.apis.FancyText.hoverText;
+import static com.alpha.redux.redux.*;
+import static com.alpha.redux.well.enchanters.MysticSword.convertEnchant;
+import static com.alpha.redux.well.enchanters.MysticSword.enchantTier;
 import static com.alpha.redux.well.swordEnchanter.*;
 import static com.alpha.redux.well.loreChecker.CheckEnchantOnSword;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 
 public class swordJewl {
+
+    private static List<String> renewEnchant(List<String> lore, List<String> enchant){
+
+        List<String> enchants = CheckEnchantOnSword(lore);
+
+        // Bukkit.broadcastMessage(enchants.toString());
+
+        lore = new ArrayList<>();
+        lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
+
+        lore.add(" ");
+
+        for (String bench : enchants){
+            int ether = bench.length() - bench.replaceAll("I", "").length();
+
+            lore.addAll(Arrays.asList(enchantTier(convertEnchant(bench.replaceAll("I", "")), ether).split("\n")));
+            //lore.add(" ");
+        }
+
+        //hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! " + rank.getNameColor(player) + player.getDisplayName() + "&7 created &cTier I Sword!"), compileListToString(lore));
+        //player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 1);
+
+        lore.addAll(enchant);
+
+        return lore;
+    }
     public static ItemStack generateJewelSword(Player player){
 
         ItemStack item = new ItemStack(Material.GOLD_SWORD, 1);
@@ -38,14 +68,7 @@ public class swordJewl {
             case 1:
             case 2:
             case 3:
-                if (Billion(lore)) {
-                    break;
-                }
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
-                lore.add("    ");
-                lore.add("&dRARE! &9Billionaire III");
-                lore.add("&7Hits with this swords deal &c2x");
-                lore.add("&cdamage&7 but cost &6350g");
+                lore = renewEnchant(lore, Arrays.asList(billionaireLore.lore(3).split("\n")));
                 hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! " + rank.getNameColor(player) + player.getDisplayName() + "&7 created &cTier I Sword!"), compileListToString(lore));
                 player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 1);
                 break;
@@ -53,142 +76,72 @@ public class swordJewl {
             case 5:
             case 6:
             case 7:
-                if(Moctezuma(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
-                lore.add("    ");
-                lore.add("&9Moctezuma III");
-                lore.add("&7Earn &6+18g&7 on kill (assists");
-                lore.add("&7excluded)");
+                lore = renewEnchant(lore, Arrays.asList(moctezumaLore.lore(3).split("\n")));
                 break;
             case 8:
             case 9:
             case 10:
             case 11:
             case 12:
-                if(GoldBump(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
-                lore.add("    ");
-                lore.add("&9Gold Bump III");
-                lore.add("&7Earn &6+12g&7 on kill");
+                lore = renewEnchant(lore, Arrays.asList(goldbumpLore.lore(3).split("\n")));
                 break;
             case 13:
             case 14:
             case 15:
-                if (lifesteal(lore)) {
-                    break;
-                }
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
-                lore.add("    ");
-                lore.add("&9Lifesteal III");
-                lore.add("&7Heal for &c13%&7 of damage dealt up");
-                lore.add("&7to &c1.5\u2764");
+                lore = renewEnchant(lore, Arrays.asList(lifestealLore.lore(3).split("\n")));
                 break;
             case 16:
-                if (Kingbust(lore)) {
-                    break;
-                }
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
-                lore.add("    ");
-                lore.add("&9King Buster III");
-                lore.add("&7Deal &c+20%&7 damage vs. players");
-                lore.add("&7above 50% HP");
+                lore = renewEnchant(lore, Arrays.asList(kingBusterLore.lore(3).split("\n")));
                 break;
             case 17:
             case 18:
-                if (execution(lore)) {
-                    break;
-                }
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
-                lore.add("    ");
-                lore.add("&dRARE! &9Executioner III");
-                lore.add("&7Hitting an enemy to below &c3.5\u2764");
-                lore.add("&7instantly kills them");
+                lore = renewEnchant(lore, Arrays.asList(executionerLore.lore(3).split("\n")));
                 hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! " + rank.getNameColor(player) + player.getDisplayName() + "&7 created &cTier I Sword!"), compileListToString(lore));
                 player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 1);
                 break;
             case 20:
             case 21:
             case 22:
-                if(Sweaty(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
-                lore.add("    ");
-                lore.add("&9Sweaty III");
-                lore.add("&7Earn &b+60% XP&7 from streak XP");
-                lore.add("&7bonus and &b+100 max XP&7 per kill");
+                lore = renewEnchant(lore, Arrays.asList(sweatyLore.lore(3).split("\n")));
                 break;
             case 23:
             case 24:
             case 25:
             case 26:
-                if(XPBoost(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
-                lore.add("    ");
-                lore.add("&9XP Boost III");
-                lore.add("&7Earn &b+30% XP&7 from kills");
+                lore = renewEnchant(lore, Arrays.asList(xpboostLore.lore(3).split("\n")));
                 break;
             case 27:
             case 28:
             case 29:
-                if(XPBump(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
-                lore.add("    ");
-                lore.add("&9XP Bump III");
-                lore.add("&7Earn &b+6 XP &7per");
-                lore.add("&7kill");
+                lore = renewEnchant(lore, Arrays.asList(xpbumpLore.lore(3).split("\n")));
                 break;
             case 30:
             case 31:
             case 32:
             case 33:
-                if(GoldBoost(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
-                lore.add("    ");
-                lore.add("&9Gold Boost III");
-                lore.add("&7Earn &6+45% gold (g)&7 from kill");
+                lore = renewEnchant(lore, Arrays.asList(goldboostLore.lore(3).split("\n")));
                 break;
             case 34:
             case 35:
             case 36:
-                if(shark(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
-                lore.add("    ");
-                lore.add("&9Shark III");
-                lore.add("&7Deal &c+7%&7 damager per other");
-                lore.add("&7player below &c6\u2764&7 within 12");
-                lore.add("&7blocks");
+                lore = renewEnchant(lore, Arrays.asList(sharkLore.lore(3).split("\n")));
                 break;
             case 37:
-                if(sharp(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
-                lore.add("    ");
-                lore.add("&9Sharp III");
-                lore.add("&7Deal &c+12%&7 melee damage");
+                lore = renewEnchant(lore, Arrays.asList(sharpLore.lore(3).split("\n")));
                 break;
             case 38:
-                if(PerunWrath(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
-                lore.add("    ");
-                lore.add("&dRARE! &9Combo: Perun's Wrath III");
-                lore.add("&7Each &efourth&7 hit strikes");
-                lore.add("&elightning&7 for &c1\u2764&7 + &c1\u2764");
-                lore.add("&7per &bdiamond piece&7 on your");
-                lore.add("&7victim.");
-                lore.add("&7&oLightning deals true damage");
+                lore = renewEnchant(lore, Arrays.asList(perunLore.lore(3).split("\n")));
                 hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! " + rank.getNameColor(player) + player.getDisplayName() + "&7 created &cTier I Sword!"), compileListToString(lore));
                 player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 1);
                 break;
             case 39:
-                if(gamble(lore)){break;}
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
-                lore.add("    ");
-                lore.add("&dRARE! &9Gamble! III");
-                lore.add("&d50% chance &7to deal &c3\u2764&7 true");
-                lore.add("&7damage to whoever you hit, or to");
-                lore.add("&7yourself");
+                lore = renewEnchant(lore, Arrays.asList(gambleLore.lore(3).split("\n")));
                 hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! " + rank.getNameColor(player) + player.getDisplayName() + "&7 created &cTier I Sword!"), compileListToString(lore));
                 player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 1);
                 break;
         }
+
+        lore.add(ChatColor.BLUE + "+6.5 Attack Damage");
 
         for(String obj : lore) if(lore.contains(obj)) lore.set(lore.indexOf(obj), ChatColor.translateAlternateColorCodes('&', obj));
         meta.setLore(lore);

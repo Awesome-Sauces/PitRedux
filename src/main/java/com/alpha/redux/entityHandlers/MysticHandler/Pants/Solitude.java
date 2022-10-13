@@ -3,6 +3,7 @@ package com.alpha.redux.entityHandlers.MysticHandler.Pants;
 import com.alpha.redux.entityHandlers.MysticHandler.PantEnchant;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
+import com.alpha.redux.well.enchants.SolitudeLore;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 

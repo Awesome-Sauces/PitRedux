@@ -461,6 +461,12 @@ public class command implements CommandExecutor {
             }
         }
 
+        if (cmd.getName().equalsIgnoreCase("trade")){
+            if(Bukkit.getOnlinePlayers().contains(Bukkit.getPlayer(args[0]))){
+
+            }
+        }
+
         if (cmd.getName().equalsIgnoreCase("pants")){
             if(player.hasPermission("opP2W")){
                 if (freshPantsCD.containsKey(String.valueOf(player.getUniqueId()))){

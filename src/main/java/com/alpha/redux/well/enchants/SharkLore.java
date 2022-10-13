@@ -17,7 +17,7 @@ public class SharkLore extends PitEnchant{
             multiplier += (level * 2) + 1;
         }else {multiplier += level*2;}
 
-        multiplier = multiplier / 10;
+        multiplier = multiplier / 100;
 
         event.addReduxDamage(event.getReduxDamage() *
                 ((Math.min(getSharkPlayers(event.getAttacker().getPlayerObject()), 5) * multiplier )/10));
