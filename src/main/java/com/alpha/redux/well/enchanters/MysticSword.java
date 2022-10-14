@@ -148,9 +148,9 @@ public class MysticSword {
                 tokens = 1;
             }
 
-            float tier1 = ((float) ((tokens) * 15) / 100);
-            float tier2 = ((float) ((tokens / 2) * 30) / 100);
-            float tier3 = ((float) ((tokens / 3) * 50) / 100);
+            float tier1 = ((float) ((tokens) * 35) / 100);
+            float tier2 = ((float) ((tokens) * 34) / 100);
+            float tier3 = ((float) ((tokens) * 33) / 100);
 
             tokens = 0;
 
@@ -383,7 +383,7 @@ public class MysticSword {
     }
 
     private static double calcEnchant(List<String> lore, String name){
-        if (lore.contains(name)) return 7;
+        if (lore.contains(name)) return 3;
         return 1;
     }
 

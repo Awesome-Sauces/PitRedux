@@ -2,6 +2,7 @@ package com.alpha.redux.MenuClicks;
 
 import com.alpha.redux.apis.chatManager.rank;
 import com.alpha.redux.events.boards;
+import com.alpha.redux.playerdata.Renown;
 import com.alpha.redux.playerdata.prestiges;
 import com.alpha.redux.playerdata.xpManager;
 import com.alpha.redux.items.itemManager;
@@ -268,10 +269,9 @@ public class InventoryEvent {
                 setEconomy(String.valueOf(player.getUniqueId()), 0);
                 hasPrestige(String.valueOf(player.getUniqueId()));
                 setXp(String.valueOf(player.getUniqueId()), 0);
-                ItemStack Renown_Tokens = ItemMaker(Material.TRIPWIRE_HOOK, ChatColor.YELLOW + "Renown Tokens",
-                        ChatColor.GRAY + "Used to buy upgrades from\n" +  ChatColor.GRAY + "the renown shop!\n\n" +
-                                ChatColor.RED + "Gained on prestige!", 1, true);
-                GiveUberItems(player, Renown_Tokens, GetByPrestige(getPrestige(String.valueOf(player.getUniqueId()))), true, null);
+
+                Renown.addRenown(String.valueOf(player.getUniqueId()),GetByPrestige(getPrestige(String.valueOf(player.getUniqueId()))));
+
                 player.setExp(0);
                 player.setLevel(0);
                 NametagEdit.getApi().setNametag(player, ChatEventApiGetLevelColor(player.getDisplayName(), String.valueOf(player.getUniqueId()))+ rank.getNameColor(player), "");

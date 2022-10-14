@@ -9,6 +9,8 @@ public class FractionalReserveLore extends PitEnchant{
     @Override
     public void run(ReduxDamageEvent event, int level) {
 
+        if (event.getDefenders().getPlayerGold() < 50000) return;
+
         double damage = (7+((level-1)*15));
 
         event.subtractReduxDamage(event.getReduxDamage() * (Math.min((event.getDefenders().getPlayerGold() / 50000)*(damage/100), (damage/100))));

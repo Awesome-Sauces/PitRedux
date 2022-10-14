@@ -1,7 +1,9 @@
 package com.alpha.redux.renownShop;
 
+import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.TebexMoners.tebexmoners;
 import com.alpha.redux.items.enchants;
+import com.alpha.redux.playerdata.Renown;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -27,11 +29,13 @@ public class RenownStorage {
         if (event.getClickedInventory().getTitle().equals(ChatColor.YELLOW + "Renown Shop")){
             if (event.getCurrentItem().getType().equals(Material.REDSTONE)){
                 ItemStack token = getToken();
-                if (player.getInventory().containsAtLeast(token, 16) && getIncrease(uuid) <= 10){
+
+
+                if (Renown.getRenown(uuid) >= 16 && getIncrease(uuid) <= 10){
                     if(hasIncrease(uuid)){
-                            for (int i = 0; i < 16; i++) {
-                                player.getInventory().removeItem(token);
-                            }
+                            Renown.setRenown(uuid, Renown.getRenown(uuid)-16);
+
+                            Sounds.RENOWN_SHOP_PURCHASE.play(player);
 
                             player.sendMessage(ChatColor.GREEN + "Damage increase purchased! " + ChatColor.RED + "+1% damage!");
 
@@ -88,11 +92,11 @@ public class RenownStorage {
         if (event.getClickedInventory().getTitle().equals(ChatColor.YELLOW + "Renown Shop")){
             if (event.getCurrentItem().getType().equals(Material.EXP_BOTTLE)){
                 ItemStack token = getToken();
-                if (player.getInventory().containsAtLeast(token, 32)){
+                if (Renown.getRenown(uuid) >= 32){
                     if(hasXpIncrease(uuid)){
-                        for (int i = 0; i < 32; i++) {
-                            player.getInventory().removeItem(token);
-                        }
+                        Renown.setRenown(uuid, Renown.getRenown(uuid)-32);
+
+                        Sounds.RENOWN_SHOP_PURCHASE.play(player);
 
                         hasXpIncrease(uuid);
                         setXpIncrease(uuid, Math.min(5 + getXpIncrease(uuid), 500));
@@ -119,11 +123,11 @@ public class RenownStorage {
         if (event.getClickedInventory().getTitle().equals(ChatColor.YELLOW + "Renown Shop")){
             if (event.getCurrentItem().getType().equals(Material.EYE_OF_ENDER)){
                 ItemStack token = getToken();
-                if (player.getInventory().containsAtLeast(token,  64)){
+                if (Renown.getRenown(uuid)>=64){
                     if(hasXpIncrease(uuid)){
-                        for (int i = 0; i < 64; i++) {
-                            player.getInventory().removeItem(token);
-                        }
+                        Renown.setRenown(uuid, Renown.getRenown(uuid)-64);
+
+                        Sounds.RENOWN_SHOP_PURCHASE.play(player);
 
                         player.getInventory().addItem(getCorruptedPearl());
 
@@ -149,11 +153,11 @@ public class RenownStorage {
         if (event.getClickedInventory().getTitle().equals(ChatColor.YELLOW + "Renown Shop")){
             if (event.getCurrentItem().getType().equals(Material.ENDER_CHEST)){
                 ItemStack token = getToken();
-                if (player.getInventory().containsAtLeast(token,  16)){
+                if (Renown.getRenown(uuid) >= 16){
                     if(hasXpIncrease(uuid)){
-                        for (int i = 0; i < 16; i++) {
-                            player.getInventory().removeItem(token);
-                        }
+                        Renown.setRenown(uuid, Renown.getRenown(uuid)-16);
+
+                        Sounds.RENOWN_SHOP_PURCHASE.play(player);
 
                         player.getInventory().addItem(getUberDrop());
 
@@ -179,11 +183,11 @@ public class RenownStorage {
         if (event.getClickedInventory().getTitle().equals(ChatColor.YELLOW + "Renown Shop")){
             if (event.getCurrentItem().getType().equals(Material.LEATHER_LEGGINGS)){
                 ItemStack token = getToken();
-                if (player.getInventory().containsAtLeast(token, 5)){
+                if (Renown.getRenown(uuid)>=5){
                     if(hasXpIncrease(uuid)){
-                        for (int i = 0; i < 5; i++) {
-                            player.getInventory().removeItem(token);
-                        }
+                        Renown.setRenown(uuid, Renown.getRenown(uuid)-5);
+
+                        Sounds.RENOWN_SHOP_PURCHASE.play(player);
 
                         tebexmoners.PlayerColorfulBoxers(player);
 
@@ -207,11 +211,11 @@ public class RenownStorage {
         if (event.getClickedInventory().getTitle().equals(ChatColor.YELLOW + "Renown Shop")){
             if (event.getCurrentItem().equals(RenownItems.ReaperScythe())){
                 ItemStack token = getToken();
-                if (player.getInventory().containsAtLeast(token, 192)){
+                if (Renown.getRenown(uuid)>=192){
                     if(getPrestige(uuid) >= 15){
-                        for (int i = 0; i < 192; i++) {
-                            player.getInventory().removeItem(token);
-                        }
+                        Renown.setRenown(uuid, Renown.getRenown(uuid)-192);
+
+                        Sounds.RENOWN_SHOP_PURCHASE.play(player);
 
                         player.getInventory().addItem(enchants.reaper_scythe);
 
@@ -235,11 +239,11 @@ public class RenownStorage {
         if (event.getClickedInventory().getTitle().equals(ChatColor.YELLOW + "Renown Shop")){
             if (event.getCurrentItem().equals(RenownItems.NuclearAtomizer())){
                 ItemStack token = getToken();
-                if (player.getInventory().containsAtLeast(token, 640)){
+                if (Renown.getRenown(uuid)>=640){
                     if(getPrestige(uuid) >= 30){
-                        for (int i = 0; i < 640; i++) {
-                            player.getInventory().removeItem(token);
-                        }
+                        Renown.setRenown(uuid, Renown.getRenown(uuid)-640);
+
+                        Sounds.RENOWN_SHOP_PURCHASE.play(player);
 
                         player.getInventory().addItem(NuclearAtomizerItem());
 
@@ -263,12 +267,13 @@ public class RenownStorage {
         if (event.getClickedInventory().getTitle().equals(ChatColor.YELLOW + "Renown Shop")){
             if (event.getCurrentItem().equals(RenownItems.MysticismDropItem(uuid))){
                 ItemStack token = getToken();
-                if (player.getInventory().containsAtLeast(token, (int) Math.round((MysticismChance.getMysticismChance(uuid) * 1000) * 32))){
+                if (Renown.getRenown(uuid)>=(int) Math.round((MysticismChance.getMysticismChance(uuid) * 1000) * 64)){
                     if(MysticismChance.getMysticismChance(uuid) >= .015){player.sendMessage(ChatColor.RED + "You maxed this already!");return;}
                     if(getPrestige(uuid) >= 5){
-                        for (int i = 0; i < (int) Math.round((MysticismChance.getMysticismChance(uuid) * 1000) * 64); i++) {
-                            player.getInventory().removeItem(token);
-                        }
+
+                        Renown.setRenown(uuid, Renown.getRenown(uuid)-(int) Math.round((MysticismChance.getMysticismChance(uuid) * 1000) * 64));
+
+                        Sounds.RENOWN_SHOP_PURCHASE.play(player);
 
                         MysticismChance.hasMysticismChance(uuid);
                         MysticismChance.addMysticismChance(uuid, .001);
@@ -292,11 +297,11 @@ public class RenownStorage {
         if (event.getClickedInventory().getTitle().equals(ChatColor.YELLOW + "Renown Shop")){
             if (event.getCurrentItem().getType().equals(Material.NETHER_STAR)){
                 ItemStack token = getToken();
-                if (player.getInventory().containsAtLeast(token, 640)){
+                if (Renown.getRenown(uuid)>=640){
                     if(hasXpIncrease(uuid)){
-                        for (int i = 0; i < 640; i++) {
-                            player.getInventory().removeItem(token);
-                        }
+                        Renown.setRenown(uuid, 640);
+
+                        Sounds.RENOWN_SHOP_PURCHASE.play(player);
 
                         player.getInventory().addItem(getStickQuest());
                         player.getInventory().addItem(getBlazeQuest());
@@ -322,12 +327,12 @@ public class RenownStorage {
         if (event.getClickedInventory().getTitle().equals(ChatColor.YELLOW + "Renown Shop")){
             if (event.getCurrentItem().getType().equals(Material.IRON_CHESTPLATE)){
                 ItemStack token = getToken();
-                if (player.getInventory().containsAtLeast(token, 20)){
+                if (Renown.getRenown(uuid)>=20){
                     if(damageDecrease.hasDecrease(uuid)){
                         if(damageDecrease.getDecrease(uuid) <= 50){
-                            for (int i = 0; i < 20; i++) {
-                                player.getInventory().removeItem(token);
-                            }
+                            Renown.setRenown(uuid, 20);
+
+                            Sounds.RENOWN_SHOP_PURCHASE.play(player);
 
                             player.sendMessage(ChatColor.GREEN + "Damage resistance purchased! " + ChatColor.RED + "+5% damage resistance!");
 

@@ -380,7 +380,7 @@ public class gui {
 
         if (randomDUDE[0] >= 120){
             DecimalFormat formatter = new DecimalFormat("#,###");
-            req_level = ChatColor.translateAlternateColorCodes('&', "&7Costs:" + "\n" +"&c&l⚫ Resets &blevel &c to 1" + "\n" + "&c&l⚫ Resets &6gold &c to 0" + "\n" + "&c&l⚫ Resets &cALL &aperks and upgrades" + "\n" + "&c&l⚫ Need minimum &6" + formatter.format(getGoldRequirement(getPrestige(String.valueOf(player.getUniqueId())))) + "&6g" + "\n\n" + "&7Reward: &e" + GetByPrestige(getPrestige(String.valueOf(player.getUniqueId()))) + " &eRenown Tokens" + "\n\n" + "&7New prestige: &e" + integerToRoman(getPrestige(String.valueOf(player.getUniqueId())) + 1) + "\n" + ChatColor.AQUA + "+" + ((int) PrestigeXpAmount(getPrestige(String.valueOf(player.getUniqueId()))) * 10) + "%" + ChatColor.GRAY + " needed xp than normal!\n\n" + "&eClick to purchase!");
+            req_level = ChatColor.translateAlternateColorCodes('&', "&7Costs:" + "\n" +"&c&l⚫ Resets &blevel &c to 1" + "\n" + "&c&l⚫ Resets &6gold &c to 0" + "\n" + "&c&l⚫ Resets &cALL &aperks and upgrades" + "\n" + "&c&l⚫ Need minimum &6" + formatter.format(getGoldRequirement(getPrestige(String.valueOf(player.getUniqueId())))) + "&6g" + "\n\n" + "&7Reward: &e" + GetByPrestige(getPrestige(String.valueOf(player.getUniqueId()))) + " &eRenown" + "\n\n" + "&7New prestige: &e" + integerToRoman(getPrestige(String.valueOf(player.getUniqueId())) + 1) + "\n" + ChatColor.AQUA + "+" + ((int) PrestigeXpAmount(getPrestige(String.valueOf(player.getUniqueId()))) * 10) + "%" + ChatColor.GRAY + " needed xp than normal!\n\n" + "&eClick to purchase!");
         }else{
             req_level  = ChatColor.AQUA + "+" + ((int) PrestigeXpAmount(getPrestige(String.valueOf(player.getUniqueId()))) * 10) + "%" + ChatColor.GRAY + " needed xp than normal!\n\n" + ChatColor.GRAY + "Required Level: " + prestigebracket(player) + "[" + ChatColor.AQUA + ChatColor.BOLD + "120" + prestigebracket(player) + "]" + "\n\n" + ChatColor.GRAY + "Level up to prestige!";
         }
@@ -392,7 +392,7 @@ public class gui {
         ItemStack Prestige_Block = ItemMaker(Material.DIAMOND, ChatColor.AQUA + "Prestige", ChatColor.GRAY + "Current: " + ChatColor.YELLOW + integerToRoman(getPrestige(String.valueOf(player.getUniqueId()))) + "\n" + req_level, 1, true);
 
         ItemStack Prestige_Shop = ItemMaker(Material.BEACON, ChatColor.YELLOW + "Renown shop",
-                ChatColor.GRAY + "Use " + ChatColor.YELLOW + "Renown Tokens " + ChatColor.GRAY + "earned from\n" +
+                ChatColor.GRAY + "Use " + ChatColor.YELLOW + "Renown " + ChatColor.GRAY + "earned from\n" +
                      ChatColor.AQUA + "Prestige " + ChatColor.GRAY + "to unlock unique\n" + ChatColor.GRAY + "upgrades!\n\n" +
                      ChatColor.GRAY + ChatColor.ITALIC + "These upgrades are safe\n" + ChatColor.GRAY + ChatColor.ITALIC + "from prestige reset.\n\n" +
                      ChatColor.GRAY + "Renown " + ChatColor.YELLOW + Renown.getRenown(String.valueOf(player.getUniqueId())) + " Renown\n\n" +

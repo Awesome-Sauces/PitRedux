@@ -191,10 +191,10 @@ public class ReduxDamageEvent extends Event implements Cancellable {
         ReduxPlayer ReduxDefender = this.getDefenders();
 
         if(isNPC(attacker)){
-            this.setReduxDamage(10);
+            this.setReduxDamage(6);
         }
 
-        this.addReduxDamage(Math.min(this.getReduxDamage() * damageIncrease.getIncrease(ReduxAttacker.getPlayerUUID()), this.getReduxDamage()*.1));
+        if(!isNPC(attacker)) this.addReduxDamage(Math.min(this.getReduxDamage() * damageIncrease.getIncrease(ReduxAttacker.getPlayerUUID()), this.getReduxDamage()*.1));
 
         /*
         if(true_damage_amount.containsKey(ReduxDefender.getPlayerUUID())){
@@ -207,10 +207,10 @@ public class ReduxDamageEvent extends Event implements Cancellable {
             if (attacker.getInventory().getItemInHand().getItemMeta().getDisplayName().contains("Tier III")) {
                 ItemStack sword = attacker.getItemInHand();
                 if(!attacker.getInventory().getItemInHand().getEnchantments().containsKey(Enchantment.DAMAGE_ALL)){
-                    sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
-                }else if (attacker.getInventory().getItemInHand().getEnchantments().get(Enchantment.DAMAGE_ALL) == 2){
+                    sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+                }else if (attacker.getInventory().getItemInHand().getEnchantments().get(Enchantment.DAMAGE_ALL) == 1){
                     sword.removeEnchantment(Enchantment.DAMAGE_ALL);
-                    sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+                    sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
                 }
 
 
@@ -250,9 +250,7 @@ public class ReduxDamageEvent extends Event implements Cancellable {
 
             if (StrengthCheck(attacker) > 0) this.addReduxDamage(this.getReduxDamage() * StrengthCheck(attacker));
 
-        } catch (Exception e){
-            this.addReduxDamage(0);
-        }
+        } catch (Exception ignored){}
 
         // Pant enchants
 
@@ -266,9 +264,7 @@ public class ReduxDamageEvent extends Event implements Cancellable {
 
                 }
             }
-        } catch (Exception e) {
-
-        }
+        } catch (Exception e) {}
 
 
 
@@ -303,7 +299,7 @@ public class ReduxDamageEvent extends Event implements Cancellable {
             this.addReduxDamage(Math.round(mega_damage_amount.get(String.valueOf(defender.getUniqueId()))));
         }
 
-        attacker.setHealth(Math.min(attacker.getHealth() +.5, attacker.getMaxHealth()));
+        attacker.setHealth(Math.min(attacker.getHealth() +.75, attacker.getMaxHealth()));
 
 
         if(defender.getInventory().getHelmet() != null && defender.getInventory().getHelmet().equals(itemManager.goldHelm)){
@@ -359,13 +355,10 @@ public class ReduxDamageEvent extends Event implements Cancellable {
 
 
  */
-        this.getBukkitEvent().setDamage(Math.min(this.getReduxDamage(), 20));
+        this.getBukkitEvent().setDamage(Math.min(Math.max(this.getReduxDamage(),1), 20));
 
 
         sendHealthBar(this.getBukkitEvent());
-
-
-
 
     }
 }

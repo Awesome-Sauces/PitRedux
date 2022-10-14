@@ -64,6 +64,8 @@ import static com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap
 import static com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap.getPlayerFromBlob;
 import static com.alpha.redux.entityHandlers.ReduxPlayerHandler.playerExists;
 import static com.alpha.redux.events.ArmorJoin.GiveChain;
+import static com.alpha.redux.events.boards.PlayerJoinScore;
+import static com.alpha.redux.events.boards.PlayerLeaveScore;
 import static com.alpha.redux.events.nonPermItems.ClearAndCheck;
 import static com.alpha.redux.gems.gemEvents.gemClickEvent;
 import static com.alpha.redux.gems.gemMain.makeGemGUI;
@@ -203,6 +205,19 @@ public class events implements Listener {
 
 */
 
+    /*
+    @EventHandler
+    public void boardHandlerQuit(PlayerQuitEvent event){
+        PlayerLeaveScore(event);
+    }
+
+    @EventHandler
+    public void boardHandlerJoin(PlayerJoinEvent event){
+        PlayerJoinScore(event);
+    }
+
+     */
+
     @EventHandler
     public static void CombatLog(PlayerQuitEvent event){
 
@@ -257,11 +272,14 @@ public class events implements Listener {
             return;
         }
 
+
+
         if(event.getEntity().getType().equals(EntityType.SLIME)){
             event.setCancelled(true);
 
             Player player = getPlayerFromBlob((Slime) event.getEntity());
 
+            assert player != null;
             if(player.getLocation().getY() >= getSpawnProtection()) deleteBlob(player);
 
             PitBlobMap.removeBlobHealth(player);

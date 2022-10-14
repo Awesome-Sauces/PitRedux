@@ -123,8 +123,9 @@ public class PitBlobMap {
 
                 if(player.getLocation().getY() >= getSpawnProtection()) deleteBlob(player);
 
-                for(Entity entity : slime.getNearbyEntities(10, 10, 10)){
+                for(Entity entity : slime.getNearbyEntities(3, 3, 3)){
                     LivingEntity livingEntity = (LivingEntity) entity;
+
 
                     if(livingEntity instanceof Player && isNPC((Player) livingEntity)){
                         Player living = (Player) livingEntity;
@@ -142,7 +143,7 @@ public class PitBlobMap {
                 }
 
             }
-        }.runTaskTimer(economy.getPlugin(), 200, 200);
+        }.runTaskTimer(economy.getPlugin(), 50, 50);
 
         runnable.put(player, task);
 

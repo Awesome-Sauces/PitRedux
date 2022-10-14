@@ -15,7 +15,7 @@ public class RenownItems {
                 ChatColor.GRAY + "Each purchase gives you " + ChatColor.RED + "+1% damage\n" + ChatColor.GRAY +
                 "Capped at " + "+10%\n\n" + ChatColor.GRAY +
                 "Current boost: " + ChatColor.RED +  "+" + Math.min(damageIncrease.getIncrease(uuid), 10) + "%\n\n" +
-                ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "16 Renown Tokens", 1, true);
+                ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "16 Renown", 1, true);
     }
 
     public static ItemStack DamageItemDecrease(String uuid){
@@ -23,7 +23,7 @@ public class RenownItems {
                 ChatColor.GRAY + "Each purchase gives you " + ChatColor.RED + "+5% resistance\n" + ChatColor.GRAY +
                 "Max tier: " + ChatColor.RED + "X\n"+ ChatColor.GRAY +
                 "Current tier: " + ChatColor.RED + boards.integerToRoman(damageDecrease.getDecrease(uuid) / 5) + "\n\n" +
-                ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "20 Renown Tokens", 1, true);
+                ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "20 Renown", 1, true);
     }
 
 
@@ -32,7 +32,7 @@ public class RenownItems {
                 ChatColor.GRAY + "Each purchase gives you " + ChatColor.AQUA + "+5 xp cap!\n" + ChatColor.GRAY +
                         "But is capped at" + ChatColor.YELLOW + " 500\n\n" + ChatColor.GRAY +
                         "Current boost: " + ChatColor.AQUA +  "+" + getXpIncrease(uuid) + " cap\n\n" +
-                        ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "32 Renown Tokens", 1, true);
+                        ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "32 Renown", 1, true);
     }
 
     public static ItemStack CorruptedPearl(){
@@ -40,7 +40,7 @@ public class RenownItems {
                 ChatColor.GRAY + "Each purchase gives you " + ChatColor.LIGHT_PURPLE + "+1 Corrupted Pearl!\n" + ChatColor.GRAY +
                         "Using a corrupted pearl will teleport a\n" + ChatColor.GRAY +
                         "random player to you and strike them with" + ChatColor.DARK_PURPLE + " venom!" + "\n\n" +
-                        ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "64 Renown Tokens", 1, true);
+                        ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "64 Renown", 1, true);
     }
 
     public static ItemStack QuesterKit(){
@@ -48,7 +48,7 @@ public class RenownItems {
                 ChatColor.GRAY + "Gives you the 3 necessary\n" + ChatColor.GRAY +
                         "questing tools. Use these\n" + ChatColor.GRAY +
                         "while doing quests or finding cakes\n" + ChatColor.GRAY + "or maybe just for fun!\n\n" +
-                        ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "640 Renown Tokens", 1, true);
+                        ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "640 Renown", 1, true);
     }
 
     public static ItemStack ReaperScythe(){
@@ -57,7 +57,7 @@ public class RenownItems {
                         "tool to harvest souls.\n" + ChatColor.GRAY +
                         "Be careful how you use it!\n\n" +
                         ChatColor.RED + "Requires prestige XV\n" +
-                        ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "192 Renown Tokens", 1, true);
+                        ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "192 Renown", 1, true);
     }
 
     public static ItemStack MysticismDropItem(String uuid){
@@ -66,7 +66,7 @@ public class RenownItems {
                         "+" + Math.round(MysticismChance.getMysticismChance(uuid) * 1000) + "% chance\n" +
                         ChatColor.GRAY + "Grants you a higher drop\n" + ChatColor.GRAY + "chance for mystics.\n\n" +
                         ChatColor.RED + "Requires prestige V\n" +
-                        ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + Math.round((MysticismChance.getMysticismChance(uuid) * 1000) * 64) +" Renown Tokens", 1, true);
+                        ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + Math.round((MysticismChance.getMysticismChance(uuid) * 1000) * 64) +" Renown", 1, true);
     }
 
     public static ItemStack NuclearAtomizer(){
@@ -74,7 +74,7 @@ public class RenownItems {
                 ChatColor.GRAY + "Atomizes renown tokens to\n" + ChatColor.GRAY + "produce temporary stat\n" +
                         ChatColor.GRAY + "boosts. Stat boosts will\n" + ChatColor.GRAY + "randomly decay and\n" +
                         ChatColor.GRAY + "return to ashes.\n\n" + ChatColor.RED + "Requires prestige XXX\n" +
-                        ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "640 Renown Tokens", 1, true);
+                        ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "640 Renown", 1, true);
     }
 
     public static ItemStack UberDrop(){
@@ -82,7 +82,7 @@ public class RenownItems {
                 ChatColor.GRAY + "Each purchase gives you " + ChatColor.LIGHT_PURPLE + "+1 Uberdrop!\n" + ChatColor.GRAY +
                         "Left clicking with an Uberdrop will\n" + ChatColor.GRAY +
                         "grant you a random uberdrop!\n\n" +
-                        ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "16 Renown Tokens", 1, true);
+                        ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "16 Renown", 1, true);
     }
 
     public static ItemStack Boxers(){
@@ -95,6 +95,6 @@ public class RenownItems {
                         ChatColor.GRAY + "- " + ChatColor.DARK_AQUA + "Sapphire Dye\n" +
                         ChatColor.GRAY + "- " + ChatColor.GOLD + "Tangerine Dye\n" +
                         ChatColor.GRAY + "- " + ChatColor.DARK_GREEN + "Prickly Dye\n\n" +
-                        ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "5 Renown Tokens", 1, true);
+                        ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "5 Renown", 1, true);
     }
 }

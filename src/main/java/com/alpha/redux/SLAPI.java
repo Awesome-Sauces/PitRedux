@@ -1,4 +1,5 @@
 package com.alpha.redux;
+import com.alpha.redux.playerdata.Renown;
 import com.alpha.redux.playerdata.economy;
 import com.alpha.redux.playerdata.prestiges;
 import com.alpha.redux.playerdata.xpManager;
@@ -6,6 +7,7 @@ import com.alpha.redux.renownShop.MysticismChance;
 import com.alpha.redux.renownShop.damageDecrease;
 import com.alpha.redux.renownShop.damageIncrease;
 
+import static com.alpha.redux.playerdata.Renown.getRenownMap;
 import static com.alpha.redux.playerdata.prestiges.*;
 import static com.alpha.redux.playerdata.xpManager.getXpMap;
 import static com.alpha.redux.renownShop.MysticismChance.getMysticismChance;
@@ -29,6 +31,21 @@ public class SLAPI {
         for (String s : plugin.getConfig().getConfigurationSection("prestige").getKeys(false))
         {
             prestiges.setPrestige(s, plugin.getConfig().getInt("prestige."+s));
+        }
+    }
+
+    public static void saveRenown(){
+        for(String p : getRenownMap().keySet()){
+            plugin.getConfig().set("renown."+p, getRenownMap().get(p));
+        }
+        plugin.saveConfig();
+    }
+
+    public static void loadRenown(){
+        if (!plugin.getConfig().contains("renown")) return;
+        for (String s : plugin.getConfig().getConfigurationSection("renown").getKeys(false))
+        {
+            Renown.setRenown(s, plugin.getConfig().getInt("renown."+s));
         }
     }
 

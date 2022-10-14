@@ -34,7 +34,7 @@ public class pants {
         try {
             if(isNPC(defender)){return;}
             if (defender.getInventory().getBoots() != null && defender.getInventory().getBoots().getItemMeta().equals(itemManager.arma.getItemMeta()) || getPrestige(String.valueOf(player.getUniqueId())) <= 15) {
-                Sounds.GAMBLE_NO.play(player);
+                //Sounds.GAMBLE_NO.play(player);
             } else if (player.getInventory().getLeggings() != null && player.getInventory().getLeggings().getItemMeta().equals(itemManager.venom.getItemMeta())) {
 
                 if(Venom_Hit.containsKey(String.valueOf(player.getUniqueId()))){

@@ -115,13 +115,13 @@ public class swords {
                 for (String s : list) {
                     switch (s) {
                         case "gambIII":
-                            Sounds.GAMBLE_YES.play(player.getLocation(), 1);
+                            //Sounds.GAMBLE_YES.play(player.getLocation(), 1);
                             return damage * 1;
                         case "gambII":
-                            Sounds.GAMBLE_YES.play(player.getLocation(), 1);
+                            //Sounds.GAMBLE_YES.play(player.getLocation(), 1);
                             return damage * .75;
                         case "gambI":
-                            Sounds.GAMBLE_YES.play(player.getLocation(), 1);
+                            //Sounds.GAMBLE_YES.play(player.getLocation(), 1);
                             return damage * .50;
 
                     }

@@ -11,6 +11,7 @@ import com.alpha.redux.entityHandlers.MysticHandler.MysticEventHandler.MysticEve
 import com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap;
 import com.alpha.redux.entityHandlers.ReduxPlayerHandler;
 import com.alpha.redux.eventManagers.ReduxEvents;
+import com.alpha.redux.playerdata.Renown;
 import com.alpha.redux.playerdata.economy;
 import com.alpha.redux.events.events;
 import com.alpha.redux.playerdata.prestiges;
@@ -48,12 +49,15 @@ import static com.alpha.redux.apis.leaderboardsplus.leaderboards.*;
 import static com.alpha.redux.apis.locations.getCakeLocation;
 import static com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap.blob;
 import static com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap.blobStreak;
+import static com.alpha.redux.events.boards.ClearAllScore;
 import static com.alpha.redux.events.boards.CreateScore;
 import static com.alpha.redux.funEvents.event.handleTwoEvent;
 import static com.alpha.redux.funEvents.event.twoTimesEvent;
 import static com.alpha.redux.questMaster.bossBattles.maldingBoss.*;
 
 public class redux extends JavaPlugin {
+
+    public static redux INSTANCE;
 
     public static XpboostLore xpboostLore = new XpboostLore();
     public static XpbumpLore xpbumpLore = new XpbumpLore();
@@ -92,9 +96,12 @@ public class redux extends JavaPlugin {
 
         redux plugin = this;
 
+        INSTANCE = this;
+
         new prestiges(this);
         new economy(this);
         new xpManager(this);
+        new Renown(this);
 
 
         skyblockItems.initializeItemstack();
@@ -120,6 +127,7 @@ public class redux extends JavaPlugin {
         xpManager.XpLevelCalculation();
         SLAPI.loadXPInc();
         SLAPI.loadDmgInc();
+        SLAPI.loadRenown();
         SLAPI.loadDmgDec();
         SLAPI.loadMystic();
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[Redux] plugin is enabled");
@@ -263,6 +271,7 @@ public class redux extends JavaPlugin {
                 SLAPI.saveMystic();
                 SLAPI.savePrestige();
                 SLAPI.saveXp();
+                SLAPI.saveRenown();
 
                 SLAPI.loadXPInc();
                 SLAPI.loadDmgInc();
@@ -287,9 +296,12 @@ public class redux extends JavaPlugin {
         SLAPI.saveXPInc();
         SLAPI.saveDmgDec();
         SLAPI.saveMystic();
+        SLAPI.saveRenown();
         CreateVillagers.unloadNPC();
         delBoard();
         getServer().getConsoleSender().sendMessage(ChatColor.RED + "[Redux] plugin is disabled");
+
+        ClearAllScore();
 
         for (Player player : MaldingPlayerHandlers.keySet()){
 

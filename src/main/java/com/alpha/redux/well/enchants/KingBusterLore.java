@@ -12,7 +12,7 @@ public class KingBusterLore extends PitEnchant{
 
             double damage = Math.max((level * 7) - 1, 7);
 
-            event.addReduxDamage(event.getReduxDamage()  * (damage/100));
+            event.addReduxDamage(event.getReduxDamage() * (damage/100));
         }
     }
 

@@ -115,13 +115,13 @@ public class CreateVillagers {
         prestige_hologram = HologramsAPI.createHologram(economy.getPlugin(), locations.prestige_npc_loc.add(0,2.75,1));
         prestige_hologram.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&ePRESTIGE"));
 
-        ender_chest = HologramsAPI.createHologram(economy.getPlugin(), locations.getEnderChestLocation());
+        ender_chest = HologramsAPI.createHologram(economy.getPlugin(), locations.getEnderChestLocation().add(0,-.5,0));
         ender_chest.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&5ENDER CHEST"));
 
         ender_chest_lore = HologramsAPI.createHologram(economy.getPlugin(), locations.getEnderChestLocation().add(0,-1,0));
         ender_chest_lore.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7Store items forever"));
 
-        mystic_well = HologramsAPI.createHologram(economy.getPlugin(), locations.getMysticWellLocation());
+        mystic_well = HologramsAPI.createHologram(economy.getPlugin(), locations.getMysticWellLocation().add(0,-.5,0));
         mystic_well.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&dMYSTIC WELL"));
 
         mystic_well_lore = HologramsAPI.createHologram(economy.getPlugin(), locations.getMysticWellLocation().add(0,-1,0));

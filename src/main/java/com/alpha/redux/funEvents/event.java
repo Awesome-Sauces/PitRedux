@@ -65,6 +65,6 @@ public class event {
     }
 
     public static void refreshHoloGram(){
-        hologram = HologramsAPI.createHologram(economy.getPlugin(), new Location(Bukkit.getWorld("world"), 0.5, 100, 0.5).add(0, 21 ,0));
+        hologram = HologramsAPI.createHologram(economy.getPlugin(), getEventNotifyLocation());
     }
 }

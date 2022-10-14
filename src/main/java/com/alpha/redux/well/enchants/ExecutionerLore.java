@@ -16,7 +16,7 @@ public class ExecutionerLore extends PitEnchant{
 
         double tier = level;
 
-        if(isNPC(event.getDefenders().getPlayerObject())) tier+=5;
+        if(isNPC(event.getDefenders().getPlayerObject())) tier+=7;
 
         double damage = event.getReduxTrueDamage() + event.getReduxTrueDamage();
 
