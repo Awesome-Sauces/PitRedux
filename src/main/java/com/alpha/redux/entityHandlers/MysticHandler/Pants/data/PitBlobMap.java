@@ -117,6 +117,7 @@ public class PitBlobMap {
         addBlobStreak(player);
         resizeBlob(player);
 
+        /*
         BukkitTask task = new BukkitRunnable() {
             @Override
             public void run() {
@@ -146,6 +147,7 @@ public class PitBlobMap {
         }.runTaskTimer(economy.getPlugin(), 50, 50);
 
         runnable.put(player, task);
+        */
 
 
     }

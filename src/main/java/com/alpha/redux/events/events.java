@@ -274,25 +274,26 @@ public class events implements Listener {
 
         if(event.getEntity().getType().equals(EntityType.SLIME)){
             event.setCancelled(true);
-        }
-
-
-        if(event.getEntity().getType().equals(EntityType.SLIME)){
-            event.setCancelled(true);
 
             Player player = getPlayerFromBlob((Slime) event.getEntity());
 
-            assert player != null;
-            if(player.getLocation().getY() >= getSpawnProtection()) deleteBlob(player);
+            if(player != null){
+                if(player.getLocation().distance(event.getEntity().getLocation()) >= 20) deleteBlob(player);
 
-            PitBlobMap.removeBlobHealth(player);
-
-            if(PitBlobMap.getBlobHealth(player) <= 0) deleteBlob(player);
-
+                PitBlobMap.removeBlobHealth(player);
+    
+                if(PitBlobMap.getBlobHealth(player) <= 1) deleteBlob(player);
+    
+            }
+            
             return;
         }
 
         if(event.getDamager().getType().equals(EntityType.SLIME)){
+            Player player = getPlayerFromBlob((Slime) event.getEntity());
+
+            event.getEntity().damage(5,player);
+
 
             event.setCancelled(true);
             return;
