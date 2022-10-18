@@ -189,26 +189,30 @@ public class rank {
             rank = ChatColor.YELLOW + "[HUNT] ";
             namecolor = String.valueOf(ChatColor.YELLOW);
             chatcolor = String.valueOf(ChatColor.WHITE);
-        }else if(player.hasPermission("VIP")){
-            rank = ChatColor.GREEN + "[VIP] ";
-            chatcolor = String.valueOf(ChatColor.WHITE);
-            namecolor = String.valueOf(ChatColor.GREEN);
-        }else if(player.hasPermission("VIP+")){
-            rank = ChatColor.GREEN + "[VIP" + ChatColor.WHITE + "+" + ChatColor.GREEN + "] ";
-            chatcolor = String.valueOf(ChatColor.WHITE);
-            namecolor = String.valueOf(ChatColor.GREEN);
-        }else if(player.hasPermission("MVP")){
-            rank = ChatColor.AQUA + "[MVP] ";
-            chatcolor = String.valueOf(ChatColor.WHITE);
-            namecolor = String.valueOf(ChatColor.AQUA);
-        }else if(player.hasPermission("MVP+")){
-            rank = ChatColor.AQUA + "[MVP" + ChatColor.RED + "+" + ChatColor.AQUA + "] ";
-            namecolor = String.valueOf(ChatColor.AQUA);
-            chatcolor = String.valueOf(ChatColor.WHITE);
         }else if(player.hasPermission("MVP++")){
             rank = ChatColor.GOLD + "[MVP" + ChatColor.BLACK + "++" + ChatColor.GOLD + "] ";
             namecolor = String.valueOf(ChatColor.GOLD);
             chatcolor = String.valueOf(ChatColor.WHITE);
+        }else if(player.hasPermission("VIP")){
+            rank = ChatColor.GREEN + "[VIP] ";
+            chatcolor = String.valueOf(ChatColor.WHITE);
+            namecolor = String.valueOf(ChatColor.GREEN);
+        }else if(player.hasPermission("MVP+")){
+            rank = ChatColor.AQUA + "[MVP" + ChatColor.RED + "+" + ChatColor.AQUA + "] ";
+            namecolor = String.valueOf(ChatColor.AQUA);
+            chatcolor = String.valueOf(ChatColor.WHITE);
+        }else if(player.hasPermission("MVP")){
+            rank = ChatColor.AQUA + "[MVP] ";
+            chatcolor = String.valueOf(ChatColor.WHITE);
+            namecolor = String.valueOf(ChatColor.AQUA);
+        }else if(player.hasPermission("VIP+")){
+            rank = ChatColor.GREEN + "[VIP" + ChatColor.WHITE + "+" + ChatColor.GREEN + "] ";
+            chatcolor = String.valueOf(ChatColor.WHITE);
+            namecolor = String.valueOf(ChatColor.GREEN);
+        }else if(player.hasPermission("VIP")){
+            rank = ChatColor.GREEN + "[VIP] ";
+            chatcolor = String.valueOf(ChatColor.WHITE);
+            namecolor = String.valueOf(ChatColor.GREEN);
         }else if(player.hasPermission("HELPER")){
             rank = ChatColor.BLUE + "[HELPER] ";
             chatcolor = String.valueOf(ChatColor.WHITE);
@@ -217,6 +221,10 @@ public class rank {
             rank = ChatColor.DARK_GREEN + "[MODERATOR] ";
             chatcolor = String.valueOf(ChatColor.WHITE);
             namecolor = String.valueOf(ChatColor.GREEN);
+        }else if(player.hasPermission("ADMIN")){
+            rank = ChatColor.RED + "[ADMIN] ";
+            chatcolor = String.valueOf(ChatColor.WHITE);
+            namecolor = String.valueOf(ChatColor.RED);
         }else if(player.hasPermission("YOUTUBE")){
             rank = ChatColor.RED + "[" + ChatColor.WHITE + "YOUTUBE" + ChatColor.RED + "] ";
             namecolor = String.valueOf(ChatColor.RED);

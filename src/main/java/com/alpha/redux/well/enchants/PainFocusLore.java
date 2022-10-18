@@ -15,10 +15,12 @@ public class PainFocusLore extends PitEnchant{
             multiplier = level+2;
         }else{multiplier = level;}
 
-        multiplier = multiplier / 100;
+        int maxHealth = (int) event.getAttacker().getPlayerObject().getMaxHealth();
+        int currentHealth = (int) event.getAttacker().getPlayerObject().getHealth();
 
-        event.addReduxDamage(event.getReduxDamage()*(Math.min((event.getAttacker().getPlayerObject().getMaxHealth() -
-                event.getAttacker().getPlayerObject().getHealth()) / 2, 2) * multiplier));
+        int hearts = Math.max((maxHealth-currentHealth), 1);
+
+        event.addReduxDamage(event.getReduxDamage()*(hearts*(multiplier/100)));
     }
 
     @Override

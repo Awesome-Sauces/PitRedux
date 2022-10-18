@@ -19,6 +19,7 @@ import com.alpha.redux.playerdata.xpManager;
 import com.alpha.redux.items.itemManager;
 import com.alpha.redux.items.enchants;
 import com.alpha.redux.questMaster.bossBattles.bossEvents;
+import com.alpha.redux.renownShop.CookieMonster.Monster;
 import com.alpha.redux.renownShop.atomizer.InventoryEventManager;
 import com.alpha.redux.startup.CreateVillagers;
 import com.alpha.redux.well.enchants.*;
@@ -91,6 +92,14 @@ public class redux extends JavaPlugin {
 
     public static DiamondStompLore diamondStompLore = new DiamondStompLore();
 
+    public static TelebowLore telebowLore = new TelebowLore();
+    public static PullBowLore pullBowLore = new PullBowLore();
+    public static MegaLongBowLore megaLongBowLore = new MegaLongBowLore();
+    public static FasterThenTheirShadowLore fasterThenTheirShadowLore = new FasterThenTheirShadowLore();
+    public static SprintDrainLore sprintDrainLore = new SprintDrainLore();
+    public static VolleyLore volleyLore = new VolleyLore();
+    public static ExplosiveLore explosiveLore = new ExplosiveLore();
+
     @Override
     public void onEnable() {
 
@@ -102,6 +111,7 @@ public class redux extends JavaPlugin {
         new economy(this);
         new xpManager(this);
         new Renown(this);
+        new Monster(this);
 
 
         skyblockItems.initializeItemstack();
@@ -126,6 +136,7 @@ public class redux extends JavaPlugin {
         SLAPI.loadXp();
         xpManager.XpLevelCalculation();
         SLAPI.loadXPInc();
+        SLAPI.loadMonster();
         SLAPI.loadDmgInc();
         SLAPI.loadRenown();
         SLAPI.loadDmgDec();
@@ -215,51 +226,9 @@ public class redux extends JavaPlugin {
             }
         }, 50L);
 
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
-        HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        for (int i = 0; i < 50; i++) {
+            HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+        }
 
         new BukkitRunnable() {
 
@@ -272,7 +241,9 @@ public class redux extends JavaPlugin {
                 SLAPI.savePrestige();
                 SLAPI.saveXp();
                 SLAPI.saveRenown();
+                SLAPI.saveMonster();
 
+                SLAPI.loadMonster();
                 SLAPI.loadXPInc();
                 SLAPI.loadDmgInc();
                 SLAPI.loadDmgDec();
@@ -297,6 +268,7 @@ public class redux extends JavaPlugin {
         SLAPI.saveDmgDec();
         SLAPI.saveMystic();
         SLAPI.saveRenown();
+        SLAPI.saveMonster();
         CreateVillagers.unloadNPC();
         delBoard();
         getServer().getConsoleSender().sendMessage(ChatColor.RED + "[Redux] plugin is disabled");
@@ -359,6 +331,8 @@ public class redux extends JavaPlugin {
         getCommand("getXp").setExecutor(commands);
         getCommand("pants").setExecutor(commands);
         getCommand("malding").setExecutor(commands);
+        getCommand("damage").setExecutor(commands);
+        getCommand("renown").setExecutor(commands);
        // getCommand("trade").setExecutor(commands);
     }
 

@@ -39,6 +39,10 @@ public class enchants {
     public static ItemStack playerSoul;
     public static ItemStack fresh_bow;
     public static ItemStack cactus;
+    public static ItemStack pantsPB;
+    public static ItemStack fullPantPB;
+    public static ItemStack fullSwordPB;
+    public static ItemStack swordPB;
 
     public static void init(){
         createLores();
@@ -60,6 +64,10 @@ public class enchants {
         createPlayerSoul();
         createFreshBow();
         createCactus();
+        createFULLPantPB();
+        createPantPB();
+        createSwordPB();
+        createFULLSwordPB();
     }
 
     private static void createLores() {
@@ -328,6 +336,115 @@ public class enchants {
         sr.setIngredient('S', Material.CACTUS);
         Bukkit.getServer().addRecipe(sr);
     }
+
+    private static void createPantPB() {
+        ItemStack item = new ItemStack(Material.MINECART, 1);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',
+                "&bPants Bundle"));
+        List<String> lore = new ArrayList<>();
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                "&7Kept on death"));
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                "&7Hold and right-click to store 10"));
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                "&7fresh pair of pants."));
+
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
+        meta.spigot().setUnbreakable(true);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        pantsPB = item;
+        //Shaped Recipe
+        ShapedRecipe sr = new ShapedRecipe(item);
+        sr.shape("SSS", "SSS", "SSS");
+        sr.setIngredient('S', Material.MINECART);
+        Bukkit.getServer().addRecipe(sr);
+    }
+
+    private static void createFULLPantPB() {
+        ItemStack item = new ItemStack(Material.STORAGE_MINECART, 1);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',
+                "&bPants Bundle"));
+        List<String> lore = new ArrayList<>();
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                "&7Kept on death"));
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                "&7Contents:"));
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                "&f10x &cRed"));
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                " "));
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                "&7Hold and right-click to open!"));
+
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
+        meta.spigot().setUnbreakable(true);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        fullPantPB = item;
+        //Shaped Recipe
+        ShapedRecipe sr = new ShapedRecipe(item);
+        sr.shape("SSS", "SSS", "SSS");
+        sr.setIngredient('S', Material.MINECART);
+        Bukkit.getServer().addRecipe(sr);
+    }
+
+    private static void createSwordPB() {
+        ItemStack item = new ItemStack(Material.MINECART, 1);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',
+                "&bSword Bundle"));
+        List<String> lore = new ArrayList<>();
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                "&7Kept on death"));
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                "&7Hold and right-click to store 10"));
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                "&7mystic swords."));
+
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
+        meta.spigot().setUnbreakable(true);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        swordPB = item;
+        //Shaped Recipe
+        ShapedRecipe sr = new ShapedRecipe(item);
+        sr.shape("SSS", "SSS", "SSS");
+        sr.setIngredient('S', Material.MINECART);
+        Bukkit.getServer().addRecipe(sr);
+    }
+
+    private static void createFULLSwordPB() {
+        ItemStack item = new ItemStack(Material.STORAGE_MINECART, 1);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',
+                "&bSword Bundle"));
+        List<String> lore = new ArrayList<>();
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                "&7Kept on death"));
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                "&7Contents:"));
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                "&f10x &cMystic Sword"));
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                " "));
+        lore.add(ChatColor.translateAlternateColorCodes('&',
+                "&7Hold and right-click to open!"));
+
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
+        meta.spigot().setUnbreakable(true);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        fullSwordPB = item;
+        //Shaped Recipe
+        ShapedRecipe sr = new ShapedRecipe(item);
+        sr.shape("SSS", "SSS", "SSS");
+        sr.setIngredient('S', Material.MINECART);
+        Bukkit.getServer().addRecipe(sr);
+    }
+
 
     private static void createMaldingChestplate() {
         ItemStack item = new ItemStack(Material.LEATHER_CHESTPLATE, 1);

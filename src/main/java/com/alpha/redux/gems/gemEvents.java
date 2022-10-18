@@ -60,7 +60,7 @@ public class gemEvents {
         if(event.getClickedInventory().getTitle() == null) return;
         if(event.getClickedInventory().getTitle().equals(ChatColor.GRAY + "Confirm or Cancel")) {
 
-            if(event.getCurrentItem().equals(confirmButton)){
+            if(event.getCurrentItem().equals(confirmButton) && event.getWhoClicked().getInventory().containsAtLeast(enchants.gem,1)){
                 ItemStack mystic = storedMystic.get(String.valueOf(event.getWhoClicked().getUniqueId()));
                 event.getWhoClicked().getInventory().removeItem(mystic);
 

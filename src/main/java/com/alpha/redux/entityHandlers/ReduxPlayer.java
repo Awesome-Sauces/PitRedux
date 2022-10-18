@@ -21,6 +21,8 @@ public class ReduxPlayer {
     Player player;
     String uuid;
     boolean regCD = true;
+    boolean perunCD = true;
+    boolean gambleCD = true;
     boolean escape = true;
     double damageIncrease;
     double damageDecrease;
@@ -99,6 +101,14 @@ public class ReduxPlayer {
     public boolean getRegCD(){return this.regCD;}
 
     public void setRegCD(){this.regCD = !this.regCD;}
+
+    public boolean getPerunCD(){return this.perunCD;}
+
+    public void setPerunCD(){this.perunCD = !this.perunCD;}
+
+    public boolean getGambleCD(){return this.gambleCD;}
+
+    public void setGambleCD(){this.gambleCD = !this.gambleCD;}
 
     public double getPlayerGoldBooster(){
         return this.goldBooster;

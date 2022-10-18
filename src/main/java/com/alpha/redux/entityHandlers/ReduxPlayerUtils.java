@@ -5,6 +5,7 @@ import com.alpha.redux.playerdata.streaks;
 import com.alpha.redux.renownShop.RenownStorage;
 import org.bukkit.Bukkit;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -16,7 +17,8 @@ import static com.alpha.redux.renownShop.xpIncrease.getXpIncrease;
 public class ReduxPlayerUtils {
 
     public static int calculateExp(ReduxPlayer player){
-        List<String> enchants = null;
+        List<String> penchants = new ArrayList<>();
+        List<String> senchants = new ArrayList<>();
 
         double xp_Amount = 18;
         int XP_CAP = 80;
@@ -30,22 +32,23 @@ public class ReduxPlayerUtils {
         else if(MULTIPLIER == 7) XP_MULTIPLIER += 3;
 
 
-        if(player.getPantEnchants() != null) enchants = player.getPantEnchants();
+        if(player.getPantEnchants() != null) penchants = player.getPantEnchants();
 
-        if(enchants != null)
-            for (String sw : enchants) {
+        if(!penchants.isEmpty())
+            for (String sw : penchants) {
                 switch (sw) {
 
                     case "sweatyIII":
-                        XP_MULTIPLIER += 2;
-                        XP_CAP += 150;
+                        XP_MULTIPLIER += .45;
+                        XP_CAP += 100;
                         break;
                     case "sweatyII":
-                        XP_MULTIPLIER += 1.2;
-                        XP_CAP += 50;
+                        XP_MULTIPLIER += .30;
+                        XP_CAP += 75;
                         break;
                     case "sweatyI":
-                        XP_MULTIPLIER += 1;
+                        XP_MULTIPLIER += .15;
+                        XP_CAP += 50;
                         break;
 
                     case "xpIII":
@@ -60,33 +63,37 @@ public class ReduxPlayerUtils {
 
                     case "xpbIII":
                         XP_CAP += 6;
+                        XP_MULTIPLIER += .05;
                         break;
                     case "xpbII":
                         XP_CAP += 4;
+                        XP_MULTIPLIER += .10;
                         break;
                     case "xpbI":
                         XP_CAP += 2;
+                        XP_MULTIPLIER += .15;
                         break;
 
                 }
             }
 
-        if(player != null && player.getSwordEnchants() != null) enchants = player.getSwordEnchants();
+        if(player.getSwordEnchants() != null) senchants = player.getSwordEnchants();
 
-        if(enchants != null)
-            for (String sw : enchants) {
+        if(!senchants.isEmpty())
+            for (String sw : senchants) {
                 switch (sw) {
 
                     case "sweatyIII":
-                        XP_MULTIPLIER += 2;
-                        XP_CAP += 150;
+                        XP_MULTIPLIER += .45;
+                        XP_CAP += 100;
                         break;
                     case "sweatyII":
-                        XP_MULTIPLIER += 1.2;
-                        XP_CAP += 50;
+                        XP_MULTIPLIER += .30;
+                        XP_CAP += 75;
                         break;
                     case "sweatyI":
-                        XP_MULTIPLIER += 1;
+                        XP_MULTIPLIER += .15;
+                        XP_CAP += 50;
                         break;
 
                     case "xpIII":
@@ -101,14 +108,16 @@ public class ReduxPlayerUtils {
 
                     case "xpbIII":
                         XP_CAP += 6;
+                        XP_MULTIPLIER += .05;
                         break;
                     case "xpbII":
                         XP_CAP += 4;
+                        XP_MULTIPLIER += .10;
                         break;
                     case "xpbI":
                         XP_CAP += 2;
+                        XP_MULTIPLIER += .15;
                         break;
-
                 }
             }
 
@@ -138,7 +147,8 @@ public class ReduxPlayerUtils {
     }
 
     public static int calculateGoldAmount(ReduxPlayer player){
-        List<String> enchants = null;
+        List<String> penchants = new ArrayList<>();
+        List<String> senchants = new ArrayList<>();
 
         int Gold_Amount = 18;
 
@@ -151,10 +161,10 @@ public class ReduxPlayerUtils {
 
 
 
-        if(player.getPantEnchants() != null) enchants = player.getPantEnchants();
+        if(player.getPantEnchants() != null) penchants = player.getPantEnchants();
 
-        if(enchants != null)
-            for (String sw : enchants) {
+        if(!penchants.isEmpty())
+            for (String sw : penchants) {
                 switch (sw) {
                     case "moctIII":
                         Gold_Amount += 18;
@@ -185,10 +195,10 @@ public class ReduxPlayerUtils {
                 }
             }
 
-        if(player.getSwordEnchants() != null) enchants = player.getSwordEnchants();
+        if(player.getSwordEnchants() != null) senchants = player.getSwordEnchants();
 
-        if(enchants != null)
-            for (String sw : enchants) {
+        if(!senchants.isEmpty())
+            for (String sw : senchants) {
                 switch (sw) {
                     case "moctIII":
                         Gold_Amount += 18;

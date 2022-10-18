@@ -37,6 +37,7 @@ public class questInventoryManager {
                         player.getInventory().removeItem(new ItemStack(Material.CAKE));
                     }
 
+
                     removeEconomy(uuid, 100000);
 
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7I didn't think you would be able to complete this quest!"));

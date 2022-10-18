@@ -272,6 +272,9 @@ public class events implements Listener {
             return;
         }
 
+        if(event.getEntity().getType().equals(EntityType.SLIME)){
+            event.setCancelled(true);
+        }
 
 
         if(event.getEntity().getType().equals(EntityType.SLIME)){
@@ -311,6 +314,13 @@ public class events implements Listener {
             Arrow arrow = (Arrow) event.getDamager();
             Player player = (Player) arrow.getShooter();
             ((Player) event.getEntity()).damage(event.getDamage(), player);
+
+            if(player.getItemInHand() != null && player.getItemInHand().getItemMeta() != null &&
+                    !player.getItemInHand().getItemMeta().getDisplayName().contains("Super Bow") &&
+            player.getItemInHand().getType().equals(Material.BOW)){
+                player.getInventory().removeItem(player.getItemInHand());
+                player.setItemInHand(enchants.fresh_bow);
+            }
 
             ReduxBowEvent mainEvent = new ReduxBowEvent(playerExists(player), playerExists((Player) event.getEntity()), event.getDamage(), event);
             Bukkit.getPluginManager().callEvent(mainEvent);
@@ -523,6 +533,120 @@ public class events implements Listener {
             player.openInventory(CactusRunTime.inventoryConstructor(player));
         }
 
+        if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_AIR){
+
+            if (event.getPlayer().getItemInHand() != null &&
+            event.getPlayer().getItemInHand().equals(enchants.fullPantPB)){
+                for (int i = 0; i < 10; i++) {
+                    event.getPlayer().getInventory().addItem(enchants.fresh_reds);
+                }
+
+                event.getPlayer().getInventory().removeItem(enchants.fullPantPB);
+            }else if (event.getPlayer().getItemInHand() != null &&
+                    event.getPlayer().getItemInHand().equals(enchants.fullSwordPB)){
+                for (int i = 0; i < 10; i++) {
+                    event.getPlayer().getInventory().addItem(enchants.fresh_sword);
+                }
+
+                event.getPlayer().getInventory().removeItem(enchants.fullSwordPB);
+            }
+
+            if(event.getPlayer().getItemInHand() != null &&
+                event.getPlayer().getItemInHand().getItemMeta() != null &&
+                event.getPlayer().getItemInHand().equals(enchants.swordPB) &&
+                    event.getPlayer().getInventory().contains(enchants.fresh_sword, 10)
+            ){
+
+                event.getPlayer().getInventory().removeItem(enchants.swordPB);
+
+                for (int i = 0; i < 10; i++) {
+                    event.getPlayer().getInventory().removeItem(enchants.fresh_sword);
+                }
+
+                event.getPlayer().getInventory().addItem(enchants.fullSwordPB);
+
+
+                return;
+
+            }else if(event.getPlayer().getItemInHand() != null &&
+                    event.getPlayer().getItemInHand().getItemMeta() != null &&
+                    event.getPlayer().getItemInHand().equals(enchants.pantsPB)){
+
+                if(event.getPlayer().getInventory().contains(enchants.fresh_reds, 10)){
+                    for (int i = 0; i < 10; i++) {
+                        event.getPlayer().getInventory().removeItem(enchants.fresh_reds);
+                    }
+
+                    event.getPlayer().getInventory().addItem(enchants.fullPantPB);
+                    event.getPlayer().getInventory().removeItem(enchants.pantsPB);
+                    return;
+                }else if(event.getPlayer().getInventory().contains(enchants.fresh_blues, 10)){
+                    for (int i = 0; i < 10; i++) {
+                        event.getPlayer().getInventory().removeItem(enchants.fresh_blues);
+                    }
+
+                    event.getPlayer().getInventory().addItem(enchants.fullPantPB);
+                    event.getPlayer().getInventory().removeItem(enchants.pantsPB);
+                    return;
+                }else if(event.getPlayer().getInventory().contains(enchants.fresh_yellows, 10)){
+                    for (int i = 0; i < 10; i++) {
+                        event.getPlayer().getInventory().removeItem(enchants.fresh_yellows);
+                    }
+
+                    event.getPlayer().getInventory().addItem(enchants.fullPantPB);
+                    event.getPlayer().getInventory().removeItem(enchants.pantsPB);
+                    return;
+                }else if(event.getPlayer().getInventory().contains(enchants.fresh_greens, 10)){
+                    for (int i = 0; i < 10; i++) {
+                        event.getPlayer().getInventory().removeItem(enchants.fresh_greens);
+                    }
+
+                    event.getPlayer().getInventory().addItem(enchants.fullPantPB);
+                    event.getPlayer().getInventory().removeItem(enchants.pantsPB);
+                    return;
+                }else if(event.getPlayer().getInventory().contains(enchants.fresh_oranges, 10)){
+                    for (int i = 0; i < 10; i++) {
+                        event.getPlayer().getInventory().removeItem(enchants.fresh_oranges);
+                    }
+
+                    event.getPlayer().getInventory().addItem(enchants.fullPantPB);
+                    event.getPlayer().getInventory().removeItem(enchants.pantsPB);
+                    return;
+                }else{
+
+                    int pant_amount = 0;
+
+                    for (ItemStack item : event.getPlayer().getInventory()){
+                        if (item!=null&&item.getItemMeta()!=null&& item.getItemMeta().getDisplayName() != null &&item.getItemMeta().getDisplayName().contains("Fresh")){
+                            pant_amount+=1;
+                        }
+                    }
+
+                    if(pant_amount < 10) return;
+
+                    int removed = 0;
+
+                    if(pant_amount>=10){
+                        for(ItemStack item : event.getPlayer().getInventory()){
+                            if(removed>=10){
+                                break;
+                            }
+
+                            if(item!=null&&item.getItemMeta()!=null&& item.getItemMeta().getDisplayName() != null &&item.getItemMeta().getDisplayName().contains("Fresh")){
+                                event.getPlayer().getInventory().removeItem(item);
+                                removed+=1;
+                            }
+                        }
+                    }
+
+                    event.getPlayer().getInventory().addItem(enchants.fullPantPB);
+                    event.getPlayer().getInventory().removeItem(enchants.pantsPB);
+                    return;
+                }
+
+            }
+        }
+
         if (event.getAction() == Action.LEFT_CLICK_AIR) {
             if (event.getItem() != null) {
                 if (event.getItem().equals(RenownStorage.getBlazeQuest())) {
@@ -637,6 +761,8 @@ public class events implements Listener {
 
                 }else if(event.getItem().getType().equals(Material.ENDER_CHEST)){
                     event.getPlayer().getInventory().removeItem(RenownStorage.getUberDrop());
+
+                    event.getPlayer().getInventory().removeItem(new ItemStack(Material.ENDER_CHEST));
 
                     event.getPlayer().getInventory().removeItem(RenownItems.UberDrop());
 
@@ -934,10 +1060,10 @@ public class events implements Listener {
             }
 
             //Perks(player);
-        }else if(npc.getName().contains("Merchant")){
+        }else if(npc != null && npc.getName() != null && npc.getName().contains("Merchant")){
             player.sendMessage(ChatColor.LIGHT_PURPLE + "Hey welcome to Better Pit!");
             player.sendMessage(ChatColor.GRAY + "Check out the store at: " + ChatColor.AQUA + "https://betterpit.tebex.io/");
-            player.sendMessage(ChatColor.AQUA + "Join the discord at: " + ChatColor.DARK_AQUA + "https://discord.gg/mBNBbePF");
+            player.sendMessage(ChatColor.AQUA + "Join the discord at: " + ChatColor.DARK_AQUA + "https://discord.gg/jeGddMuH");
             //Perks(player);
         }
     }

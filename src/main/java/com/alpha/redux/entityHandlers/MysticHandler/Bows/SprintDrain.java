@@ -39,16 +39,15 @@ public class SprintDrain {
     }
 
     private void giveSpeed(Player player, int power, int time){
-        if(!player.hasPotionEffect(PotionEffectType.SPEED)){
+
             player.removePotionEffect(PotionEffectType.SPEED);
             player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, time*20, Math.max(power-1, 0), true, true));
-        }
     }
 
     private void giveSlow(Player player, int power, int time){
-        if(!player.hasPotionEffect(PotionEffectType.SLOW)){
+
             player.removePotionEffect(PotionEffectType.SLOW);
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, time*20, Math.max(power-1, 0), true, true));
-        }
+
     }
 }

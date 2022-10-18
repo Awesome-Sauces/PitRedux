@@ -1,7 +1,10 @@
 package com.alpha.redux.well.enchants;
 
 import com.alpha.redux.entityHandlers.MysticHandler.Swords.Perun;
+import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
+import com.alpha.redux.playerdata.economy;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import static com.alpha.redux.apis.strikeLight.strikeLightningForPlayers;
 import static com.alpha.redux.entityHandlers.MysticHandler.Swords.Perun.hitCounter;
@@ -14,13 +17,28 @@ public class PerunLore extends PitEnchant{
 
         int count = 5;
 
-        if (level > 1){count = 4;}
+        if (perunCooldown(event.getAttacker()) && level > 1){count = 4;}
 
         addCounter(event);
 
         if(trigger(event, count)){
             event.addReduxTrueDamage(level*2);
         }
+    }
+
+    private boolean perunCooldown(ReduxPlayer owner){
+        if (owner.getPerunCD()){
+            owner.setPerunCD();
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    owner.setPerunCD();
+                }
+            }.runTaskLater(economy.getPlugin(), 5L);
+            return true;
+        }
+
+        return false;
     }
 
     private void addCounter(ReduxDamageEvent event){

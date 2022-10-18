@@ -6,6 +6,8 @@ import com.alpha.redux.items.enchants;
 import com.alpha.redux.items.itemManager;
 import com.alpha.redux.playerdata.economy;
 import com.alpha.redux.questMaster.bossBattles.BossMalding;
+import com.alpha.redux.renownShop.CookieMonster.Monster;
+import com.alpha.redux.renownShop.CookieMonster.MonsterHandler;
 import com.alpha.redux.renownShop.damageDecrease;
 import com.alpha.redux.renownShop.damageIncrease;
 import net.citizensnpcs.api.CitizensAPI;
@@ -51,6 +53,8 @@ public class ReduxEvents implements Listener {
     @EventHandler
     public static void DeathEventHandler(ReduxDeathEvent event){
 
+        MonsterHandler.percentageSpawn(event.getAttacker().getPlayerObject());
+
         ReduxPlayer ReduxAttacker = event.getAttacker();
 
         if(!isNPC(ReduxAttacker.getPlayerObject())){
@@ -72,6 +76,10 @@ public class ReduxEvents implements Listener {
     @EventHandler
     public void onPlace(BlockPlaceEvent event) {
 
+        if(event.getBlock().getType().equals(Material.CAKE_BLOCK) || event.getBlock().getType().equals(Material.CAKE)){
+            event.setCancelled(true);
+            return;
+        }
 
         if(event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) return;
 

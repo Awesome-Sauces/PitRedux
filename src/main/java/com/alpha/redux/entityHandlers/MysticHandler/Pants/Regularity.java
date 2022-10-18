@@ -21,7 +21,7 @@ public class Regularity {
         PantEnchant regularity = new PantEnchant(event, player, "reg") {
             @Override
             public void OneAction() {
-                regularityL.run(event, 3);
+                regularityL.run(event, 1);
             }
 
             @Override
@@ -32,7 +32,7 @@ public class Regularity {
             @Override
             public void ThreeAction() {
 
-                regularityL.run(event, 1);
+                regularityL.run(event, 3);
 
             }
         };

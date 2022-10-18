@@ -423,7 +423,7 @@ public class boards {
             prestigeData.setScore(9);
             spacer4.setScore(10);
             version.setScore(11);
-        }else if (getPrestige(uuid) >= 0){
+        }else if (getPrestige(uuid) <= 0){
             ipData.setScore(1);
             spacer1.setScore(2);
             statusData.setScore(3);

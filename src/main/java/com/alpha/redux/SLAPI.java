@@ -3,6 +3,7 @@ import com.alpha.redux.playerdata.Renown;
 import com.alpha.redux.playerdata.economy;
 import com.alpha.redux.playerdata.prestiges;
 import com.alpha.redux.playerdata.xpManager;
+import com.alpha.redux.renownShop.CookieMonster.Monster;
 import com.alpha.redux.renownShop.MysticismChance;
 import com.alpha.redux.renownShop.damageDecrease;
 import com.alpha.redux.renownShop.damageIncrease;
@@ -31,6 +32,21 @@ public class SLAPI {
         for (String s : plugin.getConfig().getConfigurationSection("prestige").getKeys(false))
         {
             prestiges.setPrestige(s, plugin.getConfig().getInt("prestige."+s));
+        }
+    }
+
+    public static void saveMonster(){
+        for(String p : Monster.getMonsterChanceMap().keySet()){
+            plugin.getConfig().set("monster."+p, Monster.getMonsterChanceMap().get(p));
+        }
+        plugin.saveConfig();
+    }
+
+    public static void loadMonster(){
+        if (!plugin.getConfig().contains("monster")) return;
+        for (String s : plugin.getConfig().getConfigurationSection("monster").getKeys(false))
+        {
+            Monster.setMonsterChance(s, plugin.getConfig().getInt("monster." + s));
         }
     }
 

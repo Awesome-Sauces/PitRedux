@@ -1,24 +1,23 @@
 package com.alpha.redux.well.enchants;
 
+import com.alpha.redux.eventManagers.ReduxBowEvent;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 
 import static com.alpha.redux.events.boards.integerToRoman;
 
-public class ProtectionLore extends PitEnchant{
+public class VolleyLore extends PitEnchant{
 
     @Override
     public void run(ReduxDamageEvent event, int level) {
+    }
 
-        double damage = Math.max(4+((level-1)*3), 1);
+    public void bow(ReduxBowEvent event, int level){
 
-        event.subtractReduxDamage(event.getReduxDamage()*(damage/100));
     }
 
     @Override
     public void init() {
-        rarity = EnchantRarity.NORMAL;
+        rarity = EnchantRarity.RARE;
     }
 
     @Override
@@ -26,7 +25,7 @@ public class ProtectionLore extends PitEnchant{
         String tier = "";
         if (level > 1){tier += " " + integerToRoman(level);}
 
-        return "&9Protection" + tier;
+        return "&dRARE! &9Volley" + tier;
     }
 
     @Override
@@ -34,11 +33,12 @@ public class ProtectionLore extends PitEnchant{
         String tier = "";
         if (level > 1){tier += " " + integerToRoman(level);}
 
-        String multiplier = String.valueOf(4+((level-1)*3));
+        String multiplier = String.valueOf(level+2);
 
-        String lore = "&9Protection" + tier + "\n" +
-                "&7Receive &9-"+multiplier+"%&7 damage" + "\n&7";
+        String lore = "&dRARE! &9Volley" + tier + "\n" +
+                "&7Shoot &f"+multiplier+" arrows &7at once" + "\n&7";
 
         return colorCode(lore);
     }
 }
+

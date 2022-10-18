@@ -33,9 +33,8 @@ public class FasterThanTheirShadow {
     }
 
     private void giveSpeed(Player player, int power, int time){
-        if(!player.hasPotionEffect(PotionEffectType.SPEED)){
+
             player.removePotionEffect(PotionEffectType.SPEED);
             player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, time*20, Math.max(power-1, 0), true, true));
-        }
     }
 }

@@ -9,6 +9,7 @@ import com.alpha.redux.playerdata.economy;
 import com.alpha.redux.playerdata.prestiges;
 import com.alpha.redux.playerdata.xpManager;
 import com.alpha.redux.well.EnchantingMechanics;
+import com.alpha.redux.well.enchanters.FreshPants;
 import com.nametagedit.plugin.NametagEdit;
 import net.citizensnpcs.api.CitizensAPI;
 import org.bukkit.*;
@@ -25,10 +26,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.alpha.redux.DeathHandler.MysticUtils.MysticRepairs;
 import static com.alpha.redux.apis.FancyText.compileListToString;
@@ -49,12 +47,15 @@ import static com.alpha.redux.events.nonPermItems.ClearAndCheck;
 import static com.alpha.redux.funEvents.event.endTwoTimes;
 import static com.alpha.redux.funEvents.event.twoTimesEvent;
 import static com.alpha.redux.items.tebexItems.giveDyes;
+import static com.alpha.redux.playerdata.Renown.hasRenown;
+import static com.alpha.redux.playerdata.Renown.setRenown;
 import static com.alpha.redux.playerdata.economy.*;
 import static com.alpha.redux.playerdata.prestiges.*;
 import static com.alpha.redux.playerdata.streaks.*;
 import static com.alpha.redux.playerdata.xpManager.GetCurrentLevel;
 import static com.alpha.redux.playerdata.xpManager.getXp;
 import static com.alpha.redux.questMaster.bossBattles.maldingBoss.summonBoss;
+import static com.alpha.redux.well.enchanters.MysticSword.*;
 import static com.alpha.redux.well.gui.*;
 
 public class command implements CommandExecutor {
@@ -175,6 +176,13 @@ public class command implements CommandExecutor {
              */
         }
 
+        if(cmd.getName().equalsIgnoreCase("damage") && player.isOp()){
+            Player defender = Bukkit.getPlayer(args[1]);
+            Player attacker = player;
+
+            defender.damage(Integer.parseInt(args[0]), attacker);
+        }
+
         if(cmd.getName().equalsIgnoreCase("veloCheck")){
             if(player.hasPermission("admin.velo")){
                 if(args.length < 1){
@@ -200,23 +208,35 @@ public class command implements CommandExecutor {
 
         if(cmd.getName().equalsIgnoreCase("enchantPant")){
             if(!player.hasPermission("pantEnchant")) return true;
-            if(args.length < 1){
-                player.sendMessage(ChatColor.RED + "Please use this format: /enchantPant <enchant>");
+            if(args.length < 2){
+                player.sendMessage(ChatColor.RED + "Please use this format: /enchantPant <enchant> <tier>");
                 return true;
             }
 
             if(player.getInventory().getItemInHand() != null){
 
                 ItemMeta meta = player.getInventory().getItemInHand().getItemMeta();
+               // ItemStack item = player.getInventory().getItemInHand();
 
                 if(player.getInventory().getItemInHand().getType().equals(Material.LEATHER_LEGGINGS)){
-                    List<String> lore = new EnchantingMechanics(player.getInventory().getItemInHand().getItemMeta().getLore(), args[0], .3, .5, "PANT").getLore();
+                    meta.setDisplayName(colorCode("&cTier III Pants"));
+
+                    List<String> lore = new ArrayList<>();
+                    lore = FreshPants.renewEnchant(meta.getLore(), FreshPants.translateList(Arrays.asList(FreshPants.enchantTier(args[0], Integer.parseInt(args[1])).split("\n"))));
+
+                    lore.add(ChatColor.RED + "As strong as iron");
 
                     meta.setLore(lore);
 
                 }else if(player.getInventory().getItemInHand().getType().equals(Material.GOLD_SWORD)){
-                    List<String> lore = new EnchantingMechanics(player.getInventory().getItemInHand().getItemMeta().getLore(), args[0], .3, .5, "SWORD").getLore();
 
+
+                    meta.setDisplayName(colorCode("&cTier III Sword"));
+
+                    List<String> lore = new ArrayList<>();
+
+                    lore = renewEnchant(meta.getLore(), translateList(Arrays.asList(enchantTier(args[0], Integer.parseInt(args[1])).split("\n"))));
+                    lore.add(ChatColor.BLUE + "+6.5 Attack Damage");
                     meta.setLore(lore);
 
                 }
@@ -436,6 +456,22 @@ public class command implements CommandExecutor {
                 hasPrestige(args[2]);
                 setPrestige(args[2], (int) amount);
                 player.sendMessage(ChatColor.GREEN + "Prestige succesfully set!");
+                return true;
+            }
+        }
+
+        if(BaseChecks(player, cmd.getName(), "renown", false, true, "SetRenown")){
+            if(args.length != 3){
+                player.sendMessage(ChatColor.RED + "Hey! You cannot use that command like that!");
+                player.sendMessage(ChatColor.GREEN + "Usage: /renown <set> <amount> <uuid>");
+                return true;
+            }
+
+            if (args[0].equalsIgnoreCase("set")){
+                double amount = Double.parseDouble(args[1]);
+                hasRenown(args[2]);
+                setRenown(args[2], (int) amount);
+                player.sendMessage(ChatColor.GREEN + "Renown succesfully set!");
                 return true;
             }
         }

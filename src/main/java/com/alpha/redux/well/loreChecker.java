@@ -380,6 +380,51 @@ public class loreChecker {
         }else if (lore.contains("&9Sprint Drain"))
             list.add("sprintI");
 
+        if (lore.contains(colorCode("&9Moctezuma III"))){
+            list.add("moctIII");
+        }else if (lore.contains(colorCode("&9Moctezuma II"))){
+            list.add("moctII");
+        }else if (lore.contains(colorCode("&9Moctezuma")))
+            list.add("moctI");
+
+
+        if (lore.contains(colorCode("&9Gold Bump III"))){
+            list.add("goldBumpIII");
+        }else if (lore.contains(colorCode("&9Gold Bump II"))){
+            list.add("goldBumpII");
+        }else if (lore.contains(colorCode("&9Gold Bump")))
+            list.add("goldBumpI");
+
+
+        if (lore.contains(colorCode("&9Sweaty III"))){
+            list.add("sweatyIII");
+        }else if (lore.contains(colorCode("&9Sweaty II"))){
+            list.add("sweatyII");
+        }else if (lore.contains(colorCode("&9Sweaty")))
+            list.add("sweatyI");
+
+
+        if (lore.contains(colorCode("&9XP Boost III"))){
+            list.add("xpIII");
+        }else if (lore.contains(colorCode("&9XP Boost II"))){
+            list.add("xpII");
+        }else if (lore.contains(colorCode("&9XP Boost")))
+            list.add("xpI");
+
+        if (lore.contains(colorCode("&9XP Bump III"))){
+            list.add("xpbIII");
+        }else if (lore.contains(colorCode("&9XP Bump II"))){
+            list.add("xpbII");
+        }else if (lore.contains(colorCode("&9XP Bump")))
+            list.add("xpbI");
+
+        if (lore.contains(colorCode("&9Gold Boost III"))){
+            list.add("gbIII");
+        }else if (lore.contains(colorCode("&9Gold Boost II"))){
+            list.add("gbII");
+        }else if (lore.contains(colorCode("&9Gold Boost")))
+            list.add("gbI");
+
         return list;
     }
 

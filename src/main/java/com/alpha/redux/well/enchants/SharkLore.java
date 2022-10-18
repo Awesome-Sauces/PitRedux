@@ -11,16 +11,15 @@ public class SharkLore extends PitEnchant{
 
     @Override
     public void run(ReduxDamageEvent event, int level) {
-        double multiplier = 0;
+        double multiplier = 1;
 
         if (level > 2) {
             multiplier += (level * 2) + 1;
         }else {multiplier += level*2;}
 
-        multiplier = multiplier / 100;
 
         event.addReduxDamage(event.getReduxDamage() *
-                ((Math.min(getSharkPlayers(event.getAttacker().getPlayerObject()), 5) * multiplier )/10));
+                ((Math.min(getSharkPlayers(event.getAttacker().getPlayerObject()), 8) * (multiplier/100) )));
 
 
     }

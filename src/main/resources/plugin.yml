@@ -9,6 +9,10 @@ commands:
     description: Teleports player to spawn
     usage: /<command>
     aliases: spwn
+  renown:
+    description: Sets renown
+    usage: /<command>
+    aliases: setrenown
   feed:
     description: Feeds player to max saturation
     usage: /<command>
@@ -16,6 +20,9 @@ commands:
   kit:
     description: Gives kit
     usage: /<command>
+  damage:
+    description: Does damage calculations
+    usage: /<command> <amount> <player>
   shop:
     description: Opens Shop
     usage: /<command>

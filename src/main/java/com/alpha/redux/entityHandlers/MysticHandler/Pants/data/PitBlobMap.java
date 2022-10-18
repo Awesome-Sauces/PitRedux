@@ -84,7 +84,7 @@ public class PitBlobMap {
 
         Slime slime = blob.get(player);
 
-        runnable.get(player).cancel();
+        if (Bukkit.getScheduler().isCurrentlyRunning(runnable.get(player).getTaskId())) runnable.get(player).cancel();
         runnable.remove(player);
 
         blob.remove(player);
@@ -123,7 +123,7 @@ public class PitBlobMap {
 
                 if(player.getLocation().getY() >= getSpawnProtection()) deleteBlob(player);
 
-                for(Entity entity : slime.getNearbyEntities(3, 3, 3)){
+                for(Entity entity : slime.getNearbyEntities(1, 1, 1)){
                     LivingEntity livingEntity = (LivingEntity) entity;
 
 
@@ -132,7 +132,7 @@ public class PitBlobMap {
 
                         getNPC(living);
 
-                        getNPC(living).teleport(getBotSpawnLocation(), PlayerTeleportEvent.TeleportCause.PLUGIN);
+                        //getNPC(living).teleport(getBotSpawnLocation(), PlayerTeleportEvent.TeleportCause.PLUGIN);
 
                         living.setHealth(living.getMaxHealth());
 

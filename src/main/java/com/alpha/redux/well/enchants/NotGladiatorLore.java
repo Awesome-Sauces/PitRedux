@@ -21,10 +21,10 @@ public class NotGladiatorLore extends PitEnchant{
 
         double power = 0;
 
-        for(Entity entity : player.getNearbyEntities(15, 15, 15))
+        for(Entity entity : player.getNearbyEntities(7, 7, 7))
             if(entity instanceof Player) power += multiplier;
 
-        return Math.min(power, multiplier * 10);
+        return Math.min(power, multiplier * 5);
     }
 
     @Override

@@ -9,7 +9,7 @@ public class SharpLore extends PitEnchant{
     @Override
     public void run(ReduxDamageEvent event, int level) {
 
-        double damage = (level*4);
+        double damage = (level*6);
         event.addReduxDamage(event.getReduxDamage() * (damage/100));
     }
 

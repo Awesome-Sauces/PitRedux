@@ -37,7 +37,7 @@ public class InventoryEventManager implements Listener {
 
     @EventHandler
     public void heister(InventoryClickEvent event){
-        if(!event.getClickedInventory().getTitle().equals(ChatColor.LIGHT_PURPLE + "Heist Master")) return;
+        if(event != null && event.getClickedInventory().getTitle() != null &&!event.getClickedInventory().getTitle().equals(ChatColor.LIGHT_PURPLE + "Heist Master")) return;
 
         event.setCancelled(true);
 
@@ -117,7 +117,7 @@ public class InventoryEventManager implements Listener {
 
     @EventHandler
     public void boosterBeacon(InventoryClickEvent event){
-        if(!event.getClickedInventory().getTitle().equals(ChatColor.LIGHT_PURPLE + "Booster Atoms")) return;
+        if(event != null && event.getClickedInventory().getTitle() != null && !event.getClickedInventory().getTitle().equals(ChatColor.LIGHT_PURPLE + "Booster Atoms")) return;
 
         event.setCancelled(true);
 
@@ -211,7 +211,7 @@ public class InventoryEventManager implements Listener {
 
     @EventHandler
     public void main(InventoryClickEvent event){
-        if(!event.getClickedInventory().getTitle().equals(ChatColor.LIGHT_PURPLE + "Nuclear Atomizer")) return;
+        if(event != null && event.getClickedInventory().getTitle() != null &&!event.getClickedInventory().getTitle().equals(ChatColor.LIGHT_PURPLE + "Nuclear Atomizer")) return;
 
         event.setCancelled(true);
 
@@ -263,28 +263,30 @@ public class InventoryEventManager implements Listener {
 
     @EventHandler
     public void cactus(InventoryClickEvent event){
-        if(event.getClickedInventory().getTitle() != null && event.getClickedInventory().getTitle().equals(ChatColor.GRAY + "Philosopher's Cactus")){
+        if(event != null && event.getClickedInventory().getTitle() != null &&event.getClickedInventory().getTitle() != null && event.getClickedInventory().getTitle().equals(ChatColor.GRAY + "Philosopher's Cactus")){
             event.setCancelled(true);
             Player player = (Player) event.getWhoClicked();
             Inventory inventory = player.getInventory();
 
-            if(event.getCurrentItem().equals(enchants.fresh_reds)){
+
+
+            if(event.getWhoClicked().getInventory().containsAtLeast(enchants.cactus, 1) && event.getCurrentItem().equals(enchants.fresh_reds)){
                 player.closeInventory();
                 event.getWhoClicked().getInventory().removeItem(enchants.cactus);
                 player.getInventory().addItem(enchants.fresh_reds);
-            }else if(event.getCurrentItem().equals(enchants.fresh_blues)){
+            }else if(event.getWhoClicked().getInventory().containsAtLeast(enchants.cactus, 1) && event.getCurrentItem().equals(enchants.fresh_blues)){
                 player.closeInventory();
                 event.getWhoClicked().getInventory().removeItem(enchants.cactus);
                 player.getInventory().addItem(enchants.fresh_blues);
-            }else if(event.getCurrentItem().equals(enchants.fresh_greens)){
+            }else if(event.getWhoClicked().getInventory().containsAtLeast(enchants.cactus, 1) && event.getCurrentItem().equals(enchants.fresh_greens)){
                 player.closeInventory();
                 event.getWhoClicked().getInventory().removeItem(enchants.cactus);
                 player.getInventory().addItem(enchants.fresh_greens);
-            }else if(event.getCurrentItem().equals(enchants.fresh_yellows)){
+            }else if(event.getWhoClicked().getInventory().containsAtLeast(enchants.cactus, 1) && event.getCurrentItem().equals(enchants.fresh_yellows)){
                 player.closeInventory();
                 player.getInventory().removeItem(enchants.cactus);
                 player.getInventory().addItem(enchants.fresh_yellows);
-            }else if(event.getCurrentItem().equals(enchants.fresh_oranges)){
+            }else if(event.getWhoClicked().getInventory().containsAtLeast(enchants.cactus, 1) && event.getCurrentItem().equals(enchants.fresh_oranges)){
                 player.closeInventory();
                 event.getWhoClicked().getInventory().removeItem(enchants.cactus);
                 player.getInventory().addItem(enchants.fresh_oranges);

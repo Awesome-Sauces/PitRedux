@@ -1,24 +1,23 @@
 package com.alpha.redux.well.enchants;
 
+import com.alpha.redux.eventManagers.ReduxBowEvent;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 
 import static com.alpha.redux.events.boards.integerToRoman;
 
-public class ProtectionLore extends PitEnchant{
+public class PullBowLore extends PitEnchant{
 
     @Override
     public void run(ReduxDamageEvent event, int level) {
+    }
 
-        double damage = Math.max(4+((level-1)*3), 1);
+    public void bow(ReduxBowEvent event, int level){
 
-        event.subtractReduxDamage(event.getReduxDamage()*(damage/100));
     }
 
     @Override
     public void init() {
-        rarity = EnchantRarity.NORMAL;
+        rarity = EnchantRarity.RARE;
     }
 
     @Override
@@ -26,7 +25,7 @@ public class ProtectionLore extends PitEnchant{
         String tier = "";
         if (level > 1){tier += " " + integerToRoman(level);}
 
-        return "&9Protection" + tier;
+        return "&dRARE! &9Pullbow" + tier;
     }
 
     @Override
@@ -34,11 +33,14 @@ public class ProtectionLore extends PitEnchant{
         String tier = "";
         if (level > 1){tier += " " + integerToRoman(level);}
 
-        String multiplier = String.valueOf(4+((level-1)*3));
+        String multiplier = String.valueOf(8-(level+1));
 
-        String lore = "&9Protection" + tier + "\n" +
-                "&7Receive &9-"+multiplier+"%&7 damage" + "\n&7";
+        String lore = "&dRARE! &9Pullbow" + tier + "\n" +
+                "&7Hitting a player pulls them and\n" +
+                "&7nearby players toward you ("+multiplier+"s" +
+                "&7cooldown)" + "\n&7";
 
         return colorCode(lore);
     }
 }
+

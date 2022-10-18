@@ -2,6 +2,7 @@ package com.alpha.redux.MenuClicks;
 
 import com.alpha.redux.apis.chatManager.rank;
 import com.alpha.redux.events.boards;
+import com.alpha.redux.items.enchants;
 import com.alpha.redux.playerdata.Renown;
 import com.alpha.redux.playerdata.prestiges;
 import com.alpha.redux.playerdata.xpManager;
@@ -220,6 +221,33 @@ public class InventoryEvent {
                     } else {
                         player.sendMessage(ChatColor.RED + "You can't afford this!");
                     }
+                    event.setCancelled(true);
+                    break;
+
+                }
+            case MINECART:
+                if (hasEconomy(String.valueOf(player.getUniqueId()))) {
+                    if (getEconomy(String.valueOf(player.getUniqueId())) >= 150 && event.getCurrentItem().getItemMeta().getDisplayName().contains("Pants Bundle")) {
+                        removeEconomy(String.valueOf(player.getUniqueId()), 150);
+                        player.getInventory().addItem(enchants.pantsPB);
+
+                        player.getWorld().playSound(player.getLocation(), Sound.LEVEL_UP, 1, 20);
+
+                        boards.CreateScore(player);
+
+                    }else if (getEconomy(String.valueOf(player.getUniqueId())) >= 150 && event.getCurrentItem().getItemMeta().getDisplayName().contains("Sword Bundle")) {
+                        removeEconomy(String.valueOf(player.getUniqueId()), 150);
+                        player.getInventory().addItem(enchants.swordPB);
+
+                        player.getWorld().playSound(player.getLocation(), Sound.LEVEL_UP, 1, 20);
+
+                        boards.CreateScore(player);
+
+                    } else {
+                        player.sendMessage(ChatColor.RED + "You can't afford this!");
+                    }
+
+
                     event.setCancelled(true);
                     break;
 

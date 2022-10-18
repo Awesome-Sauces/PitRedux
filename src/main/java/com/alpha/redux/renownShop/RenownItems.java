@@ -1,10 +1,12 @@
 package com.alpha.redux.renownShop;
 
+import com.alpha.redux.renownShop.CookieMonster.Monster;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.Material;
 import static com.alpha.redux.apis.advancedInventory.ItemMaker;
 import static com.alpha.redux.renownShop.xpIncrease.getXpIncrease;
+import static com.alpha.redux.renownShop.xpLicious.getXpliciousIncrease;
 
 import com.alpha.redux.events.boards;
 
@@ -16,6 +18,14 @@ public class RenownItems {
                 "Capped at " + "+10%\n\n" + ChatColor.GRAY +
                 "Current boost: " + ChatColor.RED +  "+" + Math.min(damageIncrease.getIncrease(uuid), 10) + "%\n\n" +
                 ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "16 Renown", 1, true);
+    }
+
+    public static ItemStack CookieItemIncrease(String uuid){
+        return ItemMaker(Material.COOKIE, ChatColor.YELLOW + "Cookie Monster Hunter",
+                ChatColor.GRAY + "Each purchase gives you " + ChatColor.RED + "+1% spawn chance\n" + ChatColor.GRAY +
+                        "Capped at " + "+10%\n\n" + ChatColor.GRAY +
+                        "Current boost: " + ChatColor.RED +  "+" + Math.min(Monster.getMonsterChance(uuid), 10) + "%\n\n" +
+                        ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "64 Renown", 1, true);
     }
 
     public static ItemStack DamageItemDecrease(String uuid){
@@ -33,6 +43,15 @@ public class RenownItems {
                         "But is capped at" + ChatColor.YELLOW + " 500\n\n" + ChatColor.GRAY +
                         "Current boost: " + ChatColor.AQUA +  "+" + getXpIncrease(uuid) + " cap\n\n" +
                         ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "32 Renown", 1, true);
+    }
+
+    public static ItemStack XpliciousIncrease(String uuid){
+        return ItemMaker(Material.EXP_BOTTLE, ChatColor.YELLOW + "Xplicious",
+                ChatColor.GRAY + "Each purchase gives you " + ChatColor.AQUA + "+15 xp cap and +5% xp!\n" + ChatColor.GRAY +
+                        "But is capped at" + ChatColor.YELLOW + " 500\n\n" + ChatColor.GRAY +
+                        "Current boost: " + ChatColor.AQUA +  "+" + getXpliciousIncrease(uuid) + " cap\n\n" +
+                        ChatColor.RED + "Requires prestige X\n" +
+                        ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "64 Renown", 1, true);
     }
 
     public static ItemStack CorruptedPearl(){

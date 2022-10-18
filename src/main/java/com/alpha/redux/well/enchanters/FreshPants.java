@@ -27,7 +27,7 @@ import static com.alpha.redux.well.mysticWell.*;
 public class FreshPants {
 
     private static boolean removeGold(Player player, String uuid, int amount){
-        if(getEconomy(uuid) >= amount){
+        if(getEconomy(uuid) > amount-1){
             removeEconomy(uuid, amount);
             boards.CreateScore(player);
             return true;
@@ -49,7 +49,8 @@ public class FreshPants {
             return;
         } else if (items.getItemMeta().getDisplayName().contains("Tier II") && removeGold(player, uuid, 8000)) {
             event.getClickedInventory().setItem(20, createPant(player,3, event.getClickedInventory().getItem(20)));
-        }else if (items.getItemMeta().getDisplayName().contains("Tier I") && removeGold(player, uuid, 4000)) {
+        }else if (!items.getItemMeta().getDisplayName().contains("Tier II") &&
+                items.getItemMeta().getDisplayName().contains("Tier I") && removeGold(player, uuid, 4000)) {
             event.getClickedInventory().setItem(20, createPant(player,2, event.getClickedInventory().getItem(20)));
         } else if (items.getItemMeta().getDisplayName().contains("Fresh") && removeGold(player, uuid, 1000)) {
             event.getClickedInventory().setItem(20, createPant(player,1, null));
@@ -85,7 +86,7 @@ public class FreshPants {
         }
     }
 
-    private static List<String> translateList(List<String> lore){
+    public static List<String> translateList(List<String> lore){
         for(String text : lore){
             lore.set(lore.indexOf(text), colorCode(text));
         }
@@ -251,7 +252,7 @@ public class FreshPants {
 
     }
 
-    private static List<String> renewEnchant(List<String> lore, List<String> enchant){
+    public static List<String> renewEnchant(List<String> lore, List<String> enchant){
 
         List<String> enchants = CheckEnchantOnPant(lore);
 

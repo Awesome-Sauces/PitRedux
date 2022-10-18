@@ -135,13 +135,23 @@ public class gui {
     }
 
     public static void NonPermanentItems(Player player){
-        Inventory gui = inv(player, 27, ChatColor.GRAY + "Non-permanent items");
+        Inventory gui = inv(player, 36, ChatColor.GRAY + "Non-permanent items");
 
         ItemStack base_glass = cGlass();
 
         ItemStack Diamond_Sword = ItemMaker(Material.DIAMOND_SWORD, ChatColor.YELLOW + "Diamond Sword",
                 ChatColor.BLUE + "+20% damage vs bountied\n\n" + ChatColor.GRAY + ChatColor.ITALIC + "Lost on death.\n" +
                 ChatColor.RESET + ChatColor.GRAY + "Cost: " + ChatColor.GOLD + "150g\n" + ChatColor.YELLOW + "Click to purchase!",
+                1, true);
+
+        ItemStack Pants_bundle = ItemMaker(Material.MINECART, ChatColor.YELLOW + "Pants Bundle",
+                ChatColor.GRAY + "Kept on Death" + ChatColor.GRAY + "Hold and right-click to store 10 fresh pair of pants.\n\n" +
+                        ChatColor.RESET + ChatColor.GRAY + "Cost: " + ChatColor.GOLD + "150g\n" + ChatColor.YELLOW + "Click to purchase!",
+                1, true);
+
+        ItemStack Sword_bundle = ItemMaker(Material.MINECART, ChatColor.YELLOW + "Sword Bundle",
+                ChatColor.GRAY + "Kept on Death" + ChatColor.GRAY + "Hold and right-click to store 10 mystic swords.\n\n" +
+                        ChatColor.RESET + ChatColor.GRAY + "Cost: " + ChatColor.GOLD + "150g\n" + ChatColor.YELLOW + "Click to purchase!",
                 1, true);
 
         ItemStack Diamond_Spade = ItemMaker(Material.DIAMOND_SPADE, ChatColor.YELLOW + "Combat Spade",
@@ -183,6 +193,8 @@ public class gui {
         addInv(gui, Diamond_Chestplate, 6, 2, false);
         addInv(gui, Diamond_Leggings, 7, 2, false);
         addInv(gui, Diamond_Boots, 8, 2, false);
+        addInv(gui, Pants_bundle, 2, 3, false);
+        addInv(gui, Sword_bundle, 3, 3, false);
 
 
 

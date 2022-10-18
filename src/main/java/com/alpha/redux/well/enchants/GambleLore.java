@@ -1,9 +1,12 @@
 package com.alpha.redux.well.enchants;
 
 import com.alpha.redux.apis.Sounds;
+import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.entityHandlers.TrueDamage.TrueDamageHandler;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
+import com.alpha.redux.playerdata.economy;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Random;
 
@@ -21,18 +24,35 @@ public class GambleLore extends PitEnchant{
         int int_random = rand.nextInt(upperbound);
         switch (int_random){
             case 0:
+                if(!gambleCooldown(event.getAttacker())) break;
                 Sounds.GAMBLE_YES.play(event.getAttacker().getPlayerObject());
                 event.addReduxTrueDamage(level*2);
                 break;
             case 1:
+                if(!gambleCooldown(event.getAttacker())) break;
                 Sounds.GAMBLE_NO.play(event.getAttacker().getPlayerObject());
                 gambleCalc(event.getAttacker().getPlayerObject(), level*2);
                 break;
         }
     }
 
-    private void gambleCalc(Player player, double trueAmount){
-        new TrueDamageHandler(playerExists(player), playerExists(player), trueAmount, 0).run();
+    private boolean gambleCooldown(ReduxPlayer owner){
+        if (owner.getGambleCD()){
+            owner.setGambleCD();
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    owner.setGambleCD();
+                }
+            }.runTaskLater(economy.getPlugin(), 5L);
+            return true;
+        }
+
+        return false;
+    }
+
+    private void gambleCalc(Player player, double multiplier){
+        new TrueDamageHandler(playerExists(player), playerExists(player), multiplier, 0).run();
     }
 
     @Override

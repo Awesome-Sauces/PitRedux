@@ -19,7 +19,7 @@ public class CriticallyFunkyLore extends PitEnchant{
         double dmg = 80-((level-1)*15);
 
         if(criticalHit(event.getAttacker().getPlayerObject().getPlayer())){
-            event.getDefenders().setPlayerIncrease(damage/10);
+            event.getDefenders().setPlayerIncrease(damage/100);
             event.subtractReduxDamage(event.getReduxDamage() * (dmg/100));
         }
     

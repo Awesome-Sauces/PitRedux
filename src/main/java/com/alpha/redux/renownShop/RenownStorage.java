@@ -4,6 +4,7 @@ import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.TebexMoners.tebexmoners;
 import com.alpha.redux.items.enchants;
 import com.alpha.redux.playerdata.Renown;
+import com.alpha.redux.renownShop.CookieMonster.Monster;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -42,6 +43,34 @@ public class RenownStorage {
 
                             addIncrease(uuid, 1);
                             player.openInventory(mainMenu(player));
+                    }else{
+                        player.sendMessage(ChatColor.RED + "You can't afford this!");
+                    }
+                }
+            }
+
+        }
+    }
+
+    public static void BuyMonsterIncrease(InventoryClickEvent event){
+        Player player = (Player) event.getWhoClicked();
+        String uuid = String.valueOf(player.getUniqueId());
+
+
+        if (event.getClickedInventory().getTitle().equals(ChatColor.YELLOW + "Renown Shop")){
+            if (event.getCurrentItem().getType().equals(Material.COOKIE)){
+
+                if (Renown.getRenown(uuid) >= 64 && Monster.getMonsterChance(uuid) <= 10){
+                    if(hasIncrease(uuid)){
+                        Renown.setRenown(uuid, Renown.getRenown(uuid)-64);
+
+                        Sounds.RENOWN_SHOP_PURCHASE.play(player);
+
+                        player.sendMessage(ChatColor.GREEN + "Cookie Monster Hunter purchased! " + ChatColor.RED + "+1% spawn chance!");
+
+
+                        Monster.addMonsterChance(uuid, 1);
+                        player.openInventory(mainMenu(player));
                     }else{
                         player.sendMessage(ChatColor.RED + "You can't afford this!");
                     }

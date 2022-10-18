@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 
 public class Volley {
     public Volley(EntityShootBowEvent event){
-        BowEnchant volley = new BowEnchant(event, "volley") {
+        BowEnchant volley = new BowEnchant(event, "v") {
             @Override
             public void ThreeAction() {
 

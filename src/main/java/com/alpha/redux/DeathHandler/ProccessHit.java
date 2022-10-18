@@ -1,11 +1,13 @@
 package com.alpha.redux.DeathHandler;
 
 import com.alpha.redux.questMaster.bossBattles.bossAttackEvent;
+import com.alpha.redux.renownShop.CookieMonster.MonsterHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.Objects;
 
+import static com.alpha.redux.DeathHandler.killHandler.getNPC;
 import static com.alpha.redux.apis.actionbarplus.sendKillBar;
 import static com.alpha.redux.entityHandlers.ReduxPlayerHandler.playerExists;
 import static com.alpha.redux.events.events.Has_Strength;
@@ -41,6 +43,9 @@ public class ProccessHit {
     }
 
     public static void KillMan(Player attacker, Player defender){
+
+        MonsterHandler.handleMonsterDeath(attacker, getNPC(defender));
+
         sendKillBar(attacker, defender);
         processKill(playerExists(attacker), playerExists(defender));
         ReduxDeathEvent mainEvent = new ReduxDeathEvent(playerExists(attacker), playerExists(defender));

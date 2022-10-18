@@ -47,7 +47,7 @@ public class ReduxDamageEvent extends Event implements Cancellable {
     private List<String> defenderSwordEnchants = new ArrayList<>();
     private List<String> defenderPantEnchants = new ArrayList<>();
 
-    private double damage;
+    private double damage = 1;
     private double trueDamage = 0;
     private final EntityDamageByEntityEvent event;
     private boolean isCancelled;
@@ -161,8 +161,8 @@ public class ReduxDamageEvent extends Event implements Cancellable {
         this.event.setDamage(damage);
     }
 
-    public void subtractReduxDamage(double damage){
-        this.damage -= damage;
+    public void subtractReduxDamage(double damages){
+        this.damage = Math.max(damage - damages, 1.0);
         this.event.setDamage(damage);
     }
 
@@ -189,6 +189,7 @@ public class ReduxDamageEvent extends Event implements Cancellable {
 
         ReduxPlayer ReduxAttacker = this.getAttacker();
         ReduxPlayer ReduxDefender = this.getDefenders();
+
 
         if(isNPC(attacker)){
             this.setReduxDamage(6);

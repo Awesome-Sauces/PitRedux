@@ -11,6 +11,7 @@ public class renownEvent {
 
             event.setCancelled(true);
 
+            BuyMonsterIncrease(event);
             BuyDamageIncrease(event);
             BuyXpIncrease(event);
             BuyCorruptedPearl(event);

@@ -16,7 +16,7 @@ public class BillionaireLore extends PitEnchant{
             gold += (level*100)+50;
         }else{gold+=level*100;}
 
-        int multiplier = 0;
+        double multiplier = 0;
 
         if (level > 1) {
             multiplier += (level*.33)+.01;

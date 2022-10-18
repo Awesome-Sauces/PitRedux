@@ -57,9 +57,7 @@ public class MegaLongBow {
     }
 
     private void giveJump(Player player, int power, int time){
-        if(!player.hasPotionEffect(PotionEffectType.JUMP)){
             player.removePotionEffect(PotionEffectType.JUMP);
             player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, time*20, Math.max(power-1, 0), true, true));
-        }
     }
 }
