@@ -84,7 +84,7 @@ public class PitBlobMap {
 
         Slime slime = blob.get(player);
 
-        if (Bukkit.getScheduler().isCurrentlyRunning(runnable.get(player).getTaskId())) runnable.get(player).cancel();
+        //if (Bukkit.getScheduler().isCurrentlyRunning(runnable.get(player).getTaskId())) runnable.get(player).cancel();
         runnable.remove(player);
 
         blob.remove(player);

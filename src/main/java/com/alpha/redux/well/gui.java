@@ -161,7 +161,7 @@ public class gui {
                 1, true);
 
         ItemStack Obsidian = ItemMaker(Material.OBSIDIAN, ChatColor.YELLOW + "Obsidian",
-                ChatColor.GRAY + "Remains for 120 seconds.\n\n" + ChatColor.GRAY + ChatColor.ITALIC + "Lost on death.\n" +
+                ChatColor.GRAY + "Remains for 10 minutes.\n\n" + ChatColor.GRAY + ChatColor.ITALIC + "Lost on death.\n" +
                         ChatColor.RESET + ChatColor.GRAY + "Cost: " + ChatColor.GOLD + "40g\n" + ChatColor.YELLOW + "Click to purchase!",
                 8, true);
 

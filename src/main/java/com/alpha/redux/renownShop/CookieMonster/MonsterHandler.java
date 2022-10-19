@@ -2,8 +2,10 @@ package com.alpha.redux.renownShop.CookieMonster;
 
 import com.alpha.redux.DeathHandler.ReduxDeathEvent;
 import com.alpha.redux.apis.Sounds;
+import com.alpha.redux.apis.chatManager.rank;
 import com.alpha.redux.items.enchants;
 import com.alpha.redux.redux;
+import com.nametagedit.plugin.NametagEdit;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.trait.trait.Equipment;
@@ -19,13 +21,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 import static com.alpha.redux.DeathHandler.killHandler.getNPC;
+import static com.alpha.redux.apis.chatManager.rank.ChatEventApiGetLevelColor;
 import static com.alpha.redux.apis.chatManager.rank.colorCode;
 import static com.alpha.redux.questMaster.bossBattles.maldingBoss.gearNearby;
 
 public class MonsterHandler {
 
     public static void percentageSpawn(Player player){
-        if(Math.random() <= ((double)Monster.getMonsterChance(String.valueOf(player.getUniqueId()))/500)){
+        if(Math.random() <= ((double)Monster.getMonsterChance(String.valueOf(player.getUniqueId()))/10000)){
             createMonsterBoss(player);
             player.sendMessage(colorCode("&c&lWOAH! &7a wild &bCookie Monster &7has appeared!"));
             Sounds.PRESTIGE.play(player);
@@ -79,6 +82,22 @@ public class MonsterHandler {
 
             }
         }.runTaskTimer(redux.INSTANCE, timeInTicks, timeInTicks);
+
+        Bukkit.getScheduler().scheduleSyncDelayedTask(redux.INSTANCE, new Runnable() {
+            @Override
+            public void run() {
+                if(MonsterData.isOwner(npc, player)){
+
+                    int renown = MonsterData.getRenownRollLoss(player.getUniqueId());
+                    MonsterData.removeMonsterInstance(npc);
+                    npc.despawn();
+                    npc.destroy();
+                    CitizensAPI.getNPCRegistry().deregister(npc);
+                    player.sendMessage(colorCode("&c&lFAILURE! &7you failed to kill the cookie monster and lost &b" + renown + " &7renown."));
+                    Sounds.DEATH_GHAST_SCREAM.play(player);
+                }
+            }
+        }, 300L);
     }
 
     public static void handleMonsterDeath(Player player, NPC npc){

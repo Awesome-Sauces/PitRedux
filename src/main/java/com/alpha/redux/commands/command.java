@@ -1,6 +1,8 @@
 package com.alpha.redux.commands;
 
 import com.alpha.redux.apis.chatManager.rank;
+import com.alpha.redux.apis.leaderboardsplus.leaderboards;
+import com.alpha.redux.boosters.Booster;
 import com.alpha.redux.commands.crates.crate;
 import com.alpha.redux.commands.repairs.menu;
 import com.alpha.redux.events.boards;
@@ -79,6 +81,11 @@ public class command implements CommandExecutor {
                 Crate.broadcastMessage();
             }
 
+            if(cmd.getName().equalsIgnoreCase("booster")){
+                Booster.purchaseBoosterCommand(args[0],leaderboards.getName(args[1]), Integer.parseInt(args[2]));
+
+                return true;
+            }
 
             if (cmd.getName().equalsIgnoreCase("makemonersrankers")) {
                 onRankBuy(args[0], args[1]);
@@ -428,6 +435,12 @@ public class command implements CommandExecutor {
             return true;
         }
 
+        if(cmd.getName().equalsIgnoreCase("booster")){
+            player.openInventory(Booster.getBoosterGUI(player));
+
+            return true;
+        }
+
         if(cmd.getName().equalsIgnoreCase("prestige")){
             if(
                     player.hasPermission("VIP+") ||
@@ -475,6 +488,8 @@ public class command implements CommandExecutor {
                 return true;
             }
         }
+
+
 
         if(BaseChecks(player, cmd.getName(), "malding", true, true, "malding")){
             summonBoss(player);

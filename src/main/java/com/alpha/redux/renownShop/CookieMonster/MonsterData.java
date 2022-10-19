@@ -55,4 +55,22 @@ public class MonsterData {
         return renown.get(0);
     }
 
+    public static int getRenownRollLoss(UUID uuid){
+        List<Integer> renown = new ArrayList<>();
+
+        renown.add(5);
+        renown.add(10);
+        renown.add(15);
+
+        Collections.shuffle(renown);
+
+        hasRenown(String.valueOf(uuid));
+        if(getRenown(String.valueOf(uuid)) >= renown.get(0)){
+            setRenown(String.valueOf(uuid), getRenown(String.valueOf(uuid))-renown.get(0));
+            return renown.get(0);
+        }
+
+        return 0;
+    }
+
 }

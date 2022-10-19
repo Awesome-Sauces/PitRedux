@@ -264,10 +264,32 @@ public class events implements Listener {
                 event.setCancelled(true);
     }
 
+    @EventHandler
+    public void BlobDamager(NPCCollisionEvent event){
+        Entity slime = event.getCollidedWith();
+
+        if(slime.getType().equals(EntityType.SLIME)){
+
+            Player player = getPlayerFromBlob((Slime) slime);
+            if(player!=null){
+                if(player.getLocation().getY() >= getSpawnProtection()) deleteBlob(player);
+                if(player.getLocation().distance(slime.getLocation()) >= 18) deleteBlob(player);
+
+                ((Player) event.getNPC().getEntity()).damage(7, player);
+            }
+
+        }
+    }
+
     @EventHandler 
     public static void MainDamageEvent(EntityDamageByEntityEvent event){
 
         if (event.getEntity().getType().equals(EntityType.VILLAGER)){
+            event.setCancelled(true);
+            return;
+        }
+
+        if(event.getDamager().getType().equals(EntityType.SLIME)){
             event.setCancelled(true);
             return;
         }
@@ -289,16 +311,23 @@ public class events implements Listener {
             return;
         }
 
+        /*
         if(event.getDamager().getType().equals(EntityType.SLIME)){
-            Player player = getPlayerFromBlob((Slime) event.getEntity());
 
-            event.getEntity().damage(5,player);
+            Bukkit.broadcastMessage("SLIME!");
+            Player player = getPlayerFromBlob((Slime) event.getDamager());
 
+            if(event.getEntity().getType().equals(EntityType.PLAYER)){
+                ((Player) event.getEntity()).damage(5, player);
+
+            }
 
             event.setCancelled(true);
             return;
         }
 
+
+         */
         Player defender = null;
 
         if(CitizensAPI.getNPCRegistry().isNPC(event.getDamager())){
@@ -869,20 +898,16 @@ public class events implements Listener {
 
     @EventHandler (priority = EventPriority.HIGH)
     public void entityDamageEvent(EntityDamageEvent event) {
-        if(!(event.getEntity() instanceof Player)) {return;}
-        if((event.getEntity() instanceof Player)) {
-            Player player = (Player) event.getEntity();
-            if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
-                event.setCancelled(true);
-            }
+        if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
+            event.setCancelled(true);
+        }
 
-            if (event.getCause() == EntityDamageEvent.DamageCause.LIGHTNING) {
-                event.setCancelled(true);
-            }
+        if (event.getCause() == EntityDamageEvent.DamageCause.LIGHTNING) {
+            event.setCancelled(true);
+        }
 
-            if (event.getCause() == EntityDamageEvent.DamageCause.PROJECTILE) {
-                event.setCancelled(true);
-            }
+        if (event.getCause() == EntityDamageEvent.DamageCause.PROJECTILE) {
+            event.setCancelled(true);
         }
 
     }

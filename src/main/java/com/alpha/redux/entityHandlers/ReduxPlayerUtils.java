@@ -1,5 +1,6 @@
 package com.alpha.redux.entityHandlers;
 
+import com.alpha.redux.boosters.Booster;
 import com.alpha.redux.items.itemManager;
 import com.alpha.redux.playerdata.streaks;
 import com.alpha.redux.renownShop.RenownStorage;
@@ -23,6 +24,10 @@ public class ReduxPlayerUtils {
         double xp_Amount = 18;
         int XP_CAP = 80;
         int master = 1;
+
+        int XP_BOOSTER = 1;
+
+        if(Booster.xpActive) XP_BOOSTER+=1;
 
         int MULTIPLIER = streaks.StreakManager(player.player);
         int XP_MULTIPLIER = 0;
@@ -136,12 +141,12 @@ public class ReduxPlayerUtils {
             xp_Amount += xp_amount_mega.get(player.uuid);
         }
 
-        double final_xp_amount = (xp_Amount * XP_MULTIPLIER)*twoTimesEvent;
+        double final_xp_amount = ((xp_Amount * XP_MULTIPLIER)*twoTimesEvent);
 
         hasMegaStreak(player.uuid);
-        if(getMegaStreak(player.uuid).equalsIgnoreCase("beastmode")) return ((int) (Math.round((Math.min((final_xp_amount + getXpIncrease(player.uuid) * twoTimesEvent), (XP_CAP + 100 + getXpIncrease(player.uuid)) * twoTimesEvent))*player.getPlayerXpBooster())) * master)* booster;
-        else if(getMegaStreak(player.uuid).equalsIgnoreCase("moon")) return ((int) (Math.round((Math.min((final_xp_amount + getXpIncrease(player.uuid)) * twoTimesEvent, (XP_CAP + 7000 + getXpIncrease(player.uuid) )* twoTimesEvent))*player.getPlayerXpBooster())) * master) * booster;
-        else return (int) ((((int) (Math.round(Math.min((final_xp_amount + getXpIncrease(player.uuid)) * twoTimesEvent, (XP_CAP + getXpIncrease(player.uuid))*twoTimesEvent))) * player.getPlayerXpBooster())) * master) * booster;
+        if(getMegaStreak(player.uuid).equalsIgnoreCase("beastmode")) return ((int) (Math.round((Math.min((final_xp_amount + getXpIncrease(player.uuid) * twoTimesEvent), (XP_CAP + 100 + getXpIncrease(player.uuid)) * twoTimesEvent))*player.getPlayerXpBooster())) * master)*XP_BOOSTER;
+        else if(getMegaStreak(player.uuid).equalsIgnoreCase("moon")) return ((int) (Math.round((Math.min((final_xp_amount + getXpIncrease(player.uuid)) * twoTimesEvent, (XP_CAP + 7000 + getXpIncrease(player.uuid) )* twoTimesEvent))*player.getPlayerXpBooster())) * master)*XP_BOOSTER;
+        else return (int) ((((int) (Math.round(Math.min((final_xp_amount + getXpIncrease(player.uuid)) * twoTimesEvent, (XP_CAP + getXpIncrease(player.uuid))*twoTimesEvent))) * player.getPlayerXpBooster())) * master)*XP_BOOSTER;
 
 
     }
@@ -151,6 +156,10 @@ public class ReduxPlayerUtils {
         List<String> senchants = new ArrayList<>();
 
         int Gold_Amount = 18;
+
+        int GOLD_BOOSTER = 1;
+
+        if(Booster.goldActive) GOLD_BOOSTER+=1;
 
         int MULTIPLIER = StreakManager(player.player);
         int GOLD_MULTIPLIER = 0;
@@ -238,7 +247,7 @@ public class ReduxPlayerUtils {
         if (player.getBoots() != null && player.getBoots().getItemMeta().equals(itemManager.heistMasterIII.getItemMeta())) master = 3;
 
 
-        return (((int) (((Gold_Amount + (Gold_Amount *GOLD_MULTIPLIER)) * twoTimesEvent) * player.getPlayerGoldBooster())) * master) * booster;
+        return ((((int) (((Gold_Amount + (Gold_Amount *GOLD_MULTIPLIER)) * twoTimesEvent) * player.getPlayerGoldBooster())) * master)*GOLD_BOOSTER);
     }
 
 }

@@ -13,6 +13,10 @@ commands:
     description: Sets renown
     usage: /<command>
     aliases: setrenown
+  booster:
+    description: Booster
+    usage: /<command>
+    aliases: B005T3R
   feed:
     description: Feeds player to max saturation
     usage: /<command>

@@ -5,6 +5,8 @@ import com.alpha.redux.apis.chatManager.rank;
 import com.alpha.redux.apis.locations;
 import com.alpha.redux.apis.skyblock.skyblockEvents;
 import com.alpha.redux.apis.skyblock.skyblockItems;
+import com.alpha.redux.boosters.Booster;
+import com.alpha.redux.boosters.BoosterEvents;
 import com.alpha.redux.commands.command;
 import com.alpha.redux.commands.repairs.ClickHandler;
 import com.alpha.redux.entityHandlers.MysticHandler.MysticEventHandler.MysticEventHandlers;
@@ -48,8 +50,7 @@ import static com.alpha.redux.DeathHandler.killHandler.isNPC;
 import static com.alpha.redux.apis.chatManager.rank.ChatEventApiGetLevelColor;
 import static com.alpha.redux.apis.leaderboardsplus.leaderboards.*;
 import static com.alpha.redux.apis.locations.getCakeLocation;
-import static com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap.blob;
-import static com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap.blobStreak;
+import static com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap.*;
 import static com.alpha.redux.events.boards.ClearAllScore;
 import static com.alpha.redux.events.boards.CreateScore;
 import static com.alpha.redux.funEvents.event.handleTwoEvent;
@@ -120,6 +121,7 @@ public class redux extends JavaPlugin {
 
 
         getServer().getPluginManager().registerEvents(new events(),this);
+        getServer().getPluginManager().registerEvents(new BoosterEvents(), this);
         getServer().getPluginManager().registerEvents(new bossEvents(), this);
         getServer().getPluginManager().registerEvents(new ReduxEvents(), this);
         getServer().getPluginManager().registerEvents(new skyblockEvents(), this);
@@ -141,27 +143,13 @@ public class redux extends JavaPlugin {
         SLAPI.loadRenown();
         SLAPI.loadDmgDec();
         SLAPI.loadMystic();
+
+        SLAPI.loadGoldBooster();
+        SLAPI.loadXpBooster();
+        SLAPI.loadBotBooster();
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[Redux] plugin is enabled");
 
-
-
-
-        new BukkitRunnable() {
-
-            @Override
-            public void run() {
-                if(twoTimesEvent >= 3){
-                    for (Player player : Bukkit.getOnlinePlayers()){
-                        if(!isNPC(player)){
-                            Sounds.BOOSTER_REMIND.play(player.getLocation(), 1);
-                        }
-                    }
-                    Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&e&lBOOSTER! &7There is currently an active &e&l3x &7booster!"));
-
-                }
-
-            }
-        }.runTaskTimer(plugin, 3600, 3600);
+        Booster.constantBoosterNotify();
 
         new BukkitRunnable() {
 
@@ -227,7 +215,7 @@ public class redux extends JavaPlugin {
         }, 50L);
 
         for (int i = 0; i < 50; i++) {
-            HunterAPI.createHunterNon(locations.getBotSpawnLocation());
+            HunterAPI.createHunterNon(locations.getBotSpawnLocation(), 0);
         }
 
         new BukkitRunnable() {
@@ -242,6 +230,9 @@ public class redux extends JavaPlugin {
                 SLAPI.saveXp();
                 SLAPI.saveRenown();
                 SLAPI.saveMonster();
+                SLAPI.saveBotBooster();
+                SLAPI.saveXpBooster();
+                SLAPI.saveGoldBooster();
 
                 SLAPI.loadMonster();
                 SLAPI.loadXPInc();
@@ -249,6 +240,9 @@ public class redux extends JavaPlugin {
                 SLAPI.loadDmgDec();
                 SLAPI.loadMystic();
                 SLAPI.loadXp();
+                SLAPI.loadBotBooster();
+                SLAPI.loadGoldBooster();
+                SLAPI.loadBotBooster();
             }
         }.runTaskTimer(plugin, 12000, 12000);
 
@@ -269,6 +263,9 @@ public class redux extends JavaPlugin {
         SLAPI.saveMystic();
         SLAPI.saveRenown();
         SLAPI.saveMonster();
+        SLAPI.saveBotBooster();
+        SLAPI.saveGoldBooster();
+        SLAPI.saveXpBooster();
         CreateVillagers.unloadNPC();
         delBoard();
         getServer().getConsoleSender().sendMessage(ChatColor.RED + "[Redux] plugin is disabled");
@@ -286,15 +283,7 @@ public class redux extends JavaPlugin {
         }
 
         for(Player player : blob.keySet()){
-            Slime slime = blob.get(player);
-
-            PitBlobMap.runnable.get(player).cancel();
-            PitBlobMap.runnable.remove(player);
-
-            blob.remove(player);
-            blobStreak.remove(player);
-
-            slime.remove();
+            deleteBlob(player);
         }
     }
 
@@ -333,6 +322,7 @@ public class redux extends JavaPlugin {
         getCommand("malding").setExecutor(commands);
         getCommand("damage").setExecutor(commands);
         getCommand("renown").setExecutor(commands);
+        getCommand("booster").setExecutor(commands);
        // getCommand("trade").setExecutor(commands);
     }
 

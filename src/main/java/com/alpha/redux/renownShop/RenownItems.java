@@ -23,7 +23,11 @@ public class RenownItems {
     public static ItemStack CookieItemIncrease(String uuid){
         return ItemMaker(Material.COOKIE, ChatColor.YELLOW + "Cookie Monster Hunter",
                 ChatColor.GRAY + "Each purchase gives you " + ChatColor.RED + "+1% spawn chance\n" + ChatColor.GRAY +
-                        "Capped at " + "+10%\n\n" + ChatColor.GRAY +
+                        ChatColor.GRAY + "Killing a " + ChatColor.AQUA + "Cookie Monster " + ChatColor.GRAY +
+                        "can reward\n" + ChatColor.GRAY + "you anywhere from " + ChatColor.AQUA + "5-50" + ChatColor.GRAY +
+                        " renown but\n" + ChatColor.GRAY + "failing to kill the " + ChatColor.AQUA + "Cookie Monster\n " + ChatColor.GRAY +
+                        "in 15 seconds will\n"+ChatColor.GRAY+"result in you losing anywhere\n" + ChatColor.GRAY + "from " + ChatColor.AQUA + "5-15 " + ChatColor.GRAY +
+                        "renown. (Will not go below 0 renown)\n" + ChatColor.GRAY + "Capped at " + "+10%\n\n" + ChatColor.GRAY +
                         "Current boost: " + ChatColor.RED +  "+" + Math.min(Monster.getMonsterChance(uuid), 10) + "%\n\n" +
                         ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "64 Renown", 1, true);
     }

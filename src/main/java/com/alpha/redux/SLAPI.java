@@ -1,4 +1,7 @@
 package com.alpha.redux;
+import com.alpha.redux.boosters.BotBoosterData;
+import com.alpha.redux.boosters.GoldBoosterData;
+import com.alpha.redux.boosters.XpBoosterData;
 import com.alpha.redux.playerdata.Renown;
 import com.alpha.redux.playerdata.economy;
 import com.alpha.redux.playerdata.prestiges;
@@ -47,6 +50,51 @@ public class SLAPI {
         for (String s : plugin.getConfig().getConfigurationSection("monster").getKeys(false))
         {
             Monster.setMonsterChance(s, plugin.getConfig().getInt("monster." + s));
+        }
+    }
+
+    public static void saveXpBooster(){
+        for(String p : XpBoosterData.getXpBoosterMap().keySet()){
+            plugin.getConfig().set("xpbooster."+p, XpBoosterData.getXpBoosterMap().get(p));
+        }
+        plugin.saveConfig();
+    }
+
+    public static void loadXpBooster(){
+        if (!plugin.getConfig().contains("xpbooster")) return;
+        for (String s : plugin.getConfig().getConfigurationSection("xpbooster").getKeys(false))
+        {
+            XpBoosterData.setXpBooster(s, plugin.getConfig().getInt("xpbooster." + s));
+        }
+    }
+
+    public static void saveGoldBooster(){
+        for(String p : GoldBoosterData.getGoldBoosterMap().keySet()){
+            plugin.getConfig().set("goldbooster."+p, GoldBoosterData.getGoldBoosterMap().get(p));
+        }
+        plugin.saveConfig();
+    }
+
+    public static void loadGoldBooster(){
+        if (!plugin.getConfig().contains("goldbooster")) return;
+        for (String s : plugin.getConfig().getConfigurationSection("goldbooster").getKeys(false))
+        {
+            GoldBoosterData.setGoldBooster(s, plugin.getConfig().getInt("goldbooster." + s));
+        }
+    }
+
+    public static void saveBotBooster(){
+        for(String p : BotBoosterData.getBotBoosterMap().keySet()){
+            plugin.getConfig().set("botbooster."+p, BotBoosterData.getBotBoosterMap().get(p));
+        }
+        plugin.saveConfig();
+    }
+
+    public static void loadBotBooster(){
+        if (!plugin.getConfig().contains("botbooster")) return;
+        for (String s : plugin.getConfig().getConfigurationSection("botbooster").getKeys(false))
+        {
+            BotBoosterData.setBotBooster(s, plugin.getConfig().getInt("botbooster." + s));
         }
     }
 
