@@ -3,6 +3,7 @@ package com.alpha.redux.entityHandlers;
 import com.alpha.redux.boosters.Booster;
 import com.alpha.redux.items.itemManager;
 import com.alpha.redux.playerdata.streaks;
+import com.alpha.redux.renownShop.GoldnBoosted;
 import com.alpha.redux.renownShop.RenownStorage;
 import org.bukkit.Bukkit;
 
@@ -164,7 +165,7 @@ public class ReduxPlayerUtils {
         int MULTIPLIER = StreakManager(player.player);
         int GOLD_MULTIPLIER = 0;
         if (MULTIPLIER == 2) GOLD_MULTIPLIER += 1;
-        else if (MULTIPLIER == 3) GOLD_MULTIPLIER += 5;
+        else if (MULTIPLIER == 3) GOLD_MULTIPLIER += 7;
         else if(MULTIPLIER == 1) GOLD_MULTIPLIER += 1;
         else if(MULTIPLIER == 7) GOLD_MULTIPLIER =1;
 
@@ -246,8 +247,13 @@ public class ReduxPlayerUtils {
         if (player.getBoots() != null && player.getBoots().getItemMeta().equals(itemManager.heistMasterII.getItemMeta())) master = 2;
         if (player.getBoots() != null && player.getBoots().getItemMeta().equals(itemManager.heistMasterIII.getItemMeta())) master = 3;
 
+        int FINAL_AMOUNT = ((((int) (((Gold_Amount + (Gold_Amount *GOLD_MULTIPLIER)) * twoTimesEvent) * player.getPlayerGoldBooster())) * master)*GOLD_BOOSTER);
 
-        return ((((int) (((Gold_Amount + (Gold_Amount *GOLD_MULTIPLIER)) * twoTimesEvent) * player.getPlayerGoldBooster())) * master)*GOLD_BOOSTER);
+        GoldnBoosted.hasGoldIncrease(player.uuid);
+
+        double booster = (double)GoldnBoosted.getGoldIncrease(player.uuid)/100;
+
+        return (int) ((FINAL_AMOUNT * booster) + FINAL_AMOUNT);
     }
 
 }

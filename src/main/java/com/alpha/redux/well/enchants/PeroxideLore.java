@@ -17,7 +17,7 @@ public class PeroxideLore extends PitEnchant{
 
         giveRegen(event.getDefenders().getPlayerObject(), Math.max(level-1, 1), time);
 
-        if (level==1) event.getDefenders().getPlayerObject().setHealth(Math.min(event.getDefenders().getPlayerObject().getHealth()+.5, event.getDefenders().getPlayerObject().getMaxHealth()));
+        //if (level==1) event.getDefenders().getPlayerObject().setHealth(Math.min(event.getDefenders().getPlayerObject().getHealth()+.5, event.getDefenders().getPlayerObject().getMaxHealth()));
     }
 
     private void giveRegen(Player player, int power, int time){

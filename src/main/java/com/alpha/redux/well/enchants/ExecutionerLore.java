@@ -23,7 +23,7 @@ public class ExecutionerLore extends PitEnchant{
 
         if(event.getDefenders().getPlayerObject().getHealth() - damage <= tier){
             Sounds.EXE.play(event.getAttacker().getPlayerObject());
-            Bukkit.getWorld("world").playEffect(event.getDefenders().getPlayerObject().getLocation(), Effect.STEP_SOUND, Material.REDSTONE_BLOCK);
+            event.getDefenders().getPlayerObject().getWorld().playEffect(event.getDefenders().getPlayerObject().getLocation(), Effect.STEP_SOUND, Material.REDSTONE_BLOCK);
             event.getDefenders().killPlayer(event.getAttacker().getPlayerObject());
             event.getBukkitEvent().setCancelled(true);
         }

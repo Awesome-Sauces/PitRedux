@@ -14,6 +14,8 @@ import com.alpha.redux.renownShop.damageIncrease;
 import static com.alpha.redux.playerdata.Renown.getRenownMap;
 import static com.alpha.redux.playerdata.prestiges.*;
 import static com.alpha.redux.playerdata.xpManager.getXpMap;
+import static com.alpha.redux.renownShop.GoldnBoosted.getGoldIncreaseMap;
+import static com.alpha.redux.renownShop.GoldnBoosted.setGoldIncrease;
 import static com.alpha.redux.renownShop.MysticismChance.getMysticismChance;
 import static com.alpha.redux.renownShop.MysticismChance.getMysticismChanceMap;
 import static com.alpha.redux.renownShop.damageIncrease.getIncreaseMap;
@@ -174,6 +176,21 @@ public class SLAPI {
         for (String s : plugin_experience.getConfig().getConfigurationSection("inc").getKeys(false))
         {
             setXpIncrease(s, plugin_experience.getConfig().getInt("inc."+s));
+        }
+    }
+
+    public static void saveGoldInc(){
+        for(String p : getGoldIncreaseMap().keySet()){
+            plugin_experience.getConfig().set("goldinc."+p, getGoldIncreaseMap().get(p));
+        }
+        plugin_experience.saveConfig();
+    }
+
+    public static void loadGoldInc(){
+        if (!plugin_experience.getConfig().contains("goldinc")) return;
+        for (String s : plugin_experience.getConfig().getConfigurationSection("goldinc").getKeys(false))
+        {
+            setGoldIncrease(s, plugin_experience.getConfig().getInt("goldinc."+s));
         }
     }
 

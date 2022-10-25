@@ -16,7 +16,8 @@ import static com.alpha.redux.apis.locations.getEventNotifyLocation;
 
 public class event {
 
-    private static Hologram hologram = HologramsAPI.createHologram(economy.getPlugin(), getEventNotifyLocation());
+    private static Hologram hologram = HologramsAPI.createHologram(economy.getPlugin(), getEventNotifyLocation(Bukkit.getWorld("world")));
+    private static Hologram hologram2 = HologramsAPI.createHologram(economy.getPlugin(), getEventNotifyLocation(Bukkit.getWorld("lobby")));
     public static int twoTimesEvent = 1;
 
     public static void twoTimesEvent(){
@@ -38,12 +39,22 @@ public class event {
         hologram.appendTextLine(ChatColor.translateAlternateColorCodes('&', "&e2x &bXP &d/&6gold&e!"));
         hologram.appendTextLine(ChatColor.translateAlternateColorCodes('&', "&ein Pit Area"));
 
+        if(hologram2.isDeleted()){
+            refreshHoloGram();
+        }
+
+        hologram2.clearLines();
+
+        hologram2.appendTextLine(ChatColor.translateAlternateColorCodes('&', "&d&lMINOR EVENT!"));
+        hologram2.appendTextLine(ChatColor.translateAlternateColorCodes('&', "&e2x &bXP &d/&6gold&e!"));
+        hologram2.appendTextLine(ChatColor.translateAlternateColorCodes('&', "&ein Pit Area"));
+
         twoTimesEvent = 2;
 
     }
 
     public static void handleTwoEvent(){
-        if(!hologram.isDeleted()){
+        if(!hologram.isDeleted() && !hologram2.isDeleted()){
             endTwoTimes();
         }else{
             twoTimesEvent();
@@ -59,12 +70,14 @@ public class event {
 
         Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&d&lMINOR EVENT! &e2x in &e&lPit Area &c&lENDED"));
         hologram.delete();
+        hologram2.delete();
 
         twoTimesEvent = 1;
 
     }
 
     public static void refreshHoloGram(){
-        hologram = HologramsAPI.createHologram(economy.getPlugin(), getEventNotifyLocation());
+        hologram = HologramsAPI.createHologram(economy.getPlugin(), getEventNotifyLocation(Bukkit.getWorld("world")));
+        hologram2 = HologramsAPI.createHologram(economy.getPlugin(), getEventNotifyLocation(Bukkit.getWorld("lobby")));
     }
 }

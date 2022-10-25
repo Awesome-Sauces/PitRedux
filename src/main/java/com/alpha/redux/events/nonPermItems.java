@@ -1,5 +1,6 @@
 package com.alpha.redux.events;
 
+import com.alpha.redux.items.enchants;
 import com.alpha.redux.items.itemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -74,6 +75,13 @@ public class nonPermItems {
 
                 }
 
+                if(player.getInventory().contains(enchants.firstaidempty)){
+                    player.getInventory().remove(enchants.firstaidempty);
+                }
+
+                if(player.getInventory().contains(enchants.firstaidfull)){
+                    player.getInventory().remove(enchants.firstaidfull);
+                }
 
                 try {
                     if (player.getInventory().contains(ItemMaker(Material.DIAMOND_SWORD, "NULL", "NULL", 1, false))) {

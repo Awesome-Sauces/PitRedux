@@ -12,7 +12,7 @@ import static com.alpha.redux.apis.chatManager.rank.colorCode;
 public class BoosterEvents implements Listener {
     @EventHandler
     public void clickBoosterInventory(InventoryClickEvent event){
-        if(!event.getClickedInventory().getTitle().equalsIgnoreCase(ChatColor.GRAY+"Boosters")) return;
+        if(event.getClickedInventory() != null && event.getClickedInventory().getTitle() != null && !event.getClickedInventory().getTitle().equalsIgnoreCase(ChatColor.GRAY+"Boosters")) return;
 
         Player player = (Player) event.getWhoClicked();
 

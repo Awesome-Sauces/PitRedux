@@ -1,9 +1,6 @@
 package com.alpha.redux.apis;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 
 import java.util.Random;
 
@@ -30,6 +27,7 @@ public class locations {
     */
 
     // Metor Map Locations
+    /*
     public static Location getSpawnLocation(){
         return new Location(Bukkit.getWorld("world"), -2.5, 161, 4.5);
     }
@@ -50,6 +48,32 @@ public class locations {
 
     public static int getSpawnProtection() {return 156;}
 
+     */
+
+    // Coral Map Locations
+    public static Location getSpawnLocation(World world){
+        return new Location(world, 0.5, 114, 10.5);
+    }
+
+    public static Location getEventNotifyLocation(World world){
+        return new Location(world, 0.5, 117, 0.5);
+    }
+
+    public static Location getBotSpawnLocation(World world){
+        return new Location(world, 0.5, 100, 0.5);
+    }
+    public static Location getLeaderBoardLocation(World world){
+        return new Location(world, 13.5, 120, 0.5);
+    }
+
+    public static Location getEnderChestLocation(World world){
+        return new Location(world, -11.5, 116.5, 6.5);
+    }
+    public static Location getMysticWellLocation(World world){
+        return new Location(world, -12.5, 117.5, 0.5);
+    }
+
+    public static int getSpawnProtection() {return 100;}
 
     /*public static Location getCakeLocation(){
         return cake;
@@ -134,6 +158,8 @@ public class locations {
 
     private static Location cake = new Location(Bukkit.getWorld("world"), -9.5, 137, 38.5);
 
+    // Meteor Map NPCS
+    /*
     public static Location perm_upgrades_loc = new Location(Bukkit.getWorld("world"), -1.5, 161, 1.5);
     public static Location non_perm_upgrades_loc = new Location(Bukkit.getWorld("world"), -4.5, 161, 1.5);
 
@@ -141,6 +167,26 @@ public class locations {
     public static Location quest_npc_loc = new Location(Bukkit.getWorld("world"), -12.5, 161, 16.5);
 
     public static Location prestige_npc_loc = new Location(Bukkit.getWorld("world"), -2.5, 162, 23.5);
+
+
+     */
+
+    // Coral Map NPC
+    public static Location perm_upgrades_loc = new Location(Bukkit.getWorld("world"), -1.5, 114, 12.5);
+    public static Location non_perm_upgrades_loc = new Location(Bukkit.getWorld("world"), 2.5, 114, 12.5);
+
+    public static Location leaderboard_npc_loc = new Location(Bukkit.getWorld("world"), 11.5, 114, 5.5);
+    public static Location quest_npc_loc = new Location(Bukkit.getWorld("world"), 9.5, 114, -4.5);
+
+    public static Location prestige_npc_loc = new Location(Bukkit.getWorld("world"), 0.5, 115, -11.5);
+
+    public static Location lobby_perm_upgrades_loc = new Location(Bukkit.getWorld("lobby"), -1.5, 114, 12.5);
+    public static Location lobby_non_perm_upgrades_loc = new Location(Bukkit.getWorld("lobby"), 2.5, 114, 12.5);
+
+    public static Location lobby_leaderboard_npc_loc = new Location(Bukkit.getWorld("lobby"), 11.5, 114, 5.5);
+    public static Location lobby_quest_npc_loc = new Location(Bukkit.getWorld("lobby"), 9.5, 114, -4.5);
+
+    public static Location lobby_prestige_npc_loc = new Location(Bukkit.getWorld("lobby"), 0.5, 115, -11.5);
 
     public static Location getCakeLocation(){
         return cake;

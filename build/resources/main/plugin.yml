@@ -3,7 +3,7 @@ version: 1.0
 author: Alpha
 main: com.alpha.redux.redux
 api-version: 1.8
-depend: [Citizens,Hunter,HolographicDisplays]
+depend: [Citizens,Hunter,HolographicDisplays,Multiverse-Core]
 commands:
   spawn:
     description: Teleports player to spawn

@@ -4,12 +4,18 @@ import com.alpha.redux.DeathHandler.ProccessHit;
 import com.alpha.redux.commands.commandUtils;
 import com.alpha.redux.events.boards;
 
+import com.alpha.redux.playerdata.economy;
 import com.alpha.redux.playerdata.xpManager;
+import com.alpha.redux.redux;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import static com.alpha.redux.events.events.cooldowns;
 import static com.alpha.redux.funEvents.event.twoTimesEvent;
 import static com.alpha.redux.playerdata.economy.*;
 import static com.alpha.redux.playerdata.prestiges.*;
@@ -21,6 +27,8 @@ public class ReduxPlayer {
     Player player;
     String uuid;
     boolean regCD = true;
+    boolean booCD = true;
+    boolean GoldenCD = true;
     boolean perunCD = true;
     boolean gambleCD = true;
     boolean escape = true;
@@ -29,6 +37,10 @@ public class ReduxPlayer {
     double xpBooster = 1;
     double goldBooster = 1;
     int obbyTime = 2400*5;
+    double strength = 0.0;
+    long strengthTimer;
+
+    List<String> perks = new ArrayList<>();
 
     public ReduxPlayer(Player player) {
         this.player = player;
@@ -101,6 +113,14 @@ public class ReduxPlayer {
     public boolean getRegCD(){return this.regCD;}
 
     public void setRegCD(){this.regCD = !this.regCD;}
+
+    public boolean getBooCD(){return this.booCD;}
+
+    public void setBooCD(){this.booCD = !this.booCD;}
+
+    public boolean getGoldenCD(){return this.GoldenCD;}
+
+    public void setGoldenCD(){this.GoldenCD = !this.GoldenCD;}
 
     public boolean getPerunCD(){return this.perunCD;}
 
@@ -215,5 +235,38 @@ public class ReduxPlayer {
         return ReduxPlayerUtils.calculateGoldAmount(this);
     }
 
+    public List<String> getPerks() {
+        return perks;
+    }
 
+    public int getPerksAmount(){
+        return perks.size();
+    }
+
+    public void addPerks(String perk){
+        this.perks.add(perk);
+    }
+
+    public void setPerks(List<String> perks) {
+        this.perks = perks;
+    }
+
+    public void strengthTick(){
+
+        strengthTimer = System.currentTimeMillis() + (7 * 1000);
+        strength = Math.min(.40, strength+.08);
+
+        Bukkit.getScheduler().scheduleSyncDelayedTask(redux.INSTANCE, new Runnable() {
+            @Override
+            public void run() {
+                if(strengthTimer < System.currentTimeMillis()){
+                    strength=0.0;
+                }
+            }
+        }, (7) * 20);
+    }
+
+    public double getStrength(){
+        return strength;
+    }
 }

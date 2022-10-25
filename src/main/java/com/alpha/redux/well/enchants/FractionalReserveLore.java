@@ -17,7 +17,8 @@ public class FractionalReserveLore extends PitEnchant{
 
         int goldTimes = (int) Math.round(playerGold/50000);
 
-        event.subtractReduxDamage(event.getReduxDamage() * (goldTimes*(damage/100)));
+        event.subtractReduxDamage(Math.max(event.getReduxDamage() * Math.min(goldTimes*.01, damage/100),
+                event.getReduxDamage() * .01));
 
     }
 

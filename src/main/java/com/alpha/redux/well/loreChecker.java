@@ -184,18 +184,30 @@ public class loreChecker {
 
 
         if (lore.contains(colorCode("&9Diamond Allergy III"))){
-            list.add("daIII");
+            list.add("diamondallergyIII");
         }else if (lore.contains(colorCode("&9Diamond Allergy II"))){
-            list.add("daII");
+            list.add("diamondallergyII");
         }else if (lore.contains(colorCode("&9Diamond Allergy")))
-            list.add("daI");
+            list.add("diamondallergyI");
 
+        if (lore.contains(colorCode("&9Pants Radar III"))){
+            list.add("pantsradarIII");
+        }else if (lore.contains(colorCode("&9Pants Radar II"))){
+            list.add("pantsradarI");
+        }else if (lore.contains(colorCode("&9Pants Radar")))
+            list.add("pantsradarI");
 
         if (lore.contains(colorCode("&9Spite")))
             list.add("spite");
 
-        if (lore.contains(colorCode("&9McSwimmer III")))
-            list.add("mcIII");
+        if (lore.contains(colorCode("&9McSwimmer III"))){
+            list.add("mcswimmerIII");
+        }else if (lore.contains(colorCode("&9McSwimmer II"))){
+            list.add("mcswimmerII");
+        }else if (lore.contains(colorCode("&9McSwimmer"))){
+            list.add("mcswimmerI");
+        }
+
 
         return list;
     }
@@ -322,6 +334,13 @@ public class loreChecker {
         }else if (lore.contains(colorCode("&9Gold Boost")))
             list.add("gbI");
 
+        if (lore.contains(colorCode("&9Pants Radar III"))){
+            list.add("pantsradarIII");
+        }else if (lore.contains(colorCode("&9Pants Radar II"))){
+            list.add("pantsradarI");
+        }else if (lore.contains(colorCode("&9Pants Radar")))
+            list.add("pantsradarI");
+
 
         return list;
     }
@@ -330,54 +349,54 @@ public class loreChecker {
 
         List<String> list=new ArrayList<String>();
 
-        if (lore.contains("&dRARE! &9Mega Longbow III")){
+        if (lore.contains(colorCode("&dRARE! &9Mega Longbow III"))){
             list.add("mlbIII");
-        }else if (lore.contains("&dRARE! &9Mega Longbow II")){
+        }else if (lore.contains(colorCode("&dRARE! &9Mega Longbow II"))){
             list.add("mlbII");
-        }else if (lore.contains("&dRARE! &9Mega Longbow"))
+        }else if (lore.contains(colorCode("&dRARE! &9Mega Longbow")))
             list.add("mlbI");
 
-        if (lore.contains("&dRARE! &9Telebow III")){
+        if (lore.contains(colorCode("&dRARE! &9Telebow III"))){
             list.add("teleIII");
-        }else if (lore.contains("&dRARE! &9Telebow II")){
+        }else if (lore.contains(colorCode("&dRARE! &9Telebow II"))){
             list.add("teleII");
-        }else if (lore.contains("&dRARE! &9Telebow"))
+        }else if (lore.contains(colorCode("&dRARE! &9Telebow")))
             list.add("teleI");
 
-        if (lore.contains("&dRARE! &9Volley III")){
+        if (lore.contains(colorCode("&dRARE! &9Volley III"))){
             list.add("vIII");
-        }else if (lore.contains("&dRARE! &9Volley II")){
+        }else if (lore.contains(colorCode("&dRARE! &9Volley II"))){
             list.add("vII");
-        }else if (lore.contains("&dRARE! &9Volley"))
+        }else if (lore.contains(colorCode("&dRARE! &9Volley")))
             list.add("vI");
 
-        if (lore.contains("&dRARE! &9Explosive III")){
+        if (lore.contains(colorCode("&dRARE! &9Explosive III"))){
             list.add("exIII");
-        }else if (lore.contains("&dRARE! &9Explosive II")){
+        }else if (lore.contains(colorCode("&dRARE! &9Explosive II"))){
             list.add("exII");
-        }else if (lore.contains("&dRARE! &9Explosive"))
+        }else if (lore.contains(colorCode("&dRARE! &9Explosive")))
             list.add("exI");
 
-        if (lore.contains("&dRARE! &9Pullbow III")){
+        if (lore.contains(colorCode("&dRARE! &9Pullbow III"))){
             list.add("pullIII");
-        }else if (lore.contains("&dRARE! &9Pullbow II")){
+        }else if (lore.contains(colorCode("&dRARE! &9Pullbow II"))){
             list.add("pullII");
-        }else if (lore.contains("&dRARE! &9Pullbow"))
+        }else if (lore.contains(colorCode("&dRARE! &9Pullbow")))
             list.add("pullI");
 
 
-        if (lore.contains("&9Faster than their shadow III")){
+        if (lore.contains(colorCode("&9Faster than their shadow III"))){
             list.add("fttsIII");
-        }else if (lore.contains("&9Faster than their shadow II")){
+        }else if (lore.contains(colorCode("&9Faster than their shadow II"))){
             list.add("fttsII");
-        }else if (lore.contains("&9Faster than their shadow"))
+        }else if (lore.contains(colorCode("&9Faster than their shadow")))
             list.add("fttsI");
 
-        if (lore.contains("&9Sprint Drain III")){
+        if (lore.contains(colorCode("&9Sprint Drain III"))){
             list.add("sprintIII");
-        }else if (lore.contains("&9Sprint Drain II")){
+        }else if (lore.contains(colorCode("&9Sprint Drain II"))){
             list.add("sprintII");
-        }else if (lore.contains("&9Sprint Drain"))
+        }else if (lore.contains(colorCode("&9Sprint Drain")))
             list.add("sprintI");
 
         if (lore.contains(colorCode("&9Moctezuma III"))){
@@ -395,6 +414,12 @@ public class loreChecker {
         }else if (lore.contains(colorCode("&9Gold Bump")))
             list.add("goldBumpI");
 
+        if (lore.contains(colorCode("&9Pants Radar III"))){
+            list.add("pantsradarIII");
+        }else if (lore.contains(colorCode("&9Pants Radar II"))){
+            list.add("pantsradarI");
+        }else if (lore.contains(colorCode("&9Pants Radar")))
+            list.add("pantsradarI");
 
         if (lore.contains(colorCode("&9Sweaty III"))){
             list.add("sweatyIII");

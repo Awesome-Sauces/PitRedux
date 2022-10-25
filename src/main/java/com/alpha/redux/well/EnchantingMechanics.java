@@ -342,18 +342,6 @@ public class EnchantingMechanics {
 
         for(String obj : list){
             if(obj.contains("III")) continue;
-            String regex = "[I]";
-
-            // Compile the regex to create pattern
-            // using compile() method
-            Pattern pattern = Pattern.compile(regex);
-
-            // Get a matcher object from pattern
-            Matcher matcher = pattern.matcher(obj);
-
-            // Replace every matched pattern with the
-            // target string using replaceAll() method
-            obj = matcher.replaceAll("");
 
             enchants.add(obj);
         }

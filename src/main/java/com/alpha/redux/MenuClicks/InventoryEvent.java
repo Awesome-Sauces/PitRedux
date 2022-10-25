@@ -1,5 +1,6 @@
 package com.alpha.redux.MenuClicks;
 
+import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.chatManager.rank;
 import com.alpha.redux.events.boards;
 import com.alpha.redux.items.enchants;
@@ -178,7 +179,14 @@ public class InventoryEvent {
                 if (hasEconomy(String.valueOf(player.getUniqueId()))) {
                     if (getEconomy(String.valueOf(player.getUniqueId())) >= 500) {
                         removeEconomy(String.valueOf(player.getUniqueId()), 500);
-                        player.getInventory().addItem(ItemMaker(Material.DIAMOND_CHESTPLATE, "NULL", "NULL", 1, false));
+
+                        if(player.getInventory().getChestplate() != null &&
+                                player.getInventory().getChestplate().getType().equals(Material.IRON_CHESTPLATE) || player.getInventory().getChestplate() == null){
+                            Sounds.ARMOR_SWAP.play(player);
+                            player.getInventory().setChestplate(ItemMaker(Material.DIAMOND_CHESTPLATE, "NULL", "NULL", 1, false));
+                        }else{
+                            player.getInventory().addItem(ItemMaker(Material.DIAMOND_CHESTPLATE, "NULL", "NULL", 1, false));
+                        }
 
                         player.getWorld().playSound(player.getLocation(), Sound.LEVEL_UP, 1, 20);
 
@@ -195,7 +203,14 @@ public class InventoryEvent {
                 if (hasEconomy(String.valueOf(player.getUniqueId()))) {
                     if (getEconomy(String.valueOf(player.getUniqueId())) >= 1500) {
                         removeEconomy(String.valueOf(player.getUniqueId()), 1500);
-                        player.getInventory().addItem(ItemMaker(Material.DIAMOND_LEGGINGS, "NULL", "NULL", 1, false));
+
+                        if(player.getInventory().getLeggings() != null &&
+                        player.getInventory().getLeggings().getType().equals(Material.IRON_LEGGINGS) || player.getInventory().getLeggings() == null){
+                            Sounds.ARMOR_SWAP.play(player);
+                            player.getInventory().setLeggings(ItemMaker(Material.DIAMOND_LEGGINGS, "NULL", "NULL", 1, false));
+                        }else{
+                            player.getInventory().addItem(ItemMaker(Material.DIAMOND_LEGGINGS, "NULL", "NULL", 1, false));
+                        }
 
                         player.getWorld().playSound(player.getLocation(), Sound.LEVEL_UP, 1, 20);
 
@@ -214,6 +229,23 @@ public class InventoryEvent {
                         removeEconomy(String.valueOf(player.getUniqueId()), 40);
                         player.getInventory().addItem(ItemMaker(Material.OBSIDIAN, "NULL", "NULL", 8, false));
 
+                        player.getWorld().playSound(player.getLocation(), Sound.LEVEL_UP, 1, 20);
+
+                        boards.CreateScore(player);
+
+                    } else {
+                        player.sendMessage(ChatColor.RED + "You can't afford this!");
+                    }
+                    event.setCancelled(true);
+                    break;
+
+                }
+            case MONSTER_EGG:
+                if (hasEconomy(String.valueOf(player.getUniqueId()))) {
+                    if (getEconomy(String.valueOf(player.getUniqueId())) >= 2000) {
+                        removeEconomy(String.valueOf(player.getUniqueId()), 2000);
+
+                        player.getInventory().addItem(enchants.firstaidfull);
                         player.getWorld().playSound(player.getLocation(), Sound.LEVEL_UP, 1, 20);
 
                         boards.CreateScore(player);
@@ -256,7 +288,15 @@ public class InventoryEvent {
                 if (hasEconomy(String.valueOf(player.getUniqueId()))) {
                     if (getEconomy(String.valueOf(player.getUniqueId())) >= 300) {
                         removeEconomy(String.valueOf(player.getUniqueId()), 300);
-                        player.getInventory().addItem(ItemMaker(Material.DIAMOND_BOOTS, "NULL", "NULL", 1, false));
+
+                        if(player.getInventory().getBoots() != null &&
+                                player.getInventory().getBoots().getType().equals(Material.IRON_BOOTS) || player.getInventory().getBoots() == null){
+                            Sounds.ARMOR_SWAP.play(player);
+                            player.getInventory().setBoots(ItemMaker(Material.DIAMOND_BOOTS, "NULL", "NULL", 1, false));
+                        }else{
+                            player.getInventory().addItem(ItemMaker(Material.DIAMOND_BOOTS, "NULL", "NULL", 1, false));
+                        }
+
 
                         player.getWorld().playSound(player.getLocation(), Sound.LEVEL_UP, 1, 20);
                         boards.CreateScore(player);

@@ -2,6 +2,7 @@ package com.alpha.redux.entityHandlers.MysticHandler.Bows;
 
 import com.alpha.redux.entityHandlers.MysticHandler.BowEnchant;
 import com.alpha.redux.eventManagers.ReduxBowEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityShootBowEvent;
@@ -11,6 +12,7 @@ import org.bukkit.util.Vector;
 
 public class MegaLongBow {
     public MegaLongBow(EntityShootBowEvent event){
+
         BowEnchant megaLongBow = new BowEnchant(event, "mlb") {
             @Override
             public void ThreeAction() {
@@ -27,6 +29,7 @@ public class MegaLongBow {
             }
             @Override
             public void TwoAction() {
+
 
                 Arrow arrow = (Arrow) bowEvent.getProjectile();
                 Player shooter = (Player) bowEvent.getEntity();

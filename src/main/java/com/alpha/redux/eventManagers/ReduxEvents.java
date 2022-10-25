@@ -76,6 +76,11 @@ public class ReduxEvents implements Listener {
     @EventHandler
     public void onPlace(BlockPlaceEvent event) {
 
+        if(!event.getBlock().getType().equals(Material.OBSIDIAN) && !event.getPlayer().getGameMode().equals(GameMode.CREATIVE)){
+            event.setCancelled(true);
+            return;
+        }
+
         if(event.getBlock().getType().equals(Material.CAKE_BLOCK) || event.getBlock().getType().equals(Material.CAKE)){
             event.setCancelled(true);
             return;

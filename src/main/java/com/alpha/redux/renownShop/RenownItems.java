@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.Material;
 import static com.alpha.redux.apis.advancedInventory.ItemMaker;
+import static com.alpha.redux.renownShop.GoldnBoosted.getGoldIncrease;
 import static com.alpha.redux.renownShop.xpIncrease.getXpIncrease;
 import static com.alpha.redux.renownShop.xpLicious.getXpliciousIncrease;
 
@@ -47,6 +48,14 @@ public class RenownItems {
                         "But is capped at" + ChatColor.YELLOW + " 500\n\n" + ChatColor.GRAY +
                         "Current boost: " + ChatColor.AQUA +  "+" + getXpIncrease(uuid) + " cap\n\n" +
                         ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "32 Renown", 1, true);
+    }
+
+    public static ItemStack GoldItemIncrease(String uuid){
+        return ItemMaker(Material.GOLD_INGOT, ChatColor.YELLOW + "Gold n' Boosted",
+                ChatColor.GRAY + "Each purchase gives you " + ChatColor.GOLD + "+5% gold!\n" + ChatColor.GRAY +
+                        "But is capped at" + ChatColor.YELLOW + " 50%\n\n" + ChatColor.GRAY +
+                        "Current boost: " + ChatColor.GOLD +  "+" + getGoldIncrease(uuid) + "%\n\n" +
+                        ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "48 Renown", 1, true);
     }
 
     public static ItemStack XpliciousIncrease(String uuid){

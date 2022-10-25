@@ -45,6 +45,7 @@ public class Sounds {
     public static final SoundEffect YUMMY_BREAD = new SoundEffect(Sound.EAT, 1, 1.2);
     public static final SoundEffect BREAD_GIVE = new SoundEffect(Sound.GHAST_FIREBALL, 1, 0.3);
     public static final SoundEffect SURVIVOR_HEAL = new SoundEffect(Sound.SILVERFISH_KILL, 1, 1.8);
+    public static final SoundEffect FIRST_AID = new SoundEffect(Sound.SILVERFISH_KILL, 1, 1.8);
     public static final SoundEffect SHOCKWAVE = new SoundEffect(Sound.EXPLODE, 2, 1.6);
     public static final SoundEffect BOOSTER_REMIND = new SoundEffect(Sound.CHICKEN_EGG_POP, 2, 1.6);
     public static final SoundEffect BUTTON = new SoundEffect(Sound.CLICK, 2, 1);

@@ -49,15 +49,15 @@ public class bossEvents implements Listener {
             if(MaldingPlayerHandlers.containsKey(event.getAttacker().getPlayerObject())){
                 double r = new Random().nextDouble();
                 if (r < 0.001) {
-                    Bukkit.getWorld("world").dropItem(event.getAttacker().getPlayerObject().getLocation(), enchants.malding_chestplate);
+                    event.getAttacker().getPlayerObject().getWorld().dropItem(event.getAttacker().getPlayerObject().getLocation(), enchants.malding_chestplate);
                     event.getAttacker().getPlayerObject().sendMessage(ChatColor.translateAlternateColorCodes('&', "&a&lWOW! &7you found some &cMalding Chestplate&7!"));
                 }
                 else if (r < 0.02) {
-                    Bukkit.getWorld("world").dropItem(event.getAttacker().getPlayerObject().getLocation(), enchants.malding_boots);
+                    event.getAttacker().getPlayerObject().getWorld().dropItem(event.getAttacker().getPlayerObject().getLocation(), enchants.malding_boots);
                     event.getAttacker().getPlayerObject().sendMessage(ChatColor.translateAlternateColorCodes('&', "&a&lWOW! &7you found some &cMalding Boots&7!"));
                 }
                 else if (r < 0.034) {
-                    Bukkit.getWorld("world").dropItem(event.getAttacker().getPlayerObject().getLocation(), enchants.malding_pants);
+                    event.getAttacker().getPlayerObject().getWorld().dropItem(event.getAttacker().getPlayerObject().getLocation(), enchants.malding_pants);
                     event.getAttacker().getPlayerObject().sendMessage(ChatColor.translateAlternateColorCodes('&', "&a&lWOW! &7you found some &cMalding Pants&7!"));
                 }
                 else if (r < 0.75) {

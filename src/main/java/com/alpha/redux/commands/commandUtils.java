@@ -1,5 +1,6 @@
 package com.alpha.redux.commands;
 
+import com.alpha.redux.apis.locations;
 import com.alpha.redux.events.boards;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -31,7 +32,7 @@ public class commandUtils {
                 mega_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
                 true_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
                 xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
-                Location loc = new Location(Bukkit.getWorld("world"), -33, 100, 436, 0, 0);
+                Location loc = locations.getSpawnLocation(player.getWorld());
                 player.teleport(loc);
                 boards.CreateScore(player);
                 return;
@@ -47,7 +48,7 @@ public class commandUtils {
             mega_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
             true_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
             xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
-            Location loc = new Location(Bukkit.getWorld("world"), -33, 100, 436, 0, 0);
+            Location loc = locations.getSpawnLocation(player.getWorld());
             player.teleport(loc);
             boards.CreateScore(player);
         }

@@ -288,8 +288,12 @@ public class FreshPants {
             return colorCode(redux.protectionLore.title(tier));
         }else if (Objects.equals(enchant, "solitude")) {
             return colorCode(redux.solitudeLore.title(tier));
+        }else if (Objects.equals(enchant, "diamondallergy")) {
+            return colorCode(redux.diamondAllergyLore.title(tier));
         }else if (Objects.equals(enchant, "notgladiator")) {
             return colorCode(redux.notGladiatorLore.title(tier));
+        }else if (Objects.equals(enchant, "booboo")) {
+            return colorCode(redux.booBooLore.title(tier));
         }else if (Objects.equals(enchant, "mirror")) {
             return colorCode(redux.mirrorLore.title(tier));
         }else if (Objects.equals(enchant, "escapepod")) {
@@ -302,6 +306,10 @@ public class FreshPants {
             return colorCode(redux.moctezumaLore.title(tier));
         }else if (Objects.equals(enchant, "goldbump")){
             return colorCode(redux.goldbumpLore.title(tier));
+        }else if (Objects.equals(enchant, "pantsradar")){
+            return colorCode(redux.pantsRadarLore.title(tier));
+        }else if (Objects.equals(enchant, "davidgoliath")){
+            return colorCode(redux.davidGoliathLore.title(tier));
         }else if (Objects.equals(enchant, "goldboost")){
             return colorCode(redux.goldboostLore.title(tier));
         }else if (Objects.equals(enchant, "sweaty")){
@@ -328,6 +336,12 @@ public class FreshPants {
             return "retro-gravitymicrocosm";
         }else if (Objects.equals(enchant, "prot")){
             return "protection";
+        }else if(Objects.equals(enchant, "diamondallergy")){
+            return "diamondallergy";
+        }else if(Objects.equals(enchant, "pantsradar")){
+            return "pantsradar";
+        }else if(Objects.equals(enchant, "booboo")){
+            return "booboo";
         }else if (Objects.equals(enchant, "soli")){
             return "solitude";
         }else if (Objects.equals(enchant, "frac")){
@@ -338,6 +352,8 @@ public class FreshPants {
             return "regularity";
         }else if (Objects.equals(enchant, "moct")){
             return "moctezuma";
+        }else if(Objects.equals(enchant, "david")){
+            return "davidgoliath";
         }else if (Objects.equals(enchant, "goldBump")){
             return "goldbump";
         }else if (Objects.equals(enchant, "xp")){
@@ -366,20 +382,28 @@ public class FreshPants {
             return colorCode(redux.protectionLore.lore(tier));
         }else if (Objects.equals(enchant, "solitude")) {
             return colorCode(redux.solitudeLore.lore(tier));
+        }else if (Objects.equals(enchant, "booboo")) {
+            return colorCode(redux.booBooLore.lore(tier));
         }else if (Objects.equals(enchant, "notgladiator")) {
             return colorCode(redux.notGladiatorLore.lore(tier));
+        }else if (Objects.equals(enchant, "pantsradar")){
+            return colorCode(redux.pantsRadarLore.lore(tier));
         }else if (Objects.equals(enchant, "mirror")) {
             return colorCode(redux.mirrorLore.lore(tier));
         }else if (Objects.equals(enchant, "escapepod")) {
             return colorCode(redux.escapePodLore.lore(tier));
         }else if (Objects.equals(enchant, "peroxide")) {
             return colorCode(redux.peroxideLore.lore(tier));
+        }else if (Objects.equals(enchant, "diamondallergy")) {
+            return colorCode(redux.diamondAllergyLore.lore(tier));
         }else if (Objects.equals(enchant, "fractionalreserve")) {
             return colorCode(redux.fractionalReserveLore.lore(tier));
         }else if (Objects.equals(enchant, "moctezuma")){
             return colorCode(redux.moctezumaLore.lore(tier));
         }else if (Objects.equals(enchant, "goldbump")){
             return colorCode(redux.goldbumpLore.lore(tier));
+        }else if (Objects.equals(enchant, "davidgoliath")){
+            return colorCode(redux.davidGoliathLore.lore(tier));
         }else if (Objects.equals(enchant, "goldboost")){
             return colorCode(redux.goldboostLore.lore(tier));
         }else if (Objects.equals(enchant, "sweaty")){
@@ -406,14 +430,14 @@ public class FreshPants {
 
         double retroGravityMicrocosm = .01 * calcEnchant(lore, "retro-gravitymicrocosm");
         double criticallyFunky = .02 * calcEnchant(lore, "criticallyfunky");
-        double regularity = .0250 * calcEnchant(lore, "regularity");
+        double regularity = .01 * calcEnchant(lore, "regularity");
         double protection = .0325 * calcEnchant(lore, "protection");
         double xpboost = .05 * calcEnchant(lore, "xpboost");
-        double solitude = .0525 * calcEnchant(lore, "solitude");
+        double solitude = .01 * calcEnchant(lore, "solitude");
         double notGladiator = .0625 * calcEnchant(lore, "notgladiator");
         double goldboost = .0650 * calcEnchant(lore, "goldboost");
         double mirror = .0675 * calcEnchant(lore, "mirror");
-        double escapePod = .0725 * calcEnchant(lore, "escapepod");
+        double escapePod = .01 * calcEnchant(lore, "escapepod");
         double xpbump = .0750 * calcEnchant(lore, "xpbump");
         double goldbump = .0775 * calcEnchant(lore, "goldbump");
         double peroxide = .0825 * calcEnchant(lore, "peroxide");
@@ -421,13 +445,25 @@ public class FreshPants {
         double moctezuma = .1025 * calcEnchant(lore, "moctezuma");
         double fractionalReserve = .1125 * calcEnchant(lore, "fractionalreserve");
         double goldenHeart = .0735 * calcEnchant(lore, "goldenheart");
+        double pantsRadar = .0525 * calcEnchant(lore, "pantsradar");
+        double booBoo = .0430 * calcEnchant(lore, "booboo");
+        double davidGoliath = .035 * calcEnchant(lore , "davidgoliath");
+        double diamondAllergy = .045 * calcEnchant(lore , "diamondallergy");
 
         while (true) {
-            if (percentChance(retroGravityMicrocosm)){
+            if(percentChance(pantsRadar)){
+                // Pants radar
+                // 5.25% of being here
+                return "pantsradar";
+            }if(percentChance(davidGoliath)){
+                return "davidgoliath";
+            }if(percentChance(diamondAllergy)){
+                return "diamondallergy";
+            }else if (percentChance(retroGravityMicrocosm)){
                 // Billionaire
                 // 1% chance of being here
                 return "retro-gravitymicrocosm";
-            } else if (percentChance(criticallyFunky)){
+            }else if (percentChance(criticallyFunky)){
                 // Perun
                 // 2% chance of being here
                 return "criticallyfunky";
@@ -439,6 +475,10 @@ public class FreshPants {
                 // Gamble
                 // 3.25% chance of being here
                 return "protection";
+            }else if (percentChance(booBoo)){
+                // Gamble
+                // 3.25% chance of being here
+                return "booboo";
             }else if (percentChance(goldenHeart)){
                 // Golden Heart
                 // 7.35% chance of being here

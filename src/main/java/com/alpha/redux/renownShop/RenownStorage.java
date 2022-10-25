@@ -15,6 +15,7 @@ import static com.alpha.redux.apis.advancedInventory.ItemMaker;
 import static com.alpha.redux.apis.chatManager.rank.colorCode;
 import static com.alpha.redux.events.boards.integerToRoman;
 import static com.alpha.redux.playerdata.prestiges.getPrestige;
+import static com.alpha.redux.renownShop.GoldnBoosted.*;
 import static com.alpha.redux.renownShop.damageIncrease.*;
 import static com.alpha.redux.renownShop.shopGUI.mainMenu;
 import static com.alpha.redux.renownShop.xpIncrease.*;
@@ -180,17 +181,17 @@ public class RenownStorage {
 
 
         if (event.getClickedInventory().getTitle().equals(ChatColor.YELLOW + "Renown Shop")){
-            if (event.getCurrentItem().getType().equals(Material.ENDER_CHEST)){
+            if (event.getCurrentItem().getType().equals(Material.GOLD_INGOT)){
                 ItemStack token = getToken();
-                if (Renown.getRenown(uuid) >= 16){
-                    if(hasXpIncrease(uuid)){
-                        Renown.setRenown(uuid, Renown.getRenown(uuid)-16);
+                if (Renown.getRenown(uuid) >= 48){
+                    if(hasGoldIncrease(uuid) && getGoldIncrease(uuid) <= 45){
+                        Renown.setRenown(uuid, Renown.getRenown(uuid)-48);
 
                         Sounds.RENOWN_SHOP_PURCHASE.play(player);
 
-                        player.getInventory().addItem(getUberDrop());
+                        addGoldIncrease(uuid, 5);
 
-                        player.sendMessage(ChatColor.GREEN + "Purchased!");
+                        player.sendMessage(ChatColor.GREEN + "Gold n' Boosted purchased! " + ChatColor.DARK_GRAY + "Tier: " + ChatColor.GOLD + "+" + getGoldIncrease(uuid) + "%");
 
                         player.openInventory(mainMenu(player));
 
@@ -328,7 +329,7 @@ public class RenownStorage {
                 ItemStack token = getToken();
                 if (Renown.getRenown(uuid)>=640){
                     if(hasXpIncrease(uuid)){
-                        Renown.setRenown(uuid, 640);
+                        Renown.setRenown(uuid, Renown.getRenown(uuid)-640);
 
                         Sounds.RENOWN_SHOP_PURCHASE.play(player);
 

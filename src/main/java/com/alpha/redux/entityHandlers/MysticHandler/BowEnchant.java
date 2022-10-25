@@ -1,6 +1,7 @@
 package com.alpha.redux.entityHandlers.MysticHandler;
 
 import com.alpha.redux.eventManagers.ReduxBowEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityShootBowEvent;
@@ -33,8 +34,6 @@ public class BowEnchant {
                 break;
             }
 
-        if (event.getAttacker().getPlayerObject().hasPotionEffect(PotionEffectType.POISON)) hasEnchant = false;
-
 
     }
 
@@ -42,16 +41,12 @@ public class BowEnchant {
         this.enchant = enchant;
         this.bowEvent = event;
 
-
-
         for(String ench : Objects.requireNonNull(getEnchants((Player) event.getEntity())))
             if (ench.contains(this.enchant)) {
                 this.hasEnchant = true;
                 this.enchantTier = ench.replace(this.enchant, "");
                 break;
             }
-
-        if (event.getEntity().hasPotionEffect(PotionEffectType.POISON)) hasEnchant = false;
 
 
     }

@@ -127,7 +127,7 @@ public class streaks {
                 true_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
                 xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
                 player.getInventory().addItem(getUberDrop());
-                Location loc = getSpawnLocation();
+                Location loc = getSpawnLocation(player.getWorld());
                 player.teleport(loc);
             }
         }
@@ -188,10 +188,7 @@ public class streaks {
 
         if (Objects.equals(getMegaStreak(String.valueOf(player.getUniqueId())), "beastmode")){
             if(getStreak(String.valueOf(player.getUniqueId())) > 49 && getStreak(String.valueOf(player.getUniqueId())) < 51){
-                if(!player.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE)){
-                    player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 600*20, 0, true, true));
-                }
+
                 NametagEdit.getApi().setNametag(player, colorCode("&a&lBEAST ") + rank.getNameColor(player), "");
                 xp_amount_mega.put(String.valueOf(player.getUniqueId()), 1);
                 mega_damage_amount.put(String.valueOf(player.getUniqueId()), 0.3);
@@ -200,10 +197,7 @@ public class streaks {
             return Beast(player);
         }if (Objects.equals(getMegaStreak(String.valueOf(player.getUniqueId())), "moon")){
             if(getStreak(String.valueOf(player.getUniqueId())) > 99 && getStreak(String.valueOf(player.getUniqueId())) < 101){
-                if(!player.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE)){
-                    player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 600*20, 0, true, true));
-                }
+
                 NametagEdit.getApi().setNametag(player, colorCode("&b&lMOON ") + rank.getNameColor(player), "");
                 xp_amount_mega.put(String.valueOf(player.getUniqueId()), 10);
                 mega_damage_amount.put(String.valueOf(player.getUniqueId()), .5);
@@ -222,10 +216,7 @@ public class streaks {
             return Uber(player);
         }else if (Objects.equals(getMegaStreak(String.valueOf(player.getUniqueId())), "highlander")){
             if(getStreak(String.valueOf(player.getUniqueId())) > 49 && getStreak(String.valueOf(player.getUniqueId())) < 51){
-                if(!player.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE)){
-                    player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 600*20, 0, true, true));
-                }
+
                 NametagEdit.getApi().setNametag(player, colorCode("&6&lHIGH ") + rank.getNameColor(player), "");
                 mega_damage_amount.put(String.valueOf(player.getUniqueId()), 0.01);
                 strikeLightningForPlayers(player.getLocation(), player);

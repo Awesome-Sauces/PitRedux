@@ -54,7 +54,7 @@ public class killHandler {
 
         NPC npc = getNPC(player);
 
-        Location loc = getBotSpawnLocation();
+        Location loc = getBotSpawnLocation(npc.getEntity().getWorld());
 
         npc.teleport(loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
 
@@ -115,7 +115,7 @@ public class killHandler {
 
             if(isNPC(ReduxDefender.getPlayerObject())){
                 NPC npc = getNPC(ReduxDefender.getPlayerObject());
-                npc.teleport(getBotSpawnLocation(), PlayerTeleportEvent.TeleportCause.PLUGIN);
+                npc.teleport(getBotSpawnLocation(npc.getEntity().getWorld()), PlayerTeleportEvent.TeleportCause.PLUGIN);
                 return true;
             }
 
@@ -130,7 +130,7 @@ public class killHandler {
             ReduxDefender.getPlayerObject().setHealth(Math.min(20, ReduxDefender.getPlayerObject().getMaxHealth()));
             //attacker.getWorld().playSound(attacker.getLocation(), Sound.LEVEL_UP, 1, 20);
             ReduxDefender.getPlayerObject().sendMessage(ChatColor.RED + colorCode("&lDEATH! ") + ChatColor.GRAY + "by " + ReduxDefender.getPlayerObject().getDisplayName());
-            Location loc = getSpawnLocation();
+            Location loc = getSpawnLocation(ReduxDefender.getPlayerObject().getWorld());
             ReduxDefender.getPlayerObject().teleport(loc);
             hasStreak(ReduxDefender.getPlayerObject().getDisplayName());
             //setStreak(ReduxDefender.getPlayerUUID(), 0);
@@ -151,45 +151,20 @@ public class killHandler {
 
         if (isNPC(ReduxDefender.getPlayerObject())) {
 
-            double r = new Random().nextDouble();
-            if (r < MysticismChance.getMysticismChance(ReduxAttacker.getPlayerUUID())) {
-                ReduxAttacker.getPlayerObject().getInventory().addItem(enchants.fresh_reds);
-                ReduxAttacker.getPlayerObject().sendMessage(ChatColor.GREEN + "WOW!" + ChatColor.GRAY + " You got a" + ChatColor.RED + " Red Fresh!");
-                ReduxAttacker.getPlayerObject().playSound(ReduxAttacker.getPlayerObject().getLocation(), Sound.NOTE_PLING, 1.0F, 1.0F);
-            }
-
-            double a = new Random().nextDouble();
-            if (a < MysticismChance.getMysticismChance(ReduxAttacker.getPlayerUUID())) {
-                ReduxAttacker.getPlayerObject().getInventory().addItem(enchants.fresh_reds);
-                ReduxAttacker.getPlayerObject().sendMessage(ChatColor.GREEN + "WOW!" + ChatColor.GRAY + " You got a" + ChatColor.RED + " Red Fresh!");
-                ReduxAttacker.getPlayerObject().playSound(ReduxAttacker.getPlayerObject().getLocation(), Sound.NOTE_PLING, 1.0F, 1.0F);
-            }
-
             double b = new Random().nextDouble();
+            double c = new Random().nextDouble();
+            double d = new Random().nextDouble();
             if (b < MysticismChance.getMysticismChance(ReduxAttacker.getPlayerUUID())) {
                 ReduxAttacker.getPlayerObject().getInventory().addItem(enchants.fresh_greens);
                 ReduxAttacker.getPlayerObject().sendMessage(ChatColor.GREEN + "WOW!" + ChatColor.GRAY + " You got a" + ChatColor.GREEN + " Green Fresh!");
                 ReduxAttacker.getPlayerObject().playSound(ReduxAttacker.getPlayerObject().getLocation(), Sound.NOTE_PLING, 1.0F, 1.0F);
-            }
-
-            double c = new Random().nextDouble();
-            if (c < MysticismChance.getMysticismChance(ReduxAttacker.getPlayerUUID())) {
+            }else if (c < MysticismChance.getMysticismChance(ReduxAttacker.getPlayerUUID())) {
                 ReduxAttacker.getPlayerObject().getInventory().addItem(enchants.fresh_blues);
                 ReduxAttacker.getPlayerObject().sendMessage(ChatColor.GREEN + "WOW!" + ChatColor.GRAY + " You got a" + ChatColor.BLUE + " Blue Fresh!");
                 ReduxAttacker.getPlayerObject().playSound(ReduxAttacker.getPlayerObject().getLocation(), Sound.NOTE_PLING, 1.0F, 1.0F);
-            }
-
-            double d = new Random().nextDouble();
-            if (d < MysticismChance.getMysticismChance(ReduxAttacker.getPlayerUUID())) {
+            }else if (d < MysticismChance.getMysticismChance(ReduxAttacker.getPlayerUUID())) {
                 ReduxAttacker.getPlayerObject().getInventory().addItem(enchants.fresh_yellows);
                 ReduxAttacker.getPlayerObject().sendMessage(ChatColor.GREEN + "WOW!" + ChatColor.GRAY + " You got a" + ChatColor.YELLOW + " Yellow Fresh!");
-                ReduxAttacker.getPlayerObject().playSound(ReduxAttacker.getPlayerObject().getLocation(), Sound.NOTE_PLING, 1.0F, 1.0F);
-            }
-
-            double e = new Random().nextDouble();
-            if (e < MysticismChance.getMysticismChance(ReduxAttacker.getPlayerUUID())) {
-                ReduxAttacker.getPlayerObject().getInventory().addItem(enchants.fresh_oranges);
-                ReduxAttacker.getPlayerObject().sendMessage(ChatColor.GREEN + "WOW!" + ChatColor.GRAY + " You got a" + ChatColor.GOLD + " Orange Fresh!");
                 ReduxAttacker.getPlayerObject().playSound(ReduxAttacker.getPlayerObject().getLocation(), Sound.NOTE_PLING, 1.0F, 1.0F);
             }
 
@@ -271,7 +246,7 @@ public class killHandler {
             addEconomy(ReduxAttacker.getPlayerUUID(), ReduxAttacker.calculateGold());
             ReduxAttacker.getPlayerObject().sendMessage(ChatColor.GREEN + colorCode("&lKILL! ") + ChatColor.GRAY + "on " + ReduxDefender.getPlayerObject().getDisplayName() + ChatColor.RESET + ChatColor.AQUA + " +" + ReduxAttacker.calculateExperience() + "XP" + ChatColor.GOLD + " +" + ReduxAttacker.calculateGold() + "g");
             ReduxDefender.getPlayerObject().sendMessage(ChatColor.RED + colorCode("&lDEATH! ") + ChatColor.GRAY + "by " + ReduxAttacker.getPlayerObject().getDisplayName());
-            Location loc = getSpawnLocation();
+            Location loc = getSpawnLocation(ReduxDefender.getPlayerObject().getWorld());
             ReduxDefender.getPlayerObject().teleport(loc);
             hasStreak(ReduxAttacker.getPlayerUUID());
             hasStreak(ReduxDefender.getPlayerObject().getDisplayName());

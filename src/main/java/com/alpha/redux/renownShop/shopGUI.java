@@ -22,7 +22,7 @@ public class shopGUI {
         ItemStack xp_increase = RenownItems.XpItemIncrease(String.valueOf(player.getUniqueId()));
         ItemStack colorfulBox = RenownItems.Boxers();
         ItemStack pearl = RenownItems.CorruptedPearl();
-        ItemStack uberDrop = RenownItems.UberDrop();
+        ItemStack uberDrop = RenownItems.GoldItemIncrease(String.valueOf(player.getUniqueId()));
         ItemStack quest = RenownItems.QuesterKit();
         ItemStack scythe = RenownItems.ReaperScythe();
         ItemStack mystic = RenownItems.MysticismDropItem(String.valueOf(player.getUniqueId()));

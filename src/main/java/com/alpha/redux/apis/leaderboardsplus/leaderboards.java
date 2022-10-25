@@ -32,7 +32,8 @@ public class leaderboards{
 
     public static HashMap<Integer, ArmorStand> LeaderBoard = new HashMap<>();
 
-    private static Hologram hologram = HologramsAPI.createHologram(economy.getPlugin(), getLeaderBoardLocation());
+    private static Hologram hologram = HologramsAPI.createHologram(economy.getPlugin(), getLeaderBoardLocation(Bukkit.getWorld("world")));
+    private static Hologram hologram2 = HologramsAPI.createHologram(economy.getPlugin(), getLeaderBoardLocation(Bukkit.getWorld("lobby")));
 
     public static void TopPlayers(){
 
@@ -114,19 +115,53 @@ public class leaderboards{
             hologram.appendTextLine(ChatColor.YELLOW + "10. " + ChatEventApi(top10, topPlayers.get(0).getKey()));
             hologram.appendTextLine("");
 
+        //For every player, add their name to gui
+            hologram2.appendTextLine(ChatColor.AQUA + ChatColor.translateAlternateColorCodes('&', "&lTOP ACTIVE PLAYERS"));
+            hologram2.appendTextLine("");
+            hologram2.appendTextLine(ChatColor.YELLOW + "1. " + ChatColor.RESET + ChatEventApi(top1, topPlayers.get(9).getKey()));
+            hologram2.appendTextLine("");
+            hologram2.appendTextLine(ChatColor.YELLOW + "2. " + ChatEventApi(top2, topPlayers.get(8).getKey()));
+            hologram2.appendTextLine("");
+            hologram2.appendTextLine(ChatColor.YELLOW + "3. " + ChatEventApi(top3, topPlayers.get(7).getKey()));
+            hologram2.appendTextLine("");
+            hologram2.appendTextLine(ChatColor.YELLOW + "4. " + ChatEventApi(top4, topPlayers.get(6).getKey()));
+            hologram2.appendTextLine("");
+            hologram2.appendTextLine(ChatColor.YELLOW + "5. " + ChatEventApi(top5, topPlayers.get(5).getKey()));
+            hologram2.appendTextLine("");
+            hologram2.appendTextLine(ChatColor.YELLOW + "6. " + ChatEventApi(top6, topPlayers.get(4).getKey()));
+            hologram2.appendTextLine("");
+            hologram2.appendTextLine(ChatColor.YELLOW + "7. " + ChatEventApi(top7, topPlayers.get(3).getKey()));
+            hologram2.appendTextLine("");
+            hologram2.appendTextLine(ChatColor.YELLOW + "8. " + ChatEventApi(top8, topPlayers.get(2).getKey()));
+            hologram2.appendTextLine("");
+            hologram2.appendTextLine(ChatColor.YELLOW + "9. " + ChatEventApi(top9, topPlayers.get(1).getKey()));
+            hologram2.appendTextLine("");
+            hologram2.appendTextLine(ChatColor.YELLOW + "10. " + ChatEventApi(top10, topPlayers.get(0).getKey()));
+            hologram2.appendTextLine("");
+
     }
 
     public static void RefreshBoard(){
         hologram.delete();
         if(hologram.isDeleted()){
-            hologram = HologramsAPI.createHologram(economy.getPlugin(), getLeaderBoardLocation());
-            TopPlayers();
+            hologram = HologramsAPI.createHologram(economy.getPlugin(), getLeaderBoardLocation(Bukkit.getWorld("world")));
         }
+
+        hologram2.delete();
+        if(hologram2.isDeleted()){
+            hologram2 = HologramsAPI.createHologram(economy.getPlugin(), getLeaderBoardLocation(Bukkit.getWorld("lobby")));
+        }
+
+        TopPlayers();
     }
 
     public static void delBoard(){
         if(!hologram.isDeleted()){
             hologram.delete();
+        }
+
+        if(!hologram2.isDeleted()){
+            hologram2.delete();
         }
     }
 

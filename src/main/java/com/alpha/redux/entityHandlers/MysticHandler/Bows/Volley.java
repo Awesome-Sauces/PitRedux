@@ -1,5 +1,6 @@
 package com.alpha.redux.entityHandlers.MysticHandler.Bows;
 
+import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.entityHandlers.MysticHandler.BowEnchant;
 import org.bukkit.Location;
 import org.bukkit.entity.Arrow;
@@ -16,33 +17,35 @@ public class Volley {
                 Player shooter = (Player) bowEvent.getEntity();
 
 
-                Arrow arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation(), EntityType.ARROW);
+                Arrow arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation().add(0,-1,0), EntityType.ARROW);
                 arrow.setCritical(true);
                 arrow.setVelocity(bowEvent.getProjectile().getVelocity());
                 arrow.setShooter(shooter);
 
 
-                arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation(), EntityType.ARROW);
+                arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation().add(0,-1,0), EntityType.ARROW);
                 arrow.setCritical(true);
                 arrow.setVelocity(bowEvent.getProjectile().getVelocity());
                 arrow.setShooter(shooter);
 
 
-                arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation(), EntityType.ARROW);
+                arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation().add(0,-1,0), EntityType.ARROW);
                 arrow.setCritical(true);
                 arrow.setVelocity(bowEvent.getProjectile().getVelocity());
                 arrow.setShooter(shooter);
 
 
-                arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation(), EntityType.ARROW);
+                arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation().add(0,-1,0), EntityType.ARROW);
                 arrow.setCritical(true);
                 arrow.setVelocity(bowEvent.getProjectile().getVelocity());
                 arrow.setShooter(shooter);
 
-                arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation(), EntityType.ARROW);
+                arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation().add(0,-1,0), EntityType.ARROW);
                 arrow.setCritical(true);
                 arrow.setVelocity(bowEvent.getProjectile().getVelocity());
                 arrow.setShooter(shooter);
+
+                Sounds.VOLLEY.play(shooter);
             }
             @Override
             public void TwoAction() {
@@ -50,29 +53,29 @@ public class Volley {
                 Player shooter = (Player) bowEvent.getEntity();
 
 
-                Arrow arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation(), EntityType.ARROW);
+                Arrow arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation().add(0,-1,0), EntityType.ARROW);
                 arrow.setCritical(true);
                 arrow.setVelocity(bowEvent.getProjectile().getVelocity());
                 arrow.setShooter(shooter);
 
-                arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation(), EntityType.ARROW);
-                arrow.setCritical(true);
-                arrow.setVelocity(bowEvent.getProjectile().getVelocity());
-                arrow.setShooter(shooter);
-
-
-                arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation(), EntityType.ARROW);
+                arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation().add(0,-1,0), EntityType.ARROW);
                 arrow.setCritical(true);
                 arrow.setVelocity(bowEvent.getProjectile().getVelocity());
                 arrow.setShooter(shooter);
 
 
-                arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation(), EntityType.ARROW);
+                arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation().add(0,-1,0), EntityType.ARROW);
                 arrow.setCritical(true);
                 arrow.setVelocity(bowEvent.getProjectile().getVelocity());
                 arrow.setShooter(shooter);
 
 
+                arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation().add(0,-1,0), EntityType.ARROW);
+                arrow.setCritical(true);
+                arrow.setVelocity(bowEvent.getProjectile().getVelocity());
+                arrow.setShooter(shooter);
+
+                Sounds.VOLLEY.play(shooter);
             }
             @Override
             public void OneAction() {
@@ -80,23 +83,23 @@ public class Volley {
                 Player shooter = (Player) bowEvent.getEntity();
 
 
-                Arrow arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation(), EntityType.ARROW);
+                Arrow arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation().add(0,-1,0), EntityType.ARROW);
                 arrow.setCritical(true);
                 arrow.setVelocity(bowEvent.getProjectile().getVelocity());
                 arrow.setShooter(shooter);
 
-                arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation(), EntityType.ARROW);
-                arrow.setCritical(true);
-                arrow.setVelocity(bowEvent.getProjectile().getVelocity());
-                arrow.setShooter(shooter);
-
-
-                arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation(), EntityType.ARROW);
+                arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation().add(0,-1,0), EntityType.ARROW);
                 arrow.setCritical(true);
                 arrow.setVelocity(bowEvent.getProjectile().getVelocity());
                 arrow.setShooter(shooter);
 
 
+                arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation().add(0,-1,0), EntityType.ARROW);
+                arrow.setCritical(true);
+                arrow.setVelocity(bowEvent.getProjectile().getVelocity());
+                arrow.setShooter(shooter);
+
+                Sounds.VOLLEY.play(shooter);
             }
         };
 

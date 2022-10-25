@@ -8,7 +8,10 @@ public class MirrorLore extends PitEnchant{
 
     @Override
     public void run(ReduxDamageEvent event, int level) {
-        event.setReduxTrueDamage(0);
+
+        double damage = level*.30;
+
+        event.setReduxTrueDamage(event.getReduxTrueDamage()*damage);
     }
 
     @Override

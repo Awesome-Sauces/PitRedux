@@ -52,6 +52,11 @@ public class crate {
             inventory.addItem(sword);
             inventory.addItem(sword);
 
+        }else if(this.crate.equals("GEM")){
+            this.broadcast = rank.getNameColor(player) + ChatColor.stripColor(player.getDisplayName()) + " &7has won &e&l1x Totally Legit Gem!";
+
+            inventory.addItem(items.getGem());
+
         }else if(this.crate.equals("BLOB")){
             this.broadcast = rank.getNameColor(player) + ChatColor.stripColor(player.getDisplayName()) + " &7has won &e&l1x Pit Blob III!";
 

@@ -101,8 +101,6 @@ public class ReduxDamageEvent extends Event implements Cancellable {
         setAttackerArmor();
         setAttackerEnchants();
         setDefenderEnchants();
-
-        run();
     }
 
 
@@ -183,7 +181,7 @@ public class ReduxDamageEvent extends Event implements Cancellable {
         this.trueDamage -= damage;
     }
 
-    private void run(){
+    public void run(){
         Player attacker = this.getAttacker().getPlayerObject();
         Player defender = this.getDefenders().getPlayerObject();
 
@@ -235,14 +233,14 @@ public class ReduxDamageEvent extends Event implements Cancellable {
 
                 try {
                     if(defender.getInventory().getChestplate().getType().equals(Material.DIAMOND_LEGGINGS)){
-                        this.addReduxDamage(4);
+                        this.addReduxDamage(2);
                     }else if(defender.getInventory().getLeggings().getType().equals(Material.DIAMOND_CHESTPLATE)){
-                        this.addReduxDamage(4);
+                        this.addReduxDamage(2);
                     }else if(defender.getInventory().getBoots().getType().equals(Material.DIAMOND_BOOTS)){
-                        this.addReduxDamage(4);
+                        this.addReduxDamage(2);
                     }
 
-                    this.addReduxDamage(5);
+                    this.addReduxDamage(3);
                 }catch (Exception e){
                     this.addReduxDamage(4);
                 }
@@ -271,7 +269,7 @@ public class ReduxDamageEvent extends Event implements Cancellable {
 
         if(defender.getInventory().getLeggings() != null){
             if(defender.getInventory().getLeggings().getType().equals(Material.LEATHER_LEGGINGS)){
-                this.subtractReduxDamage(this.getReduxDamage() * .05);
+                this.subtractReduxDamage(this.getReduxDamage() * .10);
 
             }
         }
@@ -300,15 +298,15 @@ public class ReduxDamageEvent extends Event implements Cancellable {
             this.addReduxDamage(Math.round(mega_damage_amount.get(String.valueOf(defender.getUniqueId()))));
         }
 
-        attacker.setHealth(Math.min(attacker.getHealth() +.75, attacker.getMaxHealth()));
+        attacker.setHealth(Math.min(attacker.getHealth() +.5, attacker.getMaxHealth()));
 
 
         if(defender.getInventory().getHelmet() != null && defender.getInventory().getHelmet().equals(itemManager.goldHelm)){
-            this.subtractReduxDamage(this.getReduxDamage() * .20);
+            this.subtractReduxDamage(this.getReduxDamage() * .05);
         }
 
         if(defender.getInventory().getChestplate() != null && defender.getInventory().getChestplate().equals(itemManager.arch)){
-            this.subtractReduxDamage(this.getReduxDamage() * .10);
+            this.subtractReduxDamage(this.getReduxDamage() * .05);
         }
 
 

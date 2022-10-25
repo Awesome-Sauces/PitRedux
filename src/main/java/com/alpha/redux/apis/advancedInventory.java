@@ -8,6 +8,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import static org.bukkit.Bukkit.getServer;
@@ -61,6 +63,40 @@ public class advancedInventory {
         meta.setLore(dye_lore);
         dye.setItemMeta(meta);
         return dye;
+    }
+
+    public static ItemStack EggMaker(short dyeColor, String DisplayName, String lore){
+        ItemStack dye = new ItemStack(383, 1, dyeColor);
+        ItemMeta meta = dye.getItemMeta();
+        meta.setDisplayName(DisplayName);
+        String[] lines = lore.split("\\n");
+        ArrayList<String> dye_lore = new ArrayList<>(Arrays.asList(lines));
+        meta.setLore(dye_lore);
+        dye.setItemMeta(meta);
+        return dye;
+    }
+
+    public static ItemStack DirtMaker(short dyeColor, String DisplayName, String lore){
+        ItemStack dye = new ItemStack(3, 1, dyeColor);
+        ItemMeta meta = dye.getItemMeta();
+        meta.setDisplayName(DisplayName);
+        String[] lines = lore.split("\\n");
+        ArrayList<String> dye_lore = new ArrayList<>(Arrays.asList(lines));
+        meta.setLore(dye_lore);
+        dye.setItemMeta(meta);
+        return dye;
+    }
+
+    public static ItemStack HeadMaker(String headName, String DisplayName, String lore){
+        ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+        SkullMeta meta = (SkullMeta) skull.getItemMeta();
+        meta.setDisplayName(DisplayName);
+        meta.setOwner(headName);
+        String[] lines = lore.split("\\n");
+        ArrayList<String> dye_lore = new ArrayList<>(Arrays.asList(lines));
+        meta.setLore(dye_lore);
+        skull.setItemMeta(meta);
+        return skull;
     }
 
     public static ItemStack ClayMaker(short clayColor, String DisplayName, String lore){

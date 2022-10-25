@@ -19,6 +19,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
 
+import static com.alpha.redux.apis.chatManager.rank.colorCode;
 import static com.alpha.redux.entityHandlers.ReduxPlayerHandler.playerExists;
 import static com.alpha.redux.renownShop.RenownStorage.getToken;
 import static com.alpha.redux.renownShop.atomizer.Atomizer.inventoryConstructor;
@@ -30,14 +31,20 @@ public class InventoryEventManager implements Listener {
         if(event.getPlayer().getInventory().getItemInHand() == null) return;
         if(event.getPlayer().getInventory().getItemInHand().getItemMeta() == null) return;
         if(event.getPlayer().getInventory().getItemInHand().getItemMeta().getDisplayName() != null & Objects.equals(event.getPlayer().getInventory().getItemInHand().getItemMeta().getDisplayName(), ChatColor.LIGHT_PURPLE + "Nuclear Atomizer")) {
-            if(playerExists(event.getPlayer()).getPlayerPrestige() >= 30) event.getPlayer().openInventory(inventoryConstructor(event.getPlayer()));
+
+            event.getPlayer().sendMessage(colorCode("&a&lERROR! &7this item is temporarily disabled!"));
+            Sounds.ERROR.play(event.getPlayer());
+
+            /*if(playerExists(event.getPlayer()).getPlayerPrestige() >= 30) event.getPlayer().openInventory(inventoryConstructor(event.getPlayer()));
             else event.getPlayer().sendMessage(ChatColor.RED + "You aren't high enough prestige to use this!");
+
+             */
         }
     }
 
     @EventHandler
     public void heister(InventoryClickEvent event){
-        if(event != null && event.getClickedInventory().getTitle() != null &&!event.getClickedInventory().getTitle().equals(ChatColor.LIGHT_PURPLE + "Heist Master")) return;
+        if(event != null && event.getClickedInventory() != null && event.getClickedInventory().getTitle() != null &&!event.getClickedInventory().getTitle().equals(ChatColor.LIGHT_PURPLE + "Heist Master")) return;
 
         event.setCancelled(true);
 
@@ -117,7 +124,7 @@ public class InventoryEventManager implements Listener {
 
     @EventHandler
     public void boosterBeacon(InventoryClickEvent event){
-        if(event != null && event.getClickedInventory().getTitle() != null && !event.getClickedInventory().getTitle().equals(ChatColor.LIGHT_PURPLE + "Booster Atoms")) return;
+        if(event != null && event.getClickedInventory() != null && event.getClickedInventory().getTitle() != null && !event.getClickedInventory().getTitle().equals(ChatColor.LIGHT_PURPLE + "Booster Atoms")) return;
 
         event.setCancelled(true);
 
@@ -211,7 +218,7 @@ public class InventoryEventManager implements Listener {
 
     @EventHandler
     public void main(InventoryClickEvent event){
-        if(event != null && event.getClickedInventory().getTitle() != null &&!event.getClickedInventory().getTitle().equals(ChatColor.LIGHT_PURPLE + "Nuclear Atomizer")) return;
+        if(event != null && event.getClickedInventory() != null && event.getClickedInventory().getTitle() != null &&!event.getClickedInventory().getTitle().equals(ChatColor.LIGHT_PURPLE + "Nuclear Atomizer")) return;
 
         event.setCancelled(true);
 
@@ -263,7 +270,7 @@ public class InventoryEventManager implements Listener {
 
     @EventHandler
     public void cactus(InventoryClickEvent event){
-        if(event != null && event.getClickedInventory().getTitle() != null &&event.getClickedInventory().getTitle() != null && event.getClickedInventory().getTitle().equals(ChatColor.GRAY + "Philosopher's Cactus")){
+        if(event != null && event.getClickedInventory() != null && event.getClickedInventory().getTitle() != null &&event.getClickedInventory().getTitle() != null && event.getClickedInventory().getTitle().equals(ChatColor.GRAY + "Philosopher's Cactus")){
             event.setCancelled(true);
             Player player = (Player) event.getWhoClicked();
             Inventory inventory = player.getInventory();

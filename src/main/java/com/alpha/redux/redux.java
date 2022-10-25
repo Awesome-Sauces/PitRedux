@@ -1,5 +1,8 @@
 package com.alpha.redux;
 
+import com.alpha.redux.UpgradesNpc.gui.PermanentUpgrades;
+import com.alpha.redux.UpgradesNpc.perks.*;
+import com.alpha.redux.UpgradesNpc.perks.items.GoldenHeadItem;
 import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.chatManager.rank;
 import com.alpha.redux.apis.locations;
@@ -61,12 +64,23 @@ public class redux extends JavaPlugin {
 
     public static redux INSTANCE;
 
+    public static Vampire vampire = new Vampire();
+    public static GoldenHeads goldenHeads = new GoldenHeads();
+    public static Dirty dirty = new Dirty();
+    public static Gladiator gladiator = new Gladiator();
+    public static StrengthChaining strengthChaining = new StrengthChaining();
+    public static Streaker streaker = new Streaker();
+
     public static XpboostLore xpboostLore = new XpboostLore();
     public static XpbumpLore xpbumpLore = new XpbumpLore();
     public static SweatyLore sweatyLore = new SweatyLore();
     public static GoldboostLore goldboostLore = new GoldboostLore();
     public static GoldbumpLore goldbumpLore = new GoldbumpLore();
     public static MoctezumaLore moctezumaLore = new MoctezumaLore();
+    public static PantsRadarLore pantsRadarLore = new PantsRadarLore();
+    public static BooBooLore booBooLore = new BooBooLore();
+    public static DavidGoliathLore davidGoliathLore = new DavidGoliathLore();
+    public static DiamondAllergyLore diamondAllergyLore = new DiamondAllergyLore();
 
     public static CriticallyFunkyLore criticallyFunkyLore = new CriticallyFunkyLore();
 
@@ -120,6 +134,7 @@ public class redux extends JavaPlugin {
         enchants.init();
 
 
+        getServer().getPluginManager().registerEvents(new PerkHandler(), this);
         getServer().getPluginManager().registerEvents(new events(),this);
         getServer().getPluginManager().registerEvents(new BoosterEvents(), this);
         getServer().getPluginManager().registerEvents(new bossEvents(), this);
@@ -129,6 +144,8 @@ public class redux extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new InventoryEventManager(), this);
         getServer().getPluginManager().registerEvents(new MysticEventHandlers(), this);
         getServer().getPluginManager().registerEvents(new ClickHandler(), this);
+        getServer().getPluginManager().registerEvents(new PermanentUpgrades(), this);
+        getServer().getPluginManager().registerEvents(new GoldenHeadItem(), this);
 
         commandRegistration();
 
@@ -143,6 +160,7 @@ public class redux extends JavaPlugin {
         SLAPI.loadRenown();
         SLAPI.loadDmgDec();
         SLAPI.loadMystic();
+        SLAPI.loadGoldInc();
 
         SLAPI.loadGoldBooster();
         SLAPI.loadXpBooster();
@@ -214,9 +232,17 @@ public class redux extends JavaPlugin {
             }
         }, 50L);
 
+
+
         for (int i = 0; i < 50; i++) {
-            HunterAPI.createHunterNon(locations.getBotSpawnLocation(), 0);
+            HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 0);
         }
+
+        for (int i = 0; i < 50; i++) {
+            HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby")), 0);
+        }
+
+
 
         new BukkitRunnable() {
 
@@ -233,7 +259,9 @@ public class redux extends JavaPlugin {
                 SLAPI.saveBotBooster();
                 SLAPI.saveXpBooster();
                 SLAPI.saveGoldBooster();
+                SLAPI.saveGoldInc();
 
+                SLAPI.loadGoldInc();
                 SLAPI.loadMonster();
                 SLAPI.loadXPInc();
                 SLAPI.loadDmgInc();
@@ -261,6 +289,7 @@ public class redux extends JavaPlugin {
         SLAPI.saveXPInc();
         SLAPI.saveDmgDec();
         SLAPI.saveMystic();
+        SLAPI.saveGoldInc();
         SLAPI.saveRenown();
         SLAPI.saveMonster();
         SLAPI.saveBotBooster();
@@ -323,6 +352,7 @@ public class redux extends JavaPlugin {
         getCommand("damage").setExecutor(commands);
         getCommand("renown").setExecutor(commands);
         getCommand("booster").setExecutor(commands);
+        getCommand("atest").setExecutor(commands);
        // getCommand("trade").setExecutor(commands);
     }
 

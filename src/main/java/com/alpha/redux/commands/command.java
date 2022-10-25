@@ -1,5 +1,6 @@
 package com.alpha.redux.commands;
 
+import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.chatManager.rank;
 import com.alpha.redux.apis.leaderboardsplus.leaderboards;
 import com.alpha.redux.boosters.Booster;
@@ -44,6 +45,7 @@ import static com.alpha.redux.apis.locations.getSpawnLocation;
 import static com.alpha.redux.apis.skyblock.skyblockItems.termy;
 import static com.alpha.redux.commands.repairs.ClickHandler.repairItem;
 import static com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap.deleteBlob;
+import static com.alpha.redux.entityHandlers.ReduxPlayerHandler.playerExists;
 import static com.alpha.redux.events.events.*;
 import static com.alpha.redux.events.nonPermItems.ClearAndCheck;
 import static com.alpha.redux.funEvents.event.endTwoTimes;
@@ -82,7 +84,11 @@ public class command implements CommandExecutor {
             }
 
             if(cmd.getName().equalsIgnoreCase("booster")){
-                Booster.purchaseBoosterCommand(args[0],leaderboards.getName(args[1]), Integer.parseInt(args[2]));
+                Booster.purchaseBoosterCommand(args[0],String.valueOf(Bukkit.getPlayer(args[1]).getUniqueId()), Integer.parseInt(args[2]));
+
+                Bukkit.broadcastMessage(colorCode("&e&lCONGRATS! &7"+args[1]+" just purchased &e&l"+args[0]+" &7booster!"));
+
+                Sounds.PRESTIGE.play(Bukkit.getPlayer(args[1]));
 
                 return true;
             }
@@ -144,6 +150,15 @@ public class command implements CommandExecutor {
 
                 return true;
             }
+            return true;
+        }
+
+        if(cmd.getName().equalsIgnoreCase("atest") &&
+        player.isOp()){
+
+            playerExists(player).addPerks(args[0]);
+            player.sendMessage(colorCode("&c" + playerExists(player).getPerks()));
+
             return true;
         }
 
@@ -264,7 +279,7 @@ public class command implements CommandExecutor {
                     if (cooldowns.get(String.valueOf(player.getUniqueId())) > System.currentTimeMillis()){
                         // They still have time left on mute
                         long timeleft = (cooldowns.get(String.valueOf(player.getUniqueId())) - System.currentTimeMillis()) / 1000;
-                        player.sendMessage(ChatColor.RED + "You are in combat for: " + ChatColor.GREEN + timeleft + ChatColor.RED + " seconds");
+                        player.sendMessage(colorCode("&c&lHOLD UP! &7Can't /play pit while fighting (&c" + timeleft + "s &7left)"));
                         return true;
                     }else{
                         player.removePotionEffect(PotionEffectType.WEAKNESS);
@@ -274,7 +289,18 @@ public class command implements CommandExecutor {
                         mega_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
                         true_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
                         xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
-                        Location loc = getSpawnLocation();
+
+                        Location loc = getSpawnLocation(player.getWorld());
+
+                        if(player.getWorld().getName().equals("world")){
+                            loc = getSpawnLocation(Bukkit.getWorld("lobby"));
+                            player.sendMessage(colorCode("&b&lTELEPORTING &7to lobby 2"));
+                        }else{
+                            loc = getSpawnLocation(Bukkit.getWorld("world"));
+                            player.sendMessage(colorCode("&b&lTELEPORTING &7to lobby 1"));
+                        }
+
+
                         player.teleport(loc);
                         boards.CreateScore(player);
                         return true;
@@ -288,7 +314,15 @@ public class command implements CommandExecutor {
                     mega_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
                     true_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
                     xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
-                    Location loc = getSpawnLocation();
+                    Location loc = getSpawnLocation(player.getWorld());
+
+                    if(player.getWorld().getName().equals("world")){
+                        loc = getSpawnLocation(Bukkit.getWorld("lobby"));
+                        player.sendMessage(colorCode("&b&lTELEPORTING &7to lobby 2"));
+                    }else{
+                        loc = getSpawnLocation(Bukkit.getWorld("world"));
+                        player.sendMessage(colorCode("&b&lTELEPORTING &7to lobby 1"));
+                    }
                     player.teleport(loc);
                     boards.CreateScore(player);
                 }
@@ -304,7 +338,7 @@ public class command implements CommandExecutor {
                 if (cooldowns.get(String.valueOf(player.getUniqueId())) > System.currentTimeMillis()){
                     // They still have time left on mute
                     long timeleft = (cooldowns.get(String.valueOf(player.getUniqueId())) - System.currentTimeMillis()) / 1000;
-                    player.sendMessage(ChatColor.RED + "You are in combat for " + ChatColor.RED + timeleft + ChatColor.RED + " more seconds");
+                    player.sendMessage(colorCode("&c&lHOLD UP! &7Can't /respawn while fighting (&c" + timeleft + "s &7left)"));
                     return true;
                 }else{
                     player.removePotionEffect(PotionEffectType.WEAKNESS);
@@ -314,7 +348,7 @@ public class command implements CommandExecutor {
                     mega_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
                     true_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
                     xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
-                    Location loc = new Location(Bukkit.getWorld("world"), -33, 100, 436, 0, 0);
+                    Location loc = getSpawnLocation(player.getWorld());
                     player.teleport(loc);
                     boards.CreateScore(player);
                     return true;
@@ -436,6 +470,11 @@ public class command implements CommandExecutor {
         }
 
         if(cmd.getName().equalsIgnoreCase("booster")){
+            if(player.isOp() && args.length >= 2){
+                Booster.purchaseBoosterCommand(args[0],args[1],Integer.parseInt(args[2]));
+                return true;
+            }
+
             player.openInventory(Booster.getBoosterGUI(player));
 
             return true;
@@ -612,7 +651,7 @@ public class command implements CommandExecutor {
                 if (cooldowns.get(String.valueOf(player.getUniqueId())) > System.currentTimeMillis()){
                     // They still have time left on mute
                     long timeleft = (cooldowns.get(String.valueOf(player.getUniqueId())) - System.currentTimeMillis()) / 1000;
-                    player.sendMessage(ChatColor.RED + "You are in combat for: " + ChatColor.GREEN + timeleft + ChatColor.RED + " seconds");
+                    player.sendMessage(colorCode("&c&lHOLD UP! &7Can't /respawn while fighting (&c" + timeleft + "s &7left)"));
                     return true;
                 }else{
                     player.removePotionEffect(PotionEffectType.WEAKNESS);
@@ -622,7 +661,7 @@ public class command implements CommandExecutor {
                     mega_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
                     true_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
                     xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
-                    Location loc = getSpawnLocation();
+                    Location loc = getSpawnLocation(player.getWorld());
                     player.teleport(loc);
                     NametagEdit.getApi().setNametag(player, ChatEventApiGetLevelColor(player.getDisplayName(), String.valueOf(player.getUniqueId()))+ rank.getNameColor(player), "");
 
@@ -639,7 +678,7 @@ public class command implements CommandExecutor {
                 true_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
                 NametagEdit.getApi().setNametag(player, ChatEventApiGetLevelColor(player.getDisplayName(), String.valueOf(player.getUniqueId()))+ rank.getNameColor(player), "");
                 xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
-                Location loc = getSpawnLocation();
+                Location loc = getSpawnLocation(player.getWorld());
                 player.teleport(loc);
                 boards.CreateScore(player);
             }
@@ -656,7 +695,7 @@ public class command implements CommandExecutor {
             mega_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
             true_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
             xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
-            Location loc = getSpawnLocation();
+            Location loc = getSpawnLocation(player.getWorld());
             player.teleport(loc);
             boards.CreateScore(player);
             NametagEdit.getApi().setNametag(player, ChatEventApiGetLevelColor(player.getDisplayName(), String.valueOf(player.getUniqueId()))+ rank.getNameColor(player), "");

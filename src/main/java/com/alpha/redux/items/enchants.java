@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -43,8 +44,13 @@ public class enchants {
     public static ItemStack fullPantPB;
     public static ItemStack fullSwordPB;
     public static ItemStack swordPB;
+    public static ItemStack goldenhead;
+    public static ItemStack firstaidfull;
+    public static ItemStack firstaidempty;
+
 
     public static void init(){
+        createGoldenHead();
         createLores();
         createFreshReds();
         createFreshBlues();
@@ -68,6 +74,66 @@ public class enchants {
         createPantPB();
         createSwordPB();
         createFULLSwordPB();
+        createFirstAidFull();
+        createFirstAidEmpty();
+    }
+
+    private static void createFirstAidFull() {
+        ItemStack item = new ItemStack((short)383, 1, (short) 96);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(colorCode("&cFirst-Aid Egg"));
+        List<String> lore = new ArrayList<>();
+        lore.add(colorCode("&7Heals &c2.5❤"));
+        lore.add(colorCode("&75 second cooldown."));
+        meta.spigot().setUnbreakable(true);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        firstaidfull = item;
+        //Shaped Recipe
+        ShapedRecipe sr = new ShapedRecipe(item);
+        sr.shape("SSS", "S S", "S S");
+        sr.setIngredient('S', Material.STICK);
+        Bukkit.getServer().addRecipe(sr);
+    }
+
+    private static void createFirstAidEmpty() {
+        ItemStack item = new ItemStack((short)383, 1, (short) 51);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(colorCode("&7First-Aid Egg"));
+        List<String> lore = new ArrayList<>();
+        lore.add(colorCode("&7Heals &c2.5❤"));
+        lore.add(colorCode("&7On Cooldown!"));
+        meta.spigot().setUnbreakable(true);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        firstaidempty = item;
+        //Shaped Recipe
+        ShapedRecipe sr = new ShapedRecipe(item);
+        sr.shape("SSS", "S S", "S S");
+        sr.setIngredient('S', Material.STICK);
+        Bukkit.getServer().addRecipe(sr);
+    }
+
+    private static void createGoldenHead(){
+        ItemStack skull = new ItemStack(Material.SKULL_ITEM,1, (byte) 3);
+        SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
+
+        skullMeta.setDisplayName(colorCode("&6Golden Head"));
+
+        List<String> lore = new ArrayList<>();
+
+        lore.add(colorCode("&9Speed I (0:08)"));
+        lore.add(colorCode("&9Regeneration II (0:05)"));
+        lore.add(colorCode("&63❤ absorption!"));
+        lore.add(colorCode("&71 second between eats"));
+
+        skullMeta.setLore(lore);
+
+        skullMeta.setOwner("nftv");
+        skull.setItemMeta(skullMeta);
+
+
+        goldenhead = skull;
     }
 
     private static void createLores() {

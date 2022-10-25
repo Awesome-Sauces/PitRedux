@@ -8,7 +8,7 @@ public class sharkCalc {
 
         int pAmount = 0;
 
-        for(Entity players : player.getNearbyEntities(12, 12, 12)){
+        for(Entity players : player.getNearbyEntities(7, 7, 7)){
             if(players instanceof Player){
                 Player current = (Player) players;
                 if((current.getHealth()/2) <= 10){

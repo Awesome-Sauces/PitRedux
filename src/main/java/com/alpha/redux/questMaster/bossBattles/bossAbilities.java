@@ -23,7 +23,7 @@ public class bossAbilities {
         double Y = player.getLocation().getY();
         double Z = player.getLocation().getZ();
 
-        Bukkit.getWorld("world").createExplosion(X, Y, Z, 0, false, false);
+        player.getWorld().createExplosion(X, Y, Z, 0, false, false);
 
     }
 

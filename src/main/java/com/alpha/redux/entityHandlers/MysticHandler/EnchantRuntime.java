@@ -8,6 +8,7 @@ import com.alpha.redux.eventManagers.ReduxBowEvent;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
 import com.alpha.redux.well.EnchantingMechanics;
 import com.alpha.redux.well.MysticType;
+import com.alpha.redux.well.enchants.DiamondAllergyLore;
 import org.bukkit.Bukkit;
 import org.bukkit.event.entity.EntityShootBowEvent;
 
@@ -39,18 +40,19 @@ public class EnchantRuntime {
 
     public boolean bowRun(){
 
-        new SprintDrain(this.bowEvent);
-        new Explosive(this.bowEvent);
-        new FasterThanTheirShadow(this.bowEvent);
-        new PullBow(this.bowEvent);
-        new Telebow(this.bowEvent);
+        new SprintDrain(bowEvent);
+        new Explosive(bowEvent);
+        new FasterThanTheirShadow(bowEvent);
+        new PullBow(bowEvent);
+        new Telebow(bowEvent);
 
         return true;
     }
 
     public boolean bowShoot(){
-        new MegaLongBow(this.shootEvent);
-        new Volley(this.shootEvent);
+
+        new MegaLongBow(shootEvent);
+        new Volley(shootEvent);
 
         return true;
     }
@@ -63,20 +65,22 @@ public class EnchantRuntime {
             new Executioner(event);
             new Gamble(event);
             new KingBuster(event);
-            new Lifesteal(event);
             new PainFocus(event);
             new Perun(event);
             new Shark(event);
             new Sharp(event);
+            new Lifesteal(event);
+            new Mirror(event, event.getDefenders());
             return false;
         }
 
         if(MysticType.valueOf(mysticType).equals(MysticType.PANT)){
 
+            new BooBoo(event, event.getDefenders());
             new CriticallyFunky(event, event.getDefenders());
+            new DiamondAllergy(event, event.getDefenders());
             new EscapePod(event, event.getDefenders());
             new FractionalReserve(event, event.getDefenders());
-            new Mirror(event, event.getDefenders());
             new NotGladiator(event, event.getDefenders());
             new Peroxide(event, event.getDefenders());
             new Protection(event, event.getDefenders());

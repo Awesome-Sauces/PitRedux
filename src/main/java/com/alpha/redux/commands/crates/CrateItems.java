@@ -61,6 +61,8 @@ public class CrateItems {
         return enchants.vile;
     }
 
+    public ItemStack getGem(){return enchants.gem;}
+
     public ItemStack getUber(){
         return RenownItems.UberDrop();
     }

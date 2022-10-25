@@ -15,7 +15,7 @@ public class LifestealLore extends PitEnchant{
         }else {multiplier += level*4;}
 
         event.getAttacker().getPlayerObject().setHealth(Math.min(event.getAttacker().getPlayerObject().getHealth()
-                        + Math.min(((event.getAttacker().getPlayerObject().getHealth()/2) * (multiplier/100)), 3),
+                        + Math.min(((event.getReduxDamage()/2) * (multiplier/100)), 3),
                 event.getAttacker().getPlayerObject().getMaxHealth()));
     }
 

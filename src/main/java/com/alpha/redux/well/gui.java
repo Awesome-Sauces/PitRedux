@@ -145,12 +145,12 @@ public class gui {
                 1, true);
 
         ItemStack Pants_bundle = ItemMaker(Material.MINECART, ChatColor.YELLOW + "Pants Bundle",
-                ChatColor.GRAY + "Kept on Death" + ChatColor.GRAY + "Hold and right-click to store 10 fresh pair of pants.\n\n" +
+                ChatColor.GRAY + "Kept on Death\n\n" + ChatColor.GRAY + "Hold and right-click to store 10 fresh pair of pants.\n\n" +
                         ChatColor.RESET + ChatColor.GRAY + "Cost: " + ChatColor.GOLD + "150g\n" + ChatColor.YELLOW + "Click to purchase!",
                 1, true);
 
         ItemStack Sword_bundle = ItemMaker(Material.MINECART, ChatColor.YELLOW + "Sword Bundle",
-                ChatColor.GRAY + "Kept on Death" + ChatColor.GRAY + "Hold and right-click to store 10 mystic swords.\n\n" +
+                ChatColor.GRAY + "Kept on Death\n\n" + ChatColor.GRAY + "Hold and right-click to store 10 mystic swords.\n\n" +
                         ChatColor.RESET + ChatColor.GRAY + "Cost: " + ChatColor.GOLD + "150g\n" + ChatColor.YELLOW + "Click to purchase!",
                 1, true);
 
@@ -164,6 +164,12 @@ public class gui {
                 ChatColor.GRAY + "Remains for 10 minutes.\n\n" + ChatColor.GRAY + ChatColor.ITALIC + "Lost on death.\n" +
                         ChatColor.RESET + ChatColor.GRAY + "Cost: " + ChatColor.GOLD + "40g\n" + ChatColor.YELLOW + "Click to purchase!",
                 8, true);
+
+        ItemStack FirstAid = EggMaker((short) 96, ChatColor.YELLOW + "First-Aid Egg",
+                ChatColor.GRAY + "Heals " + ChatColor.RED +
+                        "2.5❤\n" + ChatColor.GRAY +
+                        "5 second cooldown.\n\n" + ChatColor.GRAY + ChatColor.ITALIC + "Lost on death.\n" +
+                        ChatColor.RESET + ChatColor.GRAY + "Cost: " + ChatColor.GOLD + "2000g\n" + ChatColor.YELLOW + "Click to purchase!");
 
         ItemStack Iron_Kit = ItemMaker(Material.IRON_HELMET, ChatColor.YELLOW + "Iron Pack",
                 ChatColor.GRAY + "Contains:\n" + ChatColor.WHITE + " Iron Helmet\n " + ChatColor.WHITE + "Iron Chestplate\n " + ChatColor.WHITE + "Iron Leggings\n " +
@@ -195,6 +201,7 @@ public class gui {
         addInv(gui, Diamond_Boots, 8, 2, false);
         addInv(gui, Pants_bundle, 2, 3, false);
         addInv(gui, Sword_bundle, 3, 3, false);
+        addInv(gui, FirstAid, 4, 3, false);
 
 
 

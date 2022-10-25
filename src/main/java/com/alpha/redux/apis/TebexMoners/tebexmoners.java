@@ -19,7 +19,7 @@ public class tebexmoners {
     public static void onRankBuy(String player, String rank){
         Bukkit.broadcastMessage(ChatColor.GREEN + ChatColor.translateAlternateColorCodes('&', "&lCONGRATS! ") + ChatColor.GOLD + player + " has purchased: " + ChatColor.YELLOW + ChatColor.BOLD + rank);
 
-        Location loc = new Location(Bukkit.getWorld("world"), 0.5, 95, 0.5, 0, 0);
+        Location loc = new Location(Bukkit.getPlayer(player).getWorld(), 0.5, 95, 0.5, 0, 0);
         Bukkit.getWorld("world").strikeLightningEffect(loc);
         Bukkit.getWorld("world").strikeLightning(loc);
         Bukkit.getWorld("world").strikeLightningEffect(loc);

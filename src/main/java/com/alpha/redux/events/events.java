@@ -1,6 +1,7 @@
 package com.alpha.redux.events;
 
 import com.alpha.redux.MenuClicks.Cactus.CactusRunTime;
+import com.alpha.redux.UpgradesNpc.gui.PermanentUpgrades;
 import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.chatManager.rank;
 import com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap;
@@ -15,6 +16,7 @@ import com.alpha.redux.playerdata.xpManager;
 import com.alpha.redux.MenuClicks.InventoryEvent;
 import com.alpha.redux.questMaster.bossBattles.bossAttackEvent;
 import com.alpha.redux.questMaster.questInventoryManager;
+import com.alpha.redux.redux;
 import com.alpha.redux.renownShop.RenownItems;
 import com.alpha.redux.renownShop.RenownStorage;
 import com.alpha.redux.renownShop.damageDecrease;
@@ -241,7 +243,7 @@ public class events implements Listener {
                 mega_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
                 true_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
                 xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
-                Location loc = getSpawnLocation();
+                Location loc = getSpawnLocation(player.getWorld());
                 player.teleport(loc);
                 boards.CreateScore(player);
                 NametagEdit.getApi().setNametag(player, ChatEventApiGetLevelColor(player.getDisplayName(), String.valueOf(player.getUniqueId()))+ rank.getNameColor(player), "");
@@ -352,8 +354,8 @@ public class events implements Listener {
                 player.setItemInHand(enchants.fresh_bow);
             }
 
-            ReduxBowEvent mainEvent = new ReduxBowEvent(playerExists(player), playerExists((Player) event.getEntity()), event.getDamage(), event);
-            Bukkit.getPluginManager().callEvent(mainEvent);
+            ReduxBowEvent me = new ReduxBowEvent(playerExists(player), playerExists((Player) event.getEntity()), event.getDamage(), event);
+            Bukkit.getPluginManager().callEvent(me);
 
 
             return;
@@ -379,6 +381,10 @@ public class events implements Listener {
             Bukkit.getPluginManager().callEvent(mainEvent);
             if (!mainEvent.isCancelled()) {
 
+                mainEvent.run();
+
+                event.setDamage(mainEvent.getReduxDamage());
+
                 if(isNPC(defender)){
                     if(((LivingEntity) event.getEntity()).getHealth() - event.getFinalDamage() <= 3){
                         event.setCancelled(true);
@@ -387,7 +393,7 @@ public class events implements Listener {
                         return;
                     }
                 }else{
-                    if(((LivingEntity) event.getEntity()).getHealth() - event.getFinalDamage() <= 2){
+                    if(((LivingEntity) event.getEntity()).getHealth() - event.getFinalDamage() <= 1){
                         event.setCancelled(true);
                         ((LivingEntity) event.getEntity()).setHealth(((LivingEntity) event.getEntity()).getMaxHealth());
                         KillMan((Player) event.getDamager(), (Player) event.getEntity());
@@ -561,9 +567,41 @@ public class events implements Listener {
 
         if(event.getItem() != null && player.getItemInHand().getType().equals(Material.CACTUS)){
             player.openInventory(CactusRunTime.inventoryConstructor(player));
+            return;
+        }
+
+        if(event.getItem() != null && event.getItem().getType().equals(Material.EMERALD)){
+            player.openInventory(makeGemGUI(player));
+            return;
         }
 
         if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_AIR){
+
+            if(event.getPlayer().getItemInHand() != null &&
+                    event.getPlayer().getItemInHand().equals(enchants.firstaidempty)){
+                event.setCancelled(true);
+                Sounds.NO.play(player);
+                return;
+            }
+
+            if(event.getPlayer().getItemInHand() != null && event.getPlayer().getItemInHand().getItemMeta() != null &&
+                    event.getPlayer().getItemInHand().getItemMeta().getLore() != null &&
+            event.getPlayer().getItemInHand().getItemMeta().getLore().equals(enchants.firstaidfull.getItemMeta().getLore())){
+                event.setCancelled(true);
+                player.setItemInHand(enchants.firstaidempty);
+                player.setHealth(Math.min(20, player.getHealth()+3));
+                Sounds.FIRST_AID.play(player);
+
+                Bukkit.getScheduler().scheduleSyncDelayedTask(redux.INSTANCE, new Runnable() {
+                    @Override
+                    public void run() {
+                        player.getInventory().removeItem(enchants.firstaidempty);
+                        player.getInventory().addItem(enchants.firstaidfull);
+                    }
+                }, 5 * 20);
+
+                return;
+            }
 
             if (event.getPlayer().getItemInHand() != null &&
             event.getPlayer().getItemInHand().equals(enchants.fullPantPB)){
@@ -797,8 +835,6 @@ public class events implements Listener {
                     event.getPlayer().getInventory().removeItem(RenownItems.UberDrop());
 
                     claimUberReward(event.getPlayer());
-                }else if(event.getItem().getType().equals(Material.EMERALD)){
-                    player.openInventory(makeGemGUI(player));
                 }
             }
         }
@@ -807,7 +843,9 @@ public class events implements Listener {
     @EventHandler
     public void MysticWellEnchant(PlayerInteractEvent event){
         try{
+
             Material block = event.getClickedBlock().getType();
+
             if(block == Material.ENCHANTMENT_TABLE){
                 event.setCancelled(true);
                 base(event.getPlayer());
@@ -844,6 +882,11 @@ public class events implements Listener {
                     event.getPlayer().sendMessage(ChatColor.RED + "You need the right tool for this!");
                 }
 
+            }else if(!block.equals(Material.ENDER_CHEST)) {
+                if(event.getPlayer().isOp()) return;
+                if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK) &&
+                event.getPlayer().getItemInHand().getType().equals(Material.OBSIDIAN)) return;
+                event.setCancelled(true);
             }
         }catch (Exception e){
 
@@ -898,6 +941,8 @@ public class events implements Listener {
 
     @EventHandler (priority = EventPriority.HIGH)
     public void entityDamageEvent(EntityDamageEvent event) {
+        if(event.getEntity().getType().equals(EntityType.SLIME)) event.setCancelled(true);
+
         if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
             event.setCancelled(true);
         }
@@ -1072,13 +1117,16 @@ public class events implements Listener {
         Player player = (Player) event.getPlayer();
         NPC npc = CitizensAPI.getNPCRegistry().getNPC(event.getRightClicked());
 
-        if (Objects.equals(npc, CreateVillagers.non_perm_upgrades_npc)){
+        if (Objects.equals(npc, CreateVillagers.non_perm_upgrades_npc) ||
+                Objects.equals(npc, CreateVillagers.lobby_non_perm_upgrades_npc)){
             NonPermanentItems(player);
-        }else if (Objects.equals(npc, CreateVillagers.prestige_npc)){
+        }else if (Objects.equals(npc, CreateVillagers.prestige_npc) || Objects.equals(npc, CreateVillagers.lobby_prestige_npc)){
             PrestigeMenu(player);
-        }else if (Objects.equals(npc, CreateVillagers.perm_upgrades_npc)){
-            megaStreak(player);
-        }else if(Objects.equals(npc, CreateVillagers.quest_npc)){
+        }else if (Objects.equals(npc, CreateVillagers.perm_upgrades_npc) ||
+                Objects.equals(npc, CreateVillagers.lobby_perm_upgrades_npc)){
+            player.openInventory(PermanentUpgrades.getPermanentUpgrades(player));
+        }else if(Objects.equals(npc, CreateVillagers.quest_npc) ||
+                Objects.equals(npc, CreateVillagers.lobby_quest_npc)){
             if(getPrestige(String.valueOf(player.getUniqueId())) >= 15){
                 player.openInventory(makeMainMenu(player));
             }else{

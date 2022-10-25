@@ -19,7 +19,7 @@ public class SharkLore extends PitEnchant{
 
 
         event.addReduxDamage(event.getReduxDamage() *
-                ((Math.min(getSharkPlayers(event.getAttacker().getPlayerObject()), 8) * (multiplier/100) )));
+                (Math.min(Math.min(getSharkPlayers(event.getAttacker().getPlayerObject()), 3) * (multiplier/100), 3*(multiplier/100) )));
 
 
     }

@@ -18,6 +18,11 @@ import static com.alpha.redux.playerdata.economy.addEconomy;
 import static com.alpha.redux.playerdata.streaks.GiveUberItems;
 
 public class uber {
+
+    private static Boolean percentChance(double chance) {
+        return Math.random() <= chance;
+    }
+
     public static void claimUberReward(Player player){
         Random rand = new Random(); //instance of random class
         int upperbound = 40;
@@ -54,28 +59,36 @@ public class uber {
         String ArchLore = compileListToStringWithTitle(String.valueOf(itemManager.arch.getItemMeta().getDisplayName()) + "\n", itemManager.arch.getItemMeta().getLore());
         String JewelSwordLore = compileListToStringWithTitle(String.valueOf(enchants.jewl_sword.getItemMeta().getDisplayName()) + "\n", enchants.jewl_sword.getItemMeta().getLore());
         String JewelPantLore = compileListToStringWithTitle(String.valueOf(enchants.jewl_pant.getItemMeta().getDisplayName()) + "\n", enchants.jewl_pant.getItemMeta().getLore());
+        String GemLore = compileListToStringWithTitle(String.valueOf(enchants.gem.getItemMeta().getDisplayName() + "\n"), enchants.gem.getItemMeta().getLore());
 
-        switch (int_random){
-            case 0:
-                addEconomy(String.valueOf(player.getUniqueId()), 50000);
+        boolean looping = true;
+
+        while(looping){
+            if(percentChance(.10)){
+                addEconomy(String.valueOf(player.getUniqueId()), 100000);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.GOLD + " 50,000 Gold!", ChatColor.GOLD + "Golden Bar\n" + ChatColor.GRAY + "Receive: " + ChatColor.GOLD + "50,000g");
+                looping=false;
                 break;
-            case 1:
-                addEconomy(String.valueOf(player.getUniqueId()), 25000);
+            }else if(percentChance(.01)){
+                player.getInventory().addItem(enchants.gem);
+                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.GREEN + " Totally Legit Gem", GemLore);
+                looping=false;
+                break;
+            }else if(percentChance(.15)){
+                addEconomy(String.valueOf(player.getUniqueId()), 250000);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.GOLD + " 25,000 Gold!", ChatColor.GOLD + "Golden Bar\n" + ChatColor.GRAY + "Receive: " + ChatColor.GOLD + "25,000g");
+                looping=false;
                 break;
-            case 2:
-            case 11:
-            case 12:
+            }else if(percentChance(.10)){
                 player.getInventory().addItem(enchants.cactus);
                 player.getInventory().addItem(enchants.cactus);
                 player.getInventory().addItem(enchants.cactus);
                 player.getInventory().addItem(enchants.cactus);
                 player.getInventory().addItem(enchants.cactus);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x5 Cactus!", FreshRedsLore);
+                looping=false;
                 break;
-
-            case 39:
+            }else if(percentChance(.05)){
                 player.getInventory().addItem(enchants.cactus);
                 player.getInventory().addItem(enchants.cactus);
                 player.getInventory().addItem(enchants.cactus);
@@ -93,100 +106,99 @@ public class uber {
                 player.getInventory().addItem(enchants.cactus);
                 player.getInventory().addItem(enchants.cactus);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x16 Cactus!", FreshRedsLore);
+                looping=false;
                 break;
-            case 3:
-            case 13:
+            }else if(percentChance(.03)){
                 player.getInventory().addItem(itemManager.DiamondBoots);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x1 Diamond Boots!", BootLore);
+                looping=false;
                 break;
-            case 4:
-            case 22:
-            case 23:
+            }else if(percentChance(.03)){
                 player.getInventory().addItem(itemManager.DiamondLeggings);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x1 Diamond Leggings!", LegLore);
+                looping=false;
                 break;
-            case 5:
-            case 21:
+            }else if(percentChance(.03)){
                 player.getInventory().addItem(itemManager.DiamondChestplate);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x1 Diamond Chestplate!", ChestLore);
+                looping=false;
                 break;
-            case 6:
-            case 19:
-            case 20:
+            }else if(percentChance(.03)){
                 player.getInventory().addItem(itemManager.DiamondHelmet);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x1 Diamond Helmet!", HeadLore);
+                looping=false;
                 break;
-            case 7:
-            case 14:
+            }else if(percentChance(.05)){
                 player.getInventory().addItem(itemManager.feather);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.DARK_AQUA + " x1 Funky Feather!", FeatherLore);
+                looping=false;
                 break;
-            case 8:
+            }else if(percentChance(.04)){
                 player.getInventory().addItem(itemManager.feather);
                 player.getInventory().addItem(itemManager.feather);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.DARK_AQUA + " x2 Funky Feather!", FeatherLore);
+                looping=false;
                 break;
-            case 9:
+            }else if(percentChance(.03)){
                 player.getInventory().addItem(itemManager.feather);
                 player.getInventory().addItem(itemManager.feather);
                 player.getInventory().addItem(itemManager.feather);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.DARK_AQUA + " x3 Funky Feather!", FeatherLore);
+                looping=false;
                 break;
-            case 10:
-            case 15:
+            }else if(percentChance(.05)){
                 player.getInventory().addItem(itemManager.DiamondSword);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x1 Diamond Sword!", DiamondSwordLore);
+                looping=false;
                 break;
-            case 17:
+            }else if(percentChance(.10)){
                 player.getInventory().addItem(itemManager.megalongbow);
                 player.getInventory().addItem(new ItemStack(Material.ARROW));
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.RED + " x1 Bow!", MLBLore);
-
+                looping=false;
                 break;
-            case 18:
+            }else if(percentChance(.10)){
                 player.getInventory().addItem(itemManager.ftts);
                 player.getInventory().addItem(new ItemStack(Material.ARROW));
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.RED + " x1 Bow!", fttsLore);
+                looping=false;
                 break;
-            case 24:
+            }else if(percentChance(.03)){
                 GiveUberItems(player, enchants.vile, 16, true, null);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.RED + " x16 Vile!", VileLore);
+                looping=false;
                 break;
-            case 25:
+            }else if(percentChance(.05)){
                 GiveUberItems(player, enchants.vile, 8, true, null);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.RED + " x8 Vile!", VileLore);
+                looping=false;
                 break;
-            case 26:
+            }else if(percentChance(.02)){
                 GiveUberItems(player, enchants.vile, 32, true, null);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.RED + " x32 Vile!", VileLore);
+                looping=false;
                 break;
-            case 27:
+            }else if(percentChance(.05)){
                 GiveUberItems(player, itemManager.goldHelm, 1, true, null);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.GOLD + " x1 Golden Helmet!", GhelmLore);
+                looping=false;
                 break;
-            case 28:
+            }else if(percentChance(.05)){
                 GiveUberItems(player, itemManager.arch, 1, true, null);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x1 Archangel Chestplate!", ArchLore);
+                looping=false;
                 break;
-            case 29:
-            case 30:
-            case 31:
-            case 32:
-            case 33:
-            case 34:
+            }else if(percentChance(.08)){
                 GiveUberItems(player, enchants.jewl_pant, 1, true, null);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.DARK_AQUA + " x1 Jewel!", JewelPantLore);
+                looping=false;
                 break;
-            case 35:
-            case 36:
-            case 37:
-            case 38:
+            }else if(percentChance(.08)){
                 GiveUberItems(player, enchants.jewl_sword, 1, true, null);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.DARK_AQUA + " x1 Jewel!", JewelSwordLore);
-            default:
-                addEconomy(String.valueOf(player.getUniqueId()), 10000);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.GOLD + " 10,000 Gold!", ChatColor.GOLD + "Golden Bar\n" + ChatColor.GRAY + "Receive: " + ChatColor.GOLD + "10,000g");
+                looping=false;
                 break;
+            }
         }
     }
 }

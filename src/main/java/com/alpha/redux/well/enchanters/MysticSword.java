@@ -304,6 +304,8 @@ public class MysticSword {
             return colorCode(redux.goldbumpLore.title(tier));
         }else if (Objects.equals(enchant, "goldboost")){
             return colorCode(redux.goldboostLore.title(tier));
+        }else if (Objects.equals(enchant, "pantsradar")){
+            return colorCode(redux.pantsRadarLore.title(tier));
         }else if (Objects.equals(enchant, "sweaty")){
             return colorCode(redux.sweatyLore.title(tier));
         }else if (Objects.equals(enchant, "xpbump")){
@@ -324,6 +326,8 @@ public class MysticSword {
             return "lifesteal";
         }else if (Objects.equals(enchant, "diamond")){
             return "diamondstomp";
+        }else if(Objects.equals(enchant, "pantsradar")){
+            return "pantsradar";
         }else if (Objects.equals(enchant, "gamb")){
             return "gamble";
         }else if (Objects.equals(enchant, "king")){
@@ -370,6 +374,8 @@ public class MysticSword {
             return redux.moctezumaLore.lore(tier);
         }else if (Objects.equals(enchant, "goldbump")){
             return redux.goldbumpLore.lore(tier);
+        }else if (Objects.equals(enchant, "pantsradar")){
+            return colorCode(redux.pantsRadarLore.lore(tier));
         }else if (Objects.equals(enchant, "goldboost")){
             return redux.goldboostLore.lore(tier);
         }else if (Objects.equals(enchant, "sweaty")){
@@ -395,11 +401,11 @@ public class MysticSword {
         }
 
         double billionaire = .01 * calcEnchant(lore, "billionaire");
-        double perun = .02 * calcEnchant(lore, "perun");
-        double executioner = .0250 * calcEnchant(lore, "executioner");
-        double gamble = .0325 * calcEnchant(lore, "gamble");
+        double perun = .01 * calcEnchant(lore, "perun");
+        double executioner = .01 * calcEnchant(lore, "executioner");
+        double gamble = .01 * calcEnchant(lore, "gamble");
         double xpboost = .05 * calcEnchant(lore, "xpboost");
-        double painfocus = .0525 * calcEnchant(lore, "painfocus");
+        double painfocus = .0325 * calcEnchant(lore, "painfocus");
         double lifesteal = .0625 * calcEnchant(lore, "lifesteal");
         double goldboost = .0650 * calcEnchant(lore, "goldboost");
         double sharp = .0675 * calcEnchant(lore, "sharp");
@@ -410,9 +416,14 @@ public class MysticSword {
         double sweaty = .0925 * calcEnchant(lore, "sweaty");
         double moctezuma = .1025 * calcEnchant(lore, "moctezuma");
         double kingbuster = .1125 * calcEnchant(lore, "kingbuster");
+        double pantsRadar = .0525 * calcEnchant(lore, "pantsradar");
 
         while (true) {
-            if (percentChance(billionaire)){
+            if(percentChance(pantsRadar)){
+                // Pants radar
+                // 5.25% of being here
+                return "pantsradar";
+            }else if (percentChance(billionaire)){
                 // Billionaire
                 // 1% chance of being here
                 return "billionaire";
