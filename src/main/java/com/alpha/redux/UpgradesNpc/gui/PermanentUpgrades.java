@@ -279,9 +279,19 @@ public class PermanentUpgrades implements Listener {
 
         ItemStack base_glass = advancedInventory.cGlass();
 
-        Material megastreak = null;
+        Material megastreak = MATERIAL.BLAZE_POWDER;
         String lore = getOverDriveLore();
 
+        if(getMegaStreak(uuid).equals("uber")){
+                megastreak = Material.GOLD_SWORD;
+                lore = getUberLore();
+        }else if(getMegatStreak(uuid).equals("highlander")){
+                megastreak = Material.GOLD_BOOTS;
+                lore = getHighLanderLore();
+        }else if(getMegaStreak(uuid).equals("beastmode")){
+                megastreak = Material.DIAMOND_HELMET;
+                lore = getBeastModeLore();
+        }
 
         ItemStack empty = EmptySlotItem(uuid, 4);
 
@@ -304,7 +314,7 @@ public class PermanentUpgrades implements Listener {
     }
 
     @EventHandler
-    public void HandleClickEvent(InventoryClickEvent event){
+    public void PermanentUpgradesClickEvent(InventoryClickEvent event){
         Player player = (Player) event.getWhoClicked();
 
         if(event.getClickedInventory() != null &&
@@ -314,7 +324,33 @@ public class PermanentUpgrades implements Listener {
         event.setCancelled(true);
 
         if(event.getCurrentItem().getType().equals(Material.BLAZE_POWDER)){
-            gui.megaStreak(player);
+            player.openInventory(getKillstreakUpgrades(player));
+        }
+
+    }
+
+    @EventHandler
+    public void KillstreakClickEvent(InventoryClickEvent event){
+        Player player = (Player) event.getWhoClicked();
+
+        if(event.getClickedInventory() != null &&
+                event.getClickedInventory().getTitle() != null &&
+        !event.getClickedInventory().getTitle().equals(ChatColor.GRAY + "Killstreaks")) return;
+
+        event.setCancelled(true);
+
+        Material megastreak = MATERIAL.BLAZE_POWDER;
+
+        if(getMegaStreak(uuid).equals("uber")){
+                megastreak = Material.GOLD_SWORD;
+        }else if(getMegatStreak(uuid).equals("highlander")){
+                megastreak = Material.GOLD_BOOTS;
+        }else if(getMegaStreak(uuid).equals("beastmode")){
+                megastreak = Material.DIAMOND_HELMET;
+        }
+
+        if(event.getCurrentItem().getType().equals(megastreak)){
+                gui.megaStreak(player);
         }
 
     }
