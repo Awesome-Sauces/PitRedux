@@ -1,5 +1,6 @@
 package com.alpha.redux.events;
 
+import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.items.enchants;
 import com.alpha.redux.items.itemManager;
 import org.bukkit.Bukkit;
@@ -21,29 +22,31 @@ public class nonPermItems {
     public static void ClearAndCheck(Player player){
         try {
             if (player.getInventory().containsAtLeast(itemManager.feather, 1)) {
-                if(getStreak(String.valueOf(player.getUniqueId())) <= 349){
+                if(getStreak(String.valueOf(player.getUniqueId())) <= 499){
                     player.getInventory().removeItem(itemManager.feather);
+                    Sounds.FUNKY_FEATHER.play(player);
                     player.sendMessage(ChatColor.AQUA + "Your funky feather just saved your items!");
                     return;
                 }else{
-                    player.sendMessage(ChatColor.GREEN + "Congrats! " + ChatColor.GRAY + "you reached a 350 kill streak and kept your" + ChatColor.DARK_AQUA + " Funky Feather" + ChatColor.GRAY + "!");
+                    player.sendMessage(ChatColor.GREEN + "Congrats! " + ChatColor.GRAY + "you reached a 500 kill streak and kept your" + ChatColor.DARK_AQUA + " Funky Feather" + ChatColor.GRAY + "!");
                 }
 
             }else if (player.getInventory().containsAtLeast(itemManager.gmc_feather, 1)) {
-                if(getStreak(String.valueOf(player.getUniqueId())) <= 349){
+                if(getStreak(String.valueOf(player.getUniqueId())) <= 499){
                     player.getInventory().removeItem(itemManager.gmc_feather);
+                    Sounds.FUNKY_FEATHER.play(player);
                     player.sendMessage(ChatColor.AQUA + "Your funky feather just saved your items!");
                     return;
                 }else{
-                    player.sendMessage(ChatColor.GREEN + "Congrats! " + ChatColor.GRAY + "you reached a 350 kill streak and kept your" + ChatColor.DARK_AQUA + " Funky Feather" + ChatColor.GRAY + "!");
+                    player.sendMessage(ChatColor.GREEN + "Congrats! " + ChatColor.GRAY + "you reached a 500 kill streak and kept your" + ChatColor.DARK_AQUA + " Funky Feather" + ChatColor.GRAY + "!");
                 }
 
             }else {
 
                 hasStreak(String.valueOf(player.getUniqueId()));
 
-                if(getStreak(String.valueOf(player.getUniqueId())) > 250){
-                    player.sendMessage(ChatColor.GREEN + "Congrats! " + ChatColor.GRAY + "you reached a 250 kill streak and kept your lives!");
+                if(getStreak(String.valueOf(player.getUniqueId())) >= 300){
+                    player.sendMessage(ChatColor.GREEN + "Congrats! " + ChatColor.GRAY + "you reached a 300 kill streak and kept your lives!");
                 }
 
                 try {

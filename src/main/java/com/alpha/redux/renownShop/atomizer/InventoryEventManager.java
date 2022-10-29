@@ -293,7 +293,7 @@ public class InventoryEventManager implements Listener {
                 player.getInventory().addItem(enchants.fresh_oranges);
             }
 
-
+            Sounds.FIRST_AID.play(player);
 
         }
     }

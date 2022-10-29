@@ -609,12 +609,16 @@ public class events implements Listener {
                     event.getPlayer().getInventory().addItem(enchants.fresh_reds);
                 }
 
+                Sounds.ARMOR_SWAP.play(player);
+
                 event.getPlayer().getInventory().removeItem(enchants.fullPantPB);
             }else if (event.getPlayer().getItemInHand() != null &&
                     event.getPlayer().getItemInHand().equals(enchants.fullSwordPB)){
                 for (int i = 0; i < 10; i++) {
                     event.getPlayer().getInventory().addItem(enchants.fresh_sword);
                 }
+
+                Sounds.ARMOR_SWAP.play(player);
 
                 event.getPlayer().getInventory().removeItem(enchants.fullSwordPB);
             }
@@ -633,6 +637,7 @@ public class events implements Listener {
 
                 event.getPlayer().getInventory().addItem(enchants.fullSwordPB);
 
+                Sounds.FIRST_AID.play(player);
 
                 return;
 
@@ -645,6 +650,7 @@ public class events implements Listener {
                         event.getPlayer().getInventory().removeItem(enchants.fresh_reds);
                     }
 
+                    Sounds.FIRST_AID.play(player);
                     event.getPlayer().getInventory().addItem(enchants.fullPantPB);
                     event.getPlayer().getInventory().removeItem(enchants.pantsPB);
                     return;
@@ -653,6 +659,7 @@ public class events implements Listener {
                         event.getPlayer().getInventory().removeItem(enchants.fresh_blues);
                     }
 
+                    Sounds.FIRST_AID.play(player);
                     event.getPlayer().getInventory().addItem(enchants.fullPantPB);
                     event.getPlayer().getInventory().removeItem(enchants.pantsPB);
                     return;
@@ -661,6 +668,7 @@ public class events implements Listener {
                         event.getPlayer().getInventory().removeItem(enchants.fresh_yellows);
                     }
 
+                    Sounds.FIRST_AID.play(player);
                     event.getPlayer().getInventory().addItem(enchants.fullPantPB);
                     event.getPlayer().getInventory().removeItem(enchants.pantsPB);
                     return;
@@ -669,6 +677,7 @@ public class events implements Listener {
                         event.getPlayer().getInventory().removeItem(enchants.fresh_greens);
                     }
 
+                    Sounds.FIRST_AID.play(player);
                     event.getPlayer().getInventory().addItem(enchants.fullPantPB);
                     event.getPlayer().getInventory().removeItem(enchants.pantsPB);
                     return;
@@ -677,6 +686,7 @@ public class events implements Listener {
                         event.getPlayer().getInventory().removeItem(enchants.fresh_oranges);
                     }
 
+                    Sounds.FIRST_AID.play(player);
                     event.getPlayer().getInventory().addItem(enchants.fullPantPB);
                     event.getPlayer().getInventory().removeItem(enchants.pantsPB);
                     return;
@@ -707,6 +717,7 @@ public class events implements Listener {
                         }
                     }
 
+                    Sounds.FIRST_AID.play(player);
                     event.getPlayer().getInventory().addItem(enchants.fullPantPB);
                     event.getPlayer().getInventory().removeItem(enchants.pantsPB);
                     return;

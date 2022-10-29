@@ -1,5 +1,6 @@
 package com.alpha.redux.gems;
 
+import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.advancedInventory;
 import com.alpha.redux.items.enchants;
 import com.alpha.redux.well.EnchantingMechanics;
@@ -159,6 +160,7 @@ public class gemEvents {
 
                 event.getWhoClicked().sendMessage(ChatColor.GRAY + "Mystic Item successfully upgraded!");
                 event.getWhoClicked().closeInventory();
+                Sounds.GEM_USE.play(event.getWhoClicked());
                 event.getWhoClicked().getInventory().removeItem(enchants.gem);
                 event.getWhoClicked().getInventory().addItem(mystic);
 
