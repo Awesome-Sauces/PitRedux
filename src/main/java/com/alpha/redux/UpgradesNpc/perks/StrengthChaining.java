@@ -27,22 +27,31 @@ public class StrengthChaining extends PitPerk {
             public void run(ReduxDamageEvent event){
                 ReduxPlayer player = event.getAttacker();
 
+                if(player.getStrength()<=0) return;
+                event.addReduxDamage(event.getReduxDamage() * player.getStrength());
+
+                /*
                 if(player.getPerks().contains(redux.strengthChaining.getRefID())){
                     if(player.getStrength()<=0) return;
                     player.getPlayerObject().sendMessage("Strength Worked");
                     event.addReduxDamage(event.getReduxDamage() * player.getStrength());
                 }
 
+                 */
+
             }
 
             @Override
             public void run(ReduxDeathEvent event){
                 ReduxPlayer player = event.getAttacker();
-
+                player.strengthTick();
+                /*
                 if(player.getPerks().contains(redux.strengthChaining.getRefID())){
                     player.getPlayerObject().sendMessage("Strength Worked");
                     player.strengthTick();
                 }
+
+                 */
 
             }
         };

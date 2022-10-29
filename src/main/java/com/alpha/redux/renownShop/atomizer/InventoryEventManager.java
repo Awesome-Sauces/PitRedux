@@ -65,12 +65,6 @@ public class InventoryEventManager implements Listener {
             return;
         }
 
-        if(reduxPlayer.getPlayerPrestige() < 35){
-            player.sendMessage(ChatColor.RED + "Come back when you are prestige XXXV!");
-            player.closeInventory();
-            return;
-        }
-
         if(event.getCurrentItem().equals(Atomizer.heistOne)){
             if (player.getInventory().containsAtLeast(token, 576) && reduxPlayer.getPlayerGold() >= 32000000){
                 for (int i = 0; i < 576; i++) {

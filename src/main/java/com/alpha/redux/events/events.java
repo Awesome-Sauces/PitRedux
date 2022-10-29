@@ -66,8 +66,8 @@ import static com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap
 import static com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap.getPlayerFromBlob;
 import static com.alpha.redux.entityHandlers.ReduxPlayerHandler.playerExists;
 import static com.alpha.redux.events.ArmorJoin.GiveChain;
-import static com.alpha.redux.events.boards.PlayerJoinScore;
-import static com.alpha.redux.events.boards.PlayerLeaveScore;
+//import static com.alpha.redux.events.boards.PlayerJoinScore;
+//import static com.alpha.redux.events.boards.PlayerLeaveScore;
 import static com.alpha.redux.events.nonPermItems.ClearAndCheck;
 import static com.alpha.redux.gems.gemEvents.gemClickEvent;
 import static com.alpha.redux.gems.gemMain.makeGemGUI;

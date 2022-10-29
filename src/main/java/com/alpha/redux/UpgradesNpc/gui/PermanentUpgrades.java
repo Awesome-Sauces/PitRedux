@@ -1,11 +1,15 @@
 package com.alpha.redux.UpgradesNpc.gui;
 
 import com.alpha.redux.UpgradesNpc.perks.Streaker;
+import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.advancedInventory;
+import com.alpha.redux.playerdata.prestiges;
+import com.alpha.redux.playerdata.xpManager;
 import com.alpha.redux.redux;
 import com.alpha.redux.renownShop.CookieMonster.Monster;
 import com.alpha.redux.renownShop.RenownItems;
 import com.alpha.redux.well.gui;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -17,7 +21,10 @@ import org.bukkit.inventory.ItemStack;
 
 import static com.alpha.redux.apis.advancedInventory.*;
 import static com.alpha.redux.apis.chatManager.rank.colorCode;
-import static com.alpha.redux.playerdata.streaks.getMegaStreak;
+import static com.alpha.redux.playerdata.prestiges.getPrestige;
+import static com.alpha.redux.playerdata.prestiges.hasPrestige;
+import static com.alpha.redux.playerdata.streaks.*;
+import static com.alpha.redux.playerdata.xpManager.GetCurrentLevel;
 
 public class PermanentUpgrades implements Listener {
     public static ItemStack VampirePerkItem(String uuid, int slot){
@@ -59,12 +66,12 @@ public class PermanentUpgrades implements Listener {
 
     public static ItemStack EmptyKillstreakSlotItem(String uuid, int slot){
         return ItemMaker(Material.GOLD_BLOCK, ChatColor.GREEN + "Perk Slot #" + String.valueOf(slot),
-                ChatColor.GRAY + "Select a killstreak for this\n&7slot.\n\n" +
+                ChatColor.GRAY + "Select a killstreak for this\n"+ChatColor.GRAY+"slot.\n\n" +
                         ChatColor.YELLOW + "Click to choose perk!", 1, true);
     }
 
-    public static ItemStack KillStreakItem(String uuid){
-        return ItemMaker(Material.BLAZE_POWDER, ChatColor.GREEN + "Killstreaks",
+    public static ItemStack KillStreakItem(String uuid, Material material){
+        return ItemMaker(material, ChatColor.GREEN + "Killstreaks",
                 ChatColor.GRAY + "Choose killstreak perks which\n"+
                 ChatColor.GRAY + "trigger every time you get X\n" + ChatColor.GRAY + "kills.\n\n" +
                 ChatColor.GRAY + "Megastreak: " + ChatColor.GREEN + getMegaStreak(uuid) +"\n\n" +
@@ -114,7 +121,7 @@ public class PermanentUpgrades implements Listener {
 
     public static ItemStack BuildBattlerSlotItem(String uuid){
         return DyeMaker((short) 15, ChatColor.RED + "Build Battler",
-                ChatColor.GRAY + "Each tier:\n" + ChatColor.GRAY + "Your blocks stay" + ChatColor.GREEN +
+                ChatColor.GRAY + "Each tier:\n" + ChatColor.GRAY + "Your blocks stay " + ChatColor.GREEN +
                         "+60%\n" + ChatColor.GRAY + "longer.\n\n" +
                         ChatColor.GRAY + "Cost: " + ChatColor.GOLD + "1000g\n" +
                         ChatColor.RED + "Not enough gold!");
@@ -135,7 +142,7 @@ public class PermanentUpgrades implements Listener {
                 "&a&l- &7Earn &b+100% XP &7from kills.\n" +
                 "&a&l- &7Earn &6+50% gold &7from kills.\n\n" +
                 "&7BUT:\n" +
-                "&c&l- &7Receive &a+0.1❤ &7&overy\n" +
+                "&c&l- &7Receive &c+0.1❤ &7&overy\n" +
                 "&7true damage per 5 kills over 50.\n\n" +
                 "&7On death:\n" +
                 "&e&l- &7Gain &b4,000 XP&7.");
@@ -164,7 +171,7 @@ public class PermanentUpgrades implements Listener {
                 "&a&l- &7Earn &b+50% XP &7from kills.\n" +
                 "&a&l- &7Earn &6+75% gold &7from kills.\n\n" +
                 "&7BUT:\n" +
-                "&c&l- &7Receive &a+0.1❤ " +
+                "&c&l- &7Receive &c+0.1❤ " +
                 "&7damage per 5 kills over 50.\n\n" +
                 "&7On death:\n" +
                 "&e&l- &7Keep the &bDiamond Helmet&7.");
@@ -197,27 +204,122 @@ public class PermanentUpgrades implements Listener {
                 "&e&l- &7Earn your own bounty aswell.");
     }
 
-    public static ItemStack getHigherLanderItem(String uuid){
-        return ItemMaker(Material.GOLD_BOOTS, ChatColor.YELLOW + "Highlander",
-                getHighLanderLore() + "\n\n" + ChatColor.YELLOW + "Click to select!", 1, true);
+    public static ItemStack getHigherLanderItem(String uuid, Player player){
+        hasPrestige(uuid);
+        hasMegaStreak(uuid);
+
+        if(getMegaStreak(uuid).equals("highlander")){
+            return ItemMaker(Material.GOLD_BOOTS, ChatColor.GREEN + "Highlander",
+                    getHighLanderLore() + "\n\n" + ChatColor.GREEN + "Already selected!", 1, true);
+        }
+
+        int[] playerData = GetCurrentLevel(uuid, xpManager.getXp(uuid), prestiges.getPrestige(uuid), player);
+        int level = playerData[1];
+        int neededXP = playerData[0];
+
+        if(getPrestige(uuid)>=7 && level>=50){
+            return ItemMaker(Material.GOLD_BOOTS, ChatColor.YELLOW + "Highlander",
+                    getHighLanderLore() + "\n\n" + ChatColor.YELLOW + "Click to select!", 1, true);
+        }else if(level<50){
+            return ItemMaker(Material.GOLD_BOOTS, ChatColor.YELLOW + "Highlander",
+                    getHighLanderLore() + "\n\n" + ChatColor.RED + "This requires level " + ChatColor.AQUA+"50\n" + ChatColor.RED +
+                            "or higher.", 1, true);
+        }else{
+            return ItemMaker(Material.GOLD_BOOTS, ChatColor.YELLOW + "Highlander",
+                    getHighLanderLore() + "\n\n" + ChatColor.RED + "This requires prestige VII\n" + ChatColor.RED +
+                            "or higher.", 1, true);
+        }
     }
 
-    public static ItemStack getToTheMoonItem(String uuid){
-        return ItemMaker(Material.ENDER_STONE, ChatColor.YELLOW + "To the Moon",
-                getToTheMoonLore() + "\n\n" + ChatColor.YELLOW + "Click to select!", 1, true);
+    public static ItemStack getToTheMoonItem(String uuid, Player player){
+        hasPrestige(uuid);
+        hasMegaStreak(uuid);
+
+        if(getMegaStreak(uuid).equals("moon")){
+            return ItemMaker(Material.ENDER_STONE, ChatColor.GREEN + "To the Moon",
+                    getToTheMoonLore() + "\n\n" + ChatColor.GREEN + "Already selected!", 1, true);
+        }
+
+        int[] playerData = GetCurrentLevel(uuid, xpManager.getXp(uuid), prestiges.getPrestige(uuid), player);
+        int level = playerData[1];
+        int neededXP = playerData[0];
+
+        if(getPrestige(uuid)>=20 && level>= 50){
+            return ItemMaker(Material.ENDER_STONE, ChatColor.YELLOW + "To the Moon",
+                    getToTheMoonLore() + "\n\n" + ChatColor.YELLOW + "Click to select!", 1, true);
+        }else if(level<50){
+            return ItemMaker(Material.ENDER_STONE, ChatColor.YELLOW + "To the Moon",
+                    getToTheMoonLore() + "\n\n" + ChatColor.RED + "This requires level "+ChatColor.AQUA+"50\n" + ChatColor.RED +
+                            "or higher.", 1, true);
+        }else{
+            return ItemMaker(Material.ENDER_STONE, ChatColor.YELLOW + "To the Moon",
+                    getToTheMoonLore() + "\n\n" + ChatColor.RED + "This requires prestige XX\n" + ChatColor.RED +
+                            "or higher.", 1, true);
+        }
     }
 
-    public static ItemStack getUberItem(String uuid){
-        return ItemMaker(Material.GOLD_SWORD, ChatColor.YELLOW + "Uberstreak",
-                getUberLore() + "\n\n" + ChatColor.YELLOW + "Click to select!", 1, true);
+    public static ItemStack getUberItem(String uuid, Player player){
+        hasPrestige(uuid);
+        hasMegaStreak(uuid);
+
+        if(getMegaStreak(uuid).equals("uber")){
+            return ItemMaker(Material.GOLD_SWORD, ChatColor.GREEN + "Uberstreak",
+                    getUberLore() + "\n\n" + ChatColor.GREEN + "Already selected!", 1, true);
+        }
+
+        int[] playerData = GetCurrentLevel(uuid, xpManager.getXp(uuid), prestiges.getPrestige(uuid), player);
+        int level = playerData[1];
+        int neededXP = playerData[0];
+
+        if(getPrestige(uuid)>=20 && level>=100){
+            return ItemMaker(Material.GOLD_SWORD, ChatColor.YELLOW + "Uberstreak",
+                    getUberLore() + "\n\n" + ChatColor.YELLOW + "Click to select!", 1, true);
+        }else if(level<100){
+            return ItemMaker(Material.GOLD_SWORD, ChatColor.YELLOW + "Uberstreak",
+                    getUberLore() + "\n\n" + ChatColor.RED + "This requires level "+ChatColor.AQUA+"100\n" + ChatColor.RED +
+                            "or higher.", 1, true);
+        }else{
+            return ItemMaker(Material.GOLD_SWORD, ChatColor.YELLOW + "Uberstreak",
+                    getUberLore() + "\n\n" + ChatColor.RED + "This requires prestige XX\n" + ChatColor.RED +
+                            "or higher.", 1, true);
+        }
     }
 
-    public static ItemStack getBeastItem(String uuid){
-        return ItemMaker(Material.DIAMOND_HELMET, ChatColor.YELLOW + "Beastmode",
-                getBeastModeLore() + "\n\n" + ChatColor.YELLOW + "Click to select!", 1, true);
+    public static ItemStack getBeastItem(String uuid, Player player){
+        hasPrestige(uuid);
+        hasMegaStreak(uuid);
+
+        if(getMegaStreak(uuid).equals("beastmode")){
+            return ItemMaker(Material.DIAMOND_HELMET, ChatColor.GREEN + "Beastmode",
+                    getBeastModeLore() + "\n\n" + ChatColor.GREEN + "Already selected!", 1, true);
+        }
+
+        int[] playerData = GetCurrentLevel(uuid, xpManager.getXp(uuid), prestiges.getPrestige(uuid), player);
+        int level = playerData[1];
+        int neededXP = playerData[0];
+
+        if(getPrestige(uuid)>=3 && level>=25){
+            return ItemMaker(Material.DIAMOND_HELMET, ChatColor.YELLOW + "Beastmode",
+                    getBeastModeLore() + "\n\n" + ChatColor.YELLOW + "Click to select!", 1, true);
+        }else if(level<25){
+            return ItemMaker(Material.DIAMOND_HELMET, ChatColor.RED + "Beastmode",
+                    getBeastModeLore() + "\n\n" + ChatColor.RED + "This requires level "+ChatColor.AQUA+"25\n" + ChatColor.RED +
+                            "or higher.", 1, true);
+        }else{
+            return ItemMaker(Material.DIAMOND_HELMET, ChatColor.RED + "Beastmode",
+                    getBeastModeLore() + "\n\n" + ChatColor.RED + "This requires prestige III\n" + ChatColor.RED +
+                    "or higher.", 1, true);
+        }
     }
 
     public static ItemStack getOverDriveItem(String uuid){
+        hasMegaStreak(uuid);
+
+        if(getMegaStreak(uuid).equals("overdrive")){
+            return ItemMaker(Material.BLAZE_POWDER, ChatColor.GREEN + "Overdrive",
+                    getOverDriveLore() + "\n\n" + ChatColor.GREEN + "Already selected!", 1, true);
+        }
+
         return ItemMaker(Material.BLAZE_POWDER, ChatColor.YELLOW + "Overdrive",
                 getOverDriveLore() + "\n\n" + ChatColor.YELLOW + "Click to select!", 1, true);
     }
@@ -227,6 +329,18 @@ public class PermanentUpgrades implements Listener {
         String uuid = String.valueOf(player.getUniqueId());
         Inventory gui = advancedInventory.inv(player, 45, ChatColor.GRAY + "Permanent upgrades");
 
+        Material megastreak = Material.BLAZE_POWDER;
+
+        if(getMegaStreak(uuid).equals("uber")){
+            megastreak = Material.GOLD_SWORD;
+        }else if(getMegaStreak(uuid).equals("highlander")){
+            megastreak = Material.GOLD_BOOTS;
+        }else if(getMegaStreak(uuid).equals("beastmode")){
+            megastreak = Material.DIAMOND_HELMET;
+        }else if(getMegaStreak(uuid).equals("moon")){
+            megastreak = Material.ENDER_STONE;
+        }
+
         ItemStack base_glass = advancedInventory.cGlass();
 
         ItemStack vampire = VampirePerkItem(uuid, 1);
@@ -235,7 +349,7 @@ public class PermanentUpgrades implements Listener {
         ItemStack gladiator = GladiatorPerkItem(uuid, 3);
         ItemStack dirty = DirtyPerkItem(uuid, 4);
         ItemStack empty = EmptySlotItem(uuid, 4);
-        ItemStack killstreak = KillStreakItem(uuid);
+        ItemStack killstreak = KillStreakItem(uuid, megastreak);
 
         ItemStack xpBoost = XPBoostSlotItem(uuid);
         ItemStack goldBoost = GoldBoostSlotItem(uuid);
@@ -272,6 +386,30 @@ public class PermanentUpgrades implements Listener {
 
     }
 
+    public static Inventory getSelectKillstreak(Player player){
+        String uuid = String.valueOf(player.getUniqueId());
+        Inventory gui = advancedInventory.inv(player, 27, ChatColor.GRAY + "Choose a killstreak");
+        ItemStack base_glass = advancedInventory.cGlass();
+
+        for (int i = 0; i < 10; i++) {
+            advancedInventory.addInv(gui, base_glass, i, 1, false);
+            advancedInventory.addInv(gui, base_glass, i, 2, false);
+            advancedInventory.addInv(gui, base_glass, i, 3, false);
+        }
+
+        advancedInventory.addInv(gui, getOverDriveItem(uuid), 2, 2, false);
+
+        advancedInventory.addInv(gui, getBeastItem(uuid, player), 3, 2, false);
+
+        advancedInventory.addInv(gui, getHigherLanderItem(uuid, player), 4, 2, false);
+
+        advancedInventory.addInv(gui, getToTheMoonItem(uuid,player), 5, 2, false);
+
+        advancedInventory.addInv(gui, getUberItem(uuid, player), 6, 2, false);
+
+        return gui;
+    }
+
     public static Inventory getKillstreakUpgrades(Player player){
 
         String uuid = String.valueOf(player.getUniqueId());
@@ -279,18 +417,21 @@ public class PermanentUpgrades implements Listener {
 
         ItemStack base_glass = advancedInventory.cGlass();
 
-        Material megastreak = MATERIAL.BLAZE_POWDER;
+        Material megastreak = Material.BLAZE_POWDER;
         String lore = getOverDriveLore();
 
         if(getMegaStreak(uuid).equals("uber")){
                 megastreak = Material.GOLD_SWORD;
                 lore = getUberLore();
-        }else if(getMegatStreak(uuid).equals("highlander")){
+        }else if(getMegaStreak(uuid).equals("highlander")){
                 megastreak = Material.GOLD_BOOTS;
                 lore = getHighLanderLore();
         }else if(getMegaStreak(uuid).equals("beastmode")){
                 megastreak = Material.DIAMOND_HELMET;
                 lore = getBeastModeLore();
+        }else if(getMegaStreak(uuid).equals("moon")){
+            megastreak = Material.ENDER_STONE;
+            lore = getToTheMoonLore();
         }
 
         ItemStack empty = EmptySlotItem(uuid, 4);
@@ -323,7 +464,22 @@ public class PermanentUpgrades implements Listener {
 
         event.setCancelled(true);
 
-        if(event.getCurrentItem().getType().equals(Material.BLAZE_POWDER)){
+        String uuid = String.valueOf(player.getUniqueId());hasMegaStreak(uuid);
+        Material megastreak = Material.BLAZE_POWDER;
+
+        hasMegaStreak(uuid);
+
+        if(getMegaStreak(uuid).equals("uber")){
+            megastreak = Material.GOLD_SWORD;
+        }else if(getMegaStreak(uuid).equals("highlander")){
+            megastreak = Material.GOLD_BOOTS;
+        }else if(getMegaStreak(uuid).equals("beastmode")){
+            megastreak = Material.DIAMOND_HELMET;
+        }else if(getMegaStreak(uuid).equals("moon")){
+            megastreak = Material.ENDER_STONE;
+        }
+
+        if(event.getCurrentItem().getType().equals(megastreak)){
             player.openInventory(getKillstreakUpgrades(player));
         }
 
@@ -333,24 +489,94 @@ public class PermanentUpgrades implements Listener {
     public void KillstreakClickEvent(InventoryClickEvent event){
         Player player = (Player) event.getWhoClicked();
 
+        String uuid = String.valueOf(player.getUniqueId());
+
         if(event.getClickedInventory() != null &&
                 event.getClickedInventory().getTitle() != null &&
         !event.getClickedInventory().getTitle().equals(ChatColor.GRAY + "Killstreaks")) return;
 
         event.setCancelled(true);
 
-        Material megastreak = MATERIAL.BLAZE_POWDER;
+        Material megastreak = Material.BLAZE_POWDER;
 
         if(getMegaStreak(uuid).equals("uber")){
                 megastreak = Material.GOLD_SWORD;
-        }else if(getMegatStreak(uuid).equals("highlander")){
+        }else if(getMegaStreak(uuid).equals("highlander")){
                 megastreak = Material.GOLD_BOOTS;
         }else if(getMegaStreak(uuid).equals("beastmode")){
                 megastreak = Material.DIAMOND_HELMET;
+        }else if(getMegaStreak(uuid).equals("moon")){
+            megastreak = Material.ENDER_STONE;
         }
 
         if(event.getCurrentItem().getType().equals(megastreak)){
-                gui.megaStreak(player);
+                player.openInventory(getSelectKillstreak(player));
+        }
+
+    }
+
+    @EventHandler
+    public void SelectKillstreakClickEvent(InventoryClickEvent event){
+        Player player = (Player) event.getWhoClicked();
+
+        String uuid = String.valueOf(player.getUniqueId());
+
+        if(event.getClickedInventory() != null &&
+                event.getClickedInventory().getTitle() != null &&
+                !event.getClickedInventory().getTitle().equals(ChatColor.GRAY + "Choose a killstreak")) return;
+
+        event.setCancelled(true);
+
+        Material uber = Material.GOLD_SWORD;
+        Material highlander = Material.GOLD_BOOTS;
+        Material moon = Material.ENDER_STONE;
+        Material beastmode = Material.DIAMOND_HELMET;
+        Material overdrive = Material.BLAZE_POWDER;
+
+        Material clicked = event.getCurrentItem().getType();
+
+        int[] playerData = GetCurrentLevel(uuid, xpManager.getXp(uuid), prestiges.getPrestige(uuid), player);
+        int level = playerData[1];
+        int neededXP = playerData[0];
+
+        hasMegaStreak(uuid);
+        hasPrestige(uuid);
+
+        if(clicked.equals(uber) &&
+            !getMegaStreak(uuid).equals("uber") &&
+            getPrestige(uuid) >= 20 &&
+            level >= 100){
+            Sounds.SUCCESS.play(player);
+            setMega(uuid,"uber");
+            player.openInventory(getKillstreakUpgrades(player));
+        }else if(clicked.equals(moon) &&
+                !getMegaStreak(uuid).equals("moon") &&
+                getPrestige(uuid) >= 20 &&
+                level >= 50){
+            Sounds.SUCCESS.play(player);
+            setMega(uuid,"moon");
+            player.openInventory(getKillstreakUpgrades(player));
+        }else if(clicked.equals(highlander) &&
+                !getMegaStreak(uuid).equals("highlander") &&
+                getPrestige(uuid) >= 7 &&
+                level >= 50){
+            Sounds.SUCCESS.play(player);
+            setMega(uuid,"highlander");
+            player.openInventory(getKillstreakUpgrades(player));
+        }if(clicked.equals(beastmode) &&
+                !getMegaStreak(uuid).equals("beastmode") &&
+                getPrestige(uuid) >= 3 &&
+                level >= 25){
+            Sounds.SUCCESS.play(player);
+            setMega(uuid,"beastmode");
+            player.openInventory(getKillstreakUpgrades(player));
+        }if(clicked.equals(overdrive) &&
+                !getMegaStreak(uuid).equals("overdrive") &&
+                getPrestige(uuid) >= 0 &&
+                level >= 0){
+            Sounds.SUCCESS.play(player);
+            setMega(uuid,"overdrive");
+            player.openInventory(getKillstreakUpgrades(player));
         }
 
     }

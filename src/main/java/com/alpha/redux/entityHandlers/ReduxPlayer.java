@@ -260,7 +260,7 @@ public class ReduxPlayer {
             @Override
             public void run() {
                 if(strengthTimer < System.currentTimeMillis()){
-                    strength=0.0;
+                    strength=0;
                 }
             }
         }, (7) * 20);
@@ -268,5 +268,9 @@ public class ReduxPlayer {
 
     public double getStrength(){
         return strength;
+    }
+
+    public int getStrengthTier(){
+        return (int) (strength/.08);
     }
 }

@@ -16,6 +16,7 @@ import com.alpha.redux.entityHandlers.MysticHandler.MysticEventHandler.MysticEve
 import com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap;
 import com.alpha.redux.entityHandlers.ReduxPlayerHandler;
 import com.alpha.redux.eventManagers.ReduxEvents;
+import com.alpha.redux.events.boards;
 import com.alpha.redux.playerdata.Renown;
 import com.alpha.redux.playerdata.economy;
 import com.alpha.redux.events.events;
@@ -47,6 +48,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import java.util.UUID;
 import java.util.logging.Level;
 
 import static com.alpha.redux.DeathHandler.killHandler.isNPC;
@@ -54,8 +56,8 @@ import static com.alpha.redux.apis.chatManager.rank.ChatEventApiGetLevelColor;
 import static com.alpha.redux.apis.leaderboardsplus.leaderboards.*;
 import static com.alpha.redux.apis.locations.getCakeLocation;
 import static com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap.*;
-import static com.alpha.redux.events.boards.ClearAllScore;
-import static com.alpha.redux.events.boards.CreateScore;
+//import static com.alpha.redux.events.boards.ClearAllScore;
+import static com.alpha.redux.events.boards.*;
 import static com.alpha.redux.funEvents.event.handleTwoEvent;
 import static com.alpha.redux.funEvents.event.twoTimesEvent;
 import static com.alpha.redux.questMaster.bossBattles.maldingBoss.*;
@@ -134,6 +136,7 @@ public class redux extends JavaPlugin {
         enchants.init();
 
 
+        getServer().getPluginManager().registerEvents(new boards(), this);
         getServer().getPluginManager().registerEvents(new PerkHandler(), this);
         getServer().getPluginManager().registerEvents(new events(),this);
         getServer().getPluginManager().registerEvents(new BoosterEvents(), this);
@@ -192,6 +195,19 @@ public class redux extends JavaPlugin {
         }.runTaskTimer(plugin, 1, 1);
 
 
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+
+                getServer().getScheduler().runTaskTimer(redux.INSTANCE, () -> {
+                    for(UUID uuid : boardMap.keySet()){
+                        updateBoard(boardMap.get(uuid),Bukkit.getPlayer(uuid));
+                    }
+                },0,20);
+            }
+        }, 200L);
+
+
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             @Override
             public void run() {
@@ -233,7 +249,7 @@ public class redux extends JavaPlugin {
         }, 50L);
 
 
-
+/*
         for (int i = 0; i < 50; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 0);
         }
@@ -241,6 +257,8 @@ public class redux extends JavaPlugin {
         for (int i = 0; i < 50; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby")), 0);
         }
+
+ */
 
 
 
@@ -298,8 +316,6 @@ public class redux extends JavaPlugin {
         CreateVillagers.unloadNPC();
         delBoard();
         getServer().getConsoleSender().sendMessage(ChatColor.RED + "[Redux] plugin is disabled");
-
-        ClearAllScore();
 
         for (Player player : MaldingPlayerHandlers.keySet()){
 

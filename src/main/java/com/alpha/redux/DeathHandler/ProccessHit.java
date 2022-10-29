@@ -47,10 +47,11 @@ public class ProccessHit {
         MonsterHandler.handleMonsterDeath(attacker, getNPC(defender));
 
         sendKillBar(attacker, defender);
-        processKill(playerExists(attacker), playerExists(defender));
+        //processKill(playerExists(attacker), playerExists(defender));
         ReduxDeathEvent mainEvent = new ReduxDeathEvent(playerExists(attacker), playerExists(defender));
         Bukkit.getPluginManager().callEvent(mainEvent);
         if (!mainEvent.isCancelled()) {
+            mainEvent.run();
             mainEvent.setCancelled(true);
         }
     }

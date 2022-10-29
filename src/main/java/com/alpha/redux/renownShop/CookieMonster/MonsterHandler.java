@@ -41,6 +41,9 @@ public class MonsterHandler {
 
         npc.setBukkitEntityType(EntityType.PLAYER);
 
+        npc.data().setPersistent(NPC.Metadata.PLAYER_SKIN_UUID, "HawaiiFox");
+        npc.data().setPersistent(NPC.Metadata.PLAYER_SKIN_USE_LATEST, false);
+
         npc.spawn(player.getLocation());
 
         npc.teleport(player.getLocation(), PlayerTeleportEvent.TeleportCause.COMMAND);
