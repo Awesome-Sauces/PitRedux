@@ -448,12 +448,19 @@ public class command implements CommandExecutor {
         }
 
         if(cmd.getName().equalsIgnoreCase("well")) {
+            if(player.isOp()){
+                Sounds.BOOSTER_REMIND.play(player);
+                base(player);
+                return true;
+            }
+
             if(!player.hasPermission("VIP") ||
                     !player.hasPermission("VIP+") ||
                     !player.hasPermission("MVP") ||
                     !player.hasPermission("MVP+") ||
                     !player.hasPermission("MVP++")){
 
+                Sounds.BOOSTER_REMIND.play(player);
                 base(player);
                 return true;
 

@@ -848,6 +848,7 @@ public class events implements Listener {
 
             if(block == Material.ENCHANTMENT_TABLE){
                 event.setCancelled(true);
+                Sounds.BOOSTER_REMIND.play(event.getPlayer());
                 base(event.getPlayer());
             }else if(block == Material.CAKE_BLOCK){
                 if(event.getPlayer().getInventory().getItemInHand().equals(RenownStorage.getStickQuest())){
