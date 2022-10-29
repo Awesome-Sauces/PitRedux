@@ -33,7 +33,7 @@ public class FancyText {
 
         StringBuilder stringy = new StringBuilder();
 
-        stringy.append(name);
+        stringy.append(name + "\n");
 
         for (String s : list) {
             stringy.append(s);
