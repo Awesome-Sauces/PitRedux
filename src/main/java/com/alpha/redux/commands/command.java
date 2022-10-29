@@ -612,7 +612,7 @@ public class command implements CommandExecutor {
         if (cmd.getName().equalsIgnoreCase("show")){
             if(player.isOp()){
                 try {
-                    hoverText(ChatColor.translateAlternateColorCodes('&', "&a&lSHOWOFF! " +  rank.getNameColor(player) + player.getDisplayName() + ChatColor.BLUE + " has: " + ChatColor.RED + "Mystic item"), compileListToString(player.getItemInHand().getItemMeta().getLore()));
+                    hoverText(ChatColor.translateAlternateColorCodes('&', "&a&lSHOWOFF! " +  rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " has: " + player.getItemInHand().getItemMeta().getDisplayName()), compileListToString(player.getItemInHand().getItemMeta().getLore()));
                 }catch (Exception ignored){}
                 return true;
             }
