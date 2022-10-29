@@ -406,23 +406,34 @@ public class MysticSword {
             lore.set(lore.indexOf(ench), convertEnchant(ench.replaceAll("I", "")));
         }
 
-        double billionaire = .01 * calcEnchant(lore, "billionaire");
-        double perun = .01 * calcEnchant(lore, "perun");
-        double executioner = .01 * calcEnchant(lore, "executioner");
-        double gamble = .01 * calcEnchant(lore, "gamble");
-        double xpboost = .05 * calcEnchant(lore, "xpboost");
-        double painfocus = .0325 * calcEnchant(lore, "painfocus");
-        double lifesteal = .0325 * calcEnchant(lore, "lifesteal");
-        double goldboost = .0650 * calcEnchant(lore, "goldboost");
-        double combodamage = .0435 * calcEnchant(lore, "combodamage");
-        double sharp = .0675 * calcEnchant(lore, "sharp");
-        double shark = .0725 * calcEnchant(lore, "shark");
-        double xpbump = .0750 * calcEnchant(lore, "xpbump");
-        double goldbump = .0775 * calcEnchant(lore, "goldbump");
-        double diamondstomp = .0825 * calcEnchant(lore, "diamondstomp");
-        double sweaty = .0925 * calcEnchant(lore, "sweaty");
-        double moctezuma = .1025 * calcEnchant(lore, "moctezuma");
-        double kingbuster = .1125 * calcEnchant(lore, "kingbuster");
+        // Rare
+        double billionaire = .0125 * calcEnchant(lore, "billionaire");
+        double perun = .0125 * calcEnchant(lore, "perun");
+        double executioner = .0125 * calcEnchant(lore, "executioner");
+        double gamble = .0125 * calcEnchant(lore, "gamble");
+
+        // Common Normal
+        double combodamage = .0535 * calcEnchant(lore, "combodamage");
+        double sharp = .0535 * calcEnchant(lore, "sharp");
+        double kingbuster = .0535 * calcEnchant(lore, "kingbuster");
+
+        // Uncommon Normal
+        double painfocus = .0425 * calcEnchant(lore, "painfocus");
+        double lifesteal = .0425 * calcEnchant(lore, "lifesteal");
+        double diamondstomp = .0425 * calcEnchant(lore, "diamondstomp");
+        double shark = .0425 * calcEnchant(lore, "shark");
+
+        // Resource - Gold
+        double goldbump = .0525 * calcEnchant(lore, "goldbump");
+        double goldboost = .0525 * calcEnchant(lore, "goldboost");
+        double moctezuma = .0525 * calcEnchant(lore, "moctezuma");
+
+        // Resource - Sweaty
+        double sweaty = .0625 * calcEnchant(lore, "sweaty");
+        double xpbump = .0625 * calcEnchant(lore, "xpbump");
+        double xpboost = .0625 * calcEnchant(lore, "xpboost");
+
+        // Resource - Misc
         double pantsRadar = .0525 * calcEnchant(lore, "pantsradar");
 
         while (true) {

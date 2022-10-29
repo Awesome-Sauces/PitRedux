@@ -381,20 +381,28 @@ public class MysticBow {
             lore.set(lore.indexOf(ench), convertEnchant(ench.replaceAll("I", "")));
         }
 
-        double megalongbow = .01 * calcEnchant(lore, "megalongbow");
-        double volley = .02 * calcEnchant(lore, "volley");
-        double telebow = .0250 * calcEnchant(lore, "telebow");
-        double sprintdrain = .0325 * calcEnchant(lore, "sprintdrain");
-        double fasterthantheirshadow = .05 * calcEnchant(lore, "fasterthantheirshadow");
-        double pullbow = .0525 * calcEnchant(lore, "pullbow");
-        double explosive = .0625 * calcEnchant(lore, "explosive");
+        // Rare
+        double megalongbow = .0125 * calcEnchant(lore, "megalongbow");
+        double volley = .01 * calcEnchant(lore, "volley");
+        double telebow = .0125 * calcEnchant(lore, "telebow");
+        double pullbow = .0125 * calcEnchant(lore, "pullbow");
+        double explosive = .0125 * calcEnchant(lore, "explosive");
 
-        double sweaty = .0925 * calcEnchant(lore, "sweaty");
-        double moctezuma = .1025 * calcEnchant(lore, "moctezuma");
-        double xpbump = .0750 * calcEnchant(lore, "xpbump");
-        double goldbump = .0775 * calcEnchant(lore, "goldbump");
-        double goldboost = .0650 * calcEnchant(lore, "goldboost");
-        double xpboost = .05 * calcEnchant(lore, "xpboost");
+        // Common Normal
+
+        // Uncommon Normal
+        double sprintdrain = .0425 * calcEnchant(lore, "sprintdrain");
+        double fasterthantheirshadow = .0425 * calcEnchant(lore, "fasterthantheirshadow");
+
+        // Resource - Gold
+        double goldbump = .0525 * calcEnchant(lore, "goldbump");
+        double goldboost = .0525 * calcEnchant(lore, "goldboost");
+        double moctezuma = .0525 * calcEnchant(lore, "moctezuma");
+
+        // Resource - Sweaty
+        double sweaty = .0625 * calcEnchant(lore, "sweaty");
+        double xpbump = .0625 * calcEnchant(lore, "xpbump");
+        double xpboost = .0625 * calcEnchant(lore, "xpboost");
 
         while (true) {
             if (percentChance(megalongbow)){

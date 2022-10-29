@@ -428,27 +428,39 @@ public class FreshPants {
             lore.set(lore.indexOf(ench), convertEnchant(ench.replaceAll("I", "")));
         }
 
-        double retroGravityMicrocosm = .01 * calcEnchant(lore, "retro-gravitymicrocosm");
-        double criticallyFunky = .02 * calcEnchant(lore, "criticallyfunky");
-        double regularity = .01 * calcEnchant(lore, "regularity");
-        double protection = .0325 * calcEnchant(lore, "protection");
-        double xpboost = .05 * calcEnchant(lore, "xpboost");
-        double solitude = .01 * calcEnchant(lore, "solitude");
-        double notGladiator = .0625 * calcEnchant(lore, "notgladiator");
-        double goldboost = .0650 * calcEnchant(lore, "goldboost");
-        double mirror = .0675 * calcEnchant(lore, "mirror");
-        double escapePod = .01 * calcEnchant(lore, "escapepod");
-        double xpbump = .0750 * calcEnchant(lore, "xpbump");
-        double goldbump = .0775 * calcEnchant(lore, "goldbump");
-        double peroxide = .0825 * calcEnchant(lore, "peroxide");
-        double sweaty = .0925 * calcEnchant(lore, "sweaty");
-        double moctezuma = .1025 * calcEnchant(lore, "moctezuma");
-        double fractionalReserve = .1125 * calcEnchant(lore, "fractionalreserve");
-        double goldenHeart = .0735 * calcEnchant(lore, "goldenheart");
+        // Rare
+        double retroGravityMicrocosm = .0125 * calcEnchant(lore, "retro-gravitymicrocosm");
+        double regularity = .0125 * calcEnchant(lore, "regularity");
+        double solitude = .0125 * calcEnchant(lore, "solitude");
+        double escapePod = .0125 * calcEnchant(lore, "escapepod");
+
+        // Common Normal
+        double protection = .0535 * calcEnchant(lore, "protection");
+        double booBoo = .0535 * calcEnchant(lore, "booboo");
+        double peroxide = .0535 * calcEnchant(lore, "peroxide");
+        double diamondAllergy = .0535 * calcEnchant(lore , "diamondallergy");
+
+        // Uncommon Normal
+        double criticallyFunky = .0425 * calcEnchant(lore, "criticallyfunky");
+        double davidGoliath = .0425 * calcEnchant(lore , "davidgoliath");
+        double goldenHeart = .0425 * calcEnchant(lore, "goldenheart");
+        double fractionalReserve = .0425 * calcEnchant(lore, "fractionalreserve");
+        double mirror = .0425 * calcEnchant(lore, "mirror");
+        double notGladiator = .0425 * calcEnchant(lore, "notgladiator");
+
+        // Resource - Gold
+        double goldbump = .0525 * calcEnchant(lore, "goldbump");
+        double goldboost = .0525 * calcEnchant(lore, "goldboost");
+        double moctezuma = .0525 * calcEnchant(lore, "moctezuma");
+
+        // Resource - Sweaty
+        double sweaty = .0625 * calcEnchant(lore, "sweaty");
+        double xpbump = .0625 * calcEnchant(lore, "xpbump");
+        double xpboost = .0625 * calcEnchant(lore, "xpboost");
+
+        // Resource - Misc
         double pantsRadar = .0525 * calcEnchant(lore, "pantsradar");
-        double booBoo = .0430 * calcEnchant(lore, "booboo");
-        double davidGoliath = .035 * calcEnchant(lore , "davidgoliath");
-        double diamondAllergy = .045 * calcEnchant(lore , "diamondallergy");
+
 
         while (true) {
             if(percentChance(pantsRadar)){
