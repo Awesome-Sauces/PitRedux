@@ -167,7 +167,7 @@ public class gui {
 
         ItemStack FirstAid = EggMaker((short) 96, ChatColor.YELLOW + "First-Aid Egg",
                 ChatColor.GRAY + "Heals " + ChatColor.RED +
-                        "2.5❤\n" + ChatColor.GRAY +
+                        "2.5(HEART_EMOJI)\n" + ChatColor.GRAY +
                         "5 second cooldown.\n\n" + ChatColor.GRAY + ChatColor.ITALIC + "Lost on death.\n" +
                         ChatColor.RESET + ChatColor.GRAY + "Cost: " + ChatColor.GOLD + "2000g\n" + ChatColor.YELLOW + "Click to purchase!");
 
@@ -233,7 +233,7 @@ public class gui {
                         ChatColor.GREEN + "⚫ " + ChatColor.GRAY + "Deal " + ChatColor.RED + "+25% damage \n" +
                         ChatColor.GREEN + "⚫ " + ChatColor.GRAY + "Earn " + ChatColor.AQUA + "+50% XP" + ChatColor.GRAY + "from kills.\n" +
                         ChatColor.GREEN + "⚫ " + ChatColor.GRAY + "Earn " + ChatColor.GOLD + "+75% gold" + ChatColor.GRAY + "from kills.\n\n" +
-                        ChatColor.GRAY + "BUT:\n" + ChatColor.RED + "⚫" + ChatColor.GRAY + " Receive " + ChatColor.RED + "+0.1❤ " + ChatColor.GRAY + "damage per 5 kills above 50.\n\n" +
+                        ChatColor.GRAY + "BUT:\n" + ChatColor.RED + "⚫" + ChatColor.GRAY + " Receive " + ChatColor.RED + "+0.1(HEART_EMOJI) " + ChatColor.GRAY + "damage per 5 kills above 50.\n\n" +
                         ChatColor.DARK_AQUA + "Selected Mega Streak: " + ChatColor.GREEN + getMegaStreak(String.valueOf(player.getUniqueId())), 1, true);
 
         ItemStack Highlander = ItemMaker(Material.GOLD_BOOTS, ChatColor.YELLOW + "Highlander",
@@ -250,7 +250,7 @@ public class gui {
                 ChatColor.GRAY + "Triggers on: " + ChatColor.RED + "100 kills\n\n"  + ChatColor.GRAY + "On trigger:\n" + ChatColor.GREEN + "⚫ " + ChatColor.GRAY + "Perma " + ChatColor.YELLOW + "Speed I" + ChatColor.GRAY + ".\n" +
                         ChatColor.GREEN + "⚫ " + ChatColor.GRAY + "Earn " + ChatColor.AQUA + "+50% XP" + ChatColor.GRAY + " from kills.\n" +
                         ChatColor.GREEN + "⚫ " + ChatColor.GRAY + "Get " + ChatColor.AQUA + "7x xp cap" + ChatColor.GRAY + " from kills.\n\n" +
-                        ChatColor.GRAY + "BUT:\n" + ChatColor.RED + "⚫" + ChatColor.GRAY + " Receive " + ChatColor.RED + "+.5❤ " + ChatColor.GRAY + "damage per kill above 100.\n\n" +
+                        ChatColor.GRAY + "BUT:\n" + ChatColor.RED + "⚫" + ChatColor.GRAY + " Receive " + ChatColor.RED + "+.5(HEART_EMOJI) " + ChatColor.GRAY + "damage per kill above 100.\n\n" +
                         ChatColor.RED + "Requires prestige 20 to use!\n" + ChatColor.RED + "Requires level 50 to select!\n" +
                         ChatColor.DARK_AQUA + "Selected Mega Streak: " + ChatColor.GREEN + getMegaStreak(String.valueOf(player.getUniqueId())), 1, true);
 
@@ -296,7 +296,7 @@ public class gui {
         ItemStack base_glass = cGlass();
 
         ItemStack Vampire = ItemMaker(Material.FERMENTED_SPIDER_EYE, ChatColor.AQUA + "Vampire",
-                ChatColor.GRAY + "Gain " +  ChatColor.RED + "+.5❤ " + ChatColor.GRAY +"per hit (40% max)\n "+ ChatColor.GRAY + "Regeneration 1 (2s) on kill!\n\n" +
+                ChatColor.GRAY + "Gain " +  ChatColor.RED + "+.5(HEART_EMOJI) " + ChatColor.GRAY +"per hit (40% max)\n "+ ChatColor.GRAY + "Regeneration 1 (2s) on kill!\n\n" +
                         ChatColor.RED + "Don't worry it's always selected!", 1, true);
 
         ItemStack Strength = ItemMaker(Material.REDSTONE, ChatColor.AQUA + "Strength Chaining",

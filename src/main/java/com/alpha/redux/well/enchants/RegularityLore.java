@@ -52,7 +52,7 @@ public class RegularityLore extends PitEnchant{
 
         String lore = "&dRARE! &9Regularity" + tier + "\n" +
                 "&7If the final damage of your strike\n" +
-                "&7deals less than &c1.5❤&7 &7damage,\n" +
+                "&7deals less than &c1.5(HEART_EMOJI)&7 &7damage,\n" +
                 "&7strike again in &a0.1s &7for &c"+multiplier+"%\n" +
                 "&7damage" + "\n&7";
 

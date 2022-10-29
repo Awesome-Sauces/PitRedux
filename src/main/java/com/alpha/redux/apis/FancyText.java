@@ -28,6 +28,20 @@ public class FancyText {
 
     }
 
+
+    public static String compileListToString(List<String> list, String name, boolean f){
+
+        StringBuilder stringy = new StringBuilder();
+
+        stringy.append(name + "\n");
+
+        for (String s : list) {
+            stringy.append(s);
+            stringy.append("\n");
+        }
+        return stringy.toString();
+    }
+
     public static String compileListToString(List<String> list){
 
         StringBuilder stringy = new StringBuilder();
