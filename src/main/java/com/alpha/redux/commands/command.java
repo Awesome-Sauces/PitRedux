@@ -632,7 +632,8 @@ public class command implements CommandExecutor {
                         player.sendMessage(ChatColor.RED + "Please wait a little before doing that!");
                     }else{
                         try{
-                            hoverText(ChatColor.translateAlternateColorCodes('&', "&a&lSHOWOFF! " +  rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " has: " + ChatColor.RED + "Mystic item"), compileListToString(player.getItemInHand().getItemMeta().getLore()));
+                            hoverText(ChatColor.translateAlternateColorCodes('&',
+                                    "&a&lSHOWOFF! " +  rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " has: " + player.getItemInHand().getItemMeta().getDisplayName()), compileListToString(player.getItemInHand().getItemMeta().getLore()));
                         }catch (Exception e){
                             player.sendMessage(ChatColor.RED + "Please hold a mystic item!");
                         }
