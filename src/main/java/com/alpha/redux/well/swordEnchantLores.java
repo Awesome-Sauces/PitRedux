@@ -114,19 +114,19 @@ public class swordEnchantLores {
             case "exeIII":
                 assert false;
                 this.lore.add("&dRARE! &9Executioner III");
-                this.lore.add("&7Hitting an enemy to below &c3.5\u2764");
+                this.lore.add("&7Hitting an enemy to below &c3.5❤");
                 this.lore.add("&7instantly kills them");
                 break;
             case "exeII":
                 assert false;
                 this.lore.add("&dRARE! &9Executioner II");
-                this.lore.add("&7Hitting an enemy to below &c2.5\u2764");
+                this.lore.add("&7Hitting an enemy to below &c2.5❤");
                 this.lore.add("&7instantly kills them");
                 break;
             case "exeI":
                 assert false;
                 this.lore.add("&dRARE! &9Executioner");
-                this.lore.add("&7Hitting an enemy to below &c1.5\u2764");
+                this.lore.add("&7Hitting an enemy to below &c1.5❤");
                 this.lore.add("&7instantly kills them");
                 break;
             case "billIII":
@@ -151,7 +151,7 @@ public class swordEnchantLores {
                 assert false;
                 this.lore.add("&dRARE! &9Combo: Perun's Wrath III");
                 this.lore.add("&7Each &efourth&7 hit strikes");
-                this.lore.add("&elightning&7 for &c1\u2764&7 + &c1\u2764");
+                this.lore.add("&elightning&7 for &c1❤&7 + &c1❤");
                 this.lore.add("&7per &bdiamond piece&7 on your");
                 this.lore.add("&7victim.");
                 this.lore.add("&7&oLightning deals true damage");
@@ -160,34 +160,34 @@ public class swordEnchantLores {
                 assert false;
                 this.lore.add("&dRARE! &9Combo: Perun's Wrath II");
                 this.lore.add("&7Each &efourth&7 hit strikes");
-                this.lore.add("&elightning&7 for &c2\u2764&7.");
+                this.lore.add("&elightning&7 for &c2❤&7.");
                 this.lore.add("&7&oLightning deals true damage");
                 break;
             case "perunI":
                 assert false;
                 this.lore.add("&dRARE! &9Combo: Perun's Wrath");
                 this.lore.add("&7Each &efifth&7 hit strikes");
-                this.lore.add("&elightning&7 for &c1.5\u2764&7.");
+                this.lore.add("&elightning&7 for &c1.5❤&7.");
                 this.lore.add("&7&oLightning deals true damage");
                 break;
             case "gambIII":
                 assert false;
                 this.lore.add("&dRARE! &9Gamble! III");
-                this.lore.add("&d50% chance &7to deal &c3\u2764&7 true");
+                this.lore.add("&d50% chance &7to deal &c3❤&7 true");
                 this.lore.add("&7damage to whoever you hit, or to");
                 this.lore.add("&7yourself");
                 break;
             case "gambII":
                 assert false;
                 this.lore.add("&dRARE! &9Gamble! II");
-                this.lore.add("&d50% chance &7to deal &c2\u2764&7 true");
+                this.lore.add("&d50% chance &7to deal &c2❤&7 true");
                 this.lore.add("&7damage to whoever you hit, or to");
                 this.lore.add("&7yourself");
                 break;
             case "gambI":
                 assert false;
                 this.lore.add("&dRARE! &9Gamble!");
-                this.lore.add("&d50% chance &7to deal &c1\u2764&7 true");
+                this.lore.add("&d50% chance &7to deal &c1❤&7 true");
                 this.lore.add("&7damage to whoever you hit, or to");
                 this.lore.add("&7yourself");
                 break;
@@ -211,21 +211,21 @@ public class swordEnchantLores {
                 assert false;
                 this.lore.add("&9Shark III");
                 this.lore.add("&7Deal &c+7%&7 damager per other");
-                this.lore.add("&7player below &c6\u2764&7 within 12");
+                this.lore.add("&7player below &c6❤&7 within 12");
                 this.lore.add("&7blocks");
                 break;
             case "sharkII":
                 assert false;
                 this.lore.add("&9Shark II");
                 this.lore.add("&7Deal &c+4%&7 damager per other");
-                this.lore.add("&7player below &c6\u2764&7 within 12");
+                this.lore.add("&7player below &c6❤&7 within 12");
                 this.lore.add("&7blocks");
                 break;
             case "sharkI":
                 assert false;
                 this.lore.add("&9Shark");
                 this.lore.add("&7Deal &c+2%&7 damager per other");
-                this.lore.add("&7player below &c6\u2764&7 within 12");
+                this.lore.add("&7player below &c6❤&7 within 12");
                 this.lore.add("&7blocks");
                 break;
             case "kingIII":
@@ -250,19 +250,19 @@ public class swordEnchantLores {
                 assert false;
                 this.lore.add("&9Lifesteal III");
                 this.lore.add("&7Heal for &c13%&7 of damage dealt up");
-                this.lore.add("&7to &c1.5\u2764");
+                this.lore.add("&7to &c1.5❤");
                 break;
             case "lsII":
                 assert false;
                 this.lore.add("&9Lifesteal II");
                 this.lore.add("&7Heal for &c8%&7 of damage dealt up");
-                this.lore.add("&7to &c1.5\u2764");
+                this.lore.add("&7to &c1.5❤");
                 break;
             case "lsI":
                 assert false;
                 this.lore.add("&9Lifesteal");
                 this.lore.add("&7Heal for &c4%&7 of damage dealt up");
-                this.lore.add("&7to &c1.5\u2764");
+                this.lore.add("&7to &c1.5❤");
                 break;
             // ^ Normal Enchants (Yes I know very little)
 
@@ -270,19 +270,19 @@ public class swordEnchantLores {
             case "pfIII":
                 assert false;
                 this.lore.add("&9Pain Focus III");
-                this.lore.add("&7Deal &c+5%&7 damage per &c\u2764");
+                this.lore.add("&7Deal &c+5%&7 damage per &c❤");
                 this.lore.add("&7you're missing");
                 break;
             case "pfII":
                 assert false;
                 this.lore.add("&9Pain Focus II");
-                this.lore.add("&7Deal &c+2%&7 damage per &c\u2764");
+                this.lore.add("&7Deal &c+2%&7 damage per &c❤");
                 this.lore.add("&7you're missing");
                 break;
             case "pfI":
                 assert false;
                 this.lore.add("&9Pain Focus");
-                this.lore.add("&7Deal &c+1%&7 damage per &c\u2764");
+                this.lore.add("&7Deal &c+1%&7 damage per &c❤");
                 this.lore.add("&7you're missing");
                 break;
 

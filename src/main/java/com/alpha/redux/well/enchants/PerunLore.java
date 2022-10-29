@@ -86,7 +86,7 @@ public class PerunLore extends PitEnchant{
 
         String lore = "&dRARE! &9Combo: Perun's Wrath" + tier + "\n" +
                 "&7Each &e" + hit + "&7 hit strikes" +
-                "\n&elightning&7 for &c" + multiplier + "\u2764&7." +
+                "\n&elightning&7 for &c" + multiplier + "❤&7." +
                 "\n&7&oLightning deals true damage" + "\n&7";
 
         return colorCode(lore);

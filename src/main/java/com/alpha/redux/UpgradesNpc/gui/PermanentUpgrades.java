@@ -142,7 +142,7 @@ public class PermanentUpgrades implements Listener {
                 "&a&l- &7Earn &b+100% XP &7from kills.\n" +
                 "&a&l- &7Earn &6+50% gold &7from kills.\n\n" +
                 "&7BUT:\n" +
-                "&c&l- &7Receive &c+0.1(HEART_EMOJI) &7&overy\n" +
+                "&c&l- &7Receive &c+0.1❤ &7&overy\n" +
                 "&7true damage per 5 kills over 50.\n\n" +
                 "&7On death:\n" +
                 "&e&l- &7Gain &b4,000 XP&7.");
@@ -156,7 +156,7 @@ public class PermanentUpgrades implements Listener {
                 "&c&l- &7Receive &a+10% &7damage per 100 kills.\n\n" +
                 "&7During the streak:\n" +
                 "&d&l- &7100 kills: &7Deal &c-40% damage &7vs bots.\n" +
-                "&d&l- &7200 kills: &c-2 max (HEART_EMOJI)\n" +
+                "&d&l- &7200 kills: &c-2 max ❤\n" +
                 "&d&l- &7300 kills: &7Potion Effects last &c-50% &7as long\n" +
                 "&d&l- &7400 kills: &cNo longer gain health\n\n" +
                 "&7On death:\n" +
@@ -171,7 +171,7 @@ public class PermanentUpgrades implements Listener {
                 "&a&l- &7Earn &b+50% XP &7from kills.\n" +
                 "&a&l- &7Earn &6+75% gold &7from kills.\n\n" +
                 "&7BUT:\n" +
-                "&c&l- &7Receive &c+0.1(HEART_EMOJI) " +
+                "&c&l- &7Receive &c+0.1❤ " +
                 "&7damage per 5 kills over 50.\n\n" +
                 "&7On death:\n" +
                 "&e&l- &7Keep the &bDiamond Helmet&7.");
@@ -184,7 +184,7 @@ public class PermanentUpgrades implements Listener {
                 "&a&l- &7Get &b+100 max XP &7from kills.\n\n" +
                 "&7BUT:\n" +
                 "&c&l- &7Receive &c+10% &7damage per 20 kills.\n&7(starting from 100)\n" +
-                "&c&l- &7Receive &c+0.1(HEART_EMOJI) &7true damage per 20 kills.\n&7(starting from 200)\n\n" +
+                "&c&l- &7Receive &c+0.1❤ &7true damage per 20 kills.\n&7(starting from 200)\n\n" +
                 "&7During the streak:\n" +
                 "&b&l- &7Copy and store your kills &bXP&7."+
                 "&7On death:\n" +

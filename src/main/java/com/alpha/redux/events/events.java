@@ -277,7 +277,7 @@ public class events implements Listener {
                 if(player.getLocation().getY() >= getSpawnProtection()) deleteBlob(player);
                 if(player.getLocation().distance(slime.getLocation()) >= 18) deleteBlob(player);
 
-                ((Player) event.getNPC().getEntity()).damage(7, player);
+                ((Player) event.getNPC().getEntity()).damage(10, player);
             }
 
         }

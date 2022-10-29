@@ -190,7 +190,7 @@ public class ReduxDamageEvent extends Event implements Cancellable {
 
 
         if(isNPC(attacker)){
-            this.setReduxDamage(6);
+            this.setReduxDamage(7);
         }
 
         if(!isNPC(attacker)) this.addReduxDamage(Math.min(this.getReduxDamage() * damageIncrease.getIncrease(ReduxAttacker.getPlayerUUID()), this.getReduxDamage()*.1));
@@ -247,7 +247,7 @@ public class ReduxDamageEvent extends Event implements Cancellable {
 
             }
 
-            if (StrengthCheck(attacker) > 0) this.addReduxDamage(this.getReduxDamage() * StrengthCheck(attacker));
+            //if (StrengthCheck(attacker) > 0) this.addReduxDamage(this.getReduxDamage() * StrengthCheck(attacker));
 
         } catch (Exception ignored){}
 
@@ -298,7 +298,7 @@ public class ReduxDamageEvent extends Event implements Cancellable {
             this.addReduxDamage(Math.round(mega_damage_amount.get(String.valueOf(defender.getUniqueId()))));
         }
 
-        attacker.setHealth(Math.min(attacker.getHealth() +.5, attacker.getMaxHealth()));
+        //attacker.setHealth(Math.min(attacker.getHealth() +.5, attacker.getMaxHealth()));
 
 
         if(defender.getInventory().getHelmet() != null && defender.getInventory().getHelmet().equals(itemManager.goldHelm)){
@@ -354,7 +354,7 @@ public class ReduxDamageEvent extends Event implements Cancellable {
 
 
  */
-        this.getBukkitEvent().setDamage(Math.min(Math.max(this.getReduxDamage(),1), 20));
+        this.getBukkitEvent().setDamage(Math.max(this.getReduxDamage(),1));
 
 
         sendHealthBar(this.getBukkitEvent());

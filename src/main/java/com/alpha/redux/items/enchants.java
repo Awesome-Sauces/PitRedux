@@ -83,7 +83,7 @@ public class enchants {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(colorCode("&cFirst-Aid Egg"));
         List<String> lore = new ArrayList<>();
-        lore.add(colorCode("&7Heals &c2.5(HEART_EMOJI)"));
+        lore.add(colorCode("&7Heals &c2.5❤"));
         lore.add(colorCode("&75 second cooldown."));
         meta.spigot().setUnbreakable(true);
         meta.setLore(lore);
@@ -101,7 +101,7 @@ public class enchants {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(colorCode("&7First-Aid Egg"));
         List<String> lore = new ArrayList<>();
-        lore.add(colorCode("&7Heals &c2.5(HEART_EMOJI)"));
+        lore.add(colorCode("&7Heals &c2.5❤"));
         lore.add(colorCode("&7On Cooldown!"));
         meta.spigot().setUnbreakable(true);
         meta.setLore(lore);
@@ -124,7 +124,7 @@ public class enchants {
 
         lore.add(colorCode("&9Speed I (0:08)"));
         lore.add(colorCode("&9Regeneration II (0:05)"));
-        lore.add(colorCode("&63(HEART_EMOJI) absorption!"));
+        lore.add(colorCode("&63❤ absorption!"));
         lore.add(colorCode("&71 second between eats"));
 
         skullMeta.setLore(lore);
@@ -154,7 +154,7 @@ public class enchants {
         lore.add(colorCode("&7Gain &cRegen II &7(8s) when hit"));
 
         lore.add(colorCode("&9Boo-boo III"));
-        lore.add(colorCode("&7Passively regain &c1\u2764&7 every 4"));
+        lore.add(colorCode("&7Passively regain &c1❤&7 every 4"));
         lore.add(colorCode("&7seconds"));
 
         lore.add(colorCode("&9Fractional Reserve III"));
@@ -170,9 +170,9 @@ public class enchants {
         lore.add(colorCode("&dRARE! &9Retro-Gravity Microcosm III"));
         lore.add(colorCode("&7When a player hits you from"));
         lore.add(colorCode("&7above ground &e3 times&7 in a row:"));
-        lore.add(colorCode("&7You heal &c1.25\u2764"));
-        lore.add(colorCode("&7Gain &c+1.5\u2764 &7damage vs them for 30s"));
-        lore.add(colorCode("&7They take &c0.5\u2764&7 true damage"));
+        lore.add(colorCode("&7You heal &c1.25❤"));
+        lore.add(colorCode("&7Gain &c+1.5❤ &7damage vs them for 30s"));
+        lore.add(colorCode("&7They take &c0.5❤&7 true damage"));
 
         lore.add(colorCode("&9Sweaty III"));
         lore.add(colorCode("&7Earn &b+60% XP&7 from streak XP"));
@@ -212,8 +212,8 @@ public class enchants {
         lore.add(colorCode("&7player (max 10 players)"));
 
         lore.add(colorCode("&9Golden Heart III"));
-        lore.add(colorCode("&7Gain &6+2\u2764&7 absorption on kill"));
-        lore.add(colorCode("&7(max &6\u2764&7)"));
+        lore.add(colorCode("&7Gain &6+2❤&7 absorption on kill"));
+        lore.add(colorCode("&7(max &6❤&7)"));
 
         lore.add(colorCode("&9Spite"));
         lore.add(colorCode("&7Deal &c+20% damage&7 but receive"));
@@ -241,9 +241,9 @@ public class enchants {
         lore.add(colorCode("&7Also &apoisons &7yourself!"));
 
         lore.add(colorCode("&9Misery"));
-        lore.add(colorCode("&7Deal &c+0.5\u2764 &7true damage against"));
+        lore.add(colorCode("&7Deal &c+0.5❤ &7true damage against"));
         lore.add(colorCode("&7players wearing leather pants but"));
-        lore.add(colorCode("&7take &c0.3\u2764"));
+        lore.add(colorCode("&7take &c0.3❤"));
 
         meta.spigot().setUnbreakable(true);
         meta.setLore(lore);
@@ -523,7 +523,7 @@ public class enchants {
         lore.add("    ");
         lore.add(colorCode("&dRARE! &9Flaming"));
         lore.add(colorCode("&7If the final damage of your strike"));
-        lore.add(colorCode("&7deals less than &c1.5\u2764&7 &7damage,"));
+        lore.add(colorCode("&7deals less than &c1.5❤&7 &7damage,"));
         lore.add(colorCode("&7ignite opponent in &a0.1s &7for &c75%"));
         lore.add(colorCode("&7damage"));
 

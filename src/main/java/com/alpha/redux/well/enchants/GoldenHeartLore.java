@@ -48,8 +48,8 @@ public class GoldenHeartLore extends PitEnchant{
         String multiplier = String.valueOf(1+((level-1)*.5));
 
         String lore = "&9Golden Heart" + tier + "\n" +
-                "&7Gain &6+"+multiplier+"\u2764&7 absorption on kill\n" +
-                "&7(max &6\u2764&7)" + "\n&7";
+                "&7Gain &6+"+multiplier+"❤&7 absorption on kill\n" +
+                "&7(max &6❤&7)" + "\n&7";
 
         return colorCode(lore);
     }

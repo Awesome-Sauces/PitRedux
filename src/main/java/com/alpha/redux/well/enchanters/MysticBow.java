@@ -395,14 +395,17 @@ public class MysticBow {
         double fasterthantheirshadow = .0425 * calcEnchant(lore, "fasterthantheirshadow");
 
         // Resource - Gold
-        double goldbump = .0525 * calcEnchant(lore, "goldbump");
-        double goldboost = .0525 * calcEnchant(lore, "goldboost");
-        double moctezuma = .0525 * calcEnchant(lore, "moctezuma");
+        double goldbump = .0475 * calcEnchant(lore, "goldbump");
+        double goldboost = .0450 * calcEnchant(lore, "goldboost");
+        double moctezuma = .0425 * calcEnchant(lore, "moctezuma");
 
         // Resource - Sweaty
-        double sweaty = .0625 * calcEnchant(lore, "sweaty");
-        double xpbump = .0625 * calcEnchant(lore, "xpbump");
-        double xpboost = .0625 * calcEnchant(lore, "xpboost");
+        double sweaty = .0425 * calcEnchant(lore, "sweaty");
+        double xpbump = .0475 * calcEnchant(lore, "xpbump");
+        double xpboost = .0475 * calcEnchant(lore, "xpboost");
+
+        // Resource - Misc
+        double pantsRadar = .0425 * calcEnchant(lore, "pantsradar");
 
         while (true) {
             if (percentChance(megalongbow)){

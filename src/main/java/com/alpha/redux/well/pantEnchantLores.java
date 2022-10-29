@@ -15,21 +15,21 @@ public class pantEnchantLores {
                 
 
                 lore.add("&9Golden Heart III");
-                lore.add("&7Gain &6+2\u2764&7 absorption on kill");
-                lore.add("&7(max &6\u2764&7)");
+                lore.add("&7Gain &6+2❤&7 absorption on kill");
+                lore.add("&7(max &6❤&7)");
                 break;
             case "goldheartII":
                 
 
                 lore.add("&9Golden Heart II");
-                lore.add("&7Gain &6+1\u2764&7 absorption on kill");
-                lore.add("&7(max &6\u2764&7)");
+                lore.add("&7Gain &6+1❤&7 absorption on kill");
+                lore.add("&7(max &6❤&7)");
                 break;
             case "goldheartI":
                 
                 lore.add("&9Golden Heart");
-                lore.add("&7Gain &6+0.5\u2764&7 absorption on kill");
-                lore.add("&7(max &6\u2764&7)");
+                lore.add("&7Gain &6+0.5❤&7 absorption on kill");
+                lore.add("&7(max &6❤&7)");
                 break;
 
             case "blobIII":
@@ -222,31 +222,31 @@ public class pantEnchantLores {
                 lore.add("&dRARE! &9Retro-Gravity Microcosm III");
                 lore.add("&7When a player hits you from");
                 lore.add("&7above ground &e3 times&7 in a row:");
-                lore.add("&7You heal &c1.2\u2764");
-                lore.add("&7Gain &c+1.5\u2764&f &cdamage &fvs them for &e30s");
-                lore.add("&7They take &c1\u2764 &ftrue damage");
+                lore.add("&7You heal &c1.2❤");
+                lore.add("&7Gain &c+1.5❤&f &cdamage &fvs them for &e30s");
+                lore.add("&7They take &c1❤ &ftrue damage");
                 break;
             case "rgmII":
                 
                 lore.add("&dRARE! &9Retro-Gravity Microcosm II");
                 lore.add("&7When a player hits you from");
                 lore.add("&7above ground &e3 times &fin a row:");
-                lore.add("&7You heal &c1.5\u2764");
-                lore.add("&7They take &c.5\u2764 &ftrue damage");
+                lore.add("&7You heal &c1.5❤");
+                lore.add("&7They take &c.5❤ &ftrue damage");
                 break;
             case "rgmI":
                 
                 lore.add("&dRARE! &9Retro-Gravity Microcosm");
                 lore.add("&7When a player hits you from");
                 lore.add("&7above ground &e3 times &fin a row:");
-                lore.add("&7You heal &c1\u2764");
-                lore.add("&7They take &c1\u2764 &ftrue damage");
+                lore.add("&7You heal &c1❤");
+                lore.add("&7They take &c1❤ &ftrue damage");
                 break;
             case "regIII":
                 
                 lore.add("&dRARE! &9Regularity III");
                 lore.add("&7If the final damage of your strike");
-                lore.add("&7deals less than &c1.5\u2764&7 &7damage,");
+                lore.add("&7deals less than &c1.5❤&7 &7damage,");
                 lore.add("&7strike again in &a0.1s &7for &c75%");
                 lore.add("&7damage");
                 break;
@@ -254,7 +254,7 @@ public class pantEnchantLores {
                 
                 lore.add("&dRARE! &9Regularity II");
                 lore.add("&7If the final damage of your strike");
-                lore.add("&7deals less than &c1.5\u2764&7 &7damage,");
+                lore.add("&7deals less than &c1.5❤&7 &7damage,");
                 lore.add("&7strike again in &a0.1s &7for &c75%");
                 lore.add("&7damage");
                 break;
@@ -262,7 +262,7 @@ public class pantEnchantLores {
                 
                 lore.add("&dRARE! &9Regularity");
                 lore.add("&7If the final damage of your strike");
-                lore.add("&7deals less than &c1.5\u2764&7 &7damage,");
+                lore.add("&7deals less than &c1.5❤&7 &7damage,");
                 lore.add("&7strike again in &a0.1s &7for &c75%");
                 lore.add("&7damage");
                 break;

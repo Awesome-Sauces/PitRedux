@@ -30,12 +30,20 @@ public class Dirty extends PitPerk {
             public void run(ReduxDeathEvent event){
                 ReduxPlayer player = event.getAttacker();
 
+                if(!player.getPlayerObject().hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE)){
+                    player.getPlayerObject().removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
+                    player.getPlayerObject().addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 4*20, 1, true, true));
+                }
+
+                /*
                 if(player.getPerks().contains(redux.dirty.getRefID())){
                     if(!player.getPlayerObject().hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE)){
                         player.getPlayerObject().removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
                         player.getPlayerObject().addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 4*20, 1, true, true));
                     }
                 }
+
+                 */
 
             }
         };

@@ -195,7 +195,7 @@ public class itemManager {
         lore.add("");
         lore.add(colorCode("&9Lifesteal III"));
         lore.add(colorCode("&7Heal for &c12% &7of damage dealt"));
-        lore.add(colorCode("&7to &c1.5\u2764"));
+        lore.add(colorCode("&7to &c1.5❤"));
         meta.setLore(lore);
         meta.addEnchant(Enchantment.LUCK, 1, false);
         meta.addEnchant(Enchantment.DAMAGE_ALL, 2, false);
@@ -264,7 +264,7 @@ public class itemManager {
         List<String> lore = new ArrayList<>();
         lore.add(colorCode("&9Lifesteal III"));
         lore.add(colorCode("&7Heal for &c20% &7of damage dealt up"));
-        lore.add(colorCode("&7to &c1.5\u2764"));
+        lore.add(colorCode("&7to &c1.5❤"));
         meta.setLore(lore);
         meta.addEnchant(Enchantment.LUCK, 1, false);
         meta.addEnchant(Enchantment.DAMAGE_ALL, 2, false);
@@ -281,7 +281,7 @@ public class itemManager {
         List<String> lore = new ArrayList<>();
         lore.add(colorCode("&dRARE! &9Combo: Perun's Wrath III"));
         lore.add(colorCode("&7Every &efourth &7hit strikes"));
-        lore.add(colorCode("&elightning &7for &c1\u2764 &7+ &c1\u2764"));
+        lore.add(colorCode("&elightning &7for &c1❤ &7+ &c1❤"));
         lore.add(colorCode("&7per &bdiamond piece &7on your"));
         lore.add(colorCode("&7victim"));
         lore.add(colorCode("&7&oLightning deals true damage"));
@@ -665,7 +665,7 @@ public class itemManager {
         meta.setDisplayName(colorCode("&cTier I Sword"));
         List<String> lore = new ArrayList<>();
         lore.add(colorCode("&dRARE! &9Gamble III"));
-        lore.add(colorCode("&d50% chance &7to deal&c 2\u2764 &7true"));
+        lore.add(colorCode("&d50% chance &7to deal&c 2❤ &7true"));
         lore.add(colorCode("&7damage to whoever you hit, or to"));
         lore.add(colorCode("&7yourself"));
         meta.setLore(lore);
@@ -709,7 +709,7 @@ public class itemManager {
         meta.setDisplayName(colorCode("&cTier I Sword"));
         List<String> lore = new ArrayList<>();
         lore.add(colorCode("&dRARE! &9Executioner III"));
-        lore.add(colorCode("&7Hitting an enemy to below&c 2\u2764"));
+        lore.add(colorCode("&7Hitting an enemy to below&c 2❤"));
         lore.add(colorCode("&7instantly kills them"));
         lore.add("                      ");
         lore.add(colorCode("&9Sweaty III"));

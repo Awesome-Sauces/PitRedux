@@ -15,7 +15,7 @@ public class Vampire extends PitPerk {
         this.setRefID("vampire");
         this.setName(colorCode("&aVampire"));
         this.setLore(colorCode("&7Don't earn golden apples.\n" +
-                "&7Heal &c0.5(HEART_EMOJI) &7 on hit.\n" +
+                "&7Heal &c0.5❤ &7 on hit.\n" +
                 "&7Tripled on arrow crit.\n" +
                 "&cRegen I &7(8s) on kill."));
         this.setCost(4000);
@@ -29,10 +29,15 @@ public class Vampire extends PitPerk {
             public void run(ReduxDamageEvent event){
                 ReduxPlayer player = event.getAttacker();
 
+                player.getPlayerObject().setHealth(Math.min(player.getPlayerObject().getHealth()+1, 20));
+
+                /*
                 if(player.getPerks().contains(redux.vampire.getRefID())){
-                    player.getPlayerObject().sendMessage("Vampire Worked");
+                    //player.getPlayerObject().sendMessage("Vampire Worked");
                     player.getPlayerObject().setHealth(Math.min(player.getPlayerObject().getHealth()+1, 20));
                 }
+
+                 */
 
             }
 
@@ -40,6 +45,12 @@ public class Vampire extends PitPerk {
             public void run(ReduxDeathEvent event){
                 ReduxPlayer player = event.getAttacker();
 
+                if(!player.getPlayerObject().hasPotionEffect(PotionEffectType.REGENERATION)){
+                    player.getPlayerObject().removePotionEffect(PotionEffectType.REGENERATION);
+                    player.getPlayerObject().addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 8*20, 0, true, true));
+                }
+
+                /*
                 if(player.getPerks().contains(redux.vampire.getRefID())){
                     player.getPlayerObject().sendMessage("Vampire Worked");
                     if(!player.getPlayerObject().hasPotionEffect(PotionEffectType.REGENERATION)){
@@ -47,6 +58,8 @@ public class Vampire extends PitPerk {
                         player.getPlayerObject().addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 8*20, 0, true, true));
                     }
                 }
+
+                 */
 
             }
         };

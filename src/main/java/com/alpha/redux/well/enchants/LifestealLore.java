@@ -45,7 +45,7 @@ public class LifestealLore extends PitEnchant{
 
         String lore = "&9Lifesteal" + tier + "\n" +
                 "&7Heal for &c" + multiplier + "%&7 of damage dealt up" +
-                "\n&7to &c1.5\u2764" + "\n&7";
+                "\n&7to &c1.5❤" + "\n&7";
 
         return colorCode(lore);
     }
