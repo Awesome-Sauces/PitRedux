@@ -30,6 +30,7 @@ public class ReduxPlayer {
     boolean booCD = true;
     boolean GoldenCD = true;
     boolean perunCD = true;
+    boolean ComboDamageCD = true;
     boolean gambleCD = true;
     boolean escape = true;
     double damageIncrease;
@@ -123,8 +124,10 @@ public class ReduxPlayer {
     public void setGoldenCD(){this.GoldenCD = !this.GoldenCD;}
 
     public boolean getPerunCD(){return this.perunCD;}
+    public boolean getComboDamageCD(){return this.ComboDamageCD;}
 
     public void setPerunCD(){this.perunCD = !this.perunCD;}
+    public void setComboDamageCD(){this.ComboDamageCD = !this.ComboDamageCD;}
 
     public boolean getGambleCD(){return this.gambleCD;}
 

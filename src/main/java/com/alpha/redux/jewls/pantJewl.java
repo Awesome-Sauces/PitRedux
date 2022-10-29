@@ -1,5 +1,6 @@
 package com.alpha.redux.jewls;
 
+import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.chatManager.rank;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -126,17 +127,17 @@ public class pantJewl {
             case 38:
                 lore = renewEnchant(lore, Arrays.asList(escapePodLore.lore(3).split("\n")));
                 hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! " + rank.getNameColor(player) + player.getDisplayName() + "&7created &cTier I Pants!"), compileListToString(lore));
-                player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 1);
+                Sounds.PRESTIGE.play(player);
                 break;
             case 39:
                 lore = renewEnchant(lore, Arrays.asList(retroGravityMicrocosmLore.lore(3).split("\n")));
                 hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! " + rank.getNameColor(player) + player.getDisplayName() + "&7created &cTier I Pants!"), compileListToString(lore));
-                player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 1);
+                Sounds.PRESTIGE.play(player);
                 break;
             case 40:
                 lore = renewEnchant(lore, Arrays.asList(regularityLore.lore(3).split("\n")));
                 hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! " + rank.getNameColor(player) + player.getDisplayName() + "&7created &cTier I Pants!"), compileListToString(lore));
-                player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 1);
+                Sounds.PRESTIGE.play(player);
                 break;
             }
 

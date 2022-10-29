@@ -167,7 +167,7 @@ public class gui {
 
         ItemStack FirstAid = EggMaker((short) 96, ChatColor.YELLOW + "First-Aid Egg",
                 ChatColor.GRAY + "Heals " + ChatColor.RED +
-                        "2.5❤\n" + ChatColor.GRAY +
+                        "2.5(HEART_EMOJI)\n" + ChatColor.GRAY +
                         "5 second cooldown.\n\n" + ChatColor.GRAY + ChatColor.ITALIC + "Lost on death.\n" +
                         ChatColor.RESET + ChatColor.GRAY + "Cost: " + ChatColor.GOLD + "2000g\n" + ChatColor.YELLOW + "Click to purchase!");
 

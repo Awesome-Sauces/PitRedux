@@ -83,7 +83,7 @@ public class enchants {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(colorCode("&cFirst-Aid Egg"));
         List<String> lore = new ArrayList<>();
-        lore.add(colorCode("&7Heals &c2.5❤"));
+        lore.add(colorCode("&7Heals &c2.5(HEART_EMOJI)"));
         lore.add(colorCode("&75 second cooldown."));
         meta.spigot().setUnbreakable(true);
         meta.setLore(lore);
@@ -101,7 +101,7 @@ public class enchants {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(colorCode("&7First-Aid Egg"));
         List<String> lore = new ArrayList<>();
-        lore.add(colorCode("&7Heals &c2.5❤"));
+        lore.add(colorCode("&7Heals &c2.5(HEART_EMOJI)"));
         lore.add(colorCode("&7On Cooldown!"));
         meta.spigot().setUnbreakable(true);
         meta.setLore(lore);
@@ -124,7 +124,7 @@ public class enchants {
 
         lore.add(colorCode("&9Speed I (0:08)"));
         lore.add(colorCode("&9Regeneration II (0:05)"));
-        lore.add(colorCode("&63❤ absorption!"));
+        lore.add(colorCode("&63(HEART_EMOJI) absorption!"));
         lore.add(colorCode("&71 second between eats"));
 
         skullMeta.setLore(lore);

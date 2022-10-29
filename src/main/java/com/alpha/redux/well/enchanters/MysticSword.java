@@ -296,6 +296,8 @@ public class MysticSword {
             return colorCode(redux.sharkLore.title(tier));
         }else if (Objects.equals(enchant, "diamondstomp")) {
             return colorCode(redux.diamondStompLore.title(tier));
+        }else if (Objects.equals(enchant, "combodamage")) {
+            return colorCode(redux.combodamageLore.title(tier));
         }else if (Objects.equals(enchant, "kingbuster")) {
             return colorCode(redux.kingBusterLore.title(tier));
         }else if (Objects.equals(enchant, "moctezuma")){
@@ -328,6 +330,8 @@ public class MysticSword {
             return "diamondstomp";
         }else if(Objects.equals(enchant, "pantsradar")){
             return "pantsradar";
+        }else if(Objects.equals(enchant, "combodamage")){
+            return "combodamage";
         }else if (Objects.equals(enchant, "gamb")){
             return "gamble";
         }else if (Objects.equals(enchant, "king")){
@@ -378,6 +382,8 @@ public class MysticSword {
             return colorCode(redux.pantsRadarLore.lore(tier));
         }else if (Objects.equals(enchant, "goldboost")){
             return redux.goldboostLore.lore(tier);
+        }else if (Objects.equals(enchant, "combodamage")){
+            return redux.combodamageLore.lore(tier);
         }else if (Objects.equals(enchant, "sweaty")){
             return redux.sweatyLore.lore(tier);
         }else if (Objects.equals(enchant, "xpbump")){
@@ -406,8 +412,9 @@ public class MysticSword {
         double gamble = .01 * calcEnchant(lore, "gamble");
         double xpboost = .05 * calcEnchant(lore, "xpboost");
         double painfocus = .0325 * calcEnchant(lore, "painfocus");
-        double lifesteal = .0625 * calcEnchant(lore, "lifesteal");
+        double lifesteal = .0325 * calcEnchant(lore, "lifesteal");
         double goldboost = .0650 * calcEnchant(lore, "goldboost");
+        double combodamage = .0435 * calcEnchant(lore, "combodamage");
         double sharp = .0675 * calcEnchant(lore, "sharp");
         double shark = .0725 * calcEnchant(lore, "shark");
         double xpbump = .0750 * calcEnchant(lore, "xpbump");
@@ -455,6 +462,11 @@ public class MysticSword {
                 // Gold Boost
                 // 6.5% chance of being here
                 return "goldboost";
+            }else if (percentChance(combodamage)){
+                // Combo Damage
+                // Huys is the best Pit Pvper!!!!
+                // 4.35% chance of being here
+                return "combodamage";
             }else if (percentChance(sharp)){
                 // Sharp
                 // 6.75% chance of being here

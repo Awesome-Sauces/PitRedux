@@ -59,6 +59,7 @@ import static com.alpha.redux.playerdata.streaks.*;
 import static com.alpha.redux.playerdata.xpManager.GetCurrentLevel;
 import static com.alpha.redux.playerdata.xpManager.getXp;
 import static com.alpha.redux.questMaster.bossBattles.maldingBoss.summonBoss;
+import static com.alpha.redux.renownShop.CookieMonster.MonsterHandler.createMonsterBoss;
 import static com.alpha.redux.well.enchanters.MysticSword.*;
 import static com.alpha.redux.well.gui.*;
 
@@ -150,6 +151,16 @@ public class command implements CommandExecutor {
 
                 return true;
             }
+            return true;
+        }
+
+        if(cmd.getName().equalsIgnoreCase("cookiemonster") &&
+                player.isOp()){
+
+            createMonsterBoss(player);
+            player.sendMessage(colorCode("&c&lWOAH! &7a wild &bCookie Monster &7has appeared!"));
+            Sounds.PRESTIGE.play(player);
+
             return true;
         }
 
@@ -592,11 +603,18 @@ public class command implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("show")){
+            if(player.isOp()){
+                try {
+                    hoverText(ChatColor.translateAlternateColorCodes('&', "&a&lSHOWOFF! " +  rank.getNameColor(player) + player.getDisplayName() + ChatColor.BLUE + " has: " + ChatColor.RED + "Mystic item"), compileListToString(player.getItemInHand().getItemMeta().getLore()));
+                }catch (Exception ignored){}
+                return true;
+            }
             if(!player.hasPermission("VIP") ||
                     !player.hasPermission("VIP+") ||
                     !player.hasPermission("MVP") ||
                     !player.hasPermission("MVP+") ||
                     !player.hasPermission("MVP++")){
+
 
 
                 if (ShowCD.containsKey(String.valueOf(player.getUniqueId()))){
@@ -611,7 +629,7 @@ public class command implements CommandExecutor {
                         }catch (Exception e){
                             player.sendMessage(ChatColor.RED + "Please hold a mystic item!");
                         }
-                        ShowCD.put(String.valueOf(player.getUniqueId()), System.currentTimeMillis() + (30 * 1000));
+                        ShowCD.put(String.valueOf(player.getUniqueId()), System.currentTimeMillis() + (10 * 1000));
                     }
 
                 }else{
@@ -621,7 +639,7 @@ public class command implements CommandExecutor {
                         player.sendMessage(ChatColor.RED + "Please hold a mystic item!");
                     }
 
-                    ShowCD.put(String.valueOf(player.getUniqueId()), System.currentTimeMillis() + (30 * 1000));
+                    ShowCD.put(String.valueOf(player.getUniqueId()), System.currentTimeMillis() + (10 * 1000));
                 }
                 return true;
             }

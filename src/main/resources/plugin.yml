@@ -139,3 +139,7 @@ commands:
     description: A test
     usage: /<command>
     aliases: testaverylongfunctiona
+  cookiemonster:
+    description: me like cookie
+    usage: /<command>
+    aliases: melikecookiehahahahaha

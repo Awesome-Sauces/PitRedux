@@ -67,6 +67,7 @@ public class EnchantRuntime {
             new KingBuster(event);
             new PainFocus(event);
             new Perun(event);
+            new ComboDamage(event);
             new Shark(event);
             new Sharp(event);
             new Lifesteal(event);

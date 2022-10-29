@@ -216,6 +216,13 @@ public class loreChecker {
 
         List<String> list=new ArrayList<String>();
 
+        if (lore.contains(colorCode("&9Combo: Damage III"))){
+            list.add("combodamageIII");
+        }else if (lore.contains(colorCode("&9Combo: Damage II"))){
+            list.add("combodamageII");
+        }else if (lore.contains(colorCode("&9Combo: Damage"))) {
+            list.add("combodamageI");
+        }
 
         if (lore.contains(colorCode("&dRARE! &9Billionaire III"))){
             list.add("billIII");

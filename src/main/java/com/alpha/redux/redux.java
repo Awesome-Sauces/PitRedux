@@ -65,14 +65,15 @@ import static com.alpha.redux.questMaster.bossBattles.maldingBoss.*;
 public class redux extends JavaPlugin {
 
     public static redux INSTANCE;
-
     public static Vampire vampire = new Vampire();
     public static GoldenHeads goldenHeads = new GoldenHeads();
     public static Dirty dirty = new Dirty();
+
     public static Gladiator gladiator = new Gladiator();
     public static StrengthChaining strengthChaining = new StrengthChaining();
     public static Streaker streaker = new Streaker();
 
+    public static ComboDamageLore combodamageLore = new ComboDamageLore();
     public static XpboostLore xpboostLore = new XpboostLore();
     public static XpbumpLore xpbumpLore = new XpbumpLore();
     public static SweatyLore sweatyLore = new SweatyLore();
@@ -83,9 +84,7 @@ public class redux extends JavaPlugin {
     public static BooBooLore booBooLore = new BooBooLore();
     public static DavidGoliathLore davidGoliathLore = new DavidGoliathLore();
     public static DiamondAllergyLore diamondAllergyLore = new DiamondAllergyLore();
-
     public static CriticallyFunkyLore criticallyFunkyLore = new CriticallyFunkyLore();
-
     public static GoldenHeartLore goldenHeartLore = new GoldenHeartLore();
     public static ProtectionLore protectionLore = new ProtectionLore();
     public static SolitudeLore solitudeLore = new SolitudeLore();
@@ -96,7 +95,6 @@ public class redux extends JavaPlugin {
     public static FractionalReserveLore fractionalReserveLore = new FractionalReserveLore();
     public static EscapePodLore escapePodLore = new EscapePodLore();
     public static PeroxideLore peroxideLore = new PeroxideLore();
-
     public static BillionaireLore billionaireLore = new BillionaireLore();
     public static PerunLore perunLore = new PerunLore();
     public static ExecutionerLore executionerLore = new ExecutionerLore();
@@ -106,9 +104,7 @@ public class redux extends JavaPlugin {
     public static PainFocusLore painFocusLore = new PainFocusLore();
     public static SharkLore sharkLore = new SharkLore();
     public static SharpLore sharpLore = new SharpLore();
-
     public static DiamondStompLore diamondStompLore = new DiamondStompLore();
-
     public static TelebowLore telebowLore = new TelebowLore();
     public static PullBowLore pullBowLore = new PullBowLore();
     public static MegaLongBowLore megaLongBowLore = new MegaLongBowLore();
@@ -334,6 +330,7 @@ public class redux extends JavaPlugin {
 
     private void commandRegistration(){
         command commands = new command();
+        getCommand("cookiemonster").setExecutor(commands);
         getCommand("crategive").setExecutor(commands);
         getCommand("enchantPant").setExecutor(commands);
         getCommand("activateBooster").setExecutor(commands);
