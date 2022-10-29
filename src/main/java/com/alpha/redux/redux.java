@@ -74,6 +74,7 @@ public class redux extends JavaPlugin {
     public static Streaker streaker = new Streaker();
 
     public static ComboDamageLore combodamageLore = new ComboDamageLore();
+    public static FancyRaiderLore fancyraiderLore = new FancyRaiderLore();
     public static XpboostLore xpboostLore = new XpboostLore();
     public static XpbumpLore xpbumpLore = new XpbumpLore();
     public static SweatyLore sweatyLore = new SweatyLore();

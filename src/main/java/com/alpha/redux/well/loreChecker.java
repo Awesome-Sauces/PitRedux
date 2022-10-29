@@ -216,6 +216,14 @@ public class loreChecker {
 
         List<String> list=new ArrayList<String>();
 
+        if (lore.contains(colorCode("&9Fancy Raider III"))){
+            list.add("fancyraiderIII");
+        }else if (lore.contains(colorCode("&9Fancy Raider II"))){
+            list.add("fancyraiderII");
+        }else if (lore.contains(colorCode("&9Fancy Raider"))){
+            list.add("fancyraiderI");
+        }
+
         if (lore.contains(colorCode("&9Combo: Damage III"))){
             list.add("combodamageIII");
         }else if (lore.contains(colorCode("&9Combo: Damage II"))){

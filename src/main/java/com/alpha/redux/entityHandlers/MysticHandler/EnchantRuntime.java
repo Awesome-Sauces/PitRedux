@@ -60,6 +60,7 @@ public class EnchantRuntime {
     public boolean run(){
 
         if(MysticType.valueOf(mysticType).equals(MysticType.SWORD)){
+            new FancyRaider(event);
             new Billionaire(event);
             new DiamondStomp(event);
             new Executioner(event);

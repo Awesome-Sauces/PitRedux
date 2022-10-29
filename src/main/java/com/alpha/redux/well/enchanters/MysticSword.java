@@ -282,6 +282,8 @@ public class MysticSword {
             return colorCode(redux.billionaireLore.title(tier));
         }else if (Objects.equals(enchant, "perun")) {
             return colorCode(redux.perunLore.title(tier));
+        }else if (Objects.equals(enchant, "fancyraider")) {
+            return colorCode(redux.fancyraiderLore.title(tier));
         }else if (Objects.equals(enchant, "executioner")) {
             return colorCode(redux.executionerLore.title(tier));
         }else if (Objects.equals(enchant, "gamble")) {
@@ -346,6 +348,8 @@ public class MysticSword {
             return "xpboost";
         }else if (Objects.equals(enchant, "xpb")){
             return "xpbump";
+        }else if (Objects.equals(enchant, "fancyraider")){
+            return "fancyraider";
         }else if (Objects.equals(enchant, "gb")){
             return "goldboost";
         }else{
@@ -390,7 +394,9 @@ public class MysticSword {
             return redux.xpbumpLore.lore(tier);
         }else if (Objects.equals(enchant, "xpboost")){
             return redux.xpboostLore.lore(tier);
-        }else{
+        }else if (Objects.equals(enchant, "fancyraider")){
+            return redux.fancyraiderLore.lore(tier);
+        } else{
             return "ERROR";
         }
     }
@@ -416,6 +422,7 @@ public class MysticSword {
         double combodamage = .0535 * calcEnchant(lore, "combodamage");
         double sharp = .0535 * calcEnchant(lore, "sharp");
         double kingbuster = .0535 * calcEnchant(lore, "kingbuster");
+        double fancyraider = .0535 * calcEnchant(lore, "fancyraider");
 
         // Uncommon Normal
         double painfocus = .0425 * calcEnchant(lore, "painfocus");
@@ -478,6 +485,11 @@ public class MysticSword {
                 // Huys is the best Pit Pvper!!!!
                 // 4.35% chance of being here
                 return "combodamage";
+            }else if (percentChance(fancyraider)){
+                // Fancy Raider
+                // U Need to learn to get females. (Like huys does)
+                // 5.35% chance of being here
+                return "fancyraider";
             }else if (percentChance(sharp)){
                 // Sharp
                 // 6.75% chance of being here
