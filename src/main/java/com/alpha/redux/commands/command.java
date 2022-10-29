@@ -612,7 +612,7 @@ public class command implements CommandExecutor {
         if (cmd.getName().equalsIgnoreCase("show")){
             if(player.isOp()){
                 try {
-                    hoverText(ChatColor.translateAlternateColorCodes('&', "&a&lSHOWOFF! " +  rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " has: " + player.getItemInHand().getItemMeta().getDisplayName()), compileListToString(player.getItemInHand().getItemMeta().getLore()));
+                    hoverText(ChatColor.translateAlternateColorCodes('&', "&a&lSHOWOFF! " +  rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " has: " + player.getItemInHand().getItemMeta().getDisplayName()), compileListToString(player.getItemInHand().getItemMeta().getLore(), player.getItemInHand().getItemMeta().getDisplayName(), true));
                 }catch (Exception ignored){}
                 return true;
             }
@@ -632,7 +632,7 @@ public class command implements CommandExecutor {
                         player.sendMessage(ChatColor.RED + "Please wait a little before doing that!");
                     }else{
                         try{
-                            hoverText(ChatColor.translateAlternateColorCodes('&', "&a&lSHOWOFF! " +  rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " has: " + player.getItemInHand().getItemMeta().getDisplayName()), compileListToString(player.getItemInHand().getItemMeta().getLore()));
+                            hoverText(ChatColor.translateAlternateColorCodes('&', "&a&lSHOWOFF! " +  rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " has: " + player.getItemInHand().getItemMeta().getDisplayName()), compileListToString(player.getItemInHand().getItemMeta().getLore(), player.getItemInHand().getItemMeta().getDisplayName(), true));
                         }catch (Exception e){
                             player.sendMessage(ChatColor.RED + "Please hold a mystic item!");
                         }
@@ -641,7 +641,7 @@ public class command implements CommandExecutor {
 
                 }else{
                     try{
-                        hoverText(ChatColor.translateAlternateColorCodes('&', "&a&lSHOWOFF! " +  rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " has: " + player.getItemInHand().getItemMeta().getDisplayName()), compileListToString(player.getItemInHand().getItemMeta().getLore()));
+                        hoverText(ChatColor.translateAlternateColorCodes('&', "&a&lSHOWOFF! " +  rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " has: " + player.getItemInHand().getItemMeta().getDisplayName()), compileListToString(player.getItemInHand().getItemMeta().getLore(), player.getItemInHand().getItemMeta().getDisplayName(), true));
                     }catch (Exception e){
                         player.sendMessage(ChatColor.RED + "Please hold a mystic item!");
                     }
