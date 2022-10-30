@@ -228,11 +228,11 @@ public class CreateVillagers {
         lobby_quest_npc.teleport(locations.lobby_quest_npc_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
         lobby_prestige_npc.teleport(locations.lobby_prestige_npc_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
 
-        lobby2_perm_upgrades_npc.teleport(locations.lobby_perm_upgrades_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
-        lobby2_non_perm_upgrades_npc.teleport(locations.lobby_non_perm_upgrades_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
-        lobby2_leaderboard_npc.teleport(locations.lobby_leaderboard_npc_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
-        lobby2_quest_npc.teleport(locations.lobby_quest_npc_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
-        lobby2_prestige_npc.teleport(locations.lobby_prestige_npc_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
+        lobby2_perm_upgrades_npc.teleport(locations.lobby2_perm_upgrades_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
+        lobby2_non_perm_upgrades_npc.teleport(locations.lobby2_non_perm_upgrades_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
+        lobby2_leaderboard_npc.teleport(locations.lobby2_leaderboard_npc_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
+        lobby2_quest_npc.teleport(locations.lobby2_quest_npc_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
+        lobby2_prestige_npc.teleport(locations.lobby2_prestige_npc_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
 
         Location temp_quest = locations.quest_npc_loc;
         Location temp_leaderboard = locations.leaderboard_npc_loc;
