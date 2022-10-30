@@ -2,10 +2,7 @@ package com.alpha.redux;
 import com.alpha.redux.boosters.BotBoosterData;
 import com.alpha.redux.boosters.GoldBoosterData;
 import com.alpha.redux.boosters.XpBoosterData;
-import com.alpha.redux.playerdata.Renown;
-import com.alpha.redux.playerdata.economy;
-import com.alpha.redux.playerdata.prestiges;
-import com.alpha.redux.playerdata.xpManager;
+import com.alpha.redux.playerdata.*;
 import com.alpha.redux.renownShop.CookieMonster.Monster;
 import com.alpha.redux.renownShop.MysticismChance;
 import com.alpha.redux.renownShop.damageDecrease;
@@ -37,6 +34,21 @@ public class SLAPI {
         for (String s : plugin.getConfig().getConfigurationSection("prestige").getKeys(false))
         {
             prestiges.setPrestige(s, plugin.getConfig().getInt("prestige."+s));
+        }
+    }
+
+    public static void saveGoldReq(){
+        for(String p : goldReq.getGoldReqMap().keySet()){
+            plugin.getConfig().set("goldreq."+p, goldReq.getGoldReqMap().get(p));
+        }
+        plugin.saveConfig();
+    }
+
+    public static void loadGoldReq(){
+        if (!plugin.getConfig().contains("goldreq")) return;
+        for (String s : plugin.getConfig().getConfigurationSection("goldreq").getKeys(false))
+        {
+            goldReq.setGoldReq(s, plugin.getConfig().getInt("goldreq."+s));
         }
     }
 

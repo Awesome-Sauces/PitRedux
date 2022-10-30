@@ -17,6 +17,7 @@ import static com.alpha.redux.apis.advancedInventory.*;
 import static com.alpha.redux.apis.chatManager.prestigebrackets.prestigebracket;
 import static com.alpha.redux.events.boards.integerToRoman;
 import static com.alpha.redux.playerdata.economy.getGoldRequireMentAmount;
+import static com.alpha.redux.playerdata.goldReq.getGoldReq;
 import static com.alpha.redux.playerdata.goldReq.getGoldRequirement;
 import static com.alpha.redux.playerdata.prestiges.*;
 import static com.alpha.redux.playerdata.streaks.getMegaStreak;
@@ -399,7 +400,10 @@ public class gui {
 
         if (randomDUDE[0] >= 120){
             DecimalFormat formatter = new DecimalFormat("#,###");
-            req_level = ChatColor.translateAlternateColorCodes('&', "&7Costs:" + "\n" +"&c&l⚫ Resets &blevel &c to 1" + "\n" + "&c&l⚫ Resets &6gold &c to 0" + "\n" + "&c&l⚫ Resets &cALL &aperks and upgrades" + "\n" + "&c&l⚫ Need minimum &6" + formatter.format(getGoldRequirement(getPrestige(String.valueOf(player.getUniqueId())))) + "&6g" + "\n\n" + "&7Reward: &e" + GetByPrestige(getPrestige(String.valueOf(player.getUniqueId()))) + " &eRenown" + "\n\n" + "&7New prestige: &e" + integerToRoman(getPrestige(String.valueOf(player.getUniqueId())) + 1) + "\n" + ChatColor.AQUA + "+" + ((int) PrestigeXpAmount(getPrestige(String.valueOf(player.getUniqueId()))) * 10) + "%" + ChatColor.GRAY + " needed xp than normal!\n\n" + "&eClick to purchase!");
+            req_level = ChatColor.translateAlternateColorCodes('&', "&7Costs:" + "\n" +"&c&l⚫ Resets &blevel &c to 1" + "\n" + "&c&l⚫ Resets &6gold &c to 0" + "\n" + "&c&l⚫ Resets &cALL &aperks and upgrades" + "\n" +
+                    "&c&l⚫ &c&lGrinded &6" + formatter.format(getGoldReq(String.valueOf(player.getUniqueId()))) + "&c/&6" +
+                    formatter.format(getGoldRequirement(getPrestige(String.valueOf(player.getUniqueId())))) + "&6g"
+                    + "\n\n" + "&7Reward: &e" + GetByPrestige(getPrestige(String.valueOf(player.getUniqueId()))) + " &eRenown" + "\n\n" + "&7New prestige: &e" + integerToRoman(getPrestige(String.valueOf(player.getUniqueId())) + 1) + "\n" + ChatColor.AQUA + "+" + ((int) PrestigeXpAmount(getPrestige(String.valueOf(player.getUniqueId()))) * 10) + "%" + ChatColor.GRAY + " needed xp than normal!\n\n" + "&eClick to purchase!");
         }else{
             req_level  = ChatColor.AQUA + "+" + ((int) PrestigeXpAmount(getPrestige(String.valueOf(player.getUniqueId()))) * 10) + "%" + ChatColor.GRAY + " needed xp than normal!\n\n" + ChatColor.GRAY + "Required Level: " + prestigebracket(player) + "[" + ChatColor.AQUA + ChatColor.BOLD + "120" + prestigebracket(player) + "]" + "\n\n" + ChatColor.GRAY + "Level up to prestige!";
         }

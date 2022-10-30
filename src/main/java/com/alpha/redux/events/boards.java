@@ -144,8 +144,15 @@ public class boards implements Listener {
         }
 
         String prestigeColor = prestigebracket(player);
+        String lobby = "M2C";
 
-        String version = ChatColor.GRAY + "v1.0.0"; // Pit Redux Version
+        if(player.getWorld().getName().equals("world")){
+            lobby = "M6B";
+        }else if(player.getWorld().getName().equals("lobby")){
+            lobby = "M14E";
+        }
+
+        String version = ChatColor.GRAY + "v1.2.0 " + ChatColor.DARK_GRAY + lobby; // Pit Redux Version
 
         String spacer1 = " "; //blank space
         String spacer2 = "  "; //blank space

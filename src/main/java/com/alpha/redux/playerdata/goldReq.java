@@ -1,6 +1,37 @@
 package com.alpha.redux.playerdata;
 
+import java.util.HashMap;
+
 public class goldReq {
+    public static HashMap<String, Integer> GoldReq = new HashMap<>();
+
+
+
+    public static void setGoldReq(String player, int amount){
+        GoldReq.put(player, amount);
+    }
+
+    public static void addGoldReq(String player, int amount){
+        GoldReq.put(player, GoldReq.get(player)+amount);
+    }
+
+    public static int getGoldReq(String player){
+        return GoldReq.get(player);
+    }
+
+    public static HashMap<String, Integer> getGoldReqMap(){
+        return GoldReq;
+    }
+
+    public static boolean hasGoldReq(String player){
+        if(GoldReq.containsKey(player)){
+            return true;
+        }else{
+            GoldReq.put(player, 0);
+        }
+        return true;
+    }
+    
     public static int getGoldRequirement(int prestige){
 
         if(prestige <= 10) return prestige*5000;
