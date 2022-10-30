@@ -1218,15 +1218,20 @@ public class events implements Listener {
         NPC npc = CitizensAPI.getNPCRegistry().getNPC(event.getRightClicked());
 
         if (Objects.equals(npc, CreateVillagers.non_perm_upgrades_npc) ||
-                Objects.equals(npc, CreateVillagers.lobby_non_perm_upgrades_npc)){
+                Objects.equals(npc, CreateVillagers.lobby_non_perm_upgrades_npc) ||
+                Objects.equals(npc, CreateVillagers.lobby2_non_perm_upgrades_npc)){
             NonPermanentItems(player);
-        }else if (Objects.equals(npc, CreateVillagers.prestige_npc) || Objects.equals(npc, CreateVillagers.lobby_prestige_npc)){
+        }else if (Objects.equals(npc, CreateVillagers.prestige_npc) ||
+                Objects.equals(npc, CreateVillagers.lobby_prestige_npc) ||
+                Objects.equals(npc, CreateVillagers.lobby2_prestige_npc)){
             PrestigeMenu(player);
         }else if (Objects.equals(npc, CreateVillagers.perm_upgrades_npc) ||
-                Objects.equals(npc, CreateVillagers.lobby_perm_upgrades_npc)){
+                Objects.equals(npc, CreateVillagers.lobby_perm_upgrades_npc) ||
+                Objects.equals(npc, CreateVillagers.lobby2_perm_upgrades_npc)){
             player.openInventory(PermanentUpgrades.getPermanentUpgrades(player));
         }else if(Objects.equals(npc, CreateVillagers.quest_npc) ||
-                Objects.equals(npc, CreateVillagers.lobby_quest_npc)){
+                Objects.equals(npc, CreateVillagers.lobby_quest_npc) ||
+                Objects.equals(npc, CreateVillagers.lobby2_quest_npc)){
             if(getPrestige(String.valueOf(player.getUniqueId())) >= 15){
                 player.openInventory(makeMainMenu(player));
             }else{

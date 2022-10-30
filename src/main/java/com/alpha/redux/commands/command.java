@@ -306,6 +306,9 @@ public class command implements CommandExecutor {
                         if(player.getWorld().getName().equals("world")){
                             loc = getSpawnLocation(Bukkit.getWorld("lobby"));
                             player.sendMessage(colorCode("&b&lTELEPORTING &7to lobby 2"));
+                        }else if(player.getWorld().getName().equals("lobby")){
+                            loc = getSpawnLocation(Bukkit.getWorld("lobby2"));
+                            player.sendMessage(colorCode("&b&lTELEPORTING &7to lobby 3"));
                         }else{
                             loc = getSpawnLocation(Bukkit.getWorld("world"));
                             player.sendMessage(colorCode("&b&lTELEPORTING &7to lobby 1"));
@@ -335,6 +338,9 @@ public class command implements CommandExecutor {
                     if(player.getWorld().getName().equals("world")){
                         loc = getSpawnLocation(Bukkit.getWorld("lobby"));
                         player.sendMessage(colorCode("&b&lTELEPORTING &7to lobby 2"));
+                    }else if(player.getWorld().getName().equals("lobby")){
+                        loc = getSpawnLocation(Bukkit.getWorld("lobby2"));
+                        player.sendMessage(colorCode("&b&lTELEPORTING &7to lobby 3"));
                     }else{
                         loc = getSpawnLocation(Bukkit.getWorld("world"));
                         player.sendMessage(colorCode("&b&lTELEPORTING &7to lobby 1"));

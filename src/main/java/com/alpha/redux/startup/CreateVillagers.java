@@ -61,6 +61,28 @@ public class CreateVillagers {
     private static Hologram lobby_mystic_well;
     private static Hologram lobby_mystic_well_lore;
 
+    public static NPC lobby2_perm_upgrades_npc;
+    public static NPC lobby2_non_perm_upgrades_npc;
+
+    public static NPC lobby2_leaderboard_npc;
+    public static NPC lobby2_quest_npc;
+
+    public static NPC lobby2_prestige_npc;
+
+    private static Hologram lobby2_perm_upgrades_hologram;
+    private static Hologram lobby2_non_perm_upgrades_hologram;
+
+    private static Hologram lobby2_leaderboard_hologram;
+    private static Hologram lobby2_quest_hologram;
+
+    private static Hologram lobby2_prestige_hologram;
+
+    private static Hologram lobby2_ender_chest;
+    private static Hologram lobby2_ender_chest_lore;
+
+    private static Hologram lobby2_mystic_well;
+    private static Hologram lobby2_mystic_well_lore;
+
     public static void loadNPC(){
 
         perm_upgrades_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.GRAY + "Permanent");
@@ -71,6 +93,10 @@ public class CreateVillagers {
         lobby_perm_upgrades_npc.setBukkitEntityType(EntityType.VILLAGER);
         lobby_perm_upgrades_npc.setProtected(true);
 
+        lobby2_perm_upgrades_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.GRAY + "Permanent");
+        lobby2_perm_upgrades_npc.setBukkitEntityType(EntityType.VILLAGER);
+        lobby2_perm_upgrades_npc.setProtected(true);
+
         non_perm_upgrades_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.GRAY + "Non-permanent");
         non_perm_upgrades_npc.setBukkitEntityType(EntityType.VILLAGER);
         non_perm_upgrades_npc.setProtected(true);
@@ -78,6 +104,10 @@ public class CreateVillagers {
         lobby_non_perm_upgrades_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.GRAY + "Non-permanent");
         lobby_non_perm_upgrades_npc.setBukkitEntityType(EntityType.VILLAGER);
         lobby_non_perm_upgrades_npc.setProtected(true);
+
+        lobby2_non_perm_upgrades_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.GRAY + "Non-permanent");
+        lobby2_non_perm_upgrades_npc.setBukkitEntityType(EntityType.VILLAGER);
+        lobby2_non_perm_upgrades_npc.setProtected(true);
 
         leaderboard_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.GRAY + "View your stats");
         leaderboard_npc.setBukkitEntityType(EntityType.VILLAGER);
@@ -87,6 +117,10 @@ public class CreateVillagers {
         lobby_leaderboard_npc.setBukkitEntityType(EntityType.VILLAGER);
         lobby_leaderboard_npc.setProtected(true);
 
+        lobby2_leaderboard_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.GRAY + "View your stats");
+        lobby2_leaderboard_npc.setBukkitEntityType(EntityType.VILLAGER);
+        lobby2_leaderboard_npc.setProtected(true);
+
         quest_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.GRAY + "Quests & Contracts");
         quest_npc.setBukkitEntityType(EntityType.VILLAGER);
         quest_npc.setProtected(true);
@@ -95,6 +129,10 @@ public class CreateVillagers {
         lobby_quest_npc.setBukkitEntityType(EntityType.VILLAGER);
         lobby_quest_npc.setProtected(true);
 
+        lobby2_quest_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.GRAY + "Quests & Contracts");
+        lobby2_quest_npc.setBukkitEntityType(EntityType.VILLAGER);
+        lobby2_quest_npc.setProtected(true);
+
         prestige_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.GRAY + "Resets & Renown");
         prestige_npc.setBukkitEntityType(EntityType.VILLAGER);
         prestige_npc.setProtected(true);
@@ -102,6 +140,10 @@ public class CreateVillagers {
         lobby_prestige_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.GRAY + "Resets & Renown");
         lobby_prestige_npc.setBukkitEntityType(EntityType.VILLAGER);
         lobby_prestige_npc.setProtected(true);
+
+        lobby2_prestige_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.GRAY + "Resets & Renown");
+        lobby2_prestige_npc.setBukkitEntityType(EntityType.VILLAGER);
+        lobby2_prestige_npc.setProtected(true);
 
 
         moveNPC();
@@ -154,6 +196,26 @@ public class CreateVillagers {
             lobby_prestige_npc.spawn(locations.lobby_prestige_npc_loc);
         }
 
+        if (!lobby2_perm_upgrades_npc.isSpawned()) {
+            lobby2_perm_upgrades_npc.spawn(locations.lobby2_perm_upgrades_loc);
+        }
+
+        if (!lobby2_non_perm_upgrades_npc.isSpawned()) {
+            lobby2_non_perm_upgrades_npc.spawn(locations.lobby2_non_perm_upgrades_loc);
+        }
+
+        if (!lobby2_leaderboard_npc.isSpawned()) {
+            lobby2_leaderboard_npc.spawn(locations.lobby2_leaderboard_npc_loc);
+        }
+
+        if (!lobby2_quest_npc.isSpawned()) {
+            lobby2_quest_npc.spawn(locations.lobby2_quest_npc_loc);
+        }
+
+        if (!lobby2_prestige_npc.isSpawned()) {
+            lobby2_prestige_npc.spawn(locations.lobby2_prestige_npc_loc);
+        }
+
         perm_upgrades_npc.teleport(locations.perm_upgrades_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
         non_perm_upgrades_npc.teleport(locations.non_perm_upgrades_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
         leaderboard_npc.teleport(locations.leaderboard_npc_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
@@ -166,6 +228,11 @@ public class CreateVillagers {
         lobby_quest_npc.teleport(locations.lobby_quest_npc_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
         lobby_prestige_npc.teleport(locations.lobby_prestige_npc_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
 
+        lobby2_perm_upgrades_npc.teleport(locations.lobby_perm_upgrades_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
+        lobby2_non_perm_upgrades_npc.teleport(locations.lobby_non_perm_upgrades_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
+        lobby2_leaderboard_npc.teleport(locations.lobby_leaderboard_npc_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
+        lobby2_quest_npc.teleport(locations.lobby_quest_npc_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
+        lobby2_prestige_npc.teleport(locations.lobby_prestige_npc_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
 
         Location temp_quest = locations.quest_npc_loc;
         Location temp_leaderboard = locations.leaderboard_npc_loc;
@@ -190,6 +257,18 @@ public class CreateVillagers {
         lobby_prestige_npc.faceLocation(lobby_temp_prestige.add(0,0,1));
         lobby_perm_upgrades_npc.faceLocation(lobby_temp_perm_upgrades.add(0,0,-1));
         lobby_non_perm_upgrades_npc.faceLocation(lobby_temp_non_perm_upgrades.add(0,0,-1));
+
+        Location lobby2_temp_quest = locations.lobby2_quest_npc_loc;
+        Location lobby2_temp_leaderboard = locations.lobby2_leaderboard_npc_loc;
+        Location lobby2_temp_prestige = locations.lobby2_prestige_npc_loc;
+        Location lobby2_temp_perm_upgrades = locations.lobby2_perm_upgrades_loc;
+        Location lobby2_temp_non_perm_upgrades = locations.lobby2_non_perm_upgrades_loc;
+
+        lobby2_quest_npc.faceLocation(lobby2_temp_quest.add(-1,0,0));
+        lobby2_leaderboard_npc.faceLocation(lobby2_temp_leaderboard.add(-1,0,0));
+        lobby2_prestige_npc.faceLocation(lobby2_temp_prestige.add(0,0,1));
+        lobby2_perm_upgrades_npc.faceLocation(lobby2_temp_perm_upgrades.add(0,0,-1));
+        lobby2_non_perm_upgrades_npc.faceLocation(lobby2_temp_non_perm_upgrades.add(0,0,-1));
     }
 
     private static void makeHolograms(){
@@ -240,6 +319,29 @@ public class CreateVillagers {
         lobby_mystic_well_lore.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7item enchants"));
 
 
+        lobby2_perm_upgrades_hologram = HologramsAPI.createHologram(economy.getPlugin(), locations.lobby2_perm_upgrades_loc.add(0,2.75,1));
+        lobby2_perm_upgrades_hologram.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&aUPGRADES"));
+        lobby2_non_perm_upgrades_hologram = HologramsAPI.createHologram(economy.getPlugin(), locations.lobby2_non_perm_upgrades_loc.add(0,2.75,1));
+        lobby2_non_perm_upgrades_hologram.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&6ITEMS"));
+        lobby2_leaderboard_hologram = HologramsAPI.createHologram(economy.getPlugin(), locations.lobby2_leaderboard_npc_loc.add(1,2.75,0));
+        lobby2_leaderboard_hologram.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&3STATS"));
+        lobby2_quest_hologram = HologramsAPI.createHologram(economy.getPlugin(), locations.lobby2_quest_npc_loc.add(1,2.75,0));
+        lobby2_quest_hologram.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&bQUEST MASTER"));
+        lobby2_prestige_hologram = HologramsAPI.createHologram(economy.getPlugin(), locations.lobby2_prestige_npc_loc.add(0,2.75,-1));
+        lobby2_prestige_hologram.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&ePRESTIGE"));
+
+        lobby2_ender_chest = HologramsAPI.createHologram(economy.getPlugin(), locations.getEnderChestLocation(Bukkit.getWorld("lobby2")).add(0,-.5,0));
+        lobby2_ender_chest.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&5ENDER CHEST"));
+
+        lobby2_ender_chest_lore = HologramsAPI.createHologram(economy.getPlugin(), locations.getEnderChestLocation(Bukkit.getWorld("lobby2")).add(0,-1,0));
+        lobby2_ender_chest_lore.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7Store items forever"));
+
+        lobby2_mystic_well = HologramsAPI.createHologram(economy.getPlugin(), locations.getMysticWellLocation(Bukkit.getWorld("lobby2")).add(0,-.5,0));
+        lobby2_mystic_well.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&dMYSTIC WELL"));
+
+        lobby2_mystic_well_lore = HologramsAPI.createHologram(economy.getPlugin(), locations.getMysticWellLocation(Bukkit.getWorld("lobby2")).add(0,-1,0));
+        lobby2_mystic_well_lore.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7item enchants"));
+
     }
 
     private static void deleteHolograms(){
@@ -262,6 +364,16 @@ public class CreateVillagers {
         lobby_ender_chest_lore.delete();
         lobby_mystic_well.delete();
         lobby_mystic_well_lore.delete();
+
+        lobby2_perm_upgrades_hologram.delete();
+        lobby2_non_perm_upgrades_hologram.delete();
+        lobby2_leaderboard_hologram.delete();
+        lobby2_quest_hologram.delete();
+        lobby2_prestige_hologram.delete();
+        lobby2_ender_chest.delete();
+        lobby2_ender_chest_lore.delete();
+        lobby2_mystic_well.delete();
+        lobby2_mystic_well_lore.delete();
     }
 
     private static void deleteNPC(){
@@ -294,6 +406,21 @@ public class CreateVillagers {
 
         lobby_prestige_npc.despawn();
         CitizensAPI.getNPCRegistry().deregister(lobby_prestige_npc);
+
+        lobby2_perm_upgrades_npc.despawn();
+        CitizensAPI.getNPCRegistry().deregister(lobby2_perm_upgrades_npc);
+
+        lobby2_non_perm_upgrades_npc.despawn();
+        CitizensAPI.getNPCRegistry().deregister(lobby2_non_perm_upgrades_npc);
+
+        lobby2_leaderboard_npc.despawn();
+        CitizensAPI.getNPCRegistry().deregister(lobby2_leaderboard_npc);
+
+        lobby2_quest_npc.despawn();
+        CitizensAPI.getNPCRegistry().deregister(lobby2_quest_npc);
+
+        lobby2_prestige_npc.despawn();
+        CitizensAPI.getNPCRegistry().deregister(lobby2_prestige_npc);
     }
 
 }
