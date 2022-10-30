@@ -1027,6 +1027,10 @@ public class events implements Listener {
 
     @EventHandler (priority = EventPriority.HIGH)
     public void entityDamageEvent(EntityDamageEvent event) {
+        if(event.getCause()== EntityDamageEvent.DamageCause.LAVA){
+            event.setCancelled(true);
+        }
+
         if(event.getEntity().getType().equals(EntityType.SLIME)) event.setCancelled(true);
 
         if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {

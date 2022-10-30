@@ -198,10 +198,6 @@ public class streaks {
 
     public static int StreakManager(Player player){
         hasStreak(String.valueOf(player.getUniqueId()));
-        if(!isNPC(player)){
-            BountyManager(player);
-        }
-
 
         if (Objects.equals(getMegaStreak(String.valueOf(player.getUniqueId())), "beastmode")){
             if(getStreak(String.valueOf(player.getUniqueId())) > 49 && getStreak(String.valueOf(player.getUniqueId())) < 51){

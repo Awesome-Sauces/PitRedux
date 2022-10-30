@@ -156,6 +156,7 @@ public class redux extends JavaPlugin {
         SLAPI.loadXp();
         xpManager.XpLevelCalculation();
         SLAPI.loadXPInc();
+        SLAPI.loadGoldReq();
         SLAPI.loadMonster();
         SLAPI.loadDmgInc();
         SLAPI.loadRenown();
@@ -247,7 +248,22 @@ public class redux extends JavaPlugin {
         }, 50L);
 
 
+        for (int i = 0; i < 20; i++) {
+            HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 0, true);
+        }
 
+        for (int i = 0; i < 20; i++) {
+            HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 0, false);
+        }
+
+        for (int i = 0; i < 20; i++) {
+            HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby")), 0, true);
+        }
+
+        for (int i = 0; i < 20; i++) {
+            HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby")), 0, false);
+        }
+/*
         for (int i = 0; i < 50; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 0);
         }
@@ -255,6 +271,8 @@ public class redux extends JavaPlugin {
         for (int i = 0; i < 50; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby")), 0);
         }
+
+        */
 
 
         new BukkitRunnable() {
@@ -273,11 +291,13 @@ public class redux extends JavaPlugin {
                 SLAPI.saveXpBooster();
                 SLAPI.saveGoldBooster();
                 SLAPI.saveGoldInc();
+                SLAPI.saveGoldReq();
 
                 SLAPI.loadGoldInc();
                 SLAPI.loadMonster();
                 SLAPI.loadXPInc();
                 SLAPI.loadDmgInc();
+                SLAPI.loadGoldReq();
                 SLAPI.loadDmgDec();
                 SLAPI.loadMystic();
                 SLAPI.loadXp();
@@ -304,6 +324,7 @@ public class redux extends JavaPlugin {
         SLAPI.saveMystic();
         SLAPI.saveGoldInc();
         SLAPI.saveRenown();
+        SLAPI.saveGoldReq();
         SLAPI.saveMonster();
         SLAPI.saveBotBooster();
         SLAPI.saveGoldBooster();

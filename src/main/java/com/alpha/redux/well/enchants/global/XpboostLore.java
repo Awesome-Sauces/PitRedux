@@ -46,14 +46,14 @@ public class XpboostLore extends PitEnchant {
             int level = PANT_SWEATY.length() - PANT_SWEATY.replaceAll("I", "").length();
 
             double xp = (double) ((10*level)/100)+1;
-            event.addXp((int) (event.getXp()*xp));
+            event.addXp(Math.round(event.getXp()*xp));
         }
 
         if(SWORD_SWEATY.contains("xp")){
             int level = SWORD_SWEATY.length() - SWORD_SWEATY.replaceAll("I", "").length();
 
-            double xp = (double) ((10*level)/100)+1;
-            event.addXp((int) (event.getXp()*xp));
+            double xp = (double) ((10*level)/100);
+            event.addXp(Math.round(event.getXp()*xp));
         }
     }
 

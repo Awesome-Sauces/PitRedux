@@ -7,6 +7,7 @@ import com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.events.boards;
 import com.alpha.redux.items.enchants;
+import com.alpha.redux.playerdata.goldReq;
 import com.alpha.redux.redux;
 import com.alpha.redux.renownShop.MysticismChance;
 import com.alpha.redux.well.enchants.global.*;
@@ -42,9 +43,11 @@ import static com.alpha.redux.events.events.Strength;
 import static com.alpha.redux.events.nonPermItems.ClearAndCheck;
 import static com.alpha.redux.funEvents.event.twoTimesEvent;
 import static com.alpha.redux.playerdata.bounties.BountyClaimed;
+import static com.alpha.redux.playerdata.bounties.BountyManager;
 import static com.alpha.redux.playerdata.economy.addEconomy;
 import static com.alpha.redux.playerdata.economy.hasEconomy;
 import static com.alpha.redux.playerdata.streaks.*;
+import static com.alpha.redux.renownShop.GoldnBoosted.getGoldIncrease;
 import static com.alpha.redux.renownShop.xpIncrease.getXpIncrease;
 
 public class ReduxDeathEvent extends Event implements Cancellable{
@@ -128,42 +131,36 @@ public class ReduxDeathEvent extends Event implements Cancellable{
         String streak = getMegaStreak(attacker.getPlayerUUID());
 
         if(streak.equals("beastmode") && getStreak(attacker.getPlayerUUID()) >= 50){
-            xp = xp*1.5;
-            gold = gold*1.75;
-            xp_cap += 400;
+            addXp(xp*.5);
+            addGold((int) Math.round(gold*.75));
+            setXp_cap(getXp_cap()+200);
 
             addXp(Math.round((float)getStreak(getAttacker().getPlayerUUID())/3));
-
-            xp=Math.round(xp);
-            gold=Math.round(gold);
         }else if(streak.equals("overdrive") && getStreak(attacker.getPlayerUUID()) >= 50){
-            xp = xp*2;
-            gold = gold*1.5;
-            xp_cap += 200;
+            addXp(xp);
+            addGold((int) Math.round(getGold()*.5));
+            setXp_cap(getXp_cap()+100);
 
             addXp(Math.round((float)getStreak(getAttacker().getPlayerUUID())/5));
-
-            xp=Math.round(xp);
-            gold=Math.round(gold);
         }else if(streak.equals("highlander") && getStreak(attacker.getPlayerUUID()) >= 50){
-            gold = gold*2.1;
+            addGold((int) Math.round(getGold()*1.1));
 
             addGold(Math.round((float)getStreak(getAttacker().getPlayerUUID())/3));
-
-            gold=Math.round(gold);
         }else if(streak.equals("moon") && getStreak(attacker.getPlayerUUID()) >= 100){
-            xp+=100;
-            xp = xp*1.2;
-            xp_cap+=700;
-
+            addXp(100);
+            addXp(xp*.2);
+            setXp_cap(getXp_cap()+550);
             addXp(Math.round((float)getStreak(getAttacker().getPlayerUUID())/2));
-
-            xp=Math.round(xp);
         }else if(streak.equals("uber") && getStreak(attacker.getPlayerUUID()) >= 200 && attacker.getPlayerObject().getMaxHealth()/2 == 10){
             attacker.getPlayerObject().setMaxHealth(attacker.getPlayerObject().getMaxHealth()-4);
         }
+
         // Gold/XP calculations
         if(!isNPC(attacker.getPlayerObject())){
+
+            double inc = (double) getGoldIncrease(attacker.getPlayerUUID())/100;
+
+            addGold((int) Math.round(getGold()*inc));
 
             new SweatyLore().run(this);
             new XpbumpLore().run(this);
@@ -188,8 +185,8 @@ public class ReduxDeathEvent extends Event implements Cancellable{
         gold = gold*twoTimesEvent;
         xp = xp*twoTimesEvent;
 
-        xp_cap=xp_cap*XP_BOOSTER;
-        xp_cap=xp_cap*twoTimesEvent;
+        if(XP_BOOSTER>1) xp_cap+=100;
+        if(twoTimesEvent>1) xp_cap+=100;
 
         // Attacker Streak tick
         if(!isNPC(attacker.getPlayerObject())){
@@ -210,6 +207,9 @@ public class ReduxDeathEvent extends Event implements Cancellable{
 
         }
 
+        // Bounty Handling
+        if(!isNPC(defender.getPlayerObject())) BountyClaimed(defender.getPlayerObject(), attacker.getPlayerObject());
+
         // Kill rewards
         if(!isNPC(attacker.getPlayerObject())){
             attacker.addPlayerEXP((int) Math.round(Math.min(this.xp_cap, this.xp)));
@@ -229,11 +229,13 @@ public class ReduxDeathEvent extends Event implements Cancellable{
         defender.getPlayerObject().sendMessage(ChatColor.RED + colorCode("&lDEATH! ") + ChatColor.GRAY + "by " + attacker.getPlayerObject().getDisplayName());
         killTitle(defender.getPlayerObject());
         BountyClaimed(defender.getPlayerObject(), attacker.getPlayerObject());
+        if(!isNPC(attacker.getPlayerObject())) BountyManager(attacker.getPlayerObject());
 
         if(streak.equals("moon") && getStreak(attacker.getPlayerUUID()) >= 100){
             attacker.addMoonXP((int)Math.round( Math.min(xp_cap, xp)));
         }
 
+        if(!isNPC(attacker.getPlayerObject())) goldReq.addGoldReq(attacker.getPlayerUUID(), (int) Math.round(gold));
         // Final TICK Scoreboard refresh
         /*
         if(!isNPC(defender.getPlayerObject()) &&
@@ -272,8 +274,8 @@ public class ReduxDeathEvent extends Event implements Cancellable{
         return (int) xp;
     }
 
-    public void addXp(int xp) {
-        this.xp += xp;
+    public void addXp(double xps) {
+        this.xp += xps;
     }
 
     public int getGold() {

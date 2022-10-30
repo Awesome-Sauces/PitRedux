@@ -28,7 +28,7 @@ import static com.alpha.redux.questMaster.bossBattles.maldingBoss.gearNearby;
 public class MonsterHandler {
 
     public static void percentageSpawn(Player player){
-        if(Math.random() <= ((double)Monster.getMonsterChance(String.valueOf(player.getUniqueId()))/4000)){
+        if(Math.random() <= ((double)Monster.getMonsterChance(String.valueOf(player.getUniqueId()))/3000)){
             createMonsterBoss(player);
             player.sendMessage(colorCode("&c&lWOAH! &7a wild &bCookie Monster &7has appeared!"));
             Sounds.PRESTIGE.play(player);

@@ -49,7 +49,7 @@ public class SweatyLore extends PitEnchant {
             double xp = (double) ((15*level)/100)+1;
 
             event.setXp_cap(event.getXp_cap()+(25*(level+1)));
-            event.addXp((int) (event.getXp()*xp));
+            event.addXp(Math.round(event.getXp()*xp));
         }
 
         if(SWORD_SWEATY.contains("sweaty")){
@@ -58,7 +58,7 @@ public class SweatyLore extends PitEnchant {
             double xp = (double) ((15*level)/100)+1;
 
             event.setXp_cap(event.getXp_cap()+(25*(level+1)));
-            event.addXp((int) (event.getXp()*xp));
+            event.addXp(Math.round(event.getXp()*xp));
         }
     }
 

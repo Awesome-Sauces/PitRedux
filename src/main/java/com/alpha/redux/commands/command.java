@@ -311,6 +311,8 @@ public class command implements CommandExecutor {
                             player.sendMessage(colorCode("&b&lTELEPORTING &7to lobby 1"));
                         }
 
+                        deleteBlob(player);
+                        playerExists(player).setMoonXP(0);
 
                         player.teleport(loc);
                         boards.CreateScore(player);
@@ -318,6 +320,9 @@ public class command implements CommandExecutor {
                     }
 
                 }else{
+
+                    deleteBlob(player);
+                    playerExists(player).setMoonXP(0);
                     player.removePotionEffect(PotionEffectType.WEAKNESS);
                     setStreak(String.valueOf(player.getUniqueId()), 0);
                     xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
@@ -352,6 +357,8 @@ public class command implements CommandExecutor {
                     player.sendMessage(colorCode("&c&lHOLD UP! &7Can't /respawn while fighting (&c" + timeleft + "s &7left)"));
                     return true;
                 }else{
+                    deleteBlob(player);
+                    playerExists(player).setMoonXP(0);
                     player.removePotionEffect(PotionEffectType.WEAKNESS);
                     setStreak(String.valueOf(player.getUniqueId()), 0);
                     xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
@@ -366,6 +373,8 @@ public class command implements CommandExecutor {
                 }
 
             }else{
+                deleteBlob(player);
+                playerExists(player).setMoonXP(0);
                 player.removePotionEffect(PotionEffectType.WEAKNESS);
                 setStreak(String.valueOf(player.getUniqueId()), 0);
                 xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
@@ -382,11 +391,11 @@ public class command implements CommandExecutor {
 
         if(cmd.getName().equalsIgnoreCase("KillMessageToggle")) {
 
-            if(!player.hasPermission("VIP") ||
-                    !player.hasPermission("VIP+") ||
-                    !player.hasPermission("MVP") ||
-                    !player.hasPermission("MVP+") ||
-                    !player.hasPermission("MVP++")){
+            if(player.hasPermission("VIP") ||
+                    player.hasPermission("VIP+") ||
+                    player.hasPermission("MVP") ||
+                    player.hasPermission("MVP+") ||
+                    player.hasPermission("MVP++")){
 
                 if(!KillMessages.containsKey(String.valueOf(player.getUniqueId()))){
                     KillMessages.put(String.valueOf(player.getUniqueId()), false);
@@ -454,11 +463,11 @@ public class command implements CommandExecutor {
                 return true;
             }
 
-            if(!player.hasPermission("VIP") ||
-                    !player.hasPermission("VIP+") ||
-                    !player.hasPermission("MVP") ||
-                    !player.hasPermission("MVP+") ||
-                    !player.hasPermission("MVP++")){
+            if(player.hasPermission("VIP") ||
+                    player.hasPermission("VIP+") ||
+                    player.hasPermission("MVP") ||
+                    player.hasPermission("MVP+") ||
+                    player.hasPermission("MVP++")){
 
                 Sounds.BOOSTER_REMIND.play(player);
                 base(player);
@@ -616,11 +625,11 @@ public class command implements CommandExecutor {
                 }catch (Exception ignored){}
                 return true;
             }
-            if(!player.hasPermission("VIP") ||
-                    !player.hasPermission("VIP+") ||
-                    !player.hasPermission("MVP") ||
-                    !player.hasPermission("MVP+") ||
-                    !player.hasPermission("MVP++")){
+            if(player.hasPermission("VIP") ||
+                    player.hasPermission("VIP+") ||
+                    player.hasPermission("MVP") ||
+                    player.hasPermission("MVP+") ||
+                    player.hasPermission("MVP++")){
 
 
 
@@ -667,6 +676,7 @@ public class command implements CommandExecutor {
 
         if (cmd.getName().equalsIgnoreCase("spawn")) {
 
+            playerExists(player).setMoonXP(0);
             deleteBlob(player);
             //deleteHologramStreak(player);
             hasStreak(String.valueOf(player.getUniqueId()));
@@ -679,6 +689,7 @@ public class command implements CommandExecutor {
                     player.sendMessage(colorCode("&c&lHOLD UP! &7Can't /respawn while fighting (&c" + timeleft + "s &7left)"));
                     return true;
                 }else{
+                    playerExists(player).setMoonXP(0);
                     player.removePotionEffect(PotionEffectType.WEAKNESS);
                     setStreak(String.valueOf(player.getUniqueId()), 0);
                     xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
@@ -695,6 +706,7 @@ public class command implements CommandExecutor {
                 }
 
             }else{
+                playerExists(player).setMoonXP(0);
                 player.removePotionEffect(PotionEffectType.WEAKNESS);
                 setStreak(String.valueOf(player.getUniqueId()), 0);
                 xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
@@ -711,6 +723,7 @@ public class command implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("oof")) {
+            playerExists(player).setMoonXP(0);
             //deleteHologramStreak(player);
             player.removePotionEffect(PotionEffectType.WEAKNESS);
             ClearAndCheck(player);

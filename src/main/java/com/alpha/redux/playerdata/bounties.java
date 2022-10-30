@@ -21,7 +21,7 @@ public class bounties {
 
         hasStreak(uuid);
 
-        if(getStreak(uuid) % 15 == 0){
+        if(getStreak(uuid) % 30 == 0){
 
             if(BountiesMap.containsKey(uuid)){
                 if(BountiesMap.get(uuid) >= 20000){

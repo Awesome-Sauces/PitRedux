@@ -5,6 +5,7 @@ import com.alpha.redux.apis.chatManager.rank;
 import com.alpha.redux.events.boards;
 import com.alpha.redux.items.enchants;
 import com.alpha.redux.playerdata.Renown;
+import com.alpha.redux.playerdata.goldReq;
 import com.alpha.redux.playerdata.prestiges;
 import com.alpha.redux.playerdata.xpManager;
 import com.alpha.redux.items.itemManager;
@@ -163,6 +164,7 @@ public class InventoryEvent {
                 if (hasEconomy(String.valueOf(player.getUniqueId()))) {
                     if (getEconomy(String.valueOf(player.getUniqueId())) >= 200) {
                         removeEconomy(String.valueOf(player.getUniqueId()), 200);
+
                         player.getInventory().addItem(itemManager.IronHelmet, itemManager.IronChestplate, itemManager.IronLeggings, itemManager.IronBoots);}
 
                         player.getWorld().playSound(player.getLocation(), Sound.LEVEL_UP, 1, 20);
@@ -320,7 +322,8 @@ public class InventoryEvent {
 
             if (randomDUDE[1] >= 120) {
 
-                if(getEconomy(String.valueOf(player.getUniqueId())) < getGoldRequirement(getPrestige(String.valueOf(player.getUniqueId())))){
+                if(goldReq.getGoldReq(String.valueOf(player.getUniqueId())) <
+                        getGoldRequirement(getPrestige(String.valueOf(player.getUniqueId())))){
                     player.sendMessage(ChatColor.RED + "You can't afford this!");
                     player.closeInventory();
                     return;
@@ -337,6 +340,7 @@ public class InventoryEvent {
                 setEconomy(String.valueOf(player.getUniqueId()), 0);
                 hasPrestige(String.valueOf(player.getUniqueId()));
                 setXp(String.valueOf(player.getUniqueId()), 0);
+                goldReq.setGoldReq(String.valueOf(player.getUniqueId()), 0);
 
                 Renown.addRenown(String.valueOf(player.getUniqueId()),GetByPrestige(getPrestige(String.valueOf(player.getUniqueId()))));
 
