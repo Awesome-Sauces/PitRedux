@@ -37,15 +37,15 @@ public class actionbarplus {
             gray_heart = (int) Math.abs((int) defender.getMaxHealth() - defenderHealth);
         }
         for (int i = 0; i < Math.abs(dark_red_heart); i++) {
-            health.append(ChatColor.translateAlternateColorCodes('&', "&4(HEART_EMOJI)"));
+            health.append(ChatColor.translateAlternateColorCodes('&', "&4❤"));
         }
 
         for (int i = 0; i < Math.abs(red_heart); i++) {
-            health.append(ChatColor.translateAlternateColorCodes('&', "&c(HEART_EMOJI)"));
+            health.append(ChatColor.translateAlternateColorCodes('&', "&c❤"));
         }
 
         for (int i = 0; i < Math.abs(gray_heart); i++) {
-            health.append(ChatColor.translateAlternateColorCodes('&', "&0(HEART_EMOJI)"));
+            health.append(ChatColor.translateAlternateColorCodes('&', "&0❤"));
         }
 
 

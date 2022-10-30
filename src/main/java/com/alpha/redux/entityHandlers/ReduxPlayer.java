@@ -19,6 +19,8 @@ import static com.alpha.redux.events.events.cooldowns;
 import static com.alpha.redux.funEvents.event.twoTimesEvent;
 import static com.alpha.redux.playerdata.economy.*;
 import static com.alpha.redux.playerdata.prestiges.*;
+import static com.alpha.redux.playerdata.streaks.getStreak;
+import static com.alpha.redux.playerdata.streaks.hasStreak;
 import static com.alpha.redux.well.loreChecker.CheckEnchantOnPant;
 import static com.alpha.redux.well.loreChecker.CheckEnchantOnSword;
 
@@ -27,6 +29,7 @@ public class ReduxPlayer {
     Player player;
     String uuid;
     boolean regCD = true;
+    boolean vampireCD = true;
     boolean booCD = true;
     boolean GoldenCD = true;
     boolean perunCD = true;
@@ -36,6 +39,7 @@ public class ReduxPlayer {
     double damageIncrease;
     double damageDecrease;
     double xpBooster = 1;
+    int moonXP = 0;
     double goldBooster = 1;
     int obbyTime = 2400*5;
     double strength = 0.0;
@@ -110,6 +114,10 @@ public class ReduxPlayer {
     public void setEscape(boolean set){this.escape = set;}
 
     public void resetEscape(){this.escape = true;}
+
+    public void setVampireCD(){this.vampireCD = !this.vampireCD;}
+
+    public boolean getVampireCD(){return this.vampireCD;}
 
     public boolean getRegCD(){return this.regCD;}
 
@@ -275,5 +283,25 @@ public class ReduxPlayer {
 
     public int getStrengthTier(){
         return (int) (strength/.08);
+    }
+
+    public int getMoonXP() {
+        return moonXP;
+    }
+
+    public void setMoonXP(int moonXP) {
+        this.moonXP = moonXP;
+    }
+
+    public void addMoonXP(int moonXP) {
+        this.moonXP += moonXP;
+    }
+
+    public double getMoonMultiplier(){
+        hasStreak(this.uuid);
+
+        if(getStreak(this.uuid)>100){
+            return Math.min((double)(getStreak(this.uuid)-100)/100, 1.0);
+        }else return 0.0;
     }
 }

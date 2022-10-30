@@ -1,5 +1,6 @@
 package com.alpha.redux.DeathHandler;
 
+import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.chatManager.rank;
 import com.alpha.redux.boosters.Booster;
 import com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap;
@@ -26,6 +27,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.potion.PotionEffectType;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import static com.alpha.redux.DeathHandler.jewls.PlayerFinishedJewl;
@@ -43,13 +45,14 @@ import static com.alpha.redux.playerdata.bounties.BountyClaimed;
 import static com.alpha.redux.playerdata.economy.addEconomy;
 import static com.alpha.redux.playerdata.economy.hasEconomy;
 import static com.alpha.redux.playerdata.streaks.*;
+import static com.alpha.redux.renownShop.xpIncrease.getXpIncrease;
 
 public class ReduxDeathEvent extends Event implements Cancellable{
     private static final HandlerList HANDLERS = new HandlerList();
     private final ReduxPlayer attacker;
     private final ReduxPlayer defender;
     private double xp = 9;
-    private int xp_cap = 1000;
+    private int xp_cap = 200;
     private double gold = 13;
     private boolean isCancelled;
 
@@ -64,6 +67,19 @@ public class ReduxDeathEvent extends Event implements Cancellable{
     }
 
     public void run(){
+
+        if(!isNPC(defender.getPlayerObject())){
+            hasMegaStreak(defender.getPlayerUUID());
+            hasStreak(defender.getPlayerUUID());
+            if(getMegaStreak(defender.getPlayerUUID()).equals("overdrive") &&
+                    getStreak(defender.getPlayerUUID())>=50){
+                defender.addPlayerEXP(4000);
+                Sounds.SHOCKWAVE.play(defender.getPlayerObject());
+                defender.getPlayerObject().sendMessage(colorCode("&a&lCONGRATS! &7you earned &b4,000 XP &7from &cOverdrive&7!"));
+            }
+        }
+
+
         if(isNPC(attacker.getPlayerObject()) && isNPC(defender.getPlayerObject())){
             NPC npc = getNPC(defender.getPlayerObject());
             npc.teleport(getBotSpawnLocation(npc.getEntity().getWorld()), PlayerTeleportEvent.TeleportCause.PLUGIN);
@@ -81,6 +97,16 @@ public class ReduxDeathEvent extends Event implements Cancellable{
 
         // Defender Streak tick
         if (!isNPC(defender.getPlayerObject())) {
+
+            if(!isNPC(defender.getPlayerObject()) &&
+                    getMegaStreak(getDefender().getPlayerUUID()).equals("moon") && getStreak(defender.getPlayerUUID()) >= 100){
+                DecimalFormat formatter = new DecimalFormat("#,###");
+                defender.getPlayerObject().sendMessage(colorCode("&b&lTO THE MOON! &7Earned &b+"+formatter.format(defender.getMoonXP()*defender.getMoonMultiplier())+" XP &7from megastreak (&b"+defender.getMoonMultiplier()+"x &7multiplier)"));
+                defender.addPlayerEXP((int) Math.round(defender.getMoonXP()*defender.getMoonMultiplier()));
+                Sounds.DEATH_GHAST_SCREAM.play(defender.getPlayerObject());
+            }
+
+            defender.setMoonXP(0);
             // Check if user has pending uber rewards
             UberRewardClaimDeath(defender.getPlayerObject());
             
@@ -90,6 +116,7 @@ public class ReduxDeathEvent extends Event implements Cancellable{
             
             // Refil Health
             defender.getPlayerObject().setHealth(defender.getPlayerObject().getMaxHealth());
+            defender.getPlayerObject().setMaxHealth(20);
 
             // Refresh tab name
             NametagEdit.getApi().setNametag(defender.getPlayerObject(), ChatEventApiGetLevelColor(defender.getPlayerObject().getDisplayName(), defender.getPlayerUUID())+ rank.getNameColor(defender.getPlayerObject()), "");
@@ -103,6 +130,7 @@ public class ReduxDeathEvent extends Event implements Cancellable{
         if(streak.equals("beastmode") && getStreak(attacker.getPlayerUUID()) >= 50){
             xp = xp*1.5;
             gold = gold*1.75;
+            xp_cap += 400;
 
             addXp(Math.round((float)getStreak(getAttacker().getPlayerUUID())/3));
 
@@ -111,6 +139,7 @@ public class ReduxDeathEvent extends Event implements Cancellable{
         }else if(streak.equals("overdrive") && getStreak(attacker.getPlayerUUID()) >= 50){
             xp = xp*2;
             gold = gold*1.5;
+            xp_cap += 200;
 
             addXp(Math.round((float)getStreak(getAttacker().getPlayerUUID())/5));
 
@@ -125,13 +154,14 @@ public class ReduxDeathEvent extends Event implements Cancellable{
         }else if(streak.equals("moon") && getStreak(attacker.getPlayerUUID()) >= 100){
             xp+=100;
             xp = xp*1.2;
-            xp_cap+=100;
+            xp_cap+=700;
 
             addXp(Math.round((float)getStreak(getAttacker().getPlayerUUID())/2));
 
             xp=Math.round(xp);
+        }else if(streak.equals("uber") && getStreak(attacker.getPlayerUUID()) >= 200 && attacker.getPlayerObject().getMaxHealth()/2 == 10){
+            attacker.getPlayerObject().setMaxHealth(attacker.getPlayerObject().getMaxHealth()-4);
         }
-
         // Gold/XP calculations
         if(!isNPC(attacker.getPlayerObject())){
 
@@ -150,11 +180,16 @@ public class ReduxDeathEvent extends Event implements Cancellable{
         if(Booster.xpActive) XP_BOOSTER+=1;
         if(Booster.goldActive) GOLD_BOOSTER+=1;
 
+        xp_cap+=getXpIncrease(attacker.getPlayerUUID());
+
         gold = gold*GOLD_BOOSTER;
         xp = xp*XP_BOOSTER;
 
         gold = gold*twoTimesEvent;
         xp = xp*twoTimesEvent;
+
+        xp_cap=xp_cap*XP_BOOSTER;
+        xp_cap=xp_cap*twoTimesEvent;
 
         // Attacker Streak tick
         if(!isNPC(attacker.getPlayerObject())){
@@ -185,7 +220,7 @@ public class ReduxDeathEvent extends Event implements Cancellable{
         // Teleporting
         if(isNPC(defender.getPlayerObject())){
             NPC npc = getNPC(defender.getPlayerObject());
-            if(npc!=null) npc.teleport(getBotSpawnLocation(npc.getEntity().getWorld()), PlayerTeleportEvent.TeleportCause.PLUGIN);
+            if(npc.getEntity()!=null) npc.teleport(getBotSpawnLocation(npc.getEntity().getWorld()), PlayerTeleportEvent.TeleportCause.PLUGIN);
         }else if (!isNPC(defender.getPlayerObject())){
             defender.getPlayerObject().teleport(getSpawnLocation(defender.getPlayerObject().getWorld()));
         }
@@ -194,6 +229,10 @@ public class ReduxDeathEvent extends Event implements Cancellable{
         defender.getPlayerObject().sendMessage(ChatColor.RED + colorCode("&lDEATH! ") + ChatColor.GRAY + "by " + attacker.getPlayerObject().getDisplayName());
         killTitle(defender.getPlayerObject());
         BountyClaimed(defender.getPlayerObject(), attacker.getPlayerObject());
+
+        if(streak.equals("moon") && getStreak(attacker.getPlayerUUID()) >= 100){
+            attacker.addMoonXP((int)Math.round( Math.min(xp_cap, xp)));
+        }
 
         // Final TICK Scoreboard refresh
         /*

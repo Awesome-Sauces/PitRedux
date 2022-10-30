@@ -71,6 +71,7 @@ import static com.alpha.redux.events.ArmorJoin.GiveChain;
 import static com.alpha.redux.events.nonPermItems.ClearAndCheck;
 import static com.alpha.redux.gems.gemEvents.gemClickEvent;
 import static com.alpha.redux.gems.gemMain.makeGemGUI;
+import static com.alpha.redux.playerdata.bounties.BountiesMap;
 import static com.alpha.redux.playerdata.economy.*;
 import static com.alpha.redux.playerdata.prestiges.getPrestige;
 import static com.alpha.redux.playerdata.streaks.*;
@@ -80,6 +81,7 @@ import static com.alpha.redux.playerdata.xpManager.GetCurrentLevel;
 import static com.alpha.redux.questMaster.questMenu.makeMainMenu;
 import static com.alpha.redux.renownShop.renownEvent.mainEvent;
 import static com.alpha.redux.well.gui.*;
+import static com.alpha.redux.well.loreChecker.CheckEnchantOnPant;
 
 public class events implements Listener {
 
@@ -277,9 +279,81 @@ public class events implements Listener {
                 if(player.getLocation().getY() >= getSpawnProtection()) deleteBlob(player);
                 if(player.getLocation().distance(slime.getLocation()) >= 18) deleteBlob(player);
 
+                if(player.getInventory().getLeggings() != null &&
+                        player.getInventory().getLeggings().getItemMeta() != null &&
+                        player.getInventory().getLeggings().getItemMeta().getLore() != null){
+                    if(!CheckEnchantOnPant(player.getInventory().getLeggings().getItemMeta().getLore()).contains("blobIII") &&
+                            !CheckEnchantOnPant(player.getInventory().getLeggings().getItemMeta().getLore()).contains("blobII") &&
+                            !CheckEnchantOnPant(player.getInventory().getLeggings().getItemMeta().getLore()).contains("blobI")){
+                        deleteBlob(player);
+                    }
+                }
+
                 ((Player) event.getNPC().getEntity()).damage(10, player);
             }
 
+        }
+    }
+
+    @EventHandler
+    public static void HandleMegaStreakDamage(ReduxDamageEvent event){
+        // Mega Streak Calculations
+        if(!isNPC(event.getDefenders().getPlayerObject())){
+            hasStreak(event.getDefenders().getPlayerUUID());
+            hasMegaStreak(event.getDefenders().getPlayerUUID());
+            String streak = getMegaStreak(event.getDefenders().getPlayerUUID());
+
+            if(streak.equals("beastmode") && getStreak(event.getDefenders().getPlayerUUID()) >= 50){
+                if((getStreak(event.getDefenders().getPlayerUUID())-50)<=0) return;
+                int counter = (int) Math.round((double)(getStreak(event.getDefenders().getPlayerUUID())-50)/5);
+
+                event.addReduxDamage(counter*.1);
+            }else if(streak.equals("overdrive") && getStreak(event.getDefenders().getPlayerUUID()) >= 50){
+                if((getStreak(event.getDefenders().getPlayerUUID())-50)<=0) return;
+                int counter = (int) Math.round((double)(getStreak(event.getDefenders().getPlayerUUID())-50)/5);
+
+                event.addReduxTrueDamage(counter*.1);
+            }else if(streak.equals("highlander") && getStreak(event.getDefenders().getPlayerUUID()) >= 50){
+                if((getStreak(event.getDefenders().getPlayerUUID())-50)<=0) return;
+                int counter = (int) Math.round((double)(getStreak(event.getDefenders().getPlayerUUID())-50)/5);
+
+                event.addReduxDamage(counter*.01);
+            }else if(streak.equals("uber") && getStreak(event.getDefenders().getPlayerUUID()) >= 100){
+                int counter = (int) Math.round((double)(getStreak(event.getDefenders().getPlayerUUID()))/100);
+
+                event.addReduxDamage(counter*.20);
+            }else if(streak.equals("moon") && getStreak(event.getDefenders().getPlayerUUID()) >= 100){
+                if((getStreak(event.getDefenders().getPlayerUUID())-100)<=0) return;
+                int counter = (int) Math.round((double)(getStreak(event.getDefenders().getPlayerUUID())-100)/10);
+
+                event.addReduxDamage(event.getReduxDamage()*(counter*.10));
+
+                if((getStreak(event.getDefenders().getPlayerUUID())-200)<=0) return;
+                counter = (int) Math.round((double)(getStreak(event.getDefenders().getPlayerUUID())-200)/10);
+
+                event.addReduxTrueDamage(counter*.1);
+            }
+        }
+
+        // Mega Streak Calculations
+        if(!isNPC(event.getAttacker().getPlayerObject())){
+            hasStreak(event.getAttacker().getPlayerUUID());
+            hasMegaStreak(event.getAttacker().getPlayerUUID());
+            String streak = getMegaStreak(event.getAttacker().getPlayerUUID());
+
+            if(streak.equals("beastmode") && getStreak(event.getAttacker().getPlayerUUID()) >= 50){
+                event.addReduxDamage(event.getReduxDamage()*.25);
+            }else if(streak.equals("highlander") && getStreak(event.getAttacker().getPlayerUUID()) >= 50){
+                if(!isNPC(event.getDefenders().getPlayerObject()) &&
+                BountiesMap.containsKey(event.getDefenders().getPlayerUUID()) &&
+                BountiesMap.get(event.getDefenders().getPlayerUUID()) >= 0){
+                    event.addReduxDamage(event.getReduxDamage()*.33);
+                }
+            }else if(streak.equals("uber") && getStreak(event.getAttacker().getPlayerUUID()) >= 100){
+                if(isNPC(event.getDefenders().getPlayerObject())){
+                    event.subtractReduxDamage(event.getReduxDamage()*.4);
+                }
+            }
         }
     }
 
@@ -378,7 +452,7 @@ public class events implements Listener {
             cooldowns.put(String.valueOf(event.getEntity().getUniqueId()), System.currentTimeMillis() + (5 * 1000));
 
             ReduxDamageEvent mainEvent = new ReduxDamageEvent(playerExists(attacker), playerExists(defender), event.getDamage(), event);
-            Bukkit.getPluginManager().callEvent(mainEvent);
+            if(mainEvent!=null)Bukkit.getPluginManager().callEvent(mainEvent);
             if (!mainEvent.isCancelled()) {
 
                 mainEvent.run();
@@ -428,14 +502,14 @@ public class events implements Listener {
             NPC npc = getNPC(event.getEntity());
             if(npc != null){
                 Player player = (Player) npc.getEntity();
-                player.setHealth(20);
+                player.setHealth(player.getMaxHealth());
                 player.setMaxHealth(20);
             }
 
             return;
         }
         Player player = event.getEntity();
-        player.setHealth(20);
+        player.setHealth(player.getMaxHealth());
         player.setMaxHealth(20);
         try{
             escapeProc.put(String.valueOf(player.getUniqueId()), false);

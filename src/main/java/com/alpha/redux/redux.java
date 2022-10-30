@@ -94,6 +94,7 @@ public class redux extends JavaPlugin {
     public static NotGladiatorLore notGladiatorLore = new NotGladiatorLore();
     public static MirrorLore mirrorLore = new MirrorLore();
     public static FractionalReserveLore fractionalReserveLore = new FractionalReserveLore();
+    public static PitBlobLore pitBlobLore = new PitBlobLore();
     public static EscapePodLore escapePodLore = new EscapePodLore();
     public static PeroxideLore peroxideLore = new PeroxideLore();
     public static BillionaireLore billionaireLore = new BillionaireLore();
@@ -246,7 +247,7 @@ public class redux extends JavaPlugin {
         }, 50L);
 
 
-/*
+
         for (int i = 0; i < 50; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 0);
         }
@@ -254,9 +255,6 @@ public class redux extends JavaPlugin {
         for (int i = 0; i < 50; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby")), 0);
         }
-
- */
-
 
 
         new BukkitRunnable() {

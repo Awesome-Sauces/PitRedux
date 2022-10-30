@@ -28,7 +28,8 @@ import static com.alpha.redux.ItemEvents.pants.triggerChestplateMalding;
 import static com.alpha.redux.apis.actionbarplus.sendHealthBar;
 import static com.alpha.redux.apis.locations.getSpawnProtection;
 import static com.alpha.redux.playerdata.prestiges.getPrestige;
-import static com.alpha.redux.playerdata.streaks.mega_damage_amount;
+import static com.alpha.redux.playerdata.streaks.*;
+import static com.alpha.redux.playerdata.streaks.getStreak;
 import static com.alpha.redux.questMaster.bossBattles.maldingBoss.maldingName;
 import static com.alpha.redux.well.loreChecker.CheckEnchantOnPant;
 import static com.alpha.redux.well.loreChecker.CheckEnchantOnSword;
@@ -292,11 +293,6 @@ public class ReduxDamageEvent extends Event implements Cancellable {
         }
 
          */
-
-
-        if(mega_damage_amount.containsKey(String.valueOf(defender.getUniqueId()))){
-            this.addReduxDamage(Math.round(mega_damage_amount.get(String.valueOf(defender.getUniqueId()))));
-        }
 
         //attacker.setHealth(Math.min(attacker.getHealth() +.5, attacker.getMaxHealth()));
 

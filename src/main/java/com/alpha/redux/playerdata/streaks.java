@@ -80,7 +80,7 @@ public class streaks {
         if(megastreak.containsKey(player)){
             return true;
         }else{
-            megastreak.put(player, "beastmode");
+            megastreak.put(player, "overdrive");
         }
         return true;
     }
@@ -118,7 +118,7 @@ public class streaks {
                 player.setHealth(player.getMaxHealth());
                 player.removePotionEffect(PotionEffectType.SLOW);
                 player.removePotionEffect(PotionEffectType.POISON);
-                setMega(String.valueOf(player.getUniqueId()), "beastmode");
+                setMega(String.valueOf(player.getUniqueId()), "overdrive");
                 NametagEdit.getApi().setNametag(player, ChatEventApiGetLevelColor(player.getDisplayName(), String.valueOf(player.getUniqueId())) + rank.getNameColor(player), "");
                 setStreak(String.valueOf(player.getUniqueId()), 0);
                 xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
@@ -135,6 +135,23 @@ public class streaks {
     }
 
     public static int Beast(Player player){
+        hasStreak(String.valueOf(player.getUniqueId()));
+        if (getStreak(String.valueOf(player.getUniqueId())) >= 50){
+            if(mega_damage_amount.containsKey(String.valueOf(player.getUniqueId()))){
+                mega_damage_amount.put(String.valueOf(player.getUniqueId()), mega_damage_amount.get(String.valueOf(player.getUniqueId())) + .001);
+            }
+            if(xp_amount_mega.containsKey(String.valueOf(player.getUniqueId()))){
+                if(getStreak(String.valueOf(player.getUniqueId())) % 15 == 0){
+                    xp_amount_mega.put(String.valueOf(player.getUniqueId()), xp_amount_mega.get(String.valueOf(player.getUniqueId())) + 5);
+                }
+
+            }
+            return 2;
+        }
+        return 1;
+    }
+
+    public static int Overdrive(Player player){
         hasStreak(String.valueOf(player.getUniqueId()));
         if (getStreak(String.valueOf(player.getUniqueId())) >= 50){
             if(mega_damage_amount.containsKey(String.valueOf(player.getUniqueId()))){
@@ -195,7 +212,20 @@ public class streaks {
                 strikeLightningForPlayers(player.getLocation(), player);
             }
             return Beast(player);
-        }if (Objects.equals(getMegaStreak(String.valueOf(player.getUniqueId())), "moon")){
+        }
+
+        if (Objects.equals(getMegaStreak(String.valueOf(player.getUniqueId())), "overdrive")){
+            if(getStreak(String.valueOf(player.getUniqueId())) > 49 && getStreak(String.valueOf(player.getUniqueId())) < 51){
+
+                NametagEdit.getApi().setNametag(player, colorCode("&c&lOVERDRIVE ") + rank.getNameColor(player), "");
+                xp_amount_mega.put(String.valueOf(player.getUniqueId()), 1);
+                mega_damage_amount.put(String.valueOf(player.getUniqueId()), 0.5);
+                strikeLightningForPlayers(player.getLocation(), player);
+            }
+            return Overdrive(player);
+        }
+
+        if (Objects.equals(getMegaStreak(String.valueOf(player.getUniqueId())), "moon")){
             if(getStreak(String.valueOf(player.getUniqueId())) > 99 && getStreak(String.valueOf(player.getUniqueId())) < 101){
 
                 NametagEdit.getApi().setNametag(player, colorCode("&b&lMOON ") + rank.getNameColor(player), "");

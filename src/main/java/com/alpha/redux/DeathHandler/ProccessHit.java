@@ -12,7 +12,6 @@ import static com.alpha.redux.apis.actionbarplus.sendKillBar;
 import static com.alpha.redux.entityHandlers.ReduxPlayerHandler.playerExists;
 import static com.alpha.redux.events.events.Has_Strength;
 import static com.alpha.redux.events.events.Strength;
-import static com.alpha.redux.DeathHandler.killHandler.processKill;
 import static com.alpha.redux.playerdata.streaks.StreakManager;
 
 public class ProccessHit {

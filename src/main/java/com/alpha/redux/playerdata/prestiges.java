@@ -147,61 +147,61 @@ public class prestiges {
                 DivideValue = 235;
                 return DivideValue;
             case 36:
-                DivideValue = 300;
+                DivideValue = 265;
                 return DivideValue;
             case 37:
-                DivideValue = 400;
+                DivideValue = 285;
                 return DivideValue;
             case 38:
-                DivideValue = 500;
+                DivideValue = 300;
                 return DivideValue;
             case 39:
-                DivideValue = 700;
+                DivideValue = 335;
                 return DivideValue;
             case 40:
-                DivideValue = 850;
+                DivideValue = 385;
                 return DivideValue;
             case 41:
-                DivideValue = 950;
+                DivideValue = 400;
                 return DivideValue;
             case 42:
-                DivideValue = 1000;
+                DivideValue = 450;
                 return DivideValue;
             case 43:
-                DivideValue = 1100;
+                DivideValue = 500;
                 return DivideValue;
             case 44:
-                DivideValue = 1200;
+                DivideValue = 575;
                 return DivideValue;
             case 45:
-                DivideValue = 1500;
+                DivideValue = 725;
                 return DivideValue;
             case 46:
-                DivideValue = 1600;
+                DivideValue = 835;
                 return DivideValue;
             case 47:
-                DivideValue = 1700;
+                DivideValue = 955;
                 return DivideValue;
             case 48:
-                DivideValue = 1800;
+                DivideValue = 1125;
                 return DivideValue;
             case 49:
-                DivideValue = 2000;
+                DivideValue = 1255;
                 return DivideValue;
             case 50:
-                DivideValue = 7000;
+                DivideValue = 1545;
                 return DivideValue;
             case 51:
-                DivideValue = 7100;
+                DivideValue = 2130;
                 return DivideValue;
             case 52:
-                DivideValue = 7300;
+                DivideValue = 3540;
                 return DivideValue;
             case 53:
-                DivideValue = 7400;
+                DivideValue = 5250;
                 return DivideValue;
             case 54:
-                DivideValue = 7500;
+                DivideValue = 6825;
                 return DivideValue;
             case 55:
                 DivideValue = 7600;

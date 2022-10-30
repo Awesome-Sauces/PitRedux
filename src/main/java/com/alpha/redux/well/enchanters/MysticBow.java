@@ -1,5 +1,6 @@
 package com.alpha.redux.well.enchanters;
 
+import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.events.boards;
 import com.alpha.redux.redux;
 import org.bukkit.ChatColor;
@@ -47,11 +48,17 @@ public class MysticBow {
             player.sendMessage(ChatColor.RED + "This sword is already max tier!");
             return;
         } else if (items.getItemMeta().getDisplayName().contains("Tier II") && removeGold(player, uuid, 8000)) {
+            Sounds.BUTTON.play(player);
+            Sounds.PIN_DOWN.play(player);
             event.getClickedInventory().setItem(20, createBow(player, 3, event.getClickedInventory().getItem(20)));
         }else if (!items.getItemMeta().getDisplayName().contains("Tier II") &&
                 items.getItemMeta().getDisplayName().contains("Tier I") && removeGold(player, uuid, 4000)) {
+            Sounds.BUTTON.play(player);
+            Sounds.PIN_DOWN.play(player);
             event.getClickedInventory().setItem(20, createBow(player, 2, event.getClickedInventory().getItem(20)));
         } else if (items.getItemMeta().getDisplayName().contains("Mystic Bow") && removeGold(player, uuid, 1000)) {
+            Sounds.BUTTON.play(player);
+            Sounds.PIN_DOWN.play(player);
             event.getClickedInventory().setItem(20, createBow(player, 1, null));
         }
 
@@ -428,11 +435,11 @@ public class MysticBow {
                 // Xp Boost
                 // 5% chance of being here
                 return "fasterthantheirshadow";
-            }else if (percentChance(pullbow)){
+            }/*else if (percentChance(pullbow)){
                 // Pain Focus
                 // 5.25% chance of being here
                 return "pullbow";
-            }else if (percentChance(explosive)){
+            }*/else if (percentChance(explosive)){
                 // Lifesteal
                 // 6.25% chance of being here
                 return "explosive";

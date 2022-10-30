@@ -1,5 +1,7 @@
 package com.alpha.redux.well.enchanters;
 
+import com.alpha.redux.apis.Sounds;
+import com.alpha.redux.apis.chatManager.rank;
 import com.alpha.redux.events.boards;
 import com.alpha.redux.redux;
 import org.bukkit.ChatColor;
@@ -17,6 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import static com.alpha.redux.apis.FancyText.compileListToString;
+import static com.alpha.redux.apis.FancyText.hoverText;
 import static com.alpha.redux.apis.chatManager.rank.colorCode;
 import static com.alpha.redux.events.boards.integerToRoman;
 import static com.alpha.redux.playerdata.economy.getEconomy;
@@ -48,22 +52,31 @@ public class FreshPants {
             player.sendMessage(ChatColor.RED + "This pant is already max tier!");
             return;
         } else if (items.getItemMeta().getDisplayName().contains("Tier II") && removeGold(player, uuid, 8000)) {
-            event.getClickedInventory().setItem(20, createPant(player,3, event.getClickedInventory().getItem(20)));
+            Sounds.BUTTON.play(player);
+            Sounds.PIN_DOWN.play(player);
+            event.getClickedInventory().setItem(20, createPant(player,3, event.getClickedInventory().getItem(20), null));
         }else if (!items.getItemMeta().getDisplayName().contains("Tier II") &&
                 items.getItemMeta().getDisplayName().contains("Tier I") && removeGold(player, uuid, 4000)) {
-            event.getClickedInventory().setItem(20, createPant(player,2, event.getClickedInventory().getItem(20)));
+            Sounds.BUTTON.play(player);
+            Sounds.PIN_DOWN.play(player);
+            event.getClickedInventory().setItem(20, createPant(player,2, event.getClickedInventory().getItem(20), null));
         } else if (items.getItemMeta().getDisplayName().contains("Fresh") && removeGold(player, uuid, 1000)) {
-            event.getClickedInventory().setItem(20, createPant(player,1, null));
+            Sounds.BUTTON.play(player);
+            Sounds.PIN_DOWN.play(player);
+            event.getClickedInventory().setItem(20, createPant(player,1, null, event.getClickedInventory().getItem(20)));
         }
 
 
     }
 
-    public static ItemStack createPant(Player player, int tier, ItemStack pant){
-        if (pant == null){
+    public static ItemStack createPant(Player player, int tier, ItemStack pant, ItemStack last){
+        if (pant == null && last != null){
             ItemStack item = new ItemStack(Material.LEATHER_LEGGINGS, 1);
             LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
-            meta.setColor(Color.fromRGB(255,85,85));
+
+            LeatherArmorMeta lmeta = (LeatherArmorMeta) last.getItemMeta();
+
+            meta.setColor(lmeta.getColor());
             meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cTier " + integerToRoman(tier) + " Pants"));
             meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
             meta.spigot().setUnbreakable(true);
@@ -133,10 +146,12 @@ public class FreshPants {
 
         int loopnum = 0;
 
+        String FINAL_ENCHANT = "";
+
         while (looping){
             loopnum++;
             ench = getEnchant(enchants);
-
+            FINAL_ENCHANT=ench;
 
             for (String str : enchants){
                 tokens += str.length() - str.replaceAll("I", "").length();
@@ -244,6 +259,7 @@ public class FreshPants {
 
         lore.add(ChatColor.RED + "As strong as iron");
 
+        getRareEnchant(lore, FINAL_ENCHANT, player, tier);
 
 
         return lore;
@@ -275,6 +291,36 @@ public class FreshPants {
         return lore;
     }
 
+    public static void getRareEnchant(List<String> lore, String enchant, Player player, int level){
+
+        if(enchant.contains("pitblob")){
+            Sounds.PRESTIGE.play(player);
+            hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! "
+                    +  rank.getNameColor(player) +
+                    player.getDisplayName() + ChatColor.GRAY + " created " + "&cTier " + integerToRoman(level) + " Pants&7, gg!"), compileListToString(lore, colorCode("&cTier " + integerToRoman(level) + " Pants"), true));
+        }else if(enchant.contains("retro-gravitymicrocosm")){
+            Sounds.PRESTIGE.play(player);
+            hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! "
+                    +  rank.getNameColor(player) +
+                    player.getDisplayName() + ChatColor.GRAY + " created " + "&cTier " + integerToRoman(level) + " Pants&7, gg!"), compileListToString(lore, colorCode("&cTier " + integerToRoman(level) + " Pants"), true));
+        }else if(enchant.contains("regularity")){
+            Sounds.PRESTIGE.play(player);
+            hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! "
+                    +  rank.getNameColor(player) +
+                    player.getDisplayName() + ChatColor.GRAY + " created " + "&cTier " + integerToRoman(level) + " Pants&7, gg!"), compileListToString(lore, colorCode("&cTier " + integerToRoman(level) + " Pants"), true));
+        }else if(enchant.contains("solitude")){
+            Sounds.PRESTIGE.play(player);
+            hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! "
+                    +  rank.getNameColor(player) +
+                    player.getDisplayName() + ChatColor.GRAY + " created " + "&cTier " + integerToRoman(level) + " Pants&7, gg!"), compileListToString(lore, colorCode("&cTier " + integerToRoman(level) + " Pants"), true));
+        }else if(enchant.contains("escapepod")){
+            Sounds.PRESTIGE.play(player);
+            hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! "
+                    +  rank.getNameColor(player) +
+                    player.getDisplayName() + ChatColor.GRAY + " created " + "&cTier " + integerToRoman(level) + " Pants&7, gg!"), compileListToString(lore, colorCode("&cTier " + integerToRoman(level) + " Pants"), true));
+        }
+    }
+
     public static String getEnchantTitle(String enchant, int tier){
         if (Objects.equals(enchant, "retro-gravitymicrocosm")) {
             return colorCode(redux.retroGravityMicrocosmLore.title(tier));
@@ -286,6 +332,8 @@ public class FreshPants {
             return colorCode(redux.regularityLore.title(tier));
         }else if (Objects.equals(enchant, "protection")) {
             return colorCode(redux.protectionLore.title(tier));
+        }else if (Objects.equals(enchant, "pitblob")) {
+            return colorCode(redux.pitBlobLore.title(tier));
         }else if (Objects.equals(enchant, "solitude")) {
             return colorCode(redux.solitudeLore.title(tier));
         }else if (Objects.equals(enchant, "diamondallergy")) {
@@ -342,6 +390,8 @@ public class FreshPants {
             return "pantsradar";
         }else if(Objects.equals(enchant, "booboo")){
             return "booboo";
+        }else if(Objects.equals(enchant, "blob")){
+            return "pitblob";
         }else if (Objects.equals(enchant, "soli")){
             return "solitude";
         }else if (Objects.equals(enchant, "frac")){
@@ -384,6 +434,8 @@ public class FreshPants {
             return colorCode(redux.solitudeLore.lore(tier));
         }else if (Objects.equals(enchant, "booboo")) {
             return colorCode(redux.booBooLore.lore(tier));
+        }else if (Objects.equals(enchant, "pitblob")) {
+            return colorCode(redux.pitBlobLore.lore(tier));
         }else if (Objects.equals(enchant, "notgladiator")) {
             return colorCode(redux.notGladiatorLore.lore(tier));
         }else if (Objects.equals(enchant, "pantsradar")){
@@ -428,6 +480,9 @@ public class FreshPants {
             lore.set(lore.indexOf(ench), convertEnchant(ench.replaceAll("I", "")));
         }
 
+        // Super Rare
+        double pitBlob = .001 * calcEnchant(lore, "pitblob");
+
         // Rare
         double retroGravityMicrocosm = .0125 * calcEnchant(lore, "retro-gravitymicrocosm");
         double regularity = .0125 * calcEnchant(lore, "regularity");
@@ -443,7 +498,7 @@ public class FreshPants {
         // Uncommon Normal
         double criticallyFunky = .0425 * calcEnchant(lore, "criticallyfunky");
         double davidGoliath = .0425 * calcEnchant(lore , "davidgoliath");
-        double goldenHeart = .0425 * calcEnchant(lore, "goldenheart");
+        double goldenHeart = .0125 * calcEnchant(lore, "goldenheart");
         double fractionalReserve = .0425 * calcEnchant(lore, "fractionalreserve");
         double mirror = .0425 * calcEnchant(lore, "mirror");
         double notGladiator = .0425 * calcEnchant(lore, "notgladiator");
@@ -471,18 +526,10 @@ public class FreshPants {
                 return "davidgoliath";
             }if(percentChance(diamondAllergy)){
                 return "diamondallergy";
-            }else if (percentChance(retroGravityMicrocosm)){
-                // Billionaire
-                // 1% chance of being here
-                return "retro-gravitymicrocosm";
             }else if (percentChance(criticallyFunky)){
                 // Perun
                 // 2% chance of being here
                 return "criticallyfunky";
-            }else if (percentChance(regularity)){
-                // Executioner
-                // 2.5% chance of being here
-                return "regularity";
             }else if (percentChance(protection)){
                 // Gamble
                 // 3.25% chance of being here
@@ -494,15 +541,11 @@ public class FreshPants {
             }else if (percentChance(goldenHeart)){
                 // Golden Heart
                 // 7.35% chance of being here
-                return "protection";
+                return "goldenheart";
             }else if (percentChance(xpboost)){
                 // Xp Boost
                 // 5% chance of being here
                 return "xpboost";
-            }else if (percentChance(solitude)){
-                // Pain Focus
-                // 5.25% chance of being here
-                return "solitude";
             }else if (percentChance(notGladiator)){
                 // Lifesteal
                 // 6.25% chance of being here
@@ -511,10 +554,6 @@ public class FreshPants {
                 // Gold Boost
                 // 6.5% chance of being here
                 return "goldboost";
-            }else if (percentChance(escapePod)){
-                // Sharp
-                // 6.75% chance of being here
-                return "escapepod";
             }else if (percentChance(peroxide)){
                 // Shark
                 // 7.25% chance of being here
@@ -523,6 +562,10 @@ public class FreshPants {
                 // Xp Bump
                 // 7.50% chance of being here
                 return "xpbump";
+            }else if (percentChance(pitBlob)){
+                // Pitblob
+                // .1% chance of being here
+                return "pitblob";
             }else if (percentChance(goldbump)){
                 // Gold Bump
                 // 7.75% chance of being here
@@ -543,6 +586,22 @@ public class FreshPants {
                 // King Buster
                 // 11.25% chance of being here
                 return "fractionalreserve";
+            }else if (percentChance(retroGravityMicrocosm)){
+                // Billionaire
+                // 1% chance of being here
+                return "retro-gravitymicrocosm";
+            }else if (percentChance(regularity)){
+                // Executioner
+                // 2.5% chance of being here
+                return "regularity";
+            }else if (percentChance(solitude)){
+                // Pain Focus
+                // 5.25% chance of being here
+                return "solitude";
+            }else if (percentChance(escapePod)){
+                // Sharp
+                // 6.75% chance of being here
+                return "escapepod";
             }
         }
     }

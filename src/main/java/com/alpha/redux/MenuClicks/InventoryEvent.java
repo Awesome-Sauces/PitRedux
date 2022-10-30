@@ -331,7 +331,7 @@ public class InventoryEvent {
                     player.sendMessage(ChatColor.RED + "You've reached the max Prestige! Congrats!");
                     return;
                 }
-                setMega(String.valueOf(player.getUniqueId()), "beastmode");
+                setMega(String.valueOf(player.getUniqueId()), "overdrive");
                 setStreak(String.valueOf(player.getUniqueId()), 0);
                 hasEconomy(String.valueOf(player.getUniqueId()));
                 setEconomy(String.valueOf(player.getUniqueId()), 0);

@@ -176,8 +176,8 @@ public class Booster {
                         "&7active &e&l+30 &cbot &7booster!"));
 
                 for (int i = 0; i < 30; i++) {
-                    HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 900);
-                    HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby")), 900);
+                    HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 1800);
+                    HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby")), 1800);
                 }
 
                 Bukkit.getScheduler().scheduleSyncDelayedTask(redux.INSTANCE, new Runnable() {

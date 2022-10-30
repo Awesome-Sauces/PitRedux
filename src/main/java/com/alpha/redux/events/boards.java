@@ -80,6 +80,9 @@ public class boards implements Listener {
         }else if (Objects.equals(getMegaStreak(uuid), "moon")){
             select_mega = "To the Moon";
             mega_color = ChatColor.translateAlternateColorCodes('&', "&b");
+        }else if (Objects.equals(getMegaStreak(uuid), "overdrive")){
+            select_mega = "Overdrive";
+            mega_color = ChatColor.translateAlternateColorCodes('&', "&c");
         }
 
         return mega_color + select_mega;
@@ -88,7 +91,8 @@ public class boards implements Listener {
     private static int getMegaActiveData(String uuid){
         hasMegaStreak(uuid);
         if (Objects.equals(getMegaStreak(uuid), "highlander") ||
-                Objects.equals(getMegaStreak(uuid), "beastmode")){
+                Objects.equals(getMegaStreak(uuid), "beastmode") ||
+                Objects.equals(getMegaStreak(uuid), "overdrive")){
             return 50;
         }else if (Objects.equals(getMegaStreak(uuid), "uber") ||
                 Objects.equals(getMegaStreak(uuid), "moon")){
@@ -99,6 +103,8 @@ public class boards implements Listener {
     }
 
     public static void updateBoard(FastBoard board, Player player){
+
+        if(player==null) return;
 
         if(board == null) {
 
@@ -123,6 +129,19 @@ public class boards implements Listener {
         int[] playerData = GetCurrentLevel(String.valueOf(player.getUniqueId()), xpManager.getXp(String.valueOf(player.getUniqueId())), prestiges.getPrestige(String.valueOf(player.getUniqueId())), player);
         int level = playerData[1];
         int neededXP = playerData[0];
+
+        boolean MOON_ACTIVE = false;
+
+        String MOON_STORAGE = "";
+
+        hasMegaStreak(uuid);
+        hasStreak(uuid);
+        if(getMegaStreak(uuid).equals("moon") && getStreak(uuid) >= 101){
+            MOON_ACTIVE=true;
+            ReduxPlayer player1 = playerExists(player);
+
+            MOON_STORAGE = colorCode("&fStored XP: &b" + formatter.format(player1.getMoonXP()));
+        }
 
         String prestigeColor = prestigebracket(player);
 
@@ -168,7 +187,21 @@ public class boards implements Listener {
 
 
 
-        if(STRENGTH > 0 &&
+        if(MOON_ACTIVE){
+            board.updateLines(version,
+                    spacer4,
+                    prestigeData,
+                    levelData,
+                    xpData,
+                    spacer3,
+                    goldData,
+                    spacer2,
+                    statusData,
+                    streakData,
+                    MOON_STORAGE,
+                    spacer1,
+                    ipData);
+        }else if(STRENGTH > 0 &&
                 getStreak(uuid) > 0 && getPrestige(uuid) > 0){
             board.updateLines(version,
                     spacer4,

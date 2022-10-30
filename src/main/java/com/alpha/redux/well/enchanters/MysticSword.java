@@ -1,5 +1,7 @@
 package com.alpha.redux.well.enchanters;
 
+import com.alpha.redux.apis.Sounds;
+import com.alpha.redux.apis.chatManager.rank;
 import com.alpha.redux.entityHandlers.MysticHandler.Swords.Billionaire;
 import com.alpha.redux.events.boards;
 import com.alpha.redux.redux;
@@ -16,6 +18,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
 
+import static com.alpha.redux.apis.FancyText.compileListToString;
+import static com.alpha.redux.apis.FancyText.hoverText;
 import static com.alpha.redux.apis.chatManager.rank.colorCode;
 import static com.alpha.redux.events.boards.integerToRoman;
 import static com.alpha.redux.playerdata.economy.getEconomy;
@@ -48,11 +52,17 @@ public class MysticSword {
             player.sendMessage(ChatColor.RED + "This sword is already max tier!");
             return;
         } else if (items.getItemMeta().getDisplayName().contains("Tier II") && removeGold(player, uuid, 8000)) {
+            Sounds.BUTTON.play(player);
+            Sounds.PIN_DOWN.play(player);
             event.getClickedInventory().setItem(20, createSword(player,3, event.getClickedInventory().getItem(20)));
         }else if (!items.getItemMeta().getDisplayName().contains("Tier II") &&
                 items.getItemMeta().getDisplayName().contains("Tier I") && removeGold(player, uuid, 4000)) {
+            Sounds.BUTTON.play(player);
+            Sounds.PIN_DOWN.play(player);
             event.getClickedInventory().setItem(20, createSword(player,2, event.getClickedInventory().getItem(20)));
         } else if (items.getItemMeta().getDisplayName().contains("Mystic Sword") && removeGold(player, uuid, 1000)) {
+            Sounds.BUTTON.play(player);
+            Sounds.PIN_DOWN.play(player);
             event.getClickedInventory().setItem(20, createSword(player,1, null));
         }
 
@@ -134,9 +144,12 @@ public class MysticSword {
 
         int loopnum = 0;
 
+        String FINAL_ENCHANT = "";
+
         while (looping){
             loopnum++;
             ench = getEnchant(enchants);
+            FINAL_ENCHANT = ench;
 
 
             for (String str : enchants){
@@ -243,7 +256,7 @@ public class MysticSword {
 
         lore.add(ChatColor.BLUE + "+6.5 Attack Damage");
 
-
+        getRareEnchant(lore, FINAL_ENCHANT, player, tier);
 
         return lore;
 
@@ -275,6 +288,31 @@ public class MysticSword {
         lore.addAll(enchant);
 
         return lore;
+    }
+
+    public static void getRareEnchant(List<String> lore, String enchant, Player player, int level){
+
+        if(enchant.contains("billionaire")){
+            Sounds.PRESTIGE.play(player);
+            hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! "
+                    +  rank.getNameColor(player) +
+                    player.getDisplayName() + ChatColor.GRAY + " created " + "&cTier " + integerToRoman(level) + " Sword&7, gg!"), compileListToString(lore, colorCode("&cTier " + integerToRoman(level) + " Sword"), true));
+        }else if(enchant.contains("perun")){
+            Sounds.PRESTIGE.play(player);
+            hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! "
+                    +  rank.getNameColor(player) +
+                    player.getDisplayName() + ChatColor.GRAY + " created " + "&cTier " + integerToRoman(level) + " Sword&7, gg!"), compileListToString(lore, colorCode("&cTier " + integerToRoman(level) + " Sword"), true));
+        }else if(enchant.contains("executioner")){
+            Sounds.PRESTIGE.play(player);
+            hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! "
+                    +  rank.getNameColor(player) +
+                    player.getDisplayName() + ChatColor.GRAY + " created " + "&cTier " + integerToRoman(level) + " Sword&7, gg!"), compileListToString(lore, colorCode("&cTier " + integerToRoman(level) + " Sword"), true));
+        }else if(enchant.contains("gamble")){
+            Sounds.PRESTIGE.play(player);
+            hoverText(ChatColor.translateAlternateColorCodes('&', "&d&lRARE! "
+                    +  rank.getNameColor(player) +
+                    player.getDisplayName() + ChatColor.GRAY + " created " + "&cTier " + integerToRoman(level) + " Sword&7, gg!"), compileListToString(lore, colorCode("&cTier " + integerToRoman(level) + " Sword"), true));
+        }
     }
 
     public static String getEnchantTitle(String enchant, int tier){
@@ -448,22 +486,6 @@ public class MysticSword {
                 // Pants radar
                 // 5.25% of being here
                 return "pantsradar";
-            }else if (percentChance(billionaire)){
-                // Billionaire
-                // 1% chance of being here
-                return "billionaire";
-            } else if (percentChance(perun)){
-                // Perun
-                // 2% chance of being here
-                return "perun";
-            }else if (percentChance(executioner)){
-                // Executioner
-                // 2.5% chance of being here
-                return "executioner";
-            }else if (percentChance(gamble)){
-                // Gamble
-                // 3.25% chance of being here
-                return "gamble";
             }else if (percentChance(xpboost)){
                 // Xp Boost
                 // 5% chance of being here
@@ -522,6 +544,22 @@ public class MysticSword {
                 // King Buster
                 // 11.25% chance of being here
                 return "kingbuster";
+            }else if (percentChance(billionaire)){
+                // Billionaire
+                // 1% chance of being here
+                return "billionaire";
+            } else if (percentChance(perun)){
+                // Perun
+                // 2% chance of being here
+                return "perun";
+            }else if (percentChance(executioner)){
+                // Executioner
+                // 2.5% chance of being here
+                return "executioner";
+            }else if (percentChance(gamble)){
+                // Gamble
+                // 3.25% chance of being here
+                return "gamble";
             }
         }
     }
