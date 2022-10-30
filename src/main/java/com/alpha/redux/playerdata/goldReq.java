@@ -12,6 +12,7 @@ public class goldReq {
     }
 
     public static void addGoldReq(String player, int amount){
+        hasGoldReq(player);
         GoldReq.put(player, GoldReq.get(player)+amount);
     }
 
