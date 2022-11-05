@@ -76,7 +76,7 @@ public class GambleLore extends PitEnchant{
         String multiplier = String.valueOf(level);
 
         String lore = "&dRARE! &9Gamble!" + tier + "\n" +
-                "&d50% chance &7to deal &c"+multiplier+"❤&7 true\n" +
+                "&d50% chance &7to deal &c"+multiplier+"(HEART_EMOJI)&7 true\n" +
                 "&7damage to whoever you hit, or to\n" + "&7yourself" + "\n&7";
 
         return colorCode(lore);

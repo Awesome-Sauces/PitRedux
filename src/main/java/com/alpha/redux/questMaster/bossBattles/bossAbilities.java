@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -34,7 +35,7 @@ public class bossAbilities {
             tp_amount++;
             if(player.isOnGround()){
                 if(player.getLocation().add(0,2,0).getBlock().getType().equals(Material.AIR)){
-                    player.teleport(player.getLocation().add(0, 2, 0));
+                    player.teleport(player.getLocation().add(0, 2, 0), PlayerTeleportEvent.TeleportCause.PLUGIN);
                 }
 
                 player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 40, 4, true, true));

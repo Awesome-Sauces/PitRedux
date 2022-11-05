@@ -60,6 +60,15 @@ public class economy {
 
     }
 
+    public static int getEconomy(String name, boolean a){
+        try{
+            return (int) getMoney(ChatColor.stripColor(name));
+        } catch (UserDoesNotExistException e) {
+            return 0;
+        }
+
+    }
+
     public static boolean hasEconomy(String player){
         try{
             if(playerExists(UUID.fromString(player))){

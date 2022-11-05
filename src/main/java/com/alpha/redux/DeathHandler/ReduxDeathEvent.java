@@ -54,9 +54,9 @@ public class ReduxDeathEvent extends Event implements Cancellable{
     private static final HandlerList HANDLERS = new HandlerList();
     private final ReduxPlayer attacker;
     private final ReduxPlayer defender;
-    private double xp = 9;
+    private double xp = 14;
     private int xp_cap = 200;
-    private double gold = 13;
+    private double gold = 17;
     private double gold_cap = 2500;
     private boolean isCancelled;
 
@@ -196,8 +196,8 @@ public class ReduxDeathEvent extends Event implements Cancellable{
         gold = gold*twoTimesEvent;
         xp = xp*twoTimesEvent;
 
-        if(XP_BOOSTER>1) xp_cap+=100;
-        if(twoTimesEvent>1) xp_cap+=100;
+        if(XP_BOOSTER>1) xp_cap+=300;
+        if(twoTimesEvent>1) xp_cap+=300;
 
         // Attacker Streak tick
         if(!isNPC(attacker.getPlayerObject())){
@@ -233,7 +233,7 @@ public class ReduxDeathEvent extends Event implements Cancellable{
             NPC npc = getNPC(defender.getPlayerObject());
             if(npc.getEntity()!=null) npc.teleport(getBotSpawnLocation(npc.getEntity().getWorld()), PlayerTeleportEvent.TeleportCause.PLUGIN);
         }else if (!isNPC(defender.getPlayerObject())){
-            defender.getPlayerObject().teleport(getSpawnLocation(defender.getPlayerObject().getWorld()));
+            defender.getPlayerObject().teleport(getSpawnLocation(defender.getPlayerObject().getWorld()), PlayerTeleportEvent.TeleportCause.PLUGIN);
         }
 
         // Standard Messages

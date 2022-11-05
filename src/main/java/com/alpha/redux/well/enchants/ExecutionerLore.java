@@ -50,7 +50,7 @@ public class ExecutionerLore extends PitEnchant{
         String multiplier = String.valueOf(level);
 
         String lore = "&dRARE! &9Executioner" + tier + "\n" +
-                "&7Hitting an enemy to below &c" + multiplier + "❤" +
+                "&7Hitting an enemy to below &c" + multiplier + "(HEART_EMOJI)" +
                 "\n&7instantly kills them" + "\n&7";
 
         return colorCode(lore);

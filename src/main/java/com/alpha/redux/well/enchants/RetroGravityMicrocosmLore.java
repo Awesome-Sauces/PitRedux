@@ -79,8 +79,8 @@ public class RetroGravityMicrocosmLore extends PitEnchant{
         String lore = "&dRARE! &9Retro-Gravity Microcosm" + tier + "\n" +
                 "&7When a player hits you from\n" +
                 "&7above ground &e3 times &7in a row:\n" +
-                "&7You heal &c"+multiplier+"❤\n" +
-                "&7They take &c"+take+"❤ &7true damage" + "\n&7";
+                "&7You heal &c"+multiplier+"(HEART_EMOJI)\n" +
+                "&7They take &c"+take+"(HEART_EMOJI) &7true damage" + "\n&7";
 
         return colorCode(lore);
     }

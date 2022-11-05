@@ -53,7 +53,7 @@ public class BooBooLore extends PitEnchant{
         String multiplier = String.valueOf(.25*level);
 
         String lore = "&9Boo-boo" + tier + "\n" +
-                "&7Heal &c" + multiplier + "❤ &7when hit."+ "\n&7";
+                "&7Heal &c" + multiplier + "(HEART_EMOJI) &7when hit."+ "\n&7";
 
         return colorCode(lore);
     }

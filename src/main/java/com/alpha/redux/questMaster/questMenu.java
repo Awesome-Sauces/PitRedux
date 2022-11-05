@@ -18,11 +18,11 @@ public class questMenu {
 
         // Custom Items
         ItemStack claimRewards = questMenuItems.claimRewards(uuid);
-        ItemStack KillPlayersQuest = questMenuItems.KillPlayersQuest(uuid);
-        ItemStack FindCakeQuest = questMenuItems.FindCakeQuest(uuid);
-        ItemStack BringVileQuest = questMenuItems.BringVileQuest(uuid);
-        ItemStack BringCoinsQuest = questMenuItems.BringCoinsQuest(uuid);
-        ItemStack BringFreshQuest = questMenuItems.BringFreshQuest(uuid);
+        ItemStack KillPlayersQuest = questMenuItems.PlayerSoulsToFresh(uuid);
+        ItemStack FindCakeQuest = questMenuItems.PlayerSoulsToMysticSword(uuid);
+        ItemStack BringVileQuest = questMenuItems.PlayerSoulsToJewelPant(uuid);
+        ItemStack BringCoinsQuest = questMenuItems.PlayerSoulsToJewelSword(uuid);
+        ItemStack BringFreshQuest = questMenuItems.PlayerSoulsToMalding(uuid);
 
         for (int i = 0; i < 10; i++) {
             advancedInventory.addInv(gui, base_glass, i, 1, false);

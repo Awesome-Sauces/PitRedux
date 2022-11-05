@@ -131,7 +131,7 @@ public class killHandler {
             //attacker.getWorld().playSound(attacker.getLocation(), Sound.LEVEL_UP, 1, 20);
             ReduxDefender.getPlayerObject().sendMessage(ChatColor.RED + colorCode("&lDEATH! ") + ChatColor.GRAY + "by " + ReduxDefender.getPlayerObject().getDisplayName());
             Location loc = getSpawnLocation(ReduxDefender.getPlayerObject().getWorld());
-            ReduxDefender.getPlayerObject().teleport(loc);
+            ReduxDefender.getPlayerObject().teleport(loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
             hasStreak(ReduxDefender.getPlayerObject().getDisplayName());
             //setStreak(ReduxDefender.getPlayerUUID(), 0);
             if(!isNPC(ReduxDefender.getPlayerObject())) boards.CreateScore(ReduxDefender.getPlayerObject());

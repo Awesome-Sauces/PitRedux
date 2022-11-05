@@ -6,6 +6,7 @@ import com.alpha.redux.apis.leaderboardsplus.leaderboards;
 import com.alpha.redux.boosters.Booster;
 import com.alpha.redux.commands.crates.crate;
 import com.alpha.redux.commands.repairs.menu;
+import com.alpha.redux.commands.view.ViewCore;
 import com.alpha.redux.events.boards;
 import com.alpha.redux.items.enchants;
 import com.alpha.redux.playerdata.economy;
@@ -22,6 +23,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import com.alpha.redux.items.itemManager;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -233,7 +235,7 @@ public class command implements CommandExecutor {
                     if(success){
                         Location playerLocation = checkedPlayer.getLocation();
                         checkedPlayer.setVelocity(checkedPlayer.getVelocity().add(new Vector(0, 100, 0)));
-                        checkedPlayer.teleport(playerLocation);
+                        checkedPlayer.teleport(playerLocation, PlayerTeleportEvent.TeleportCause.PLUGIN);
                     }
                 }
             }
@@ -459,6 +461,30 @@ public class command implements CommandExecutor {
                 giveDyes(player.getDisplayName());
             }
 
+            return true;
+        }
+
+        if(cmd.getName().equalsIgnoreCase("view")){
+            if(args.length < 1) {
+                player.sendMessage(colorCode("&cMissing arguments! Usage: /view <username>"));
+                return true;
+            }
+
+            Player tempPlayer = Bukkit.getPlayer(args[0]);
+            OfflinePlayer offline;
+
+            if(tempPlayer==null){
+                offline = Bukkit.getOfflinePlayer(Bukkit.getOfflinePlayer(args[0]).getUniqueId());
+                tempPlayer = ViewCore.loadPlayer(offline);
+                if(tempPlayer==null){
+                    player.sendMessage("&cPlayer doesn't exist");
+                    return true;
+                }
+                player.openInventory(ViewCore.getViewInventory(player, tempPlayer, args[0], false));
+                return true;
+            }
+
+            player.openInventory(ViewCore.getViewInventory(player, tempPlayer, args[0], true));
             return true;
         }
 

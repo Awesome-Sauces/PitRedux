@@ -1,5 +1,6 @@
 package com.alpha.redux.questMaster;
 
+import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.items.enchants;
 import com.alpha.redux.renownShop.RenownStorage;
 import org.bukkit.ChatColor;
@@ -13,6 +14,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.Random;
 
+import static com.alpha.redux.apis.chatManager.rank.colorCode;
 import static com.alpha.redux.playerdata.economy.*;
 import static com.alpha.redux.questMaster.bossBattles.maldingBoss.summonBoss;
 import static com.alpha.redux.questMaster.questLevel.addQuestLevel;
@@ -23,112 +25,23 @@ public class questInventoryManager {
         String uuid = String.valueOf(event.getWhoClicked().getUniqueId());
         Player player = (Player) event.getWhoClicked();
 
+        hasEconomy(uuid);
+
         ItemStack claimRewards = questMenuItems.claimRewards(uuid);
-        ItemStack KillPlayersQuest = questMenuItems.KillPlayersQuest(uuid);
-        ItemStack FindCakeQuest = questMenuItems.FindCakeQuest(uuid);
-        ItemStack BringVileQuest = questMenuItems.BringVileQuest(uuid);
-        ItemStack BringCoinsQuest = questMenuItems.BringCoinsQuest(uuid);
-        ItemStack BringFreshQuest = questMenuItems.BringFreshQuest(uuid);
+        ItemStack FreshPants = questMenuItems.PlayerSoulsToFresh(uuid);
+        ItemStack MysticSword = questMenuItems.PlayerSoulsToMysticSword(uuid);
+        ItemStack PantJewel = questMenuItems.PlayerSoulsToJewelPant(uuid);
+        ItemStack SwordJewel = questMenuItems.PlayerSoulsToJewelSword(uuid);
+        ItemStack Malding = questMenuItems.PlayerSoulsToMalding(uuid);
 
-        if(event.getCurrentItem().equals(FindCakeQuest)){
-            if(player.getInventory().containsAtLeast(new ItemStack(Material.CAKE), 4)){
-                if(getEconomy(uuid) >= 100000){
-                    for (int i = 0; i < 4; i++) {
-                        player.getInventory().removeItem(new ItemStack(Material.CAKE));
-                    }
-
-
-                    removeEconomy(uuid, 100000);
-
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7I didn't think you would be able to complete this quest!"));
-
-                    Random rand = new Random(); //instance of random class
-                    int upperbound = 10;
-                    int int_random = rand.nextInt(upperbound);
-
-                    switch (int_random){
-                        case 0:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &c&lARGH! &7I got jumped by the nasty cheater! Sorry I wasn't able to bring your reward. From the kindness of my heart I'll refund half your gold!"));
-                            addEconomy(uuid, 50000);
-                            break;
-                        case 1:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+1 " + ChatColor.LIGHT_PURPLE + "Uberdrop" + ChatColor.GREEN + "!");
-                            player.getInventory().addItem(getUberDrop());
-                            break;
-                        case 2:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+32 " + ChatColor.YELLOW + "Renown Tokens" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 32; i++) {
-                                player.getInventory().addItem(RenownStorage.getToken());
-                            }
-                            break;
-                        case 3:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+48 " + ChatColor.YELLOW + "Renown Tokens" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 48; i++) {
-                                player.getInventory().addItem(RenownStorage.getToken());
-                            }
-                            break;
-
-                        case 4:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+16 " + ChatColor.YELLOW + "Renown Tokens" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 16; i++) {
-                                player.getInventory().addItem(RenownStorage.getToken());
-                            }
-                            break;
-
-                        case 5:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+8 " + ChatColor.YELLOW + "Renown Tokens" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 8; i++) {
-                                player.getInventory().addItem(RenownStorage.getToken());
-                            }
-                            break;
-
-                        case 6:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+64 " + ChatColor.YELLOW + "Renown Tokens" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 64; i++) {
-                                player.getInventory().addItem(RenownStorage.getToken());
-                            }
-                            break;
-                        case 7:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+2 " + ChatColor.DARK_AQUA+ "Player Souls" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 2; i++) {
-                                player.getInventory().addItem(enchants.playerSoul);
-                            }
-                            break;
-                        case 8:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+1 " + ChatColor.DARK_AQUA + "Player Soul" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 1; i++) {
-                                player.getInventory().addItem(enchants.playerSoul);
-                            }
-                            break;
-                        case 9:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+3 " + ChatColor.DARK_AQUA + "Player Souls" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 3; i++) {
-                                player.getInventory().addItem(enchants.playerSoul);
-                            }
-                            break;
-                    }
-                }else{
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &7Hmm it seems as you don't have enough gold for that, come back when you have 100,000 gold!"));
-                }
-
-            }
-        }else if(event.getCurrentItem().equals(KillPlayersQuest)){
-            if(player.getInventory().containsAtLeast(enchants.playerSoul, 4)) {
-                if (getEconomy(uuid) >= 100000) {
-                    for (int i = 0; i < 16; i++) {
+        if(event.getCurrentItem().equals(Malding)){
+            if(player.getInventory().containsAtLeast(enchants.playerSoul, 64)) {
+                if (getEconomy(uuid) >= 25000) {
+                    for (int i = 0; i < 64; i++) {
                         player.getInventory().removeItem(enchants.playerSoul);
                     }
 
-                    removeEconomy(uuid, 100000);
+                    removeEconomy(uuid, 25000);
 
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7I didn't think you would be able to complete this quest!"));
 
@@ -142,268 +55,65 @@ public class questInventoryManager {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &7Hmm it seems as you don't have enough gold for that, come back when you have 100,000 gold!"));
                 }
             }
-        }else if(event.getCurrentItem().equals(BringVileQuest)){
-            if(player.getInventory().containsAtLeast(enchants.vile, 64)) {
-                if (getEconomy(uuid) >= 100000) {
-                    for (int i = 0; i < 64; i++) {
-                        player.getInventory().removeItem(enchants.vile);
-                    }
-
-                    removeEconomy(uuid, 100000);
-
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7I didn't think you would be able to complete this quest!"));
-
-                    Random rand = new Random(); //instance of random class
-                    int upperbound = 10;
-                    int int_random = rand.nextInt(upperbound);
-
-                    switch (int_random){
-                        case 0:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &c&lARGH! &7I got jumped by the nasty cheater! Sorry I wasn't able to bring your reward. From the kindness of my heart I'll refund half your gold!"));
-                            addEconomy(uuid, 50000);
-                            break;
-                        case 1:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+1 " + ChatColor.LIGHT_PURPLE + "Uberdrop" + ChatColor.GREEN + "!");
-                            player.getInventory().addItem(getUberDrop());
-                            break;
-                        case 2:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+32 " + ChatColor.YELLOW + "Renown Tokens" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 32; i++) {
-                                player.getInventory().addItem(RenownStorage.getToken());
-                            }
-                            break;
-                        case 3:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+48 " + ChatColor.YELLOW + "Renown Tokens" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 48; i++) {
-                                player.getInventory().addItem(RenownStorage.getToken());
-                            }
-                            break;
-
-                        case 4:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+16 " + ChatColor.YELLOW + "Renown Tokens" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 16; i++) {
-                                player.getInventory().addItem(RenownStorage.getToken());
-                            }
-
-                            break;
-                        case 5:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+8 " + ChatColor.YELLOW + "Renown Tokens" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 8; i++) {
-                                player.getInventory().addItem(RenownStorage.getToken());
-                            }
-
-                            break;
-                        case 6:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+64 " + ChatColor.YELLOW + "Renown Tokens" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 64; i++) {
-                                player.getInventory().addItem(RenownStorage.getToken());
-                            }
-                            break;
-                        case 7:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+2 " + ChatColor.DARK_AQUA+ "Player Souls" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 2; i++) {
-                                player.getInventory().addItem(enchants.playerSoul);
-                            }
-                            break;
-                        case 8:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+1 " + ChatColor.DARK_AQUA + "Player Soul" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 1; i++) {
-                                player.getInventory().addItem(enchants.playerSoul);
-                            }
-                            break;
-                        case 9:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+3 " + ChatColor.DARK_AQUA + "Player Souls" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 3; i++) {
-                                player.getInventory().addItem(enchants.playerSoul);
-                            }
-                            break;
-                    }
-                }else{
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &7Hmm it seems as you don't have enough gold for that, come back when you have 100,000 gold!"));
+        }else if(event.getCurrentItem().equals(FreshPants)){
+            if(player.getInventory().containsAtLeast(enchants.playerSoul, 64) &&
+            getEconomy(uuid)>=50000){
+                for (int i = 0; i < 64; i++) {
+                    player.getInventory().removeItem(enchants.playerSoul);
                 }
+
+                player.getInventory().addItem(enchants.fullPantPB);
+
+                removeEconomy(uuid, 50000);
+
+                player.sendMessage(colorCode("&a&lCONGRATS! &7succesfully purchased!"));
+                Sounds.RENOWN_SHOP_PURCHASE.play(player);
             }
-        }else if(event.getCurrentItem().equals(BringFreshQuest)){
-            if(player.getInventory().containsAtLeast(enchants.fresh_reds, 20)) {
-                if (getEconomy(uuid) >= 100000) {
-                    for (int i = 0; i < 20; i++) {
-                        player.getInventory().removeItem(enchants.fresh_reds);
-                    }
-
-                    removeEconomy(uuid, 100000);
-
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7I didn't think you would be able to complete this quest!"));
-
-                    Random rand = new Random(); //instance of random class
-                    int upperbound = 10;
-                    int int_random = rand.nextInt(upperbound);
-
-                    switch (int_random){
-                        case 0:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &c&lARGH! &7I got jumped by the nasty cheater! Sorry I wasn't able to bring your reward. From the kindness of my heart I'll refund half your gold!"));
-                            addEconomy(uuid, 50000);
-                            break;
-                        case 1:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+1 " + ChatColor.LIGHT_PURPLE + "Uberdrop" + ChatColor.GREEN + "!");
-                            player.getInventory().addItem(getUberDrop());
-                            break;
-                        case 2:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+32 " + ChatColor.YELLOW + "Renown Tokens" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 32; i++) {
-                                player.getInventory().addItem(RenownStorage.getToken());
-                            }
-                            break;
-                        case 3:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+48 " + ChatColor.YELLOW + "Renown Tokens" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 48; i++) {
-                                player.getInventory().addItem(RenownStorage.getToken());
-                            }
-                            break;
-
-                        case 4:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+16 " + ChatColor.YELLOW + "Renown Tokens" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 16; i++) {
-                                player.getInventory().addItem(RenownStorage.getToken());
-                            }
-                            break;
-
-                        case 5:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+8 " + ChatColor.YELLOW + "Renown Tokens" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 8; i++) {
-                                player.getInventory().addItem(RenownStorage.getToken());
-                            }
-                            break;
-
-                        case 6:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+64 " + ChatColor.YELLOW + "Renown Tokens" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 64; i++) {
-                                player.getInventory().addItem(RenownStorage.getToken());
-                            }
-                        case 7:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+2 " + ChatColor.DARK_AQUA+ "Player Souls" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 2; i++) {
-                                player.getInventory().addItem(enchants.playerSoul);
-                            }
-                            break;
-                        case 8:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+1 " + ChatColor.DARK_AQUA + "Player Soul" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 1; i++) {
-                                player.getInventory().addItem(enchants.playerSoul);
-                            }
-                            break;
-                        case 9:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+3 " + ChatColor.DARK_AQUA + "Player Souls" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 3; i++) {
-                                player.getInventory().addItem(enchants.playerSoul);
-                            }
-                            break;
-                    }
-                }else{
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &7Hmm it seems as you don't have enough gold for that, come back when you have 100,000 gold!"));
+        }else if(event.getCurrentItem().equals(MysticSword)){
+            if(player.getInventory().containsAtLeast(enchants.playerSoul, 256) &&
+                    getEconomy(uuid)>=50000){
+                for (int i = 0; i < 256; i++) {
+                    player.getInventory().removeItem(enchants.playerSoul);
                 }
+
+                player.getInventory().addItem(enchants.fullSwordPB);
+
+                removeEconomy(uuid, 50000);
+
+                player.sendMessage(colorCode("&a&lCONGRATS! &7succesfully purchased!"));
+                Sounds.RENOWN_SHOP_PURCHASE.play(player);
             }
-        }else if(event.getCurrentItem().equals(BringCoinsQuest)){
-                if (getEconomy(uuid) >= 1000000) {
-
-                    removeEconomy(uuid, 1000000);
-
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7I didn't think you would be able to complete this quest!"));
-
-                    Random rand = new Random(); //instance of random class
-                    int upperbound = 10;
-                    int int_random = rand.nextInt(upperbound);
-
-                    switch (int_random){
-                        case 0:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &c&lARGH! &7I got jumped by the nasty cheater! Sorry I wasn't able to bring your reward. From the kindness of my heart I'll refund half your gold!"));
-                            addEconomy(uuid, 500000);
-                            break;
-                        case 1:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+1 " + ChatColor.LIGHT_PURPLE + "Uberdrop" + ChatColor.GREEN + "!");
-                            player.getInventory().addItem(getUberDrop());
-                            break;
-                        case 2:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+32 " + ChatColor.YELLOW + "Renown Tokens" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 32; i++) {
-                                player.getInventory().addItem(RenownStorage.getToken());
-                            }
-                            break;
-                        case 3:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+48 " + ChatColor.YELLOW + "Renown Tokens" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 48; i++) {
-                                player.getInventory().addItem(RenownStorage.getToken());
-                            }
-                            break;
-
-                        case 4:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+16 " + ChatColor.YELLOW + "Renown Tokens" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 16; i++) {
-                                player.getInventory().addItem(RenownStorage.getToken());
-                            }
-                            break;
-
-                        case 5:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+8 " + ChatColor.YELLOW + "Renown Tokens" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 8; i++) {
-                                player.getInventory().addItem(RenownStorage.getToken());
-                            }
-                            break;
-
-                        case 6:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+64 " + ChatColor.YELLOW + "Renown Tokens" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 64; i++) {
-                                player.getInventory().addItem(RenownStorage.getToken());
-                            }
-                            break;
-                        case 7:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+2 " + ChatColor.DARK_AQUA+ "Player Souls" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 2; i++) {
-                                player.getInventory().addItem(enchants.playerSoul);
-                            }
-                            break;
-                        case 8:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+1 " + ChatColor.DARK_AQUA + "Player Soul" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 1; i++) {
-                                player.getInventory().addItem(enchants.playerSoul);
-                            }
-                            break;
-                        case 9:
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &a&lWOW! &7Your reward will be sent shortly!"));
-                            player.sendMessage(ChatColor.GREEN + "+3 " + ChatColor.DARK_AQUA + "Player Souls" + ChatColor.GREEN + "!");
-                            for (int i = 0; i < 3; i++) {
-                                player.getInventory().addItem(enchants.playerSoul);
-                            }
-                            break;
-                    }
-                }else{
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bQuest Master&8 >> &7Hmm it seems as you don't have enough gold for that, come back when you have 100,000 gold!"));
+        }else if(event.getCurrentItem().equals(PantJewel)){
+            if(player.getInventory().containsAtLeast(enchants.playerSoul, 256) &&
+                    getEconomy(uuid)>=50000){
+                for (int i = 0; i < 256; i++) {
+                    player.getInventory().removeItem(enchants.playerSoul);
                 }
+
+                player.getInventory().addItem(enchants.jewl_pant);
+
+                removeEconomy(uuid, 50000);
+
+                player.sendMessage(colorCode("&a&lCONGRATS! &7succesfully purchased!"));
+                Sounds.RENOWN_SHOP_PURCHASE.play(player);
+            }
+        }else if(event.getCurrentItem().equals(SwordJewel)){
+            if(player.getInventory().containsAtLeast(enchants.playerSoul, 256) &&
+                    getEconomy(uuid)>=100000){
+                for (int i = 0; i < 256; i++) {
+                    player.getInventory().removeItem(enchants.playerSoul);
+                }
+
+                player.getInventory().addItem(enchants.jewl_sword);
+
+                removeEconomy(uuid, 100000);
+
+                player.sendMessage(colorCode("&a&lCONGRATS! &7succesfully purchased!"));
+                Sounds.RENOWN_SHOP_PURCHASE.play(player);
+            }
         }
+
+
 
         event.setCancelled(true);
     }

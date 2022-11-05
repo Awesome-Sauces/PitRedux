@@ -12,6 +12,7 @@ import com.alpha.redux.boosters.Booster;
 import com.alpha.redux.boosters.BoosterEvents;
 import com.alpha.redux.commands.command;
 import com.alpha.redux.commands.repairs.ClickHandler;
+import com.alpha.redux.commands.view.ViewCore;
 import com.alpha.redux.entityHandlers.MysticHandler.MysticEventHandler.MysticEventHandlers;
 import com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap;
 import com.alpha.redux.entityHandlers.ReduxPlayerHandler;
@@ -169,6 +170,7 @@ public class redux extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ClickHandler(), this);
         getServer().getPluginManager().registerEvents(new PermanentUpgrades(), this);
         getServer().getPluginManager().registerEvents(new GoldenHeadItem(), this);
+        getServer().getPluginManager().registerEvents(new ViewCore(), this);
 
         commandRegistration();
 
@@ -269,7 +271,7 @@ public class redux extends JavaPlugin {
             }
         }, 50L);
 
-
+/*
         for (int i = 0; i < 45; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 0, true);
         }
@@ -416,6 +418,7 @@ public class redux extends JavaPlugin {
         getCommand("renown").setExecutor(commands);
         getCommand("booster").setExecutor(commands);
         getCommand("atest").setExecutor(commands);
+        getCommand("view").setExecutor(commands);
        // getCommand("trade").setExecutor(commands);
     }
 
