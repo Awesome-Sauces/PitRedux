@@ -48,6 +48,10 @@ public class boards implements Listener {
     public void onJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
 
+        try {
+            playerExists(event.getPlayer()).setSpeed(0);
+        }catch (Exception ignored){}
+
         FastBoard board = new FastBoard(player);
         board.updateTitle(ChatColor.YELLOW + colorCode("&lTHE BETTER PIT"));
         boardMap.put(player.getUniqueId(), board);
@@ -56,6 +60,10 @@ public class boards implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event){
         Player player = event.getPlayer();
+
+        try {
+            playerExists(event.getPlayer()).setSpeed(0);
+        }catch (Exception ignored){}
 
         FastBoard board = boardMap.remove(player.getUniqueId());
 
@@ -152,7 +160,7 @@ public class boards implements Listener {
             lobby = "M14E";
         }
 
-        String version = ChatColor.GRAY + "v1.2.0 " + ChatColor.DARK_GRAY + lobby; // Pit Redux Version
+        String version = ChatColor.GRAY + "v1.2.3 " + ChatColor.DARK_GRAY + lobby; // Pit Redux Version
 
         String spacer1 = " "; //blank space
         String spacer2 = "  "; //blank space
@@ -190,7 +198,7 @@ public class boards implements Listener {
 
 
         if (STRENGTH <= 0){strengthData = ChatColor.WHITE + "Strength: " + ChatColor.RED + "NONE";
-        }else{strengthData = ChatColor.WHITE + "Strength: " + ChatColor.RED + integerToRoman(STRENGTH);}
+        }else{strengthData = ChatColor.WHITE + "Strength: " + ChatColor.RED + integerToRoman(STRENGTH) + ChatColor.GRAY + " (" + String.valueOf(reduxPlayer.getSTRENGTH_TIMER()) + "s)";}
 
 
 

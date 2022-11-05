@@ -15,6 +15,8 @@ import com.alpha.redux.commands.repairs.ClickHandler;
 import com.alpha.redux.entityHandlers.MysticHandler.MysticEventHandler.MysticEventHandlers;
 import com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap;
 import com.alpha.redux.entityHandlers.ReduxPlayerHandler;
+import com.alpha.redux.eventManagers.ArmorEvents.ArmorListener;
+import com.alpha.redux.eventManagers.ArmorEvents.DispenserArmorListener;
 import com.alpha.redux.eventManagers.ReduxEvents;
 import com.alpha.redux.events.boards;
 import com.alpha.redux.playerdata.Renown;
@@ -48,6 +50,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 
@@ -73,6 +77,11 @@ public class redux extends JavaPlugin {
     public static StrengthChaining strengthChaining = new StrengthChaining();
     public static Streaker streaker = new Streaker();
 
+    public static PitPocketLore pitPocketLore = new PitPocketLore();
+    public static GrasshopperLore grasshopperLore = new GrasshopperLore();
+    public static GoldBoostedLore goldBoostedLore = new GoldBoostedLore();
+    public static BerserkerLore berserkerLore = new BerserkerLore();
+    public static PunisherLore punisherLore = new PunisherLore();
     public static ComboDamageLore combodamageLore = new ComboDamageLore();
     public static FancyRaiderLore fancyraiderLore = new FancyRaiderLore();
     public static XpboostLore xpboostLore = new XpboostLore();
@@ -89,6 +98,7 @@ public class redux extends JavaPlugin {
     public static GoldenHeartLore goldenHeartLore = new GoldenHeartLore();
     public static ProtectionLore protectionLore = new ProtectionLore();
     public static SolitudeLore solitudeLore = new SolitudeLore();
+    public static CricketLore cricketLore = new CricketLore();
     public static RetroGravityMicrocosmLore retroGravityMicrocosmLore = new RetroGravityMicrocosmLore();
     public static RegularityLore regularityLore = new RegularityLore();
     public static NotGladiatorLore notGladiatorLore = new NotGladiatorLore();
@@ -96,6 +106,14 @@ public class redux extends JavaPlugin {
     public static FractionalReserveLore fractionalReserveLore = new FractionalReserveLore();
     public static PitBlobLore pitBlobLore = new PitBlobLore();
     public static EscapePodLore escapePodLore = new EscapePodLore();
+    public static PrickLore prickLore = new PrickLore();
+    public static GottaGoFastLore gottaGoFastLore = new GottaGoFastLore();
+    public static BillyLore billyLore = new BillyLore();
+    public static SelfCheckoutLore selfCheckoutLore = new SelfCheckoutLore();
+    public static PebbleLore pebbleLore = new PebbleLore();
+    public static ArrowArmoryLore arrowArmoryLore = new ArrowArmoryLore();
+    public static FletchingLore fletchingLore = new FletchingLore();
+    public static JumpspammerLore jumpspammerLore = new JumpspammerLore();
     public static PeroxideLore peroxideLore = new PeroxideLore();
     public static BillionaireLore billionaireLore = new BillionaireLore();
     public static PerunLore perunLore = new PerunLore();
@@ -133,6 +151,10 @@ public class redux extends JavaPlugin {
         itemManager.init();
         enchants.init();
 
+        List<String> listy = new ArrayList<>();
+
+        getServer().getPluginManager().registerEvents(new ArmorListener(listy), this);
+        getServer().getPluginManager().registerEvents(new DispenserArmorListener(), this);
 
         getServer().getPluginManager().registerEvents(new boards(), this);
         getServer().getPluginManager().registerEvents(new PerkHandler(), this);
@@ -248,7 +270,7 @@ public class redux extends JavaPlugin {
         }, 50L);
 
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 45; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 0, true);
         }
 
@@ -256,7 +278,7 @@ public class redux extends JavaPlugin {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 0, false);
         }
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 45; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby")), 0, true);
         }
 
@@ -264,7 +286,7 @@ public class redux extends JavaPlugin {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby")), 0, false);
         }
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 45; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby2")), 0, true);
         }
 

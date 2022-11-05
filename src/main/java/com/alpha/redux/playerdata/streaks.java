@@ -113,12 +113,13 @@ public class streaks {
 
     public static void UberRewardClaimDeath(Player player){
         if(Objects.equals(getMegaStreak(String.valueOf(player.getUniqueId())), "uber")){
-            if (getStreak(String.valueOf(player.getUniqueId())) >= 500){
+            if (getStreak(String.valueOf(player.getUniqueId())) >= 400){
                 player.setMaxHealth(20);
                 player.setHealth(player.getMaxHealth());
                 player.removePotionEffect(PotionEffectType.SLOW);
                 player.removePotionEffect(PotionEffectType.POISON);
                 setMega(String.valueOf(player.getUniqueId()), "overdrive");
+                setStreak(String.valueOf(player.getUniqueId()), 0);
                 NametagEdit.getApi().setNametag(player, ChatEventApiGetLevelColor(player.getDisplayName(), String.valueOf(player.getUniqueId())) + rank.getNameColor(player), "");
                 setStreak(String.valueOf(player.getUniqueId()), 0);
                 xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);

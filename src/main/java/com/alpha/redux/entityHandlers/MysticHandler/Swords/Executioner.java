@@ -3,6 +3,7 @@ package com.alpha.redux.entityHandlers.MysticHandler.Swords;
 import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.entityHandlers.MysticHandler.SwordEnchant;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
+import com.alpha.redux.redux;
 import com.alpha.redux.well.enchants.ExecutionerLore;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
@@ -13,21 +14,19 @@ import static com.alpha.redux.ItemEvents.sharkCalc.getSharkPlayers;
 
 public class Executioner {
 
-    ExecutionerLore executionerLore = new ExecutionerLore();
-
     public Executioner(ReduxDamageEvent event){
         SwordEnchant executioner = new SwordEnchant(event, "exe") {
             @Override
             public void ThreeAction() {
-                executionerLore.run(event, 3);
+                redux.executionerLore.run(event, 3);
             }
             @Override
             public void TwoAction() {
-                executionerLore.run(event, 2);
+                redux.executionerLore.run(event, 2);
             }
             @Override
             public void OneAction() {
-                executionerLore.run(event, 1);
+                redux.executionerLore.run(event, 1);
             }
         };
         executioner.run();

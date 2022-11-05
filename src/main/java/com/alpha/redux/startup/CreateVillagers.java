@@ -83,6 +83,10 @@ public class CreateVillagers {
     private static Hologram lobby2_mystic_well;
     private static Hologram lobby2_mystic_well_lore;
 
+    private static Hologram BetterPit;
+    private static Hologram LobbyBetterPit;
+    private static Hologram Lobby2BetterPit;
+
     public static void loadNPC(){
 
         perm_upgrades_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.GRAY + "Permanent");
@@ -342,6 +346,51 @@ public class CreateVillagers {
         lobby2_mystic_well_lore = HologramsAPI.createHologram(economy.getPlugin(), locations.getMysticWellLocation(Bukkit.getWorld("lobby2")).add(0,-1,0));
         lobby2_mystic_well_lore.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7item enchants"));
 
+        BetterPit = HologramsAPI.createHologram(economy.getPlugin(), locations.getBetterPitLocation(Bukkit.getWorld("world")));
+        BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&e&lUNLOCKED FEATURES"));
+        BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', ""));
+        BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[1] &b/respawn"));
+        BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[5] &b/play pit"));
+        BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&910&7] &bUpgrades"));
+        BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&915&7] &bEnder chest"));
+        BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&230&7] &bContracts"));
+        BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&e50&7] &bStats"));
+        BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&660&7] &b/trade"));
+        BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&c70&7] &b/view"));
+        BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&b120&7] &bPrestige"));
+        BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7Gain levels to unlock more"));
+
+
+        LobbyBetterPit = HologramsAPI.createHologram(economy.getPlugin(), locations.getBetterPitLocation(Bukkit.getWorld("lobby")));
+        LobbyBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&e&lUNLOCKED FEATURES"));
+        LobbyBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', ""));
+        LobbyBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[1] &b/respawn"));
+        LobbyBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[5] &b/play pit"));
+        LobbyBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&910&7] &bUpgrades"));
+        LobbyBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&915&7] &bEnder chest"));
+        LobbyBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&230&7] &bContracts"));
+        LobbyBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&e50&7] &bStats"));
+        LobbyBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&660&7] &b/trade"));
+        LobbyBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&c70&7] &b/view"));
+        LobbyBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&b120&7] &bPrestige"));
+        LobbyBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7Gain levels to unlock more"));
+
+
+
+        Lobby2BetterPit = HologramsAPI.createHologram(economy.getPlugin(), locations.getBetterPitLocation(Bukkit.getWorld("lobby2")));
+        Lobby2BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&e&lUNLOCKED FEATURES"));
+        Lobby2BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', ""));
+        Lobby2BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[1] &b/respawn"));
+        Lobby2BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[5] &b/play pit"));
+        Lobby2BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&910&7] &bUpgrades"));
+        Lobby2BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&915&7] &bEnder chest"));
+        Lobby2BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&230&7] &bContracts"));
+        Lobby2BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&e50&7] &bStats"));
+        Lobby2BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&660&7] &b/trade"));
+        Lobby2BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&c70&7] &b/view"));
+        Lobby2BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&b120&7] &bPrestige"));
+        Lobby2BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7Gain levels to unlock more"));
+
     }
 
     private static void deleteHolograms(){
@@ -374,6 +423,10 @@ public class CreateVillagers {
         lobby2_ender_chest_lore.delete();
         lobby2_mystic_well.delete();
         lobby2_mystic_well_lore.delete();
+
+        BetterPit.delete();
+        LobbyBetterPit.delete();
+        Lobby2BetterPit.delete();
     }
 
     private static void deleteNPC(){

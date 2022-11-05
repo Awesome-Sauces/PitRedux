@@ -194,6 +194,10 @@ public class ReduxDamageEvent extends Event implements Cancellable {
             this.setReduxDamage(7);
         }
 
+        if(isNPC(defender) && !isNPC(attacker)){
+            this.subtractReduxDamage(event.getDamage()*.4);
+        }
+
         if(!isNPC(attacker)) this.addReduxDamage(Math.min(this.getReduxDamage() * damageIncrease.getIncrease(ReduxAttacker.getPlayerUUID()), this.getReduxDamage()*.1));
 
         /*

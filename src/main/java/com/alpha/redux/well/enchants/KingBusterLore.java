@@ -18,7 +18,7 @@ public class KingBusterLore extends PitEnchant{
 
     private boolean halfHealth(ReduxDamageEvent event){
         double damage = event.getReduxDamage() + event.getReduxTrueDamage();
-        return event.getDefenders().getPlayerObject().getHealth() - damage <= 10;
+        return event.getDefenders().getPlayerObject().getHealth() >= 10;
     }
 
     @Override

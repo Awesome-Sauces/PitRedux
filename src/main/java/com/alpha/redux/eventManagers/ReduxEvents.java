@@ -2,10 +2,12 @@ package com.alpha.redux.eventManagers;
 
 import com.alpha.redux.DeathHandler.ReduxDeathEvent;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
+import com.alpha.redux.eventManagers.ArmorEvents.ArmorEquipEvent;
 import com.alpha.redux.items.enchants;
 import com.alpha.redux.items.itemManager;
 import com.alpha.redux.playerdata.economy;
 import com.alpha.redux.questMaster.bossBattles.BossMalding;
+import com.alpha.redux.redux;
 import com.alpha.redux.renownShop.CookieMonster.Monster;
 import com.alpha.redux.renownShop.CookieMonster.MonsterHandler;
 import com.alpha.redux.renownShop.damageDecrease;
@@ -48,6 +50,12 @@ public class ReduxEvents implements Listener {
     @EventHandler
     public static void InterceptEntityDamage(ReduxDamageEvent event){
 
+    }
+
+    @EventHandler
+    public void onEquips(ArmorEquipEvent event){
+        redux.cricketLore.run(event);
+        redux.gottaGoFastLore.run(event);
     }
 
     @EventHandler

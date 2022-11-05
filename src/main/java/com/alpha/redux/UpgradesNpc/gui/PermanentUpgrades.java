@@ -155,12 +155,12 @@ public class PermanentUpgrades implements Listener {
                 "&7BUT:\n" +
                 "&c&l- &7Receive &c+20% &7damage per 100 kills.\n\n" +
                 "&7During the streak:\n" +
-                "&d&l- &7100 kills: &7Deal &c-40% damage &7vs bots.\n" +
+                "&d&l- &7100 kills: &7Deal &c-70% damage &7vs bots.\n" +
                 "&d&l- &7200 kills: &c-2 max ❤\n" +
                 "&d&l- &7300 kills: &7Potion Effects last &c-50% &7as long\n" +
                 "&d&l- &7400 kills: &cNo longer gain health\n\n" +
                 "&7On death:\n" +
-                "&d&l- &7Earn an &dUberdrop &7if you have at least a 500 streak.");
+                "&d&l- &7Earn an &dUberdrop &7if you have at least a 400 streak.");
     }
 
     public static String getBeastModeLore(){
@@ -253,7 +253,7 @@ public class PermanentUpgrades implements Listener {
                             "or higher.", 1, true);
         }else{
             return ItemMaker(Material.ENDER_STONE, ChatColor.YELLOW + "To the Moon",
-                    getToTheMoonLore() + "\n\n" + ChatColor.RED + "This requires prestige XX\n" + ChatColor.RED +
+                    getToTheMoonLore() + "\n\n" + ChatColor.RED + "This requires prestige XV\n" + ChatColor.RED +
                             "or higher.", 1, true);
         }
     }
@@ -548,13 +548,15 @@ public class PermanentUpgrades implements Listener {
             level >= 100){
             Sounds.SUCCESS.play(player);
             setMega(uuid,"uber");
+            setStreak(uuid, 0);
             player.openInventory(getKillstreakUpgrades(player));
         }else if(clicked.equals(moon) &&
                 !getMegaStreak(uuid).equals("moon") &&
-                getPrestige(uuid) >= 20 &&
+                getPrestige(uuid) >= 15 &&
                 level >= 50){
             Sounds.SUCCESS.play(player);
             setMega(uuid,"moon");
+            setStreak(uuid, 0);
             player.openInventory(getKillstreakUpgrades(player));
         }else if(clicked.equals(highlander) &&
                 !getMegaStreak(uuid).equals("highlander") &&
@@ -562,6 +564,7 @@ public class PermanentUpgrades implements Listener {
                 level >= 50){
             Sounds.SUCCESS.play(player);
             setMega(uuid,"highlander");
+            setStreak(uuid, 0);
             player.openInventory(getKillstreakUpgrades(player));
         }if(clicked.equals(beastmode) &&
                 !getMegaStreak(uuid).equals("beastmode") &&
@@ -569,6 +572,7 @@ public class PermanentUpgrades implements Listener {
                 level >= 25){
             Sounds.SUCCESS.play(player);
             setMega(uuid,"beastmode");
+            setStreak(uuid, 0);
             player.openInventory(getKillstreakUpgrades(player));
         }if(clicked.equals(overdrive) &&
                 !getMegaStreak(uuid).equals("overdrive") &&
@@ -576,6 +580,7 @@ public class PermanentUpgrades implements Listener {
                 level >= 0){
             Sounds.SUCCESS.play(player);
             setMega(uuid,"overdrive");
+            setStreak(uuid, 0);
             player.openInventory(getKillstreakUpgrades(player));
         }
 

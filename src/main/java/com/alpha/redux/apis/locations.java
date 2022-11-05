@@ -69,6 +69,11 @@ public class locations {
     public static Location getEnderChestLocation(World world){
         return new Location(world, -11.5, 116.5, 6.5);
     }
+
+    public static Location getBetterPitLocation(World world){
+        return new Location(world, -6.5, 117, 11.5);
+    }
+
     public static Location getMysticWellLocation(World world){
         return new Location(world, -12.5, 117.5, 0.5);
     }
@@ -188,8 +193,8 @@ public class locations {
 
     public static Location lobby_prestige_npc_loc = new Location(Bukkit.getWorld("lobby"), 0.5, 115, -11.5);
 
-    public static Location lobby2_perm_upgrades_loc = new Location(Bukkit.getWorld("lobby"), -1.5, 114, 12.5);
-    public static Location lobby2_non_perm_upgrades_loc = new Location(Bukkit.getWorld("lobby"), 2.5, 114, 12.5);
+    public static Location lobby2_perm_upgrades_loc = new Location(Bukkit.getWorld("lobby2"), -1.5, 114, 12.5);
+    public static Location lobby2_non_perm_upgrades_loc = new Location(Bukkit.getWorld("lobby2"), 2.5, 114, 12.5);
 
     public static Location lobby2_leaderboard_npc_loc = new Location(Bukkit.getWorld("lobby2"), 11.5, 114, 5.5);
     public static Location lobby2_quest_npc_loc = new Location(Bukkit.getWorld("lobby2"), 9.5, 114, -4.5);

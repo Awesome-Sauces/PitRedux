@@ -8,6 +8,8 @@ import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
+import java.text.DecimalFormat;
+
 import static com.alpha.redux.DeathHandler.killHandler.isNPC;
 
 public class actionbarplus {
@@ -48,8 +50,10 @@ public class actionbarplus {
             health.append(ChatColor.translateAlternateColorCodes('&', "&0❤"));
         }
 
+        DecimalFormat df = new DecimalFormat("#.000");
+        float number = Float.parseFloat(df.format(event.getFinalDamage()));
 
-        sendActionBar(player, colorPlayer + defender.getDisplayName() + health);
+        sendActionBar(player, colorPlayer + defender.getDisplayName() + health + " &c" + number + "HP");
     }
 
     public static void sendKillBar(Player player, Player defender){

@@ -340,6 +340,16 @@ public class MysticSword {
             return colorCode(redux.combodamageLore.title(tier));
         }else if (Objects.equals(enchant, "kingbuster")) {
             return colorCode(redux.kingBusterLore.title(tier));
+        }else if (Objects.equals(enchant, "punisher")) {
+            return colorCode(redux.punisherLore.title(tier));
+        }else if (Objects.equals(enchant, "grasshopper")) {
+            return colorCode(redux.grasshopperLore.title(tier));
+        }else if (Objects.equals(enchant, "goldandboosted")) {
+            return colorCode(redux.goldBoostedLore.title(tier));
+        }else if (Objects.equals(enchant, "pitpocket")) {
+            return colorCode(redux.pitPocketLore.title(tier));
+        }else if (Objects.equals(enchant, "berserker")) {
+            return colorCode(redux.berserkerLore.title(tier));
         }else if (Objects.equals(enchant, "moctezuma")){
             return colorCode(redux.moctezumaLore.title(tier));
         }else if (Objects.equals(enchant, "goldbump")){
@@ -372,6 +382,18 @@ public class MysticSword {
             return "pantsradar";
         }else if(Objects.equals(enchant, "combodamage")){
             return "combodamage";
+        }else if(Objects.equals(enchant, "punisher")){
+            return "punisher";
+        }else if(Objects.equals(enchant, "pitpocket")){
+            return "pitpocket";
+        }else if(Objects.equals(enchant, "berserker")){
+            return "berserker";
+        }else if(Objects.equals(enchant, "goldandboosted")){
+            return "goldandboosted";
+        }else if(Objects.equals(enchant, "self-checkout")){
+            return "self-checkout";
+        }else if(Objects.equals(enchant, "grasshopper")){
+            return "grasshopper";
         }else if (Objects.equals(enchant, "gamb")){
             return "gamble";
         }else if (Objects.equals(enchant, "king")){
@@ -416,6 +438,16 @@ public class MysticSword {
             return redux.diamondStompLore.lore(tier);
         }else if (Objects.equals(enchant, "kingbuster")) {
             return redux.kingBusterLore.lore(tier);
+        }else if (Objects.equals(enchant, "punisher")) {
+            return colorCode(redux.punisherLore.lore(tier));
+        }else if (Objects.equals(enchant, "grasshopper")) {
+            return colorCode(redux.grasshopperLore.lore(tier));
+        }else if (Objects.equals(enchant, "goldandboosted")) {
+            return colorCode(redux.goldBoostedLore.lore(tier));
+        }else if (Objects.equals(enchant, "pitpocket")) {
+            return colorCode(redux.pitPocketLore.lore(tier));
+        }else if (Objects.equals(enchant, "berserker")) {
+            return colorCode(redux.berserkerLore.lore(tier));
         }else if (Objects.equals(enchant, "moctezuma")){
             return redux.moctezumaLore.lore(tier);
         }else if (Objects.equals(enchant, "goldbump")){
@@ -461,12 +493,17 @@ public class MysticSword {
         double sharp = .0535 * calcEnchant(lore, "sharp");
         double kingbuster = .0535 * calcEnchant(lore, "kingbuster");
         double fancyraider = .0535 * calcEnchant(lore, "fancyraider");
+        double punisher = .0535 * calcEnchant(lore, "punisher");
+        double pitpocket = .0535 * calcEnchant(lore, "pitpocket");
+        double berserker = .0535 * calcEnchant(lore, "berserker");
+        double grasshopper = .0535 * calcEnchant(lore, "grasshopper");
 
         // Uncommon Normal
         double painfocus = .0425 * calcEnchant(lore, "painfocus");
         double lifesteal = .0425 * calcEnchant(lore, "lifesteal");
         double diamondstomp = .0425 * calcEnchant(lore, "diamondstomp");
         double shark = .0425 * calcEnchant(lore, "shark");
+        double goldandboosted = .0425 * calcEnchant(lore, "goldandboosted");
 
         // Resource - Gold
         double goldbump = .0475 * calcEnchant(lore, "goldbump");
@@ -494,6 +531,16 @@ public class MysticSword {
                 // Pain Focus
                 // 5.25% chance of being here
                 return "painfocus";
+            }else if(percentChance(punisher)){
+                return "punisher";
+            }else if(percentChance(goldandboosted)){
+                return "goldandboosted";
+            }else if(percentChance(pitpocket)){
+                return "pitpocket";
+            }else if(percentChance(grasshopper)){
+                return "grasshopper";
+            }else if(percentChance(berserker)){
+                return "berserker";
             }else if (percentChance(lifesteal)){
                 // Lifesteal
                 // 6.25% chance of being here

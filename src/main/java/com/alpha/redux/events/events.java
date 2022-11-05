@@ -289,7 +289,7 @@ public class events implements Listener {
                     }
                 }
 
-                ((Player) event.getNPC().getEntity()).damage(10, player);
+                ((Player) event.getNPC().getEntity()).damage(4, player);
             }
 
         }
@@ -312,12 +312,16 @@ public class events implements Listener {
                 if((getStreak(event.getDefenders().getPlayerUUID())-50)<=0) return;
                 int counter = (int) Math.round((double)(getStreak(event.getDefenders().getPlayerUUID())-50)/5);
 
+                event.getDefenders().addPotionEffect(PotionEffectType.SPEED, 32000, 1);
+
                 event.addReduxTrueDamage(counter*.1);
             }else if(streak.equals("highlander") && getStreak(event.getDefenders().getPlayerUUID()) >= 50){
                 if((getStreak(event.getDefenders().getPlayerUUID())-50)<=0) return;
-                int counter = (int) Math.round((double)(getStreak(event.getDefenders().getPlayerUUID())-50)/5);
+                int counter = (int) Math.round((double)(getStreak(event.getDefenders().getPlayerUUID())-50)/15);
 
-                event.addReduxDamage(counter*.01);
+                event.getDefenders().addPotionEffect(PotionEffectType.SPEED, 32000, 1);
+
+                event.addReduxDamage(counter*.1);
             }else if(streak.equals("uber") && getStreak(event.getDefenders().getPlayerUUID()) >= 100){
                 int counter = (int) Math.round((double)(getStreak(event.getDefenders().getPlayerUUID()))/100);
 
@@ -351,7 +355,7 @@ public class events implements Listener {
                 }
             }else if(streak.equals("uber") && getStreak(event.getAttacker().getPlayerUUID()) >= 100){
                 if(isNPC(event.getDefenders().getPlayerObject())){
-                    event.subtractReduxDamage(event.getReduxDamage()*.4);
+                    event.subtractReduxDamage(event.getReduxDamage()*.70);
                 }
             }
         }
@@ -428,7 +432,7 @@ public class events implements Listener {
                 player.setItemInHand(enchants.fresh_bow);
             }
 
-            ReduxBowEvent me = new ReduxBowEvent(playerExists(player), playerExists((Player) event.getEntity()), event.getDamage(), event);
+            ReduxBowEvent me = new ReduxBowEvent(playerExists(player), playerExists((Player) event.getEntity()), 3, event);
             Bukkit.getPluginManager().callEvent(me);
 
 

@@ -5,6 +5,7 @@ import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
 import com.alpha.redux.well.enchants.EnchantRarity;
 import com.alpha.redux.well.enchants.PitEnchant;
+import org.bukkit.Bukkit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,15 +46,16 @@ public class GoldboostLore extends PitEnchant {
         if(PANT_SWEATY.contains("gb")){
             int level = PANT_SWEATY.length() - PANT_SWEATY.replaceAll("I", "").length();
 
-            double gold = (double) ((15*level)/100);
-            event.addGold((int) Math.round(event.getGold()*gold));
+            double gold = 15*level;
+            event.addGold((int) (event.getGold()*(gold/100)));
         }
 
         if(SWORD_SWEATY.contains("gb")){
             int level = SWORD_SWEATY.length() - SWORD_SWEATY.replaceAll("I", "").length();
 
-            double gold = (double) ((15*level)/100);
-            event.addGold((int) Math.round(event.getGold()*gold));
+            double gold = (15*level);
+
+            event.addGold((int) (event.getGold()*(gold/100)));
         }
     }
 

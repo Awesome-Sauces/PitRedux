@@ -4,18 +4,17 @@ import com.alpha.redux.DeathHandler.ProccessHit;
 import com.alpha.redux.commands.commandUtils;
 import com.alpha.redux.events.boards;
 
-import com.alpha.redux.playerdata.economy;
 import com.alpha.redux.playerdata.xpManager;
 import com.alpha.redux.redux;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.alpha.redux.events.events.cooldowns;
 import static com.alpha.redux.funEvents.event.twoTimesEvent;
 import static com.alpha.redux.playerdata.economy.*;
 import static com.alpha.redux.playerdata.prestiges.*;
@@ -28,15 +27,20 @@ public class ReduxPlayer {
 
     Player player;
     String uuid;
+    int task;
     boolean regCD = true;
     boolean vampireCD = true;
     boolean booCD = true;
     boolean GoldenCD = true;
+    boolean PitPocketCD = true;
     boolean perunCD = true;
+    boolean prickCD = true;
     boolean ComboDamageCD = true;
     boolean gambleCD = true;
     boolean escape = true;
     double damageIncrease;
+    int STRENGTH_TIMER = 0;
+    boolean STRENGTH_REPEATABLE = false;
     double damageDecrease;
     double xpBooster = 1;
     int moonXP = 0;
@@ -118,6 +122,14 @@ public class ReduxPlayer {
     public void setVampireCD(){this.vampireCD = !this.vampireCD;}
 
     public boolean getVampireCD(){return this.vampireCD;}
+
+    public void setPrickCD(){this.prickCD = !this.prickCD;}
+
+    public boolean getPrickCD(){return this.prickCD;}
+
+    public void setPitPocketCD(){this.PitPocketCD = !this.PitPocketCD;}
+
+    public boolean getPitPocketCD(){return this.PitPocketCD;}
 
     public boolean getRegCD(){return this.regCD;}
 
@@ -264,17 +276,42 @@ public class ReduxPlayer {
 
     public void strengthTick(){
 
-        strengthTimer = System.currentTimeMillis() + (7 * 1000);
+        strengthTimer = 7;
         strength = Math.min(.40, strength+.08);
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(redux.INSTANCE, new Runnable() {
-            @Override
-            public void run() {
-                if(strengthTimer < System.currentTimeMillis()){
-                    strength=0;
+        if (!this.STRENGTH_REPEATABLE) {
+            this.STRENGTH_REPEATABLE = true;
+            task = Bukkit.getScheduler().scheduleSyncRepeatingTask(redux.INSTANCE, new Runnable() {
+                @Override
+                public void run() {
+
+                    if (strengthTimer > 0) {
+                        strengthTimer -= 1;
+                    }
+
+                    if (strengthTimer <= 0) {
+                        strength = 0.0;
+                    }
                 }
-            }
-        }, (7) * 20);
+            }, 20, 20);
+        }
+    }
+
+    public void cancelSTRENGTH_TIMER(){
+        this.STRENGTH_REPEATABLE=false;
+        Bukkit.getScheduler().cancelTask(this.task);
+    }
+
+    public int getSTRENGTH_TIMER() {
+        return STRENGTH_TIMER;
+    }
+
+    public void setSTRENGTH_TIMER(int STRENGTH_TIMER) {
+        this.STRENGTH_TIMER = STRENGTH_TIMER;
+    }
+
+    public void setStrength(double strength){
+        this.strength = strength;
     }
 
     public double getStrength(){
@@ -303,5 +340,30 @@ public class ReduxPlayer {
         if(getStreak(this.uuid)>100){
             return Math.min((double)(getStreak(this.uuid)-100)/100, 1.0);
         }else return 0.0;
+    }
+
+    public void addPotionEffect(PotionEffectType type, int time, int power){
+        if(!player.hasPotionEffect(type)){
+            player.addPotionEffect(new PotionEffect(type, time*20, Math.max(power-1, 0), true, true));
+        }
+    }
+
+    public void removePotionEffect(PotionEffectType type){
+        if(player.hasPotionEffect(type)){
+            player.removePotionEffect(type);
+        }
+    }
+
+    public static float getWalkSpeed(float enchantLvl) {
+        if(enchantLvl == 0) return 0.2F;
+        else return (0.2F+(0.2F*enchantLvl));
+    }
+
+    public void setSpeed(float speed){
+        player.setWalkSpeed(getWalkSpeed(speed));
+    }
+
+    public float getSpeed(){
+        return getWalkSpeed(0);
     }
 }

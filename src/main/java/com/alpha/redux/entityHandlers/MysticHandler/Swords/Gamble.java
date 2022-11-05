@@ -5,6 +5,7 @@ import com.alpha.redux.entityHandlers.MysticHandler.SwordEnchant;
 import com.alpha.redux.entityHandlers.TrueDamage.TrueDamageHandler;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
 import com.alpha.redux.items.enchants;
+import com.alpha.redux.redux;
 import com.alpha.redux.well.enchants.GambleLore;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -20,20 +21,18 @@ import static com.alpha.redux.entityHandlers.ReduxPlayerHandler.playerExists;
 public class Gamble {
     public Gamble(ReduxDamageEvent event){
 
-        GambleLore gambleLore = new GambleLore();
-
         SwordEnchant gamble = new SwordEnchant(event, "gamb") {
             @Override
             public void ThreeAction() {
-                gambleLore.run(event,3);
+                redux.gambleLore.run(event,3);
             }
             @Override
             public void TwoAction() {
-                gambleLore.run(event,2);
+                redux.gambleLore.run(event,2);
             }
             @Override
             public void OneAction() {
-                gambleLore.run(event,1);
+                redux.gambleLore.run(event,1);
             }
         };
 

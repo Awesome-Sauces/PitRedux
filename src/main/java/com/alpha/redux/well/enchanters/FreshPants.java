@@ -330,6 +330,18 @@ public class FreshPants {
             return colorCode(redux.goldenHeartLore.title(tier));
         }else if (Objects.equals(enchant, "regularity")) {
             return colorCode(redux.regularityLore.title(tier));
+        }else if (Objects.equals(enchant, "billy")) {
+            return colorCode(redux.billyLore.title(tier));
+        }else if (Objects.equals(enchant, "cricket")) {
+            return colorCode(redux.cricketLore.title(tier));
+        }else if (Objects.equals(enchant, "pebble")) {
+            return colorCode(redux.pebbleLore.title(tier));
+        }else if (Objects.equals(enchant, "gottagofast")) {
+            return colorCode(redux.gottaGoFastLore.title(tier));
+        }else if (Objects.equals(enchant, "self-checkout")) {
+            return colorCode(redux.selfCheckoutLore.title(tier));
+        }else if (Objects.equals(enchant, "prick")) {
+            return colorCode(redux.prickLore.title(tier));
         }else if (Objects.equals(enchant, "protection")) {
             return colorCode(redux.protectionLore.title(tier));
         }else if (Objects.equals(enchant, "pitblob")) {
@@ -414,6 +426,18 @@ public class FreshPants {
             return "goldboost";
         }else if (Objects.equals(enchant, "goldheart")){
             return "goldenheart";
+        }else if(Objects.equals(enchant, "prick")){
+            return "prick";
+        }else if(Objects.equals(enchant, "billy")){
+            return "billy";
+        }else if(Objects.equals(enchant, "cricket")){
+            return "cricket";
+        }else if(Objects.equals(enchant, "pebble")){
+            return "pebble";
+        }else if(Objects.equals(enchant, "gottagofast")){
+            return "gottagofast";
+        }else if(Objects.equals(enchant, "self-checkout")){
+            return "self-checkout";
         }else{
             return enchant;
         }
@@ -432,6 +456,18 @@ public class FreshPants {
             return colorCode(redux.protectionLore.lore(tier));
         }else if (Objects.equals(enchant, "solitude")) {
             return colorCode(redux.solitudeLore.lore(tier));
+        }else if (Objects.equals(enchant, "billy")) {
+            return colorCode(redux.billyLore.lore(tier));
+        }else if (Objects.equals(enchant, "cricket")) {
+            return colorCode(redux.cricketLore.lore(tier));
+        }else if (Objects.equals(enchant, "pebble")) {
+            return colorCode(redux.pebbleLore.lore(tier));
+        }else if (Objects.equals(enchant, "gottagofast")) {
+            return colorCode(redux.gottaGoFastLore.lore(tier));
+        }else if (Objects.equals(enchant, "self-checkout")) {
+            return colorCode(redux.selfCheckoutLore.lore(tier));
+        }else if (Objects.equals(enchant, "prick")) {
+            return colorCode(redux.prickLore.lore(tier));
         }else if (Objects.equals(enchant, "booboo")) {
             return colorCode(redux.booBooLore.lore(tier));
         }else if (Objects.equals(enchant, "pitblob")) {
@@ -494,6 +530,8 @@ public class FreshPants {
         double booBoo = .0535 * calcEnchant(lore, "booboo");
         double peroxide = .0535 * calcEnchant(lore, "peroxide");
         double diamondAllergy = .0535 * calcEnchant(lore , "diamondallergy");
+        double cricket = .0535 * calcEnchant(lore, "cricket");
+        double billy = .0535 * calcEnchant(lore, "billy");
 
         // Uncommon Normal
         double criticallyFunky = .0425 * calcEnchant(lore, "criticallyfunky");
@@ -502,6 +540,10 @@ public class FreshPants {
         double fractionalReserve = .0425 * calcEnchant(lore, "fractionalreserve");
         double mirror = .0425 * calcEnchant(lore, "mirror");
         double notGladiator = .0425 * calcEnchant(lore, "notgladiator");
+        double selfCheckout = .0425 * calcEnchant(lore, "self-checkout");
+        double pebble = .0425 * calcEnchant(lore, "pebble");
+        double gottaGoFast = .0425 * calcEnchant(lore, "gottagofast");
+        double prick = .0425 * calcEnchant(lore, "prick");
 
         // Resource - Gold
         double goldbump = .0475 * calcEnchant(lore, "goldbump");
@@ -522,9 +564,21 @@ public class FreshPants {
                 // Pants radar
                 // 5.25% of being here
                 return "pantsradar";
-            }if(percentChance(davidGoliath)){
+            }else if(percentChance(davidGoliath)){
                 return "davidgoliath";
-            }if(percentChance(diamondAllergy)){
+            }else if(percentChance(prick)){
+                return "prick";
+            }else if(percentChance(selfCheckout)){
+                return "self-checkout";
+            }else if(percentChance(pebble)){
+                return "pebble";
+            }else if(percentChance(gottaGoFast)){
+                return "gottagofast";
+            }else if(percentChance(cricket)){
+                return "cricket";
+            }else if(percentChance(billy)){
+                return "billy";
+            }else if(percentChance(diamondAllergy)){
                 return "diamondallergy";
             }else if (percentChance(criticallyFunky)){
                 // Perun

@@ -22,6 +22,41 @@ public class loreChecker {
         }else if (lore.contains(colorCode("&9Boo-boo")))
             list.add("boobooI");
 
+        if (lore.contains(colorCode("&9Cricket III"))){
+            list.add("cricketIII");
+        }else if (lore.contains(colorCode("&9Cricket II"))){
+            list.add("cricketII");
+        }else if (lore.contains(colorCode("&9Cricket")))
+            list.add("cricketI");
+
+        if (lore.contains(colorCode("&9Prick III"))){
+            list.add("prickIII");
+        }else if (lore.contains(colorCode("&9Prick II"))){
+            list.add("prickII");
+        }else if (lore.contains(colorCode("&9Prick")))
+            list.add("prickI");
+
+        if (lore.contains(colorCode("&9Self-checkout III"))){
+            list.add("self-checkoutIII");
+        }else if (lore.contains(colorCode("&9Self-checkout II"))){
+            list.add("self-checkoutII");
+        }else if (lore.contains(colorCode("&9Self-checkout")))
+            list.add("self-checkoutI");
+
+        if (lore.contains(colorCode("&9Pebble III"))){
+            list.add("pebbleIII");
+        }else if (lore.contains(colorCode("&9Pebble II"))){
+            list.add("pebbleII");
+        }else if (lore.contains(colorCode("&9Pebble")))
+            list.add("pebbleI");
+
+        if (lore.contains(colorCode("&9Gotta go fast III"))){
+            list.add("gottagofastIII");
+        }else if (lore.contains(colorCode("&9Gotta go fast II"))){
+            list.add("gottagofastII");
+        }else if (lore.contains(colorCode("&9Gotta go fast")))
+            list.add("gottagofastI");
+
         if (lore.contains(colorCode("&9Hidden Jewel")))
             list.add("jewel");
 
@@ -35,7 +70,7 @@ public class loreChecker {
 
         if (lore.contains(colorCode("&dRARE! &9Pit Blob III"))){
             list.add("blobIII");
-        }else if (lore.contains(colorCode("&dRARE! &9Pit Blob III"))){
+        }else if (lore.contains(colorCode("&dRARE! &9Pit Blob II"))){
             list.add("blobII");
         }else if (lore.contains(colorCode("&dRARE! &9Pit Blob")))
             list.add("blobI");
@@ -107,6 +142,12 @@ public class loreChecker {
         }else if (lore.contains(colorCode("&9David and Goliath II")))
             list.add("davidI");
 
+        if (lore.contains(colorCode("&9Billy III"))){
+            list.add("billyIII");
+        }else if (lore.contains(colorCode("&9Billy II"))){
+            list.add("billyII");
+        }else if (lore.contains(colorCode("&9Billy")))
+            list.add("billyI");
 
         if (lore.contains(colorCode("&9\"Not\" Gladiator III"))){
             list.add("gladIII");
@@ -222,6 +263,46 @@ public class loreChecker {
             list.add("fancyraiderII");
         }else if (lore.contains(colorCode("&9Fancy Raider"))){
             list.add("fancyraiderI");
+        }
+
+        if (lore.contains(colorCode("&9Pitpocket III"))){
+            list.add("pitpocketIII");
+        }else if (lore.contains(colorCode("&9Pitpocket II"))){
+            list.add("pitpocketII");
+        }else if (lore.contains(colorCode("&9Pitpocket"))){
+            list.add("pitpocketI");
+        }
+
+        if (lore.contains(colorCode("&9Gold and Boosted III"))){
+            list.add("goldandboostedIII");
+        }else if (lore.contains(colorCode("&9Gold and Boosted II"))){
+            list.add("goldandboostedII");
+        }else if (lore.contains(colorCode("&9Gold and Boosted"))){
+            list.add("goldandboostedI");
+        }
+
+        if (lore.contains(colorCode("&9Punisher III"))){
+            list.add("punisherIII");
+        }else if (lore.contains(colorCode("&9Punisher II"))){
+            list.add("punisherII");
+        }else if (lore.contains(colorCode("&9Punisher"))){
+            list.add("punisherI");
+        }
+
+        if (lore.contains(colorCode("&9Berserker III"))){
+            list.add("berserkerIII");
+        }else if (lore.contains(colorCode("&9Berserker II"))){
+            list.add("berserkerII");
+        }else if (lore.contains(colorCode("&9Berserker"))){
+            list.add("berserkerI");
+        }
+
+        if (lore.contains(colorCode("&9Grasshopper III"))){
+            list.add("grasshopperIII");
+        }else if (lore.contains(colorCode("&9Grasshopper II"))){
+            list.add("grasshopperII");
+        }else if (lore.contains(colorCode("&9Grasshopper"))){
+            list.add("grasshopperI");
         }
 
         if (lore.contains(colorCode("&9Combo: Damage III"))){
@@ -413,6 +494,27 @@ public class loreChecker {
             list.add("sprintII");
         }else if (lore.contains(colorCode("&9Sprint Drain")))
             list.add("sprintI");
+
+        if (lore.contains(colorCode("&9Arrow Armory III"))){
+            list.add("arrowarmoryIII");
+        }else if (lore.contains(colorCode("&9Arrow Armory II"))){
+            list.add("arrowarmoryII");
+        }else if (lore.contains(colorCode("&9Arrow Armory")))
+            list.add("arrowarmoryI");
+
+        if (lore.contains(colorCode("&9Fletching III"))){
+            list.add("fletchingIII");
+        }else if (lore.contains(colorCode("&9Fletching II"))){
+            list.add("fletchingII");
+        }else if (lore.contains(colorCode("&9Fletching")))
+            list.add("fletchingI");
+
+        if (lore.contains(colorCode("&9Jumpspammer III"))){
+            list.add("jumpspammerIII");
+        }else if (lore.contains(colorCode("&9Jumpspammer II"))){
+            list.add("jumpspammerII");
+        }else if (lore.contains(colorCode("&9Jumpspammer")))
+            list.add("jumpspammerI");
 
         if (lore.contains(colorCode("&9Moctezuma III"))){
             list.add("moctIII");

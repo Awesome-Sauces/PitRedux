@@ -8,6 +8,7 @@ import com.alpha.redux.eventManagers.ReduxBowEvent;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
 import com.alpha.redux.well.EnchantingMechanics;
 import com.alpha.redux.well.MysticType;
+import com.alpha.redux.well.enchants.CricketLore;
 import com.alpha.redux.well.enchants.DiamondAllergyLore;
 import org.bukkit.Bukkit;
 import org.bukkit.event.entity.EntityShootBowEvent;
@@ -61,6 +62,10 @@ public class EnchantRuntime {
 
         if(MysticType.valueOf(mysticType).equals(MysticType.SWORD)){
             new FancyRaider(event);
+            new Punisher(event);
+            new PitPocket(event);
+            new Grasshopper(event);
+            new GoldBoosted(event);
             new Billionaire(event);
             new DiamondStomp(event);
             new Executioner(event);
@@ -78,7 +83,13 @@ public class EnchantRuntime {
 
         if(MysticType.valueOf(mysticType).equals(MysticType.PANT)){
 
+            new SelfCheckout(event, event.getDefenders());
+            new Prick(event, event.getDefenders());
+            new Billy(event, event.getDefenders());
+            new Cricket(event, event.getDefenders());
+
             new BooBoo(event, event.getDefenders());
+            new Cricket(event, event.getDefenders());
             new CriticallyFunky(event, event.getDefenders());
             new DiamondAllergy(event, event.getDefenders());
             new EscapePod(event, event.getDefenders());

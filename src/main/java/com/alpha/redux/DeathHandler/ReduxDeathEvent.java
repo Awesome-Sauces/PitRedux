@@ -57,6 +57,7 @@ public class ReduxDeathEvent extends Event implements Cancellable{
     private double xp = 9;
     private int xp_cap = 200;
     private double gold = 13;
+    private double gold_cap = 2500;
     private boolean isCancelled;
 
     public static HandlerList getHandlerList() {
@@ -130,29 +131,31 @@ public class ReduxDeathEvent extends Event implements Cancellable{
         hasMegaStreak(attacker.getPlayerUUID());
         String streak = getMegaStreak(attacker.getPlayerUUID());
 
+        // Clearing Potions
+        defender.removePotionEffect(PotionEffectType.SPEED);
+        attacker.removePotionEffect(PotionEffectType.SPEED);
+
+
+        // Megastreak calcs
         if(streak.equals("beastmode") && getStreak(attacker.getPlayerUUID()) >= 50){
             addXp(xp*.5);
             addGold((int) Math.round(gold*.75));
             setXp_cap(getXp_cap()+200);
 
-            addXp(Math.round((float)getStreak(getAttacker().getPlayerUUID())/3));
+            addXp(100);
+            addXp(Math.min(Math.round((float)getStreak(getAttacker().getPlayerUUID())/3), 200));
         }else if(streak.equals("overdrive") && getStreak(attacker.getPlayerUUID()) >= 50){
             addXp(xp);
             addGold((int) Math.round(getGold()*.5));
             setXp_cap(getXp_cap()+100);
 
-            addXp(Math.round((float)getStreak(getAttacker().getPlayerUUID())/5));
-        }else if(streak.equals("highlander") && getStreak(attacker.getPlayerUUID()) >= 50){
-            addGold((int) Math.round(getGold()*1.1));
-
-            addGold(Math.round((float)getStreak(getAttacker().getPlayerUUID())/3));
+            addXp(50);
+            addXp(Math.min(Math.round((float)getStreak(getAttacker().getPlayerUUID())/3), 100));
         }else if(streak.equals("moon") && getStreak(attacker.getPlayerUUID()) >= 100){
             addXp(100);
             addXp(xp*.2);
             setXp_cap(getXp_cap()+550);
-            addXp(Math.round((float)getStreak(getAttacker().getPlayerUUID())/2));
-        }else if(streak.equals("uber") && getStreak(attacker.getPlayerUUID()) >= 200 && attacker.getPlayerObject().getMaxHealth()/2 == 10){
-            attacker.getPlayerObject().setMaxHealth(attacker.getPlayerObject().getMaxHealth()-4);
+            addXp(Math.min(Math.round((float)getStreak(getAttacker().getPlayerUUID())/2), 350));
         }
 
         // Gold/XP calculations
@@ -160,15 +163,23 @@ public class ReduxDeathEvent extends Event implements Cancellable{
 
             double inc = (double) getGoldIncrease(attacker.getPlayerUUID())/100;
 
-            addGold((int) Math.round(getGold()*inc));
-
-            new SweatyLore().run(this);
             new XpbumpLore().run(this);
             new XpboostLore().run(this);
+            new SweatyLore().run(this);
 
             new MoctezumaLore().run(this);
-            new GoldboostLore().run(this);
             new GoldbumpLore().run(this);
+            new GoldboostLore().run(this);
+
+            addGold((int) Math.round(getGold()*inc));
+        }
+
+        if(streak.equals("highlander") && getStreak(attacker.getPlayerUUID()) >= 50){
+            addGold((int) Math.round(getGold()*1.1));
+
+            addGold(Math.min(100, Math.round((float)getStreak(getAttacker().getPlayerUUID())/3)));
+        }else if(streak.equals("uber") && getStreak(attacker.getPlayerUUID()) >= 200 && attacker.getPlayerObject().getMaxHealth()/2 == 10){
+            attacker.getPlayerObject().setMaxHealth(attacker.getPlayerObject().getMaxHealth()-4);
         }
 
         // Boosters
@@ -202,7 +213,7 @@ public class ReduxDeathEvent extends Event implements Cancellable{
             if(!KillMessages.containsKey(attacker.getPlayerUUID())){
                 KillMessages.put(attacker.getPlayerUUID(), true);
             }else if(KillMessages.get(attacker.getPlayerUUID()).equals(true)){
-                attacker.getPlayerObject().sendMessage(ChatColor.GREEN + colorCode("&lKILL! ") + ChatColor.GRAY + "on " + defender.getPlayerObject().getDisplayName() + ChatColor.RESET + ChatColor.AQUA + " +" + Math.min(this.xp, xp_cap) + "XP" + ChatColor.GOLD + " +" + this.gold + "g");
+                attacker.getPlayerObject().sendMessage(ChatColor.GREEN + colorCode("&lKILL! ") + ChatColor.GRAY + "on " + defender.getPlayerObject().getDisplayName() + ChatColor.RESET + ChatColor.AQUA + " +" + Math.min(this.xp, xp_cap) + "XP" + ChatColor.GOLD + " +" + Math.min(this.gold, this.gold_cap) + "g");
             }
 
         }
@@ -214,7 +225,7 @@ public class ReduxDeathEvent extends Event implements Cancellable{
         if(!isNPC(attacker.getPlayerObject())){
             attacker.addPlayerEXP((int) Math.round(Math.min(this.xp_cap, this.xp)));
             hasEconomy(attacker.getPlayerUUID());
-            addEconomy(attacker.getPlayerUUID(), (int) Math.round(this.gold));
+            addEconomy(attacker.getPlayerUUID(), Math.min((int) Math.round(this.gold), xp_cap));
         }
 
         // Teleporting
@@ -235,7 +246,7 @@ public class ReduxDeathEvent extends Event implements Cancellable{
             attacker.addMoonXP((int)Math.round( Math.min(xp_cap, xp)));
         }
 
-        if(!isNPC(attacker.getPlayerObject())) goldReq.addGoldReq(attacker.getPlayerUUID(), (int) Math.round(gold));
+        if(!isNPC(attacker.getPlayerObject())) goldReq.addGoldReq(attacker.getPlayerUUID(), Math.min((int) Math.round(gold), xp_cap));
         // Final TICK Scoreboard refresh
         /*
         if(!isNPC(defender.getPlayerObject()) &&
