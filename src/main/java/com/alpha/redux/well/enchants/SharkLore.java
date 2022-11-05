@@ -50,7 +50,7 @@ public class SharkLore extends PitEnchant{
 
         String lore = "&9Shark" + tier + "\n" +
                 "&7Deal &c+"+multiplier+"%&7 damage per other" +
-                "\n&7player below &c6(HEART_EMOJI)&7 within 12" + "\n&7blocks" + "\n&7";
+                "\n&7player below &c6❤&7 within 12" + "\n&7blocks" + "\n&7";
 
         return colorCode(lore);
     }
