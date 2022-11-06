@@ -1,5 +1,6 @@
 package com.alpha.redux.apis.TebexMoners;
 
+import com.alpha.redux.apis.locations;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -19,17 +20,17 @@ public class tebexmoners {
     public static void onRankBuy(String player, String rank){
         Bukkit.broadcastMessage(ChatColor.GREEN + ChatColor.translateAlternateColorCodes('&', "&lCONGRATS! ") + ChatColor.GOLD + player + " has purchased: " + ChatColor.YELLOW + ChatColor.BOLD + rank);
 
-        Location loc = new Location(Bukkit.getPlayer(player).getWorld(), 0.5, 95, 0.5, 0, 0);
-        Bukkit.getWorld("world").strikeLightningEffect(loc);
-        Bukkit.getWorld("world").strikeLightning(loc);
-        Bukkit.getWorld("world").strikeLightningEffect(loc);
-        Bukkit.getWorld("world").strikeLightning(loc);
-        Bukkit.getWorld("world").strikeLightningEffect(loc);
-        Bukkit.getWorld("world").strikeLightning(loc);
-        Bukkit.getWorld("world").strikeLightningEffect(loc);
-        Bukkit.getWorld("world").strikeLightning(loc);
-        Bukkit.getWorld("world").strikeLightningEffect(loc);
-        Bukkit.getWorld("world").strikeLightning(loc);
+        Location loc = locations.getEventNotifyLocation(Bukkit.getPlayer(player).getWorld());
+        loc.getWorld().strikeLightningEffect(loc);
+        loc.getWorld().strikeLightning(loc);
+        loc.getWorld().strikeLightningEffect(loc);
+        loc.getWorld().strikeLightning(loc);
+        loc.getWorld().strikeLightningEffect(loc);
+        loc.getWorld().strikeLightning(loc);
+        loc.getWorld().strikeLightningEffect(loc);
+        loc.getWorld().strikeLightning(loc);
+        loc.getWorld().strikeLightningEffect(loc);
+        loc.getWorld().strikeLightning(loc);
     }
 
     public static void ColorfulBoxers(String player){

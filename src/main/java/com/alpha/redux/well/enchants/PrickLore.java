@@ -51,7 +51,7 @@ public class PrickLore extends PitEnchant{
         double multiplier = (double) ((5+(level*15)));
 
         String lore = "&9Prick" + tier + "\n" +
-                "&7Enemies hitting you receive\n&c"+(multiplier/100)+"❤ &7true damage" + "\n&7";
+                "&7Enemies hitting you receive\n&c"+(multiplier/100)+"(HEART_EMOJI) &7true damage" + "\n&7";
 
         return colorCode(lore);
     }

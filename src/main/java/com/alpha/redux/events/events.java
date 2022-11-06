@@ -4,6 +4,7 @@ import com.alpha.redux.MenuClicks.Cactus.CactusRunTime;
 import com.alpha.redux.UpgradesNpc.gui.PermanentUpgrades;
 import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.chatManager.rank;
+import com.alpha.redux.apis.locations;
 import com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.entityHandlers.TrueDamage.TrueDamageHandler;
@@ -1031,6 +1032,17 @@ public class events implements Listener {
 
     @EventHandler (priority = EventPriority.HIGH)
     public void entityDamageEvent(EntityDamageEvent event) {
+
+        if(event.getCause()== EntityDamageEvent.DamageCause.VOID){
+            event.getEntity().teleport(locations.getBotSpawnLocation(event.getEntity().getWorld()), PlayerTeleportEvent.TeleportCause.PLUGIN);
+            if(event.getEntity().getType().equals(EntityType.PLAYER) &&
+            !isNPC((Player) event.getEntity())){
+                Player player = (Player)event.getEntity();
+                player.sendMessage(colorCode("&c&lOOPS! &7you fell out of the void!"));
+                Sounds.ERROR.play(player);
+            }
+            event.setCancelled(true);
+        }
 
         if(event.getCause()== EntityDamageEvent.DamageCause.FIRE){
             event.setCancelled(true);

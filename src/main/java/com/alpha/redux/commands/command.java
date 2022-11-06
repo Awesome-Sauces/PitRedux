@@ -362,7 +362,7 @@ public class command implements CommandExecutor {
                 if (cooldowns.get(String.valueOf(player.getUniqueId())) > System.currentTimeMillis()){
                     // They still have time left on mute
                     long timeleft = (cooldowns.get(String.valueOf(player.getUniqueId())) - System.currentTimeMillis()) / 1000;
-                    player.sendMessage(colorCode("&c&lHOLD UP! &7Can't /respawn while fighting (&c" + timeleft + "s &7left)"));
+                    player.sendMessage(colorCode("&c&lHOLD UP! &7Can't /hub while fighting (&c" + timeleft + "s &7left)"));
                     return true;
                 }else{
                     deleteBlob(player);
@@ -390,7 +390,7 @@ public class command implements CommandExecutor {
                 mega_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
                 true_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
                 xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
-                Location loc = new Location(Bukkit.getWorld("world"), -33, 100, 436, 0, 0);
+                Location loc = new Location(Bukkit.getWorld("world"), 0.5, 114, 10.5, 0, 0);
                 player.teleport(loc);
                 boards.CreateScore(player);
             }

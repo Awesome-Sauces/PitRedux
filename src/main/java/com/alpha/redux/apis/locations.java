@@ -63,11 +63,11 @@ public class locations {
         return new Location(world, 0.5, 100, 0.5);
     }
     public static Location getLeaderBoardLocation(World world){
-        return new Location(world, 13.5, 120, 0.5);
+        return new Location(world, 16.5, 120, 0.5);
     }
 
     public static Location getEnderChestLocation(World world){
-        return new Location(world, -11.5, 116.5, 6.5);
+        return new Location(world, -11.5, 116.5, 5.5);
     }
 
     public static Location getBetterPitLocation(World world){
@@ -161,7 +161,7 @@ public class locations {
     // Metor Map Cake locations
 
 
-    private static Location cake = new Location(Bukkit.getWorld("world"), -9.5, 137, 38.5);
+    private static Location cake = new Location(Bukkit.getWorld("world"), 57.5, 91, 7.5);
 
     // Meteor Map NPCS
     /*
@@ -213,61 +213,61 @@ public class locations {
         switch (int_random){
             case 0:
                 cake.getBlock().setType(Material.AIR);
-                cake = new Location(Bukkit.getWorld("world"), -47.5, 118, 60.5);
+                cake = new Location(Bukkit.getWorld("world"), -40.5, 99, 33.5);
                 Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "The cake has changed location!");
                 getCakeLocation().getBlock().setType(Material.CAKE_BLOCK);
                 break;
             case 1:
                 cake.getBlock().setType(Material.AIR);
-                cake = new Location(Bukkit.getWorld("world"), -47.5, 136, -0.5);
+                cake = new Location(Bukkit.getWorld("world"), 18.5, 83, 19.5);
                 Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "The cake has changed location!");
                 getCakeLocation().getBlock().setType(Material.CAKE_BLOCK);
                 break;
             case 2:
                 cake.getBlock().setType(Material.AIR);
-                cake = new Location(Bukkit.getWorld("world"), 47.5, 138, -12.5);
+                cake = new Location(Bukkit.getWorld("world"), 20.5, 83, -20.5);
                 Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "The cake has changed location!");
                 getCakeLocation().getBlock().setType(Material.CAKE_BLOCK);
                 break;
             case 3:
                 cake.getBlock().setType(Material.AIR);
-                cake = new Location(Bukkit.getWorld("world"), 31.5, 120, -38.5);
+                cake = new Location(Bukkit.getWorld("world"), 53.5, 99, -55.5);
                 Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "The cake has changed location!");
                 getCakeLocation().getBlock().setType(Material.CAKE_BLOCK);
                 break;
             case 4:
                 cake.getBlock().setType(Material.AIR);
-                cake = new Location(Bukkit.getWorld("world"), 31.5, 121, -29.5);
+                cake = new Location(Bukkit.getWorld("world"), 9.5, 85, -93.5);
                 Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "The cake has changed location!");
                 getCakeLocation().getBlock().setType(Material.CAKE_BLOCK);
                 break;
             case 5:
                 cake.getBlock().setType(Material.AIR);
-                cake = new Location(Bukkit.getWorld("world"), -58.5, 121, 25.5);
+                cake = new Location(Bukkit.getWorld("world"), -35.5, 87, -65.5);
                 Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "The cake has changed location!");
                 getCakeLocation().getBlock().setType(Material.CAKE_BLOCK);
                 break;
             case 6:
                 cake.getBlock().setType(Material.AIR);
-                cake = new Location(Bukkit.getWorld("world"), 40.5, 129, 42.5);
+                cake = new Location(Bukkit.getWorld("world"), 2.5, 67, -189.5);
                 Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "The cake has changed location!");
                 getCakeLocation().getBlock().setType(Material.CAKE_BLOCK);
                 break;
             case 7:
                 cake.getBlock().setType(Material.AIR);
-                cake = new Location(Bukkit.getWorld("world"), 11.5, 124, 16.5);
+                cake = new Location(Bukkit.getWorld("world"), -99.5, 85, -4.5);
                 Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "The cake has changed location!");
                 getCakeLocation().getBlock().setType(Material.CAKE_BLOCK);
                 break;
             case 8:
                 cake.getBlock().setType(Material.AIR);
-                cake = new Location(Bukkit.getWorld("world"), -15.5, 124, 6.5);
+                cake = new Location(Bukkit.getWorld("world"), -62.5, 85, -1.5);
                 Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "The cake has changed location!");
                 getCakeLocation().getBlock().setType(Material.CAKE_BLOCK);
                 break;
             case 9:
                 cake.getBlock().setType(Material.AIR);
-                cake = new Location(Bukkit.getWorld("world"), 4.5, 130, -24.5);
+                cake = new Location(Bukkit.getWorld("world"), -69.5, 95, 77.5);
                 Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "The cake has changed location!");
                 getCakeLocation().getBlock().setType(Material.CAKE_BLOCK);
                 break;
