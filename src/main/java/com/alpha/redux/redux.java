@@ -272,7 +272,7 @@ public class redux extends JavaPlugin {
         }, 50L);
 
 
-        for (int i = 0; i < 45; i++) {
+        for (int i = 0; i < 15; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 0, true);
         }
 
@@ -280,7 +280,7 @@ public class redux extends JavaPlugin {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 0, false);
         }
 
-        for (int i = 0; i < 45; i++) {
+        for (int i = 0; i < 15; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby")), 0, true);
         }
 
@@ -288,7 +288,7 @@ public class redux extends JavaPlugin {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby")), 0, false);
         }
 
-        for (int i = 0; i < 45; i++) {
+        for (int i = 0; i < 15; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby2")), 0, true);
         }
 
