@@ -271,7 +271,7 @@ public class redux extends JavaPlugin {
             }
         }, 50L);
 
-/*
+
         for (int i = 0; i < 45; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 0, true);
         }

@@ -477,7 +477,7 @@ public class command implements CommandExecutor {
                 offline = Bukkit.getOfflinePlayer(Bukkit.getOfflinePlayer(args[0]).getUniqueId());
                 tempPlayer = ViewCore.loadPlayer(offline);
                 if(tempPlayer==null){
-                    player.sendMessage("&cPlayer doesn't exist");
+                    player.sendMessage(colorCode("&cPlayer doesn't exist"));
                     return true;
                 }
                 player.openInventory(ViewCore.getViewInventory(player, tempPlayer, args[0], false));

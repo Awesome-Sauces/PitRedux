@@ -56,7 +56,7 @@ public class ReduxDeathEvent extends Event implements Cancellable{
     private final ReduxPlayer defender;
     private double xp = 14;
     private int xp_cap = 200;
-    private double gold = 17;
+    private double gold = 18;
     private double gold_cap = 2500;
     private boolean isCancelled;
 
