@@ -17,7 +17,7 @@ public class Vampire extends PitPerk {
         this.setRefID("vampire");
         this.setName(colorCode("&aVampire"));
         this.setLore(colorCode("&7Don't earn golden apples.\n" +
-                "&7Heal &c0.5(HEART_EMOJI) &7 on hit.\n" +
+                "&7Heal &c0.5❤ &7 on hit.\n" +
                 "&7Tripled on arrow crit.\n" +
                 "&cRegen I &7(8s) on kill."));
         this.setCost(4000);

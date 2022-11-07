@@ -161,7 +161,7 @@ public class Booster {
 
                         Bukkit.broadcastMessage(colorCode("&e&lBOOSTER &7ended, all things will now return to normal"));
                     }
-                }, 36000L);
+                }, 72000L);
 
                 return false;
             case "BOT":
@@ -176,9 +176,9 @@ public class Booster {
                         "&7active &e&l+30 &cbot &7booster!"));
 
                 for (int i = 0; i < 30; i++) {
-                    HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 1800, false);
-                    HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby")), 1800, false);
-                    HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby2")), 1800, false);
+                    HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 3600, false);
+                    HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby")), 3600, false);
+                    HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby2")), 3600, false);
                 }
 
                 Bukkit.getScheduler().scheduleSyncDelayedTask(redux.INSTANCE, new Runnable() {
@@ -188,7 +188,7 @@ public class Booster {
 
                         Bukkit.broadcastMessage(colorCode("&e&lBOOSTER &7ended, all things will now return to normal"));
                     }
-                }, 36000L);
+                }, 72000L);
 
                 return false;
             default:
@@ -209,7 +209,7 @@ public class Booster {
 
                         Bukkit.broadcastMessage(colorCode("&e&lBOOSTER &7ended, all things will now return to normal"));
                     }
-                }, 36000L);
+                }, 72000L);
 
                 return false;
 

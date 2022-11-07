@@ -22,28 +22,28 @@ public class questMenuItems {
 
     public static ItemStack PlayerSoulsToMysticSword(String uuid){
         return ItemMaker(Material.STORAGE_MINECART, ChatColor.YELLOW +
-                "Yummy Souls+", colorCode("&7Bring the &bQuest Master &3256\n" +
+                "Yummy Souls+", colorCode("&7Bring the &bQuest Master &3128\n" +
                 "&3Player Souls &7to convert\n&7them into a &eSword Bundle\n\n" +
                 "&650,000g &7conversion cost!"), 1, true);
     }
 
     public static ItemStack PlayerSoulsToJewelPant(String uuid){
         return ItemMaker(Material.SLIME_BALL, ChatColor.YELLOW +
-                "Yummy Souls++", colorCode("&7Bring the &bQuest Master &3256\n" +
+                "Yummy Souls++", colorCode("&7Bring the &bQuest Master &3128\n" +
                 "&3Player Souls &7to convert\n&7them into a &3Hidden Jewel Pant\n\n" +
                 "&650,000g &7conversion cost!"), 1, true);
     }
 
     public static ItemStack PlayerSoulsToJewelSword(String uuid){
         return ItemMaker(Material.SLIME_BLOCK, ChatColor.YELLOW +
-                "Yummy Souls+++", colorCode("&7Bring the &bQuest Master &3256\n" +
+                "Yummy Souls+++", colorCode("&7Bring the &bQuest Master &3128\n" +
                 "&3Player Souls &7to convert\n&7them into a &3Hidden Jewel Sword\n\n" +
-                "&6100,000g &7conversion cost!"), 1, true);
+                "&675,000g &7conversion cost!"), 1, true);
     }
 
     public static ItemStack PlayerSoulsToMalding(String uuid){
         return ItemMaker(Material.DIAMOND_HOE, ChatColor.YELLOW +
-                "Soul Reaper", colorCode("&7Bring the &bQuest Master &364\n" +
+                "Soul Reaper", colorCode("&7Bring the &bQuest Master &332\n" +
                 "&3Player Souls &7to convert\n&7them into a &cMalding &7kill\n" +
                 "&7him for special rewards!\n\n" +
                 "&625,000g &7conversion cost!"), 1, true);

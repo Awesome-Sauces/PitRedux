@@ -76,6 +76,17 @@ public class advancedInventory {
         return dye;
     }
 
+    public static ItemStack FishMaker(short dyeColor, String DisplayName, String lore){
+        ItemStack dye = new ItemStack(349, 1, dyeColor);
+        ItemMeta meta = dye.getItemMeta();
+        meta.setDisplayName(DisplayName);
+        String[] lines = lore.split("\\n");
+        ArrayList<String> dye_lore = new ArrayList<>(Arrays.asList(lines));
+        meta.setLore(dye_lore);
+        dye.setItemMeta(meta);
+        return dye;
+    }
+
     public static ItemStack DirtMaker(short dyeColor, String DisplayName, String lore){
         ItemStack dye = new ItemStack(3, 1, dyeColor);
         ItemMeta meta = dye.getItemMeta();

@@ -338,7 +338,7 @@ public class ReduxPlayer {
         hasStreak(this.uuid);
 
         if(getStreak(this.uuid)>100){
-            return Math.min((double)(getStreak(this.uuid)-100)/100, 1.0);
+            return Math.min((double)(getStreak(this.uuid)-100)*.005, 1.5);
         }else return 0.0;
     }
 

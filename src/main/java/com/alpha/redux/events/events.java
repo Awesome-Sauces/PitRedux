@@ -329,12 +329,12 @@ public class events implements Listener {
                 event.addReduxDamage(counter*.20);
             }else if(streak.equals("moon") && getStreak(event.getDefenders().getPlayerUUID()) >= 100){
                 if((getStreak(event.getDefenders().getPlayerUUID())-100)<=0) return;
-                int counter = (int) Math.round((double)(getStreak(event.getDefenders().getPlayerUUID())-100)/10);
+                int counter = (int) Math.round((double)(getStreak(event.getDefenders().getPlayerUUID())-100)/20);
 
                 event.addReduxDamage(event.getReduxDamage()*(counter*.10));
 
                 if((getStreak(event.getDefenders().getPlayerUUID())-200)<=0) return;
-                counter = (int) Math.round((double)(getStreak(event.getDefenders().getPlayerUUID())-200)/10);
+                counter = (int) Math.round((double)(getStreak(event.getDefenders().getPlayerUUID())-200)/20);
 
                 event.addReduxTrueDamage(counter*.1);
             }
@@ -356,7 +356,7 @@ public class events implements Listener {
                 }
             }else if(streak.equals("uber") && getStreak(event.getAttacker().getPlayerUUID()) >= 100){
                 if(isNPC(event.getDefenders().getPlayerObject())){
-                    event.subtractReduxDamage(event.getReduxDamage()*.70);
+                    event.subtractReduxDamage(event.getReduxDamage()*.50);
                 }
             }
         }
@@ -1096,7 +1096,7 @@ public class events implements Listener {
             if (event.getClickedInventory().getTitle().equalsIgnoreCase(ChatColor.GRAY + "Non-permanent items")) {
                 event.setCancelled(true);
                 NonPermItems(event);
-            } else if (event.getClickedInventory().getTitle().equalsIgnoreCase(ChatColor.GOLD + "Prestige Hub")) {
+            } else if (event.getClickedInventory().getTitle().equalsIgnoreCase(ChatColor.GRAY + "Prestige & Renown")) {
                 PrestigeItems(event);
             } else if(event.getClickedInventory().getTitle().equalsIgnoreCase(ChatColor.YELLOW + "Quest Master")){
                 questInventoryManager.main(event);

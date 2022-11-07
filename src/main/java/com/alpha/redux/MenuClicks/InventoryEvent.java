@@ -9,6 +9,7 @@ import com.alpha.redux.playerdata.goldReq;
 import com.alpha.redux.playerdata.prestiges;
 import com.alpha.redux.playerdata.xpManager;
 import com.alpha.redux.items.itemManager;
+import com.alpha.redux.renownShop.gui.RenownShopGUI;
 import com.alpha.redux.well.enchanters.FreshPants;
 import com.alpha.redux.well.enchanters.MysticBow;
 import com.alpha.redux.well.enchanters.MysticSword;
@@ -370,7 +371,7 @@ public class InventoryEvent {
                 player.sendMessage(ChatColor.RED + "You need Level 120 to prestige!");
             }
         }else if (event.getCurrentItem().getType() == Material.BEACON){
-            player.openInventory(mainMenu(player));
+            player.openInventory(RenownShopGUI.getRenownShopGUI(player));
             event.setCancelled(true);
         }
         event.setCancelled(true);

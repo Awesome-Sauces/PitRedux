@@ -12,6 +12,7 @@ import com.alpha.redux.items.enchants;
 import com.alpha.redux.playerdata.economy;
 import com.alpha.redux.playerdata.prestiges;
 import com.alpha.redux.playerdata.xpManager;
+import com.alpha.redux.redux;
 import com.alpha.redux.well.EnchantingMechanics;
 import com.alpha.redux.well.enchanters.FreshPants;
 import com.nametagedit.plugin.NametagEdit;
@@ -169,8 +170,14 @@ public class command implements CommandExecutor {
         if(cmd.getName().equalsIgnoreCase("atest") &&
         player.isOp()){
 
+            /*
             playerExists(player).addPerks(args[0]);
             player.sendMessage(colorCode("&c" + playerExists(player).getPerks()));
+
+             */
+            redux.moonStreak.addValue(args[0], Integer.valueOf(args[1]));
+
+            redux.moonStreak.test();
 
             return true;
         }

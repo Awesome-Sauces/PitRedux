@@ -17,7 +17,6 @@ import com.alpha.redux.entityHandlers.MysticHandler.MysticEventHandler.MysticEve
 import com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap;
 import com.alpha.redux.entityHandlers.ReduxPlayerHandler;
 import com.alpha.redux.eventManagers.ArmorEvents.ArmorListener;
-import com.alpha.redux.eventManagers.ArmorEvents.DispenserArmorListener;
 import com.alpha.redux.eventManagers.ReduxEvents;
 import com.alpha.redux.events.boards;
 import com.alpha.redux.playerdata.Renown;
@@ -29,7 +28,10 @@ import com.alpha.redux.items.itemManager;
 import com.alpha.redux.items.enchants;
 import com.alpha.redux.questMaster.bossBattles.bossEvents;
 import com.alpha.redux.renownShop.CookieMonster.Monster;
+import com.alpha.redux.renownShop.DataStorage.*;
 import com.alpha.redux.renownShop.atomizer.InventoryEventManager;
+import com.alpha.redux.renownShop.gui.RenownShopGUI;
+import com.alpha.redux.renownShop.gui.RenownShopUpgradesGUI;
 import com.alpha.redux.startup.CreateVillagers;
 import com.alpha.redux.well.enchants.*;
 import com.alpha.redux.well.enchants.global.*;
@@ -134,6 +136,20 @@ public class redux extends JavaPlugin {
     public static VolleyLore volleyLore = new VolleyLore();
     public static ExplosiveLore explosiveLore = new ExplosiveLore();
 
+    // Data Store
+    public static MoonStreak moonStreak = new MoonStreak("moon");
+
+    public static ExperienceIndustrialComplex experienceIndustrialComplex = new ExperienceIndustrialComplex("industrial");
+    public static FastPass fastPass = new FastPass("fastpass");
+    public static Heresy heresy = new Heresy("heresy");
+    public static RenownGoldBoost renownGoldBoost = new RenownGoldBoost("goldboost");
+    public static RenownXpBump renownXpBump = new RenownXpBump("xpbump");
+    public static Tenacity tenacity = new Tenacity("tenacity");
+    public static TheWay theWay = new TheWay("way");
+    public static Mysticism mysticism = new Mysticism("mysticChance");
+    public static Celebrity celebrity = new Celebrity("celebrity");
+
+
     @Override
     public void onEnable() {
 
@@ -155,7 +171,6 @@ public class redux extends JavaPlugin {
         List<String> listy = new ArrayList<>();
 
         getServer().getPluginManager().registerEvents(new ArmorListener(listy), this);
-        getServer().getPluginManager().registerEvents(new DispenserArmorListener(), this);
 
         getServer().getPluginManager().registerEvents(new boards(), this);
         getServer().getPluginManager().registerEvents(new PerkHandler(), this);
@@ -171,6 +186,8 @@ public class redux extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PermanentUpgrades(), this);
         getServer().getPluginManager().registerEvents(new GoldenHeadItem(), this);
         getServer().getPluginManager().registerEvents(new ViewCore(), this);
+        getServer().getPluginManager().registerEvents(new RenownShopUpgradesGUI(), this);
+        getServer().getPluginManager().registerEvents(new RenownShopGUI(), this);
 
         commandRegistration();
 
@@ -187,6 +204,17 @@ public class redux extends JavaPlugin {
         SLAPI.loadDmgDec();
         SLAPI.loadMystic();
         SLAPI.loadGoldInc();
+
+        // DataStore
+        experienceIndustrialComplex.loadHashMap();
+        fastPass.loadHashMap();
+        heresy.loadHashMap();
+        renownGoldBoost.loadHashMap();
+        renownXpBump.loadHashMap();
+        tenacity.loadHashMap();
+        theWay.loadHashMap();
+        mysticism.loadHashMap();
+        celebrity.loadHashMap();
 
         SLAPI.loadGoldBooster();
         SLAPI.loadXpBooster();
@@ -271,12 +299,12 @@ public class redux extends JavaPlugin {
             }
         }, 50L);
 
-
+/*
         for (int i = 0; i < 15; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 0, true);
         }
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 15; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 0, false);
         }
 
@@ -284,7 +312,7 @@ public class redux extends JavaPlugin {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby")), 0, true);
         }
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 15; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby")), 0, false);
         }
 
@@ -292,7 +320,7 @@ public class redux extends JavaPlugin {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby2")), 0, true);
         }
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 15; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby2")), 0, false);
         }
 /*
@@ -324,6 +352,15 @@ public class redux extends JavaPlugin {
                 SLAPI.saveGoldBooster();
                 SLAPI.saveGoldInc();
                 SLAPI.saveGoldReq();
+                experienceIndustrialComplex.saveHashMap();
+                fastPass.saveHashMap();
+                heresy.saveHashMap();
+                renownGoldBoost.saveHashMap();
+                renownXpBump.saveHashMap();
+                tenacity.saveHashMap();
+                theWay.saveHashMap();
+                mysticism.saveHashMap();
+                celebrity.saveHashMap();
 
                 SLAPI.loadGoldInc();
                 SLAPI.loadMonster();
@@ -336,6 +373,15 @@ public class redux extends JavaPlugin {
                 SLAPI.loadBotBooster();
                 SLAPI.loadGoldBooster();
                 SLAPI.loadBotBooster();
+                celebrity.loadHashMap();
+                experienceIndustrialComplex.loadHashMap();
+                mysticism.loadHashMap();
+                fastPass.loadHashMap();
+                heresy.loadHashMap();
+                renownGoldBoost.loadHashMap();
+                renownXpBump.loadHashMap();
+                tenacity.loadHashMap();
+                theWay.loadHashMap();
             }
         }.runTaskTimer(plugin, 12000, 12000);
 
@@ -361,6 +407,15 @@ public class redux extends JavaPlugin {
         SLAPI.saveBotBooster();
         SLAPI.saveGoldBooster();
         SLAPI.saveXpBooster();
+        experienceIndustrialComplex.saveHashMap();
+        fastPass.saveHashMap();
+        celebrity.saveHashMap();
+        heresy.saveHashMap();
+        renownGoldBoost.saveHashMap();
+        renownXpBump.saveHashMap();
+        tenacity.saveHashMap();
+        theWay.saveHashMap();
+        mysticism.saveHashMap();
         CreateVillagers.unloadNPC();
         delBoard();
         getServer().getConsoleSender().sendMessage(ChatColor.RED + "[Redux] plugin is disabled");

@@ -13,8 +13,6 @@ public class Renown {
 
     public static HashMap<String, Integer> Renown = new HashMap<>();
 
-
-
     public static void setRenown(String player, int amount){
         Renown.put(player, amount);
     }

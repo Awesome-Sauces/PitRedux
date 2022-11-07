@@ -24,8 +24,9 @@ dependencies {
     compileOnly files("libs/NametagEdit.jar")
     compileOnly files("libs/citizens.jar")
     compileOnly files("libs/hunter.jar")
+    compileOnly files("libs/EssentialsX.jar")
 
-    compileOnly "net.essentialsx:EssentialsX:2.20.0-SNAPSHOT"
+    //compileOnly "net.essentialsx:EssentialsX:2.20.0-SNAPSHOT"
     compileOnly "org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT"
     //compileOnly 'net.citizensnpcs:citizens-main:2.0.30-SNAPSHOT'
     compileOnly "com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.9"

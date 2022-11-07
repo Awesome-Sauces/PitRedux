@@ -35,7 +35,7 @@ public class questInventoryManager {
         ItemStack Malding = questMenuItems.PlayerSoulsToMalding(uuid);
 
         if(event.getCurrentItem().equals(Malding)){
-            if(player.getInventory().containsAtLeast(enchants.playerSoul, 64)) {
+            if(player.getInventory().containsAtLeast(enchants.playerSoul, 32)) {
                 if (getEconomy(uuid) >= 25000) {
                     for (int i = 0; i < 64; i++) {
                         player.getInventory().removeItem(enchants.playerSoul);
@@ -70,7 +70,7 @@ public class questInventoryManager {
                 Sounds.RENOWN_SHOP_PURCHASE.play(player);
             }
         }else if(event.getCurrentItem().equals(MysticSword)){
-            if(player.getInventory().containsAtLeast(enchants.playerSoul, 256) &&
+            if(player.getInventory().containsAtLeast(enchants.playerSoul, 128) &&
                     getEconomy(uuid)>=50000){
                 for (int i = 0; i < 256; i++) {
                     player.getInventory().removeItem(enchants.playerSoul);
@@ -84,7 +84,7 @@ public class questInventoryManager {
                 Sounds.RENOWN_SHOP_PURCHASE.play(player);
             }
         }else if(event.getCurrentItem().equals(PantJewel)){
-            if(player.getInventory().containsAtLeast(enchants.playerSoul, 256) &&
+            if(player.getInventory().containsAtLeast(enchants.playerSoul, 128) &&
                     getEconomy(uuid)>=50000){
                 for (int i = 0; i < 256; i++) {
                     player.getInventory().removeItem(enchants.playerSoul);
@@ -98,15 +98,15 @@ public class questInventoryManager {
                 Sounds.RENOWN_SHOP_PURCHASE.play(player);
             }
         }else if(event.getCurrentItem().equals(SwordJewel)){
-            if(player.getInventory().containsAtLeast(enchants.playerSoul, 256) &&
-                    getEconomy(uuid)>=100000){
+            if(player.getInventory().containsAtLeast(enchants.playerSoul, 128) &&
+                    getEconomy(uuid)>=75000){
                 for (int i = 0; i < 256; i++) {
                     player.getInventory().removeItem(enchants.playerSoul);
                 }
 
                 player.getInventory().addItem(enchants.jewl_sword);
 
-                removeEconomy(uuid, 100000);
+                removeEconomy(uuid, 75000);
 
                 player.sendMessage(colorCode("&a&lCONGRATS! &7succesfully purchased!"));
                 Sounds.RENOWN_SHOP_PURCHASE.play(player);
