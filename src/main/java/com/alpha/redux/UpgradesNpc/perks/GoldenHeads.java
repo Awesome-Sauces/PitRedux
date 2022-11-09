@@ -6,6 +6,7 @@ import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
 import com.alpha.redux.items.enchants;
 import com.alpha.redux.redux;
+import org.bukkit.Material;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -15,6 +16,7 @@ public class GoldenHeads extends PitPerk {
 
     public GoldenHeads(){
         this.setRefID("goldenhead");
+        this.setMaterial(Material.SKULL_ITEM);
         this.setName(colorCode("&aGolden Heads"));
         this.setLore(colorCode("&7Golden apples you earn turn into\n" +
                 "&6Golden Heads&7."));

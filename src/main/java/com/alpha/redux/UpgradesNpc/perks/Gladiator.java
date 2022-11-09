@@ -4,6 +4,7 @@ import com.alpha.redux.DeathHandler.ReduxDeathEvent;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
 import com.alpha.redux.redux;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -15,6 +16,7 @@ public class Gladiator extends PitPerk {
 
     public Gladiator(){
         this.setRefID("gladiator");
+        this.setMaterial(Material.BONE);
         this.setName(colorCode("&aGladiator"));
         this.setLore(colorCode("&7Receive &9-3% &7damage per\n" +
                 "&7nearby player.\n\n" +

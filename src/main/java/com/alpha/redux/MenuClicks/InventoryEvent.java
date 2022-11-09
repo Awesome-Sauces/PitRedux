@@ -9,6 +9,7 @@ import com.alpha.redux.playerdata.goldReq;
 import com.alpha.redux.playerdata.prestiges;
 import com.alpha.redux.playerdata.xpManager;
 import com.alpha.redux.items.itemManager;
+import com.alpha.redux.redux;
 import com.alpha.redux.renownShop.gui.RenownShopGUI;
 import com.alpha.redux.well.enchanters.FreshPants;
 import com.alpha.redux.well.enchanters.MysticBow;
@@ -361,6 +362,9 @@ public class InventoryEvent {
                 Bukkit.broadcastMessage(ChatColor.YELLOW + colorCode("&lPRESTIGE! ") + ChatColor.GOLD + player.getDisplayName() + ChatColor.GRAY + " unlocked prestige " + ChatColor.YELLOW + getPrestige(String.valueOf(player.getUniqueId())) + ChatColor.GRAY + " gg!");
                 boards.CreateScore(player);
                 player.closeInventory();
+                if(redux.fastPass.hasValue(String.valueOf(player.getUniqueId()))){
+                    setXp(player.getUniqueId().toString(),getLevelXP(player, 50, getPrestige(player.getUniqueId().toString())));
+                }
                 player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 0);
                 PacketPlayOutTitle title = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TITLE,
                         IChatBaseComponent.ChatSerializer.a("{\"text\":\"PRESTIGE!\",\"bold\":true,\"color\":\"yellow\"}"), 100, 20, 20);

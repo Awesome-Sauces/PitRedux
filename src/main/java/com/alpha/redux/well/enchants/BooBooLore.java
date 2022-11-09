@@ -18,7 +18,7 @@ public class BooBooLore extends PitEnchant{
         if (event.getDefenders().getBooCD()){
             event.getDefenders().setBooCD();
 
-            event.getDefenders().getPlayerObject().setHealth(Math.min(20,
+            event.getDefenders().getPlayerObject().setHealth(Math.min(event.getDefenders().getPlayerObject().getMaxHealth(),
                     event.getDefenders().getPlayerObject().getHealth()+(.25*level)));
 
             new BukkitRunnable() {

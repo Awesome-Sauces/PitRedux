@@ -39,7 +39,7 @@ public class Sounds {
     public static final SoundEffect ENDERCHEST_OPEN = new SoundEffect(Sound.CHEST_OPEN, 1, 1);
     public static final SoundEffect ARMOR_SWAP = new SoundEffect(Sound.HORSE_ARMOR, 1F, 1.3F);
     public static final SoundEffect COMPENSATION = new SoundEffect(Sound.NOTE_PLING, 2, 1.5F);
-    public static final SoundEffect RENOWN_SHOP_PURCHASE = new SoundEffect(Sound.ORB_PICKUP, 2, 1.5F);
+    public static final SoundEffect RENOWN_SHOP_PURCHASE = new SoundEffect(Sound.LEVEL_UP, 2, 3.5F);
     public static final SoundEffect FUNKY_FEATHER = new SoundEffect(Sound.BAT_TAKEOFF, 2, 2F);
     public static final SoundEffect CLEAR_JEWEL = new SoundEffect(Sound.SHEEP_SHEAR, 1, 2);
     public static final SoundEffect YUMMY_BREAD = new SoundEffect(Sound.EAT, 1, 1.2);

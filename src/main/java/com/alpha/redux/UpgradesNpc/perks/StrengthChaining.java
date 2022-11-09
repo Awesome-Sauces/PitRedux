@@ -4,6 +4,7 @@ import com.alpha.redux.DeathHandler.ReduxDeathEvent;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
 import com.alpha.redux.redux;
+import org.bukkit.Material;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -13,6 +14,7 @@ public class StrengthChaining extends PitPerk {
 
     public StrengthChaining(){
         this.setRefID("strength");
+        this.setMaterial(Material.REDSTONE);
         this.setName(colorCode("&aStrength-Chaining"));
         this.setLore(colorCode("&c+8% damage &7for 7s stacking\n" +
                 "&7on kill."));

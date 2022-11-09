@@ -8,6 +8,10 @@ public class MoonStreak extends DataStore {
     }
 
     public String getLore(){
-        return colorCode("");
+        return colorCode("&7Includes:\n" +
+                "&8- &bSuper Streaker\n"+
+                "&8- &bGold Stack\n"+
+                "&8- &bXP Stack\n\n"+
+                "&7Megastreak: &bTo the Moon");
     }
 }

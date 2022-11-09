@@ -5,6 +5,7 @@ import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
 import com.alpha.redux.playerdata.economy;
 import com.alpha.redux.redux;
+import org.bukkit.Material;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -15,6 +16,7 @@ public class Vampire extends PitPerk {
 
     public Vampire(){
         this.setRefID("vampire");
+        this.setMaterial(Material.FERMENTED_SPIDER_EYE);
         this.setName(colorCode("&aVampire"));
         this.setLore(colorCode("&7Don't earn golden apples.\n" +
                 "&7Heal &c0.5❤ &7 on hit.\n" +

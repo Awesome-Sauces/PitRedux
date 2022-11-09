@@ -1,5 +1,6 @@
 package com.alpha.redux;
 
+import com.alpha.redux.UpgradesNpc.gui.PerkSelectGUI;
 import com.alpha.redux.UpgradesNpc.gui.PermanentUpgrades;
 import com.alpha.redux.UpgradesNpc.perks.*;
 import com.alpha.redux.UpgradesNpc.perks.items.GoldenHeadItem;
@@ -31,6 +32,7 @@ import com.alpha.redux.renownShop.CookieMonster.Monster;
 import com.alpha.redux.renownShop.DataStorage.*;
 import com.alpha.redux.renownShop.atomizer.InventoryEventManager;
 import com.alpha.redux.renownShop.gui.RenownShopGUI;
+import com.alpha.redux.renownShop.gui.RenownShopKillstreaksGUI;
 import com.alpha.redux.renownShop.gui.RenownShopUpgradesGUI;
 import com.alpha.redux.startup.CreateVillagers;
 import com.alpha.redux.well.enchants.*;
@@ -137,7 +139,17 @@ public class redux extends JavaPlugin {
     public static ExplosiveLore explosiveLore = new ExplosiveLore();
 
     // Data Store
-    public static MoonStreak moonStreak = new MoonStreak("moon");
+    public static MoonStreak moonStreak = new MoonStreak("moonstreak");
+    public static UberStreak uberStreak = new UberStreak("uberstreak");
+    public static HighlanderStreak highlanderStreak = new HighlanderStreak("highlander");
+    public static BeastmodeStreak beastmodeStreak = new BeastmodeStreak("beastmode");
+    public static MagnumOpus magnumOpus = new MagnumOpus("magnum");
+
+    // Perks
+    public static PerkSlotOne perkSlotOne = new PerkSlotOne("perkone");
+    public static PerkSlotTwo perkSlotTwo = new PerkSlotTwo("perktwo");
+    public static PerkSlotThree perkSlotThree = new PerkSlotThree("perkthree");
+    public static PerkSlotFour perkSlotFour = new PerkSlotFour("perkfour");
 
     public static ExperienceIndustrialComplex experienceIndustrialComplex = new ExperienceIndustrialComplex("industrial");
     public static FastPass fastPass = new FastPass("fastpass");
@@ -148,6 +160,9 @@ public class redux extends JavaPlugin {
     public static TheWay theWay = new TheWay("way");
     public static Mysticism mysticism = new Mysticism("mysticChance");
     public static Celebrity celebrity = new Celebrity("celebrity");
+    public static ExtraHearts extraHearts = new ExtraHearts("hearts");
+    public static Promotion promotion = new Promotion("promotion");
+
 
 
     @Override
@@ -188,6 +203,8 @@ public class redux extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ViewCore(), this);
         getServer().getPluginManager().registerEvents(new RenownShopUpgradesGUI(), this);
         getServer().getPluginManager().registerEvents(new RenownShopGUI(), this);
+        getServer().getPluginManager().registerEvents(new RenownShopKillstreaksGUI(), this);
+        getServer().getPluginManager().registerEvents(new PerkSelectGUI(), this);
 
         commandRegistration();
 
@@ -215,6 +232,19 @@ public class redux extends JavaPlugin {
         theWay.loadHashMap();
         mysticism.loadHashMap();
         celebrity.loadHashMap();
+        extraHearts.loadHashMap();
+        promotion.loadHashMap();
+
+        perkSlotOne.loadHashMap();
+        perkSlotTwo.loadHashMap();
+        perkSlotThree.loadHashMap();
+        perkSlotFour.loadHashMap();
+
+        moonStreak.loadHashMap();
+        uberStreak.loadHashMap();
+        beastmodeStreak.loadHashMap();
+        highlanderStreak.loadHashMap();
+        magnumOpus.loadHashMap();
 
         SLAPI.loadGoldBooster();
         SLAPI.loadXpBooster();
@@ -299,12 +329,12 @@ public class redux extends JavaPlugin {
             }
         }, 50L);
 
-/*
+
         for (int i = 0; i < 15; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 0, true);
         }
 
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 25; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 0, false);
         }
 
@@ -312,7 +342,7 @@ public class redux extends JavaPlugin {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby")), 0, true);
         }
 
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 25; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby")), 0, false);
         }
 
@@ -320,7 +350,7 @@ public class redux extends JavaPlugin {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby2")), 0, true);
         }
 
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 25; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby2")), 0, false);
         }
 /*
@@ -361,6 +391,19 @@ public class redux extends JavaPlugin {
                 theWay.saveHashMap();
                 mysticism.saveHashMap();
                 celebrity.saveHashMap();
+                extraHearts.saveHashMap();
+                promotion.saveHashMap();
+
+                moonStreak.saveHashMap();
+                uberStreak.saveHashMap();
+                beastmodeStreak.saveHashMap();
+                highlanderStreak.saveHashMap();
+                magnumOpus.saveHashMap();
+
+                perkSlotOne.saveHashMap();
+                perkSlotTwo.saveHashMap();
+                perkSlotThree.saveHashMap();
+                perkSlotFour.saveHashMap();
 
                 SLAPI.loadGoldInc();
                 SLAPI.loadMonster();
@@ -373,15 +416,27 @@ public class redux extends JavaPlugin {
                 SLAPI.loadBotBooster();
                 SLAPI.loadGoldBooster();
                 SLAPI.loadBotBooster();
+                moonStreak.loadHashMap();
+                uberStreak.loadHashMap();
+                beastmodeStreak.loadHashMap();
+                highlanderStreak.loadHashMap();
                 celebrity.loadHashMap();
+                magnumOpus.loadHashMap();
                 experienceIndustrialComplex.loadHashMap();
                 mysticism.loadHashMap();
                 fastPass.loadHashMap();
+                extraHearts.loadHashMap();
                 heresy.loadHashMap();
+                promotion.loadHashMap();
                 renownGoldBoost.loadHashMap();
                 renownXpBump.loadHashMap();
                 tenacity.loadHashMap();
                 theWay.loadHashMap();
+
+                perkSlotOne.loadHashMap();
+                perkSlotTwo.loadHashMap();
+                perkSlotThree.loadHashMap();
+                perkSlotFour.loadHashMap();
             }
         }.runTaskTimer(plugin, 12000, 12000);
 
@@ -407,15 +462,26 @@ public class redux extends JavaPlugin {
         SLAPI.saveBotBooster();
         SLAPI.saveGoldBooster();
         SLAPI.saveXpBooster();
+        perkSlotOne.saveHashMap();
+        perkSlotTwo.saveHashMap();
+        perkSlotThree.saveHashMap();
+        perkSlotFour.saveHashMap();
         experienceIndustrialComplex.saveHashMap();
+        extraHearts.saveHashMap();
         fastPass.saveHashMap();
         celebrity.saveHashMap();
         heresy.saveHashMap();
         renownGoldBoost.saveHashMap();
         renownXpBump.saveHashMap();
+        promotion.saveHashMap();
         tenacity.saveHashMap();
+        moonStreak.saveHashMap();
+        uberStreak.saveHashMap();
+        beastmodeStreak.saveHashMap();
+        highlanderStreak.saveHashMap();
         theWay.saveHashMap();
         mysticism.saveHashMap();
+        magnumOpus.saveHashMap();
         CreateVillagers.unloadNPC();
         delBoard();
         getServer().getConsoleSender().sendMessage(ChatColor.RED + "[Redux] plugin is disabled");

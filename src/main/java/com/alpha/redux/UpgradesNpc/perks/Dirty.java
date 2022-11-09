@@ -4,6 +4,7 @@ import com.alpha.redux.DeathHandler.ReduxDeathEvent;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
 import com.alpha.redux.redux;
+import org.bukkit.Material;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -13,6 +14,7 @@ public class Dirty extends PitPerk {
 
     public Dirty(){
         this.setRefID("dirty");
+        this.setMaterial(Material.DIRT);
         this.setName(colorCode("&aDirty"));
         this.setLore(colorCode("&7Gain &9Resistance II &7(4s) on\n" +
                 "&7kill."));

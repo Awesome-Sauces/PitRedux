@@ -66,11 +66,10 @@ public class GoldenHeadItem implements Listener {
 
                     player.setItemInHand(null);
 
-                    if(amount > 1) {
+                    if(amount > 2) {
+                        player.getInventory().setItemInHand(null);
+                    }else if(amount > 1) {
                         player.getInventory().setItemInHand(enchants.goldenhead);
-                        for (int i = 0; i < Math.max(amount-2,0); i++){
-                            player.getInventory().addItem(enchants.goldenhead);
-                        }
                     }
 
                     addEffects(player);

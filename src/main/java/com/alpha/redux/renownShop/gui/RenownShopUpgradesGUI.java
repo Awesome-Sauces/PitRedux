@@ -18,10 +18,19 @@ import org.bukkit.inventory.ItemStack;
 import static com.alpha.redux.apis.advancedInventory.FishMaker;
 import static com.alpha.redux.apis.advancedInventory.ItemMaker;
 import static com.alpha.redux.apis.chatManager.rank.colorCode;
+import static com.alpha.redux.playerdata.prestiges.getPrestige;
+import static com.alpha.redux.playerdata.prestiges.hasPrestige;
+
 
 public class RenownShopUpgradesGUI implements Listener {
 
     public static ItemStack getTheWayItem(String uuid){
+        hasPrestige(uuid);
+        if(getPrestige(uuid)<7){
+            return ItemMaker(Material.BEDROCK, ChatColor.RED + "Unknown upgrade",
+                    colorCode("&7Prestige: &e"+boards.integerToRoman(7)),1, true);
+        }
+
         Renown.hasRenown(uuid);
         if(redux.theWay.hasValue(uuid) &&
                 ((Integer)redux.theWay.getValue(uuid))>=1){
@@ -37,7 +46,35 @@ public class RenownShopUpgradesGUI implements Listener {
         }
     }
 
+    public static ItemStack getPromotionItem(String uuid){
+        hasPrestige(uuid);
+        if(getPrestige(uuid)<12){
+            return ItemMaker(Material.BEDROCK, ChatColor.RED + "Unknown upgrade",
+                    colorCode("&7Prestige: &e"+boards.integerToRoman(12)),1, true);
+        }
+
+        Renown.hasRenown(uuid);
+        if(redux.promotion.hasValue(uuid) &&
+                ((Integer)redux.promotion.getValue(uuid))>=1){
+            return ItemMaker(Material.FENCE, ChatColor.GREEN + "Promotion!!",
+                    colorCode(redux.promotion.getLore() + "\n\n" +
+                            "&aMaxed out!"),1, true);
+        }else{
+            return ItemMaker(Material.FENCE, ChatColor.YELLOW + "Promotion!!",
+                    colorCode(redux.promotion.getLore() + "\n\n" +
+                            "&7Cost: &e50 Renown\n" +
+                            "&7You have: &e"+Renown.getRenown(uuid)+" Renown\n\n" +
+                            "&eClick to purchase!"),1, true);
+        }
+    }
+
     public static ItemStack getCelebrityItem(String uuid){
+        hasPrestige(uuid);
+        if(getPrestige(uuid)<20){
+            return ItemMaker(Material.BEDROCK, ChatColor.RED + "Unknown upgrade",
+                    colorCode("&7Prestige: &e"+boards.integerToRoman(20)),1, true);
+        }
+
         Renown.hasRenown(uuid);
         if(redux.celebrity.hasValue(uuid) &&
                 ((Integer)redux.celebrity.getValue(uuid))>=1){
@@ -47,13 +84,19 @@ public class RenownShopUpgradesGUI implements Listener {
         }else{
             return FishMaker((short) 3, ChatColor.YELLOW + "Celebrity",
                     colorCode(redux.celebrity.getLore() + "\n\n" +
-                            "&7Cost: &e100 Renown\n" +
+                            "&7Cost: &e300 Renown\n" +
                             "&7You have: &e"+Renown.getRenown(uuid)+" Renown\n\n" +
                             "&eClick to purchase!"));
         }
     }
 
     public static ItemStack getFastPassItem(String uuid){
+        hasPrestige(uuid);
+        if(getPrestige(uuid)<15){
+            return ItemMaker(Material.BEDROCK, ChatColor.RED + "Unknown upgrade",
+                    colorCode("&7Prestige: &e"+boards.integerToRoman(15)),1, true);
+        }
+
         Renown.hasRenown(uuid);
         if(redux.fastPass.hasValue(uuid) &&
                 ((Integer)redux.fastPass.getValue(uuid))>=1){
@@ -70,6 +113,12 @@ public class RenownShopUpgradesGUI implements Listener {
     }
 
     public static ItemStack getExperienceItem(String uuid){
+        hasPrestige(uuid);
+        if(getPrestige(uuid)<14){
+            return ItemMaker(Material.BEDROCK, ChatColor.RED + "Unknown upgrade",
+                    colorCode("&7Prestige: &e"+boards.integerToRoman(14)),1, true);
+        }
+
         Renown.hasRenown(uuid);
         if(redux.experienceIndustrialComplex.hasValue(uuid) &&
                 ((Integer)redux.experienceIndustrialComplex.getValue(uuid))>=1){
@@ -86,6 +135,12 @@ public class RenownShopUpgradesGUI implements Listener {
     }
 
     public static ItemStack getHeresyItem(String uuid){
+        hasPrestige(uuid);
+        if(getPrestige(uuid)<6){
+            return ItemMaker(Material.BEDROCK, ChatColor.RED + "Unknown upgrade",
+                    colorCode("&7Prestige: &e"+boards.integerToRoman(6)),1, true);
+        }
+
         Renown.hasRenown(uuid);
         if(redux.heresy.hasValue(uuid) &&
                 ((Integer)redux.heresy.getValue(uuid))>=1){
@@ -102,6 +157,12 @@ public class RenownShopUpgradesGUI implements Listener {
     }
 
     public static ItemStack getMysticismItem(String uuid){
+        hasPrestige(uuid);
+        if(getPrestige(uuid)<1){
+            return ItemMaker(Material.BEDROCK, ChatColor.RED + "Unknown upgrade",
+                    colorCode("&7Prestige: &e"+boards.integerToRoman(1)),1, true);
+        }
+
         Renown.hasRenown(uuid);
         if(redux.mysticism.hasValue(uuid) &&
                 ((Integer)redux.mysticism.getValue(uuid))>=20){
@@ -129,7 +190,47 @@ public class RenownShopUpgradesGUI implements Listener {
         }
     }
 
+    public static ItemStack getExtraHearts(String uuid){
+        hasPrestige(uuid);
+        if(getPrestige(uuid)<5){
+            return ItemMaker(Material.BEDROCK, ChatColor.RED + "Unknown upgrade",
+                    colorCode("&7Prestige: &e"+boards.integerToRoman(5)),1, true);
+        }
+
+        Renown.hasRenown(uuid);
+        if(redux.extraHearts.hasValue(uuid) &&
+                ((Integer)redux.extraHearts.getValue(uuid))>=2){
+            return ItemMaker(Material.APPLE, ChatColor.GREEN + "Extra Hearts",
+                    colorCode("&7Current: &c+" + redux.extraHearts.getValue(uuid) +
+                            "&c❤\n" +
+                            "&7Tier: &a" + boards.integerToRoman((Integer) redux.extraHearts.getValue(uuid)) + "\n\n" +
+                            redux.extraHearts.getLore() + "\n\n" +
+                            "&aMaxed out!"),1, true);
+        }else if(redux.extraHearts.hasValue(uuid)){
+            return ItemMaker(Material.APPLE, ChatColor.GREEN + "Extra Hearts",
+                    colorCode("&7Current: &c+" + redux.extraHearts.getValue(uuid) +
+                            "&c❤\n" +
+                            "&7Tier: &a" + boards.integerToRoman((Integer) redux.extraHearts.getValue(uuid)) + "\n\n" +
+                            redux.extraHearts.getLore() + "\n\n" +
+                            "&7Upgrade Cost: &e"+(((Integer)redux.extraHearts.getValue(uuid))*20)+" &eRenown\n" +
+                            "&7You have: &e"+Renown.getRenown(uuid)+" Renown\n\n" +
+                            "&eClick to upgrade!"),1, true);
+        }else{
+            return ItemMaker(Material.APPLE, ChatColor.YELLOW + "Extra Hearts",
+                    colorCode(redux.extraHearts.getLore() + "\n\n" +
+                            "&7Cost: &e20 Renown\n" +
+                            "&7You have: &e"+Renown.getRenown(uuid)+" Renown\n\n" +
+                            "&eClick to purchase!"),1, true);
+        }
+    }
+
     public static ItemStack getTenacityItem(String uuid){
+        hasPrestige(uuid);
+        if(getPrestige(uuid)<1){
+            return ItemMaker(Material.BEDROCK, ChatColor.RED + "Unknown upgrade",
+                    colorCode("&7Prestige: &e"+boards.integerToRoman(1)),1, true);
+        }
+
         Renown.hasRenown(uuid);
         if(redux.tenacity.hasValue(uuid) &&
                 ((Integer)redux.tenacity.getValue(uuid))>=5){
@@ -188,7 +289,7 @@ public class RenownShopUpgradesGUI implements Listener {
     public static ItemStack getGoldBumpItem(String uuid){
         Renown.hasRenown(uuid);
         if(redux.renownGoldBoost.hasValue(uuid) &&
-        ((Integer)redux.renownGoldBoost.getValue(uuid))>=10){
+                ((Integer)redux.renownGoldBoost.getValue(uuid))>=10){
             return ItemMaker(Material.GOLD_NUGGET, ChatColor.GREEN + "Renown Gold Boost",
                     colorCode("&7Current: &6+" + redux.renownGoldBoost.getValue(uuid) +
                             "&6.0% gold (g)\n" +
@@ -241,6 +342,8 @@ public class RenownShopUpgradesGUI implements Listener {
 
         advancedInventory.addInv(gui, getMysticismItem(uuid), 2, 3, false);
         advancedInventory.addInv(gui, getCelebrityItem(uuid), 3, 3, false);
+        advancedInventory.addInv(gui, getExtraHearts(uuid), 4, 3, false);
+        advancedInventory.addInv(gui, getPromotionItem(uuid), 5, 3, false);
 
         advancedInventory.addInv(gui, getGoBackItem(uuid), 5, 5, false);
 
@@ -260,12 +363,17 @@ public class RenownShopUpgradesGUI implements Listener {
 
         event.setCancelled(true);
 
+        if(event.getCurrentItem().getType().equals(Material.BEDROCK)){
+            Sounds.ERROR.play(player);
+            player.sendMessage(ChatColor.RED + "You are too low prestige to acquire this!");
+        }
+
         if(event.getCurrentItem().getType().equals(Material.GOLD_NUGGET)){
             Renown.hasRenown(uuid);
 
             if(redux.renownGoldBoost.hasValue(uuid) &&
                     ((Integer)redux.renownGoldBoost.getValue(uuid))>=10){
-                Sounds.ERROR.play(player);
+                Sounds.NO.play(player);
             }else if(redux.renownGoldBoost.hasValue(uuid) && Renown.getRenown(uuid)>=(((Integer)redux.renownGoldBoost.getValue(uuid))*5)){
                 Sounds.RENOWN_SHOP_PURCHASE.play(player);
                 Renown.setRenown(uuid, Renown.getRenown(uuid)-(((Integer)redux.renownGoldBoost.getValue(uuid))*5));
@@ -275,7 +383,7 @@ public class RenownShopUpgradesGUI implements Listener {
                 Renown.setRenown(uuid, Renown.getRenown(uuid)-5);
                 redux.renownGoldBoost.setValue(uuid, (Integer) 1);
             }else{
-                Sounds.ERROR.play(player);
+                Sounds.NO.play(player);
             }
 
             player.openInventory(getRenownShopUpgradesGUI(player));
@@ -284,7 +392,7 @@ public class RenownShopUpgradesGUI implements Listener {
 
             if(redux.renownXpBump.hasValue(uuid) &&
                     ((Integer)redux.renownXpBump.getValue(uuid))>=10){
-                Sounds.ERROR.play(player);
+                Sounds.NO.play(player);
             }else if(redux.renownXpBump.hasValue(uuid) &&
                     Renown.getRenown(uuid)>=(((Integer)redux.renownXpBump.getValue(uuid))*5)){
                 Sounds.RENOWN_SHOP_PURCHASE.play(player);
@@ -295,7 +403,30 @@ public class RenownShopUpgradesGUI implements Listener {
                 Renown.setRenown(uuid, Renown.getRenown(uuid)-5);
                 redux.renownXpBump.setValue(uuid, (Integer) 1);
             }else{
-                Sounds.ERROR.play(player);
+                Sounds.NO.play(player);
+            }
+
+            player.openInventory(getRenownShopUpgradesGUI(player));
+        }else if(event.getCurrentItem().getType().equals(Material.APPLE)){
+            Renown.hasRenown(uuid);
+
+            if(redux.extraHearts.hasValue(uuid) &&
+                    ((Integer)redux.extraHearts.getValue(uuid))>=2){
+                Sounds.NO.play(player);
+            }else if(redux.extraHearts.hasValue(uuid) &&
+                    Renown.getRenown(uuid)>=(((Integer)redux.extraHearts.getValue(uuid))*20)){
+                Sounds.RENOWN_SHOP_PURCHASE.play(player);
+                Renown.setRenown(uuid, Renown.getRenown(uuid)-(((Integer)redux.renownXpBump.getValue(uuid))*20));
+                redux.extraHearts.addValue(uuid, (Integer) 1);
+
+                player.setMaxHealth(20+((Integer)redux.extraHearts.getValue(uuid, 1)*2));
+            }else if(Renown.getRenown(uuid)>=20 && !redux.extraHearts.hasValue(uuid)){
+                Sounds.RENOWN_SHOP_PURCHASE.play(player);
+                Renown.setRenown(uuid, Renown.getRenown(uuid)-20);
+                redux.extraHearts.setValue(uuid, (Integer) 1);
+                player.setMaxHealth(20+((Integer)redux.extraHearts.getValue(uuid, 1)*2));
+            }else{
+                Sounds.NO.play(player);
             }
 
             player.openInventory(getRenownShopUpgradesGUI(player));
@@ -304,7 +435,7 @@ public class RenownShopUpgradesGUI implements Listener {
 
             if(redux.mysticism.hasValue(uuid) &&
                     ((Integer)redux.mysticism.getValue(uuid))>=20){
-                Sounds.ERROR.play(player);
+                Sounds.NO.play(player);
             }else if(redux.mysticism.hasValue(uuid) &&
                     Renown.getRenown(uuid)>=(((Integer)redux.mysticism.getValue(uuid))*5)){
                 Sounds.RENOWN_SHOP_PURCHASE.play(player);
@@ -315,7 +446,7 @@ public class RenownShopUpgradesGUI implements Listener {
                 Renown.setRenown(uuid, Renown.getRenown(uuid)-5);
                 redux.mysticism.setValue(uuid, (Integer) 1);
             }else{
-                Sounds.ERROR.play(player);
+                Sounds.NO.play(player);
             }
 
             player.openInventory(getRenownShopUpgradesGUI(player));
@@ -324,7 +455,7 @@ public class RenownShopUpgradesGUI implements Listener {
 
             if(redux.tenacity.hasValue(uuid) &&
                     ((Integer)redux.tenacity.getValue(uuid))>=5){
-                Sounds.ERROR.play(player);
+                Sounds.NO.play(player);
             }else if(redux.tenacity.hasValue(uuid) && Renown.getRenown(uuid)>=(((Integer)redux.tenacity.getValue(uuid))*25)){
                 Sounds.RENOWN_SHOP_PURCHASE.play(player);
                 Renown.setRenown(uuid, Renown.getRenown(uuid)-(((Integer)redux.tenacity.getValue(uuid))*25));
@@ -334,7 +465,7 @@ public class RenownShopUpgradesGUI implements Listener {
                 Renown.setRenown(uuid, Renown.getRenown(uuid)-25);
                 redux.tenacity.setValue(uuid, (Integer) 1);
             }else{
-                Sounds.ERROR.play(player);
+                Sounds.NO.play(player);
             }
 
             player.openInventory(getRenownShopUpgradesGUI(player));
@@ -343,13 +474,13 @@ public class RenownShopUpgradesGUI implements Listener {
 
             if(redux.theWay.hasValue(uuid) &&
                     ((Integer)redux.theWay.getValue(uuid))>=1){
-                Sounds.ERROR.play(player);
+                Sounds.NO.play(player);
             }else if(Renown.getRenown(uuid)>=50 && !redux.theWay.hasValue(uuid)){
                 Sounds.RENOWN_SHOP_PURCHASE.play(player);
                 Renown.setRenown(uuid, Renown.getRenown(uuid)-50);
                 redux.theWay.setValue(uuid, (Integer) 1);
             }else{
-                Sounds.ERROR.play(player);
+                Sounds.NO.play(player);
             }
 
             player.openInventory(getRenownShopUpgradesGUI(player));
@@ -358,13 +489,13 @@ public class RenownShopUpgradesGUI implements Listener {
 
             if(redux.fastPass.hasValue(uuid) &&
                     ((Integer)redux.fastPass.getValue(uuid))>=1){
-                Sounds.ERROR.play(player);
+                Sounds.NO.play(player);
             }else if(Renown.getRenown(uuid)>=100 && !redux.fastPass.hasValue(uuid)){
                 Sounds.RENOWN_SHOP_PURCHASE.play(player);
                 Renown.setRenown(uuid, Renown.getRenown(uuid)-100);
                 redux.fastPass.setValue(uuid, (Integer) 1);
             }else{
-                Sounds.ERROR.play(player);
+                Sounds.NO.play(player);
             }
 
             player.openInventory(getRenownShopUpgradesGUI(player));
@@ -373,13 +504,13 @@ public class RenownShopUpgradesGUI implements Listener {
 
             if(redux.heresy.hasValue(uuid) &&
                     ((Integer)redux.heresy.getValue(uuid))>=1){
-                Sounds.ERROR.play(player);
+                Sounds.NO.play(player);
             }else if(Renown.getRenown(uuid)>=50 && !redux.heresy.hasValue(uuid)){
                 Sounds.RENOWN_SHOP_PURCHASE.play(player);
                 Renown.setRenown(uuid, Renown.getRenown(uuid)-50);
                 redux.heresy.setValue(uuid, (Integer) 1);
             }else{
-                Sounds.ERROR.play(player);
+                Sounds.NO.play(player);
             }
 
             player.openInventory(getRenownShopUpgradesGUI(player));
@@ -388,13 +519,28 @@ public class RenownShopUpgradesGUI implements Listener {
 
             if(redux.experienceIndustrialComplex.hasValue(uuid) &&
                     ((Integer)redux.experienceIndustrialComplex.getValue(uuid))>=1){
-                Sounds.ERROR.play(player);
+                Sounds.NO.play(player);
             }else if(Renown.getRenown(uuid)>=80 && !redux.experienceIndustrialComplex.hasValue(uuid)){
                 Sounds.RENOWN_SHOP_PURCHASE.play(player);
                 Renown.setRenown(uuid, Renown.getRenown(uuid)-80);
                 redux.experienceIndustrialComplex.setValue(uuid, (Integer) 1);
             }else{
-                Sounds.ERROR.play(player);
+                Sounds.NO.play(player);
+            }
+
+            player.openInventory(getRenownShopUpgradesGUI(player));
+        }else if(event.getCurrentItem().getType().equals(Material.FENCE)){
+            Renown.hasRenown(uuid);
+
+            if(redux.promotion.hasValue(uuid) &&
+                    ((Integer)redux.promotion.getValue(uuid))>=1){
+                Sounds.NO.play(player);
+            }else if(Renown.getRenown(uuid)>=50 && !redux.promotion.hasValue(uuid)){
+                Sounds.RENOWN_SHOP_PURCHASE.play(player);
+                Renown.setRenown(uuid, Renown.getRenown(uuid)-50);
+                redux.promotion.setValue(uuid, (Integer) 1);
+            }else{
+                Sounds.NO.play(player);
             }
 
             player.openInventory(getRenownShopUpgradesGUI(player));
@@ -404,13 +550,13 @@ public class RenownShopUpgradesGUI implements Listener {
 
             if(redux.celebrity.hasValue(uuid) &&
                     ((Integer)redux.celebrity.getValue(uuid))>=1){
-                Sounds.ERROR.play(player);
-            }else if(Renown.getRenown(uuid)>=100 && !redux.celebrity.hasValue(uuid)){
+                Sounds.NO.play(player);
+            }else if(Renown.getRenown(uuid)>=300 && !redux.celebrity.hasValue(uuid)){
                 Sounds.RENOWN_SHOP_PURCHASE.play(player);
-                Renown.setRenown(uuid, Renown.getRenown(uuid)-100);
+                Renown.setRenown(uuid, Renown.getRenown(uuid)-300);
                 redux.celebrity.setValue(uuid, (Integer) 1);
             }else{
-                Sounds.ERROR.play(player);
+                Sounds.NO.play(player);
             }
 
             player.openInventory(getRenownShopUpgradesGUI(player));

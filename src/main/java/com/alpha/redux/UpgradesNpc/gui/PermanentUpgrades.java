@@ -177,6 +177,17 @@ public class PermanentUpgrades implements Listener {
                 "&e&l- &7Keep the &bDiamond Helmet&7.");
     }
 
+    public static String getMagnum(){
+        return colorCode("&7Triggers on: &c100 kills\n\n" +
+                "&7On trigger:\n" +
+                "&a&l- &7EXPLODE!!!\n\n" +
+                "&7BUT:\n" +
+                "&c&l- &7Die.\n\n" +
+                "&7On death:\n" +
+                "&e&l- &7Earn &e3 Renown&7.");
+    }
+
+
     public static String getToTheMoonLore(){
         return colorCode("&7Triggers on: &c100 kills\n\n" +
                 "&7On trigger:\n" +
@@ -217,17 +228,17 @@ public class PermanentUpgrades implements Listener {
         int level = playerData[1];
         int neededXP = playerData[0];
 
-        if(getPrestige(uuid)>=7 && level>=50){
+        if(redux.highlanderStreak.hasValue(uuid) && level>=50){
             return ItemMaker(Material.GOLD_BOOTS, ChatColor.YELLOW + "Highlander",
                     getHighLanderLore() + "\n\n" + ChatColor.YELLOW + "Click to select!", 1, true);
-        }else if(level<50){
+        }else if(redux.highlanderStreak.hasValue(uuid) && level<50){
             return ItemMaker(Material.GOLD_BOOTS, ChatColor.YELLOW + "Highlander",
                     getHighLanderLore() + "\n\n" + ChatColor.RED + "This requires level " + ChatColor.AQUA+"50\n" + ChatColor.RED +
                             "or higher.", 1, true);
         }else{
-            return ItemMaker(Material.GOLD_BOOTS, ChatColor.YELLOW + "Highlander",
-                    getHighLanderLore() + "\n\n" + ChatColor.RED + "This requires prestige VII\n" + ChatColor.RED +
-                            "or higher.", 1, true);
+            return ItemMaker(Material.BEDROCK, ChatColor.YELLOW + "Highlander",
+                    getHighLanderLore() + "\n\n" + ChatColor.RED + "Unlocked in Renown Shop!\n" + ChatColor.RED +
+                            "Bundle: " + ChatColor.GOLD + "Highlander", 1, true);
         }
     }
 
@@ -244,17 +255,17 @@ public class PermanentUpgrades implements Listener {
         int level = playerData[1];
         int neededXP = playerData[0];
 
-        if(getPrestige(uuid)>=20 && level>= 50){
+        if(redux.moonStreak.hasValue(uuid) && level>= 50){
             return ItemMaker(Material.ENDER_STONE, ChatColor.YELLOW + "To the Moon",
                     getToTheMoonLore() + "\n\n" + ChatColor.YELLOW + "Click to select!", 1, true);
-        }else if(level<50){
+        }else if(redux.moonStreak.hasValue(uuid) && level<50){
             return ItemMaker(Material.ENDER_STONE, ChatColor.YELLOW + "To the Moon",
                     getToTheMoonLore() + "\n\n" + ChatColor.RED + "This requires level "+ChatColor.AQUA+"50\n" + ChatColor.RED +
                             "or higher.", 1, true);
         }else{
-            return ItemMaker(Material.ENDER_STONE, ChatColor.YELLOW + "To the Moon",
-                    getToTheMoonLore() + "\n\n" + ChatColor.RED + "This requires prestige XV\n" + ChatColor.RED +
-                            "or higher.", 1, true);
+            return ItemMaker(Material.BEDROCK, ChatColor.YELLOW + "To the Moon",
+                    getToTheMoonLore() + "\n\n" + ChatColor.RED + "Unlocked in Renown Shop!\n" + ChatColor.RED +
+                            "Bundle: " + ChatColor.AQUA + "To the Moon", 1, true);
         }
     }
 
@@ -271,17 +282,44 @@ public class PermanentUpgrades implements Listener {
         int level = playerData[1];
         int neededXP = playerData[0];
 
-        if(getPrestige(uuid)>=20 && level>=100){
+        if(redux.uberStreak.hasValue(uuid) && level>=100){
             return ItemMaker(Material.GOLD_SWORD, ChatColor.YELLOW + "Uberstreak",
                     getUberLore() + "\n\n" + ChatColor.YELLOW + "Click to select!", 1, true);
-        }else if(level<100){
+        }else if(redux.uberStreak.hasValue(uuid) && level<100){
             return ItemMaker(Material.GOLD_SWORD, ChatColor.YELLOW + "Uberstreak",
                     getUberLore() + "\n\n" + ChatColor.RED + "This requires level "+ChatColor.AQUA+"100\n" + ChatColor.RED +
                             "or higher.", 1, true);
         }else{
-            return ItemMaker(Material.GOLD_SWORD, ChatColor.YELLOW + "Uberstreak",
-                    getUberLore() + "\n\n" + ChatColor.RED + "This requires prestige XX\n" + ChatColor.RED +
+            return ItemMaker(Material.BEDROCK, ChatColor.YELLOW + "Uberstreak",
+                    getUberLore() + "\n\n" + ChatColor.RED + "Unlocked in Renown Shop!\n" + ChatColor.RED +
+                            "Bundle: " + ChatColor.LIGHT_PURPLE + "Uberstreak", 1, true);
+        }
+    }
+
+    public static ItemStack getMagnumItem(String uuid, Player player){
+        hasPrestige(uuid);
+        hasMegaStreak(uuid);
+
+        if(getMegaStreak(uuid).equals("magnum")){
+            return ItemMaker(Material.NETHER_STAR, ChatColor.GREEN + "Magnum Opus",
+                    getMagnum() + "\n\n" + ChatColor.GREEN + "Already selected!", 1, true);
+        }
+
+        int[] playerData = GetCurrentLevel(uuid, xpManager.getXp(uuid), prestiges.getPrestige(uuid), player);
+        int level = playerData[1];
+        int neededXP = playerData[0];
+
+        if(redux.magnumOpus.hasValue(uuid) && level>=70){
+            return ItemMaker(Material.NETHER_STAR, ChatColor.YELLOW + "Magnum Opus",
+                    getMagnum() + "\n\n" + ChatColor.YELLOW + "Click to select!", 1, true);
+        }else if(redux.magnumOpus.hasValue(uuid) && level<70){
+            return ItemMaker(Material.NETHER_STAR, ChatColor.RED + "Magnum Opus",
+                    getMagnum() + "\n\n" + ChatColor.RED + "This requires level "+ChatColor.AQUA+"70\n" + ChatColor.RED +
                             "or higher.", 1, true);
+        }else{
+            return ItemMaker(Material.NETHER_STAR, ChatColor.RED + "Magnum Opus",
+                    getMagnum() + "\n\n" + ChatColor.RED + "Unlocked in Renown Shop!\n" + ChatColor.RED +
+                            "Bundle: " + ChatColor.GREEN + "Magnum Opus", 1, true);
         }
     }
 
@@ -298,17 +336,17 @@ public class PermanentUpgrades implements Listener {
         int level = playerData[1];
         int neededXP = playerData[0];
 
-        if(getPrestige(uuid)>=3 && level>=25){
+        if(redux.beastmodeStreak.hasValue(uuid) && level>=25){
             return ItemMaker(Material.DIAMOND_HELMET, ChatColor.YELLOW + "Beastmode",
                     getBeastModeLore() + "\n\n" + ChatColor.YELLOW + "Click to select!", 1, true);
-        }else if(level<25){
+        }else if(redux.beastmodeStreak.hasValue(uuid) && level<25){
             return ItemMaker(Material.DIAMOND_HELMET, ChatColor.RED + "Beastmode",
                     getBeastModeLore() + "\n\n" + ChatColor.RED + "This requires level "+ChatColor.AQUA+"25\n" + ChatColor.RED +
                             "or higher.", 1, true);
         }else{
-            return ItemMaker(Material.DIAMOND_HELMET, ChatColor.RED + "Beastmode",
-                    getBeastModeLore() + "\n\n" + ChatColor.RED + "This requires prestige III\n" + ChatColor.RED +
-                    "or higher.", 1, true);
+            return ItemMaker(Material.BEDROCK, ChatColor.RED + "Beastmode",
+                    getBeastModeLore() + "\n\n" + ChatColor.RED + "Unlocked in Renown Shop!\n" + ChatColor.RED +
+                    "Bundle: " + ChatColor.GREEN + "Beastmode", 1, true);
         }
     }
 
@@ -339,6 +377,8 @@ public class PermanentUpgrades implements Listener {
             megastreak = Material.DIAMOND_HELMET;
         }else if(getMegaStreak(uuid).equals("moon")){
             megastreak = Material.ENDER_STONE;
+        }else if(getMegaStreak(uuid).equals("magnum")){
+            megastreak = Material.NETHER_STAR;
         }
 
         ItemStack base_glass = advancedInventory.cGlass();
@@ -403,9 +443,11 @@ public class PermanentUpgrades implements Listener {
 
         advancedInventory.addInv(gui, getHigherLanderItem(uuid, player), 4, 2, false);
 
-        advancedInventory.addInv(gui, getToTheMoonItem(uuid,player), 5, 2, false);
+        advancedInventory.addInv(gui, getMagnumItem(uuid, player), 5, 2, false);
 
-        advancedInventory.addInv(gui, getUberItem(uuid, player), 6, 2, false);
+        advancedInventory.addInv(gui, getToTheMoonItem(uuid,player), 6, 2, false);
+
+        advancedInventory.addInv(gui, getUberItem(uuid, player), 7, 2, false);
 
         return gui;
     }
@@ -432,6 +474,9 @@ public class PermanentUpgrades implements Listener {
         }else if(getMegaStreak(uuid).equals("moon")){
             megastreak = Material.ENDER_STONE;
             lore = getToTheMoonLore();
+        }else if(getMegaStreak(uuid).equals("magnum")){
+            megastreak = Material.NETHER_STAR;
+            lore = getMagnum();
         }
 
         ItemStack empty = EmptySlotItem(uuid, 4);
@@ -477,6 +522,8 @@ public class PermanentUpgrades implements Listener {
             megastreak = Material.DIAMOND_HELMET;
         }else if(getMegaStreak(uuid).equals("moon")){
             megastreak = Material.ENDER_STONE;
+        }else if(getMegaStreak(uuid).equals("magnum")){
+            megastreak = Material.NETHER_STAR;
         }
 
         if(event.getCurrentItem().getType().equals(megastreak)){
@@ -507,6 +554,8 @@ public class PermanentUpgrades implements Listener {
                 megastreak = Material.DIAMOND_HELMET;
         }else if(getMegaStreak(uuid).equals("moon")){
             megastreak = Material.ENDER_STONE;
+        }else if(getMegaStreak(uuid).equals("magnum")){
+            megastreak = Material.NETHER_STAR;
         }
 
         if(event.getCurrentItem().getType().equals(megastreak)){
@@ -532,6 +581,7 @@ public class PermanentUpgrades implements Listener {
         Material moon = Material.ENDER_STONE;
         Material beastmode = Material.DIAMOND_HELMET;
         Material overdrive = Material.BLAZE_POWDER;
+        Material magnum = Material.NETHER_STAR;
 
         Material clicked = event.getCurrentItem().getType();
 
@@ -542,17 +592,29 @@ public class PermanentUpgrades implements Listener {
         hasMegaStreak(uuid);
         hasPrestige(uuid);
 
+        if(clicked.equals(Material.BEDROCK)){
+            Sounds.ERROR.play(player);
+        }
+
         if(clicked.equals(uber) &&
             !getMegaStreak(uuid).equals("uber") &&
-            getPrestige(uuid) >= 20 &&
+            redux.uberStreak.hasValue(uuid) &&
             level >= 100){
             Sounds.SUCCESS.play(player);
             setMega(uuid,"uber");
             setStreak(uuid, 0);
             player.openInventory(getKillstreakUpgrades(player));
+        }if(clicked.equals(magnum) &&
+                !getMegaStreak(uuid).equals("magnum") &&
+                redux.magnumOpus.hasValue(uuid) &&
+                level >= 70){
+            Sounds.SUCCESS.play(player);
+            setMega(uuid,"magnum");
+            setStreak(uuid, 0);
+            player.openInventory(getKillstreakUpgrades(player));
         }else if(clicked.equals(moon) &&
                 !getMegaStreak(uuid).equals("moon") &&
-                getPrestige(uuid) >= 15 &&
+                redux.moonStreak.hasValue(uuid) &&
                 level >= 50){
             Sounds.SUCCESS.play(player);
             setMega(uuid,"moon");
@@ -560,7 +622,7 @@ public class PermanentUpgrades implements Listener {
             player.openInventory(getKillstreakUpgrades(player));
         }else if(clicked.equals(highlander) &&
                 !getMegaStreak(uuid).equals("highlander") &&
-                getPrestige(uuid) >= 7 &&
+                redux.highlanderStreak.hasValue(uuid) &&
                 level >= 50){
             Sounds.SUCCESS.play(player);
             setMega(uuid,"highlander");
@@ -568,7 +630,7 @@ public class PermanentUpgrades implements Listener {
             player.openInventory(getKillstreakUpgrades(player));
         }if(clicked.equals(beastmode) &&
                 !getMegaStreak(uuid).equals("beastmode") &&
-                getPrestige(uuid) >= 3 &&
+                redux.beastmodeStreak.hasValue(uuid) &&
                 level >= 25){
             Sounds.SUCCESS.play(player);
             setMega(uuid,"beastmode");

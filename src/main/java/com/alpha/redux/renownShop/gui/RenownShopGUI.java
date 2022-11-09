@@ -96,6 +96,7 @@ public class RenownShopGUI implements Listener {
             player.openInventory(RenownShopUpgradesGUI.getRenownShopUpgradesGUI(player));
             Sounds.BUTTON.play(player);
         }else if(event.getCurrentItem().getType().equals(Material.BLAZE_POWDER)){
+            player.openInventory(RenownShopKillstreaksGUI.getRenownShopKillstreaksGUI(player));
             Sounds.BUTTON.play(player);
         }else if(event.getCurrentItem().getType().equals(Material.ARROW)){
             gui.PrestigeMenu(player);

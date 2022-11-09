@@ -4,6 +4,7 @@ import com.alpha.redux.DeathHandler.ReduxDeathEvent;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
 import com.alpha.redux.redux;
+import org.bukkit.Material;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -13,8 +14,9 @@ public class Streaker extends PitPerk {
 
     public Streaker(){
         this.setRefID("streaker");
+        this.setMaterial(Material.WHEAT);
         this.setName(colorCode("&aStreaker"));
-        this.setLore(colorCode("&7Triple streak kill &bXP &7bonus."));
+        this.setLore(colorCode("&7Triple streak kill &bbase XP &7bonus."));
         this.setCost(8000);
         this.setLevel(50);
     }

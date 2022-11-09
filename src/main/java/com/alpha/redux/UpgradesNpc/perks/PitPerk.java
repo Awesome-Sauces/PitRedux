@@ -1,5 +1,7 @@
 package com.alpha.redux.UpgradesNpc.perks;
 
+import org.bukkit.Material;
+
 public abstract class PitPerk {
 
     private String name;
@@ -7,11 +9,13 @@ public abstract class PitPerk {
     private int cost;
     private int level;
     private String refID;
+    private Material material;
 
     public PitPerk(){}
 
-    public PitPerk(String refID, String name, String lore, int cost, int level){
+    public PitPerk(String refID, String name, String lore, int cost, int level, Material material){
         this.refID = refID;
+        this.material = material;
         this.name = name;
         this.lore = lore;
         this.cost = cost;
@@ -58,5 +62,13 @@ public abstract class PitPerk {
 
     public String getRefID(){
         return refID;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 }

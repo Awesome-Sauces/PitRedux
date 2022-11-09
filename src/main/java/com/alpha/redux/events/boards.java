@@ -82,6 +82,9 @@ public class boards implements Listener {
         }else if (Objects.equals(getMegaStreak(uuid), "beastmode")){
             select_mega = "Beastmode";
             mega_color = ChatColor.translateAlternateColorCodes('&', "&a");
+        }else if (Objects.equals(getMegaStreak(uuid), "magnum")){
+            select_mega = "Magnum Opus";
+            mega_color = ChatColor.translateAlternateColorCodes('&', "&e");
         }else if (Objects.equals(getMegaStreak(uuid), "uber")){
             select_mega = "Uberstreak";
             mega_color = ChatColor.translateAlternateColorCodes('&', "&d");
@@ -100,7 +103,8 @@ public class boards implements Listener {
         hasMegaStreak(uuid);
         if (Objects.equals(getMegaStreak(uuid), "highlander") ||
                 Objects.equals(getMegaStreak(uuid), "beastmode") ||
-                Objects.equals(getMegaStreak(uuid), "overdrive")){
+                Objects.equals(getMegaStreak(uuid), "overdrive") ||
+                Objects.equals(getMegaStreak(uuid), "magnum")){
             return 50;
         }else if (Objects.equals(getMegaStreak(uuid), "uber") ||
                 Objects.equals(getMegaStreak(uuid), "moon")){
@@ -160,7 +164,7 @@ public class boards implements Listener {
             lobby = "M14E";
         }
 
-        String version = ChatColor.GRAY + "v1.3.5 " + ChatColor.DARK_GRAY + lobby; // Pit Redux Version
+        String version = ChatColor.GRAY + "v1.4.5 " + ChatColor.DARK_GRAY + lobby; // Pit Redux Version
 
         String spacer1 = " "; //blank space
         String spacer2 = "  "; //blank space

@@ -47,12 +47,11 @@ public class nonPermItems {
 
                 if(getStreak(String.valueOf(player.getUniqueId())) >= 300){
                     player.sendMessage(ChatColor.GREEN + "Congrats! " + ChatColor.GRAY + "you reached a 300 kill streak and kept your lives!");
-                }
 
-                try {
+                }else{
                     if(Objects.equals(getMegaStreak(String.valueOf(player.getUniqueId())), "uber")){
                         registerCommonItems(player);
-                    }else if(getStreak(String.valueOf(player.getUniqueId())) < 99){
+                    }else if(getStreak(String.valueOf(player.getUniqueId())) < 299){
                         try{
                             if(player.getInventory().getLeggings().getType().equals(Material.LEATHER_LEGGINGS)){
                                 MysticLivesHandler(player, player.getInventory().getLeggings());
@@ -63,10 +62,6 @@ public class nonPermItems {
 
                         registerCommonItems(player);
                     }
-
-
-                } catch (Exception e) {
-
                 }
 
 

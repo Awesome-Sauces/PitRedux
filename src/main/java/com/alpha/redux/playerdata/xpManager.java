@@ -217,6 +217,24 @@ public class xpManager {
         return failedReturn;
     }
 
+    public static int getLevelXP(Player player, int level, int PlayerPrestige) {
+        int CurrentXpMoment = 0;
+        int current_level = 0;
+        int xp_to_next_level = 0;
+        for (int i = 0; i < XpAmounts.size(); i++) {
+
+            current_level=i;
+
+            CurrentXpMoment += XpAmounts.get(i) + (XpAmounts.get(i) * PrestigeXpAmount(PlayerPrestige));
+
+            if(current_level-1==level){
+                return CurrentXpMoment;
+            }
+        }
+        return 0;
+    }
+
+
     public static int[] GetCurrentLevels(String player, Integer PlayerXpAmount, Integer PlayerPrestige) {
         int CurrentXpMoment = 0;
         int current_level = 0;

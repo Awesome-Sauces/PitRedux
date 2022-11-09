@@ -35,6 +35,7 @@ import org.bukkit.util.Vector;
 import java.util.*;
 
 import static com.alpha.redux.DeathHandler.MysticUtils.MysticRepairs;
+import static com.alpha.redux.DeathHandler.ProccessHit.KillMan;
 import static com.alpha.redux.apis.FancyText.compileListToString;
 import static com.alpha.redux.apis.FancyText.hoverText;
 import static com.alpha.redux.apis.HeadNames.headnames.changeName;
@@ -59,8 +60,8 @@ import static com.alpha.redux.playerdata.Renown.setRenown;
 import static com.alpha.redux.playerdata.economy.*;
 import static com.alpha.redux.playerdata.prestiges.*;
 import static com.alpha.redux.playerdata.streaks.*;
-import static com.alpha.redux.playerdata.xpManager.GetCurrentLevel;
-import static com.alpha.redux.playerdata.xpManager.getXp;
+import static com.alpha.redux.playerdata.xpManager.*;
+import static com.alpha.redux.playerdata.xpManager.getLevelXP;
 import static com.alpha.redux.questMaster.bossBattles.maldingBoss.summonBoss;
 import static com.alpha.redux.renownShop.CookieMonster.MonsterHandler.createMonsterBoss;
 import static com.alpha.redux.well.enchanters.MysticSword.*;
@@ -175,9 +176,7 @@ public class command implements CommandExecutor {
             player.sendMessage(colorCode("&c" + playerExists(player).getPerks()));
 
              */
-            redux.moonStreak.addValue(args[0], Integer.valueOf(args[1]));
-
-            redux.moonStreak.test();
+            setXp(player.getUniqueId().toString(),getLevelXP(player, Integer.parseInt(args[0]), getPrestige(player.getUniqueId().toString())));
 
             return true;
         }
@@ -762,20 +761,7 @@ public class command implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("oof")) {
-            playerExists(player).setMoonXP(0);
-            //deleteHologramStreak(player);
-            player.removePotionEffect(PotionEffectType.WEAKNESS);
-            ClearAndCheck(player);
-            setStreak(String.valueOf(player.getUniqueId()), 0);
-            xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
-            Strength.put(String.valueOf(player.getUniqueId()), 0.0);
-            mega_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
-            true_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
-            xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
-            Location loc = getSpawnLocation(player.getWorld());
-            player.teleport(loc);
-            boards.CreateScore(player);
-            NametagEdit.getApi().setNametag(player, ChatEventApiGetLevelColor(player.getDisplayName(), String.valueOf(player.getUniqueId()))+ rank.getNameColor(player), "");
+            KillMan(player,player);
             return true;
         }
 

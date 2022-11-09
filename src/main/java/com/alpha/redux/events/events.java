@@ -668,7 +668,7 @@ public class events implements Listener {
             event.getPlayer().getItemInHand().getItemMeta().getLore().equals(enchants.firstaidfull.getItemMeta().getLore())){
                 event.setCancelled(true);
                 player.setItemInHand(enchants.firstaidempty);
-                player.setHealth(Math.min(20, player.getHealth()+3));
+                player.setHealth(Math.min(player.getMaxHealth(), player.getHealth()+5));
                 Sounds.FIRST_AID.play(player);
 
                 Bukkit.getScheduler().scheduleSyncDelayedTask(redux.INSTANCE, new Runnable() {
