@@ -3,10 +3,6 @@ package com.alpha.redux.eventManagers;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.items.enchants;
 import com.alpha.redux.items.itemManager;
-import com.alpha.redux.renownShop.damageDecrease;
-import com.alpha.redux.renownShop.damageIncrease;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -18,19 +14,12 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-import static com.alpha.redux.DeathHandler.ProccessHit.StrengthCheck;
-import static com.alpha.redux.DeathHandler.killHandler.getNPC;
 import static com.alpha.redux.DeathHandler.killHandler.isNPC;
 import static com.alpha.redux.ItemEvents.pants.VenomEvent;
 import static com.alpha.redux.ItemEvents.pants.triggerChestplateMalding;
 import static com.alpha.redux.apis.actionbarplus.sendHealthBar;
 import static com.alpha.redux.apis.locations.getSpawnProtection;
-import static com.alpha.redux.playerdata.prestiges.getPrestige;
-import static com.alpha.redux.playerdata.streaks.*;
-import static com.alpha.redux.playerdata.streaks.getStreak;
-import static com.alpha.redux.questMaster.bossBattles.maldingBoss.maldingName;
 import static com.alpha.redux.well.loreChecker.CheckEnchantOnPant;
 import static com.alpha.redux.well.loreChecker.CheckEnchantOnSword;
 
@@ -197,8 +186,6 @@ public class ReduxDamageEvent extends Event implements Cancellable {
         if(isNPC(defender) && !isNPC(attacker)){
             this.subtractReduxDamage(event.getDamage()*.4);
         }
-
-        if(!isNPC(attacker)) this.addReduxDamage(Math.min(this.getReduxDamage() * damageIncrease.getIncrease(ReduxAttacker.getPlayerUUID()), this.getReduxDamage()*.1));
 
         /*
         if(true_damage_amount.containsKey(ReduxDefender.getPlayerUUID())){

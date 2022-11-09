@@ -5,21 +5,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.Material;
 import static com.alpha.redux.apis.advancedInventory.ItemMaker;
-import static com.alpha.redux.renownShop.GoldnBoosted.getGoldIncrease;
-import static com.alpha.redux.renownShop.xpIncrease.getXpIncrease;
-import static com.alpha.redux.renownShop.xpLicious.getXpliciousIncrease;
+
+
+
 
 import com.alpha.redux.events.boards;
 
 public class RenownItems {
 
-    public static ItemStack DamageItemIncrease(String uuid){
-        return ItemMaker(Material.REDSTONE, ChatColor.YELLOW + "Damage Increase",
-                ChatColor.GRAY + "Each purchase gives you " + ChatColor.RED + "+1% damage\n" + ChatColor.GRAY +
-                "Capped at " + "+10%\n\n" + ChatColor.GRAY +
-                "Current boost: " + ChatColor.RED +  "+" + Math.min(damageIncrease.getIncrease(uuid), 10) + "%\n\n" +
-                ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "16 Renown", 1, true);
-    }
 
     public static ItemStack CookieItemIncrease(String uuid){
         return ItemMaker(Material.COOKIE, ChatColor.YELLOW + "Cookie Monster Hunter",
@@ -33,20 +26,13 @@ public class RenownItems {
                         ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "64 Renown", 1, true);
     }
 
-    public static ItemStack DamageItemDecrease(String uuid){
-        return ItemMaker(Material.IRON_CHESTPLATE, ChatColor.YELLOW + "Damage Resistance",
-                ChatColor.GRAY + "Each purchase gives you " + ChatColor.RED + "+5% resistance\n" + ChatColor.GRAY +
-                "Max tier: " + ChatColor.RED + "X\n"+ ChatColor.GRAY +
-                "Current tier: " + ChatColor.RED + boards.integerToRoman(damageDecrease.getDecrease(uuid) / 5) + "\n\n" +
-                ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "20 Renown", 1, true);
-    }
+
 
 
     public static ItemStack XpItemIncrease(String uuid){
         return ItemMaker(Material.EXP_BOTTLE, ChatColor.YELLOW + "Factory",
                 ChatColor.GRAY + "Each purchase gives you " + ChatColor.AQUA + "+5 xp cap!\n" + ChatColor.GRAY +
                         "But is capped at" + ChatColor.YELLOW + " 500\n\n" + ChatColor.GRAY +
-                        "Current boost: " + ChatColor.AQUA +  "+" + getXpIncrease(uuid) + " cap\n\n" +
                         ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "32 Renown", 1, true);
     }
 
@@ -54,7 +40,6 @@ public class RenownItems {
         return ItemMaker(Material.GOLD_INGOT, ChatColor.YELLOW + "Gold n' Boosted",
                 ChatColor.GRAY + "Each purchase gives you " + ChatColor.GOLD + "+5% gold!\n" + ChatColor.GRAY +
                         "But is capped at" + ChatColor.YELLOW + " 50%\n\n" + ChatColor.GRAY +
-                        "Current boost: " + ChatColor.GOLD +  "+" + getGoldIncrease(uuid) + "%\n\n" +
                         ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "48 Renown", 1, true);
     }
 
@@ -62,7 +47,6 @@ public class RenownItems {
         return ItemMaker(Material.EXP_BOTTLE, ChatColor.YELLOW + "Xplicious",
                 ChatColor.GRAY + "Each purchase gives you " + ChatColor.AQUA + "+15 xp cap and +5% xp!\n" + ChatColor.GRAY +
                         "But is capped at" + ChatColor.YELLOW + " 500\n\n" + ChatColor.GRAY +
-                        "Current boost: " + ChatColor.AQUA +  "+" + getXpliciousIncrease(uuid) + " cap\n\n" +
                         ChatColor.RED + "Requires prestige X\n" +
                         ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + "64 Renown", 1, true);
     }

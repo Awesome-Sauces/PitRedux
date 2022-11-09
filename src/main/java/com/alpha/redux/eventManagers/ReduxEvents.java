@@ -4,47 +4,21 @@ import com.alpha.redux.DeathHandler.ReduxDeathEvent;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.eventManagers.ArmorEvents.ArmorEquipEvent;
 import com.alpha.redux.items.enchants;
-import com.alpha.redux.items.itemManager;
 import com.alpha.redux.playerdata.economy;
-import com.alpha.redux.questMaster.bossBattles.BossMalding;
 import com.alpha.redux.redux;
-import com.alpha.redux.renownShop.CookieMonster.Monster;
 import com.alpha.redux.renownShop.CookieMonster.MonsterHandler;
-import com.alpha.redux.renownShop.damageDecrease;
-import com.alpha.redux.renownShop.damageIncrease;
-import net.citizensnpcs.api.CitizensAPI;
-import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitTask;
 
-import java.util.Objects;
 import java.util.Random;
 
-import static com.alpha.redux.DeathHandler.ProccessHit.KillMan;
-import static com.alpha.redux.DeathHandler.ProccessHit.StrengthCheck;
-import static com.alpha.redux.DeathHandler.killHandler.getNPC;
 import static com.alpha.redux.DeathHandler.killHandler.isNPC;
-import static com.alpha.redux.ItemEvents.pants.*;
-import static com.alpha.redux.ItemEvents.swords.*;
-import static com.alpha.redux.ItemEvents.swords.EXEcutioner;
-import static com.alpha.redux.apis.actionbarplus.sendHealthBar;
-import static com.alpha.redux.apis.locations.getBotSpawnLocation;
 import static com.alpha.redux.apis.locations.getSpawnProtection;
 import static com.alpha.redux.entityHandlers.ReduxPlayerHandler.playerExists;
-import static com.alpha.redux.playerdata.prestiges.getPlugin;
-import static com.alpha.redux.playerdata.prestiges.getPrestige;
-import static com.alpha.redux.playerdata.streaks.mega_damage_amount;
-import static com.alpha.redux.playerdata.streaks.true_damage_amount;
-import static com.alpha.redux.questMaster.bossBattles.maldingBoss.MaldingPlayerHandlers;
-import static com.alpha.redux.questMaster.bossBattles.maldingBoss.maldingName;
 
 public class ReduxEvents implements Listener {
     @EventHandler

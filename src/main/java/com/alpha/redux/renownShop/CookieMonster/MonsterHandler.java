@@ -27,12 +27,13 @@ import static com.alpha.redux.questMaster.bossBattles.maldingBoss.gearNearby;
 
 public class MonsterHandler {
 
-    public static void percentageSpawn(Player player){
+    public static void percentageSpawn(Player player){/*
         if(Math.random() <= ((double)Monster.getMonsterChance(String.valueOf(player.getUniqueId()))/3000)){
             createMonsterBoss(player);
             player.sendMessage(colorCode("&c&lWOAH! &7a wild &bCookie Monster &7has appeared!"));
             Sounds.PRESTIGE.play(player);
         }
+        */
     }
 
     public static void createMonsterBoss(Player player){

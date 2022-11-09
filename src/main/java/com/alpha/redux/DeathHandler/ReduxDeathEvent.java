@@ -46,8 +46,6 @@ import static com.alpha.redux.playerdata.bounties.BountyManager;
 import static com.alpha.redux.playerdata.economy.addEconomy;
 import static com.alpha.redux.playerdata.economy.hasEconomy;
 import static com.alpha.redux.playerdata.streaks.*;
-import static com.alpha.redux.renownShop.GoldnBoosted.getGoldIncrease;
-import static com.alpha.redux.renownShop.xpIncrease.getXpIncrease;
 
 public class ReduxDeathEvent extends Event implements Cancellable{
     private static final HandlerList HANDLERS = new HandlerList();

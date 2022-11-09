@@ -3,22 +3,18 @@ package com.alpha.redux.entityHandlers;
 import com.alpha.redux.boosters.Booster;
 import com.alpha.redux.items.itemManager;
 import com.alpha.redux.playerdata.streaks;
-import com.alpha.redux.renownShop.GoldnBoosted;
 import com.alpha.redux.renownShop.RenownStorage;
-import org.bukkit.Bukkit;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static com.alpha.redux.commands.command.booster;
 import static com.alpha.redux.funEvents.event.twoTimesEvent;
 import static com.alpha.redux.playerdata.streaks.*;
-import static com.alpha.redux.renownShop.xpIncrease.getXpIncrease;
 
 public class ReduxPlayerUtils {
 
-    public static int calculateExp(ReduxPlayer player){
+    public static int calculateExp(ReduxPlayer player) {
         List<String> penchants = new ArrayList<>();
         List<String> senchants = new ArrayList<>();
 
@@ -28,19 +24,19 @@ public class ReduxPlayerUtils {
 
         int XP_BOOSTER = 1;
 
-        if(Booster.xpActive) XP_BOOSTER+=1;
+        if (Booster.xpActive) XP_BOOSTER += 1;
 
         int MULTIPLIER = streaks.StreakManager(player.player);
         int XP_MULTIPLIER = 0;
         if (MULTIPLIER == 2) XP_MULTIPLIER += 2;
         else if (MULTIPLIER == 3) XP_MULTIPLIER += 1;
-        else if(MULTIPLIER == 1) XP_MULTIPLIER += 1;
-        else if(MULTIPLIER == 7) XP_MULTIPLIER += 3;
+        else if (MULTIPLIER == 1) XP_MULTIPLIER += 1;
+        else if (MULTIPLIER == 7) XP_MULTIPLIER += 3;
 
 
-        if(player.getPantEnchants() != null) penchants = player.getPantEnchants();
+        if (player.getPantEnchants() != null) penchants = player.getPantEnchants();
 
-        if(!penchants.isEmpty())
+        if (!penchants.isEmpty())
             for (String sw : penchants) {
                 switch (sw) {
 
@@ -83,9 +79,9 @@ public class ReduxPlayerUtils {
                 }
             }
 
-        if(player.getSwordEnchants() != null) senchants = player.getSwordEnchants();
+        if (player.getSwordEnchants() != null) senchants = player.getSwordEnchants();
 
-        if(!senchants.isEmpty())
+        if (!senchants.isEmpty())
             for (String sw : senchants) {
                 switch (sw) {
 
@@ -132,24 +128,22 @@ public class ReduxPlayerUtils {
         }
 
 
-
-        if (player.getBoots() != null && player.getBoots().getItemMeta().equals(itemManager.heistMasterI.getItemMeta())) if (new Random().nextInt(2) == 1) master = 2;
-        if (player.getBoots() != null && player.getBoots().getItemMeta().equals(itemManager.heistMasterII.getItemMeta())) master = 2;
-        if (player.getBoots() != null && player.getBoots().getItemMeta().equals(itemManager.heistMasterIII.getItemMeta())) master = 3;
+        if (player.getBoots() != null && player.getBoots().getItemMeta().equals(itemManager.heistMasterI.getItemMeta()))
+            if (new Random().nextInt(2) == 1) master = 2;
+        if (player.getBoots() != null && player.getBoots().getItemMeta().equals(itemManager.heistMasterII.getItemMeta()))
+            master = 2;
+        if (player.getBoots() != null && player.getBoots().getItemMeta().equals(itemManager.heistMasterIII.getItemMeta()))
+            master = 3;
 
 
         if (xp_amount_mega.containsKey(player.uuid)) {
             xp_Amount += xp_amount_mega.get(player.uuid);
         }
 
-        double final_xp_amount = ((xp_Amount * XP_MULTIPLIER)*twoTimesEvent);
+        double final_xp_amount = ((xp_Amount * XP_MULTIPLIER) * twoTimesEvent);
 
         hasMegaStreak(player.uuid);
-        if(getMegaStreak(player.uuid).equalsIgnoreCase("beastmode")) return ((int) (Math.round((Math.min((final_xp_amount + getXpIncrease(player.uuid) * twoTimesEvent), (XP_CAP + 100 + getXpIncrease(player.uuid)) * twoTimesEvent))*player.getPlayerXpBooster())) * master)*XP_BOOSTER;
-        else if(getMegaStreak(player.uuid).equalsIgnoreCase("moon")) return ((int) (Math.round((Math.min((final_xp_amount + getXpIncrease(player.uuid)) * twoTimesEvent, (XP_CAP + 7000 + getXpIncrease(player.uuid) )* twoTimesEvent))*player.getPlayerXpBooster())) * master)*XP_BOOSTER;
-        else return (int) ((((int) (Math.round(Math.min((final_xp_amount + getXpIncrease(player.uuid)) * twoTimesEvent, (XP_CAP + getXpIncrease(player.uuid))*twoTimesEvent))) * player.getPlayerXpBooster())) * master)*XP_BOOSTER;
-
-
+        return (int) final_xp_amount;
     }
 
     public static int calculateGoldAmount(ReduxPlayer player){
@@ -249,11 +243,11 @@ public class ReduxPlayerUtils {
 
         int FINAL_AMOUNT = ((((int) (((Gold_Amount + (Gold_Amount *GOLD_MULTIPLIER)) * twoTimesEvent) * player.getPlayerGoldBooster())) * master)*GOLD_BOOSTER);
 
-        GoldnBoosted.hasGoldIncrease(player.uuid);
 
-        double booster = (double)GoldnBoosted.getGoldIncrease(player.uuid)/100;
 
-        return (int) ((FINAL_AMOUNT * booster) + FINAL_AMOUNT);
+
+
+        return (int) ((FINAL_AMOUNT) + FINAL_AMOUNT);
     }
 
 }

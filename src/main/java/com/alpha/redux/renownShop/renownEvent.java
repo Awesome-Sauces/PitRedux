@@ -11,17 +11,6 @@ public class renownEvent {
 
             event.setCancelled(true);
 
-            BuyMonsterIncrease(event);
-            BuyDamageIncrease(event);
-            BuyXpIncrease(event);
-            BuyCorruptedPearl(event);
-            BuyDamageDecrease(event);
-            BuyColorFulBoxers(event);
-            BuyUberDrop(event);
-            BuyThreeQuest(event);
-            BuyScythe(event);
-            BuyMysticism(event);
-            BuyAtom(event);
 
             return;
         }else{

@@ -1,6 +1,5 @@
 package com.alpha.redux.questMaster;
 
-import com.alpha.redux.renownShop.damageIncrease;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

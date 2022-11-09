@@ -17,8 +17,7 @@ public class shopGUI {
         ItemStack base_glass = advancedInventory.cGlass();
 
         ItemStack cookie = RenownItems.CookieItemIncrease(String.valueOf(player.getUniqueId()));
-        ItemStack dmg_increase = RenownItems.DamageItemIncrease(String.valueOf(player.getUniqueId()));
-        ItemStack dmg_decrease = RenownItems.DamageItemDecrease(String.valueOf(player.getUniqueId()));
+
         ItemStack xp_increase = RenownItems.XpItemIncrease(String.valueOf(player.getUniqueId()));
         ItemStack colorfulBox = RenownItems.Boxers();
         ItemStack pearl = RenownItems.CorruptedPearl();
@@ -36,10 +35,10 @@ public class shopGUI {
         }
 
         // First Row
-        advancedInventory.addInv(gui, dmg_increase, 3, 2, false);
+
         advancedInventory.addInv(gui, xp_increase, 4, 2, false);
         advancedInventory.addInv(gui, cookie, 5, 2, false);
-        advancedInventory.addInv(gui, dmg_decrease, 6, 2, false);
+
         advancedInventory.addInv(gui, colorfulBox, 7, 2, false);
         // Second Row
         advancedInventory.addInv(gui, uberDrop, 3, 3, false);

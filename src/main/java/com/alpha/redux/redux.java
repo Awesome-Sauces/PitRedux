@@ -213,14 +213,10 @@ public class redux extends JavaPlugin {
         //SLAPI.loadGold();
         SLAPI.loadXp();
         xpManager.XpLevelCalculation();
-        SLAPI.loadXPInc();
         SLAPI.loadGoldReq();
         SLAPI.loadMonster();
-        SLAPI.loadDmgInc();
         SLAPI.loadRenown();
-        SLAPI.loadDmgDec();
         SLAPI.loadMystic();
-        SLAPI.loadGoldInc();
 
         // DataStore
         experienceIndustrialComplex.loadHashMap();
@@ -369,9 +365,6 @@ public class redux extends JavaPlugin {
 
             @Override
             public void run() {
-                SLAPI.saveDmgInc();
-                SLAPI.saveXPInc();
-                SLAPI.saveDmgDec();
                 SLAPI.saveMystic();
                 SLAPI.savePrestige();
                 SLAPI.saveXp();
@@ -380,7 +373,6 @@ public class redux extends JavaPlugin {
                 SLAPI.saveBotBooster();
                 SLAPI.saveXpBooster();
                 SLAPI.saveGoldBooster();
-                SLAPI.saveGoldInc();
                 SLAPI.saveGoldReq();
                 experienceIndustrialComplex.saveHashMap();
                 fastPass.saveHashMap();
@@ -405,12 +397,8 @@ public class redux extends JavaPlugin {
                 perkSlotThree.saveHashMap();
                 perkSlotFour.saveHashMap();
 
-                SLAPI.loadGoldInc();
                 SLAPI.loadMonster();
-                SLAPI.loadXPInc();
-                SLAPI.loadDmgInc();
                 SLAPI.loadGoldReq();
-                SLAPI.loadDmgDec();
                 SLAPI.loadMystic();
                 SLAPI.loadXp();
                 SLAPI.loadBotBooster();
@@ -451,11 +439,7 @@ public class redux extends JavaPlugin {
         getCakeLocation().getBlock().setType(Material.AIR);
         SLAPI.savePrestige();
         SLAPI.saveXp();
-        SLAPI.saveDmgInc();
-        SLAPI.saveXPInc();
-        SLAPI.saveDmgDec();
         SLAPI.saveMystic();
-        SLAPI.saveGoldInc();
         SLAPI.saveRenown();
         SLAPI.saveGoldReq();
         SLAPI.saveMonster();

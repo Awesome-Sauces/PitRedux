@@ -5,18 +5,11 @@ import com.alpha.redux.boosters.XpBoosterData;
 import com.alpha.redux.playerdata.*;
 import com.alpha.redux.renownShop.CookieMonster.Monster;
 import com.alpha.redux.renownShop.MysticismChance;
-import com.alpha.redux.renownShop.damageDecrease;
-import com.alpha.redux.renownShop.damageIncrease;
 
 import static com.alpha.redux.playerdata.Renown.getRenownMap;
 import static com.alpha.redux.playerdata.prestiges.*;
 import static com.alpha.redux.playerdata.xpManager.getXpMap;
-import static com.alpha.redux.renownShop.GoldnBoosted.getGoldIncreaseMap;
-import static com.alpha.redux.renownShop.GoldnBoosted.setGoldIncrease;
-import static com.alpha.redux.renownShop.MysticismChance.getMysticismChance;
 import static com.alpha.redux.renownShop.MysticismChance.getMysticismChanceMap;
-import static com.alpha.redux.renownShop.damageIncrease.getIncreaseMap;
-import static com.alpha.redux.renownShop.xpIncrease.*;
 
 public class SLAPI {
 
@@ -159,65 +152,4 @@ public class SLAPI {
         }
     }
 
-
-    public static void saveDmgInc(){
-        for(String p : getIncreaseMap().keySet()){
-            plugin_experience.getConfig().set("damage."+p, getIncreaseMap().get(p));
-        }
-        plugin_experience.saveConfig();
-    }
-
-
-    public static void loadDmgInc(){
-        if (!plugin_experience.getConfig().contains("damage")) return;
-        for (String s : plugin_experience.getConfig().getConfigurationSection("damage").getKeys(false))
-        {
-            damageIncrease.setIncrease(s, plugin_experience.getConfig().getInt("damage."+s));
-        }
-    }
-
-    public static void saveXPInc(){
-        for(String p : getXpIncreaseMap().keySet()){
-            plugin_experience.getConfig().set("inc."+p, getXpIncreaseMap().get(p));
-        }
-        plugin_experience.saveConfig();
-    }
-
-    public static void loadXPInc(){
-        if (!plugin_experience.getConfig().contains("inc")) return;
-        for (String s : plugin_experience.getConfig().getConfigurationSection("inc").getKeys(false))
-        {
-            setXpIncrease(s, plugin_experience.getConfig().getInt("inc."+s));
-        }
-    }
-
-    public static void saveGoldInc(){
-        for(String p : getGoldIncreaseMap().keySet()){
-            plugin_experience.getConfig().set("goldinc."+p, getGoldIncreaseMap().get(p));
-        }
-        plugin_experience.saveConfig();
-    }
-
-    public static void loadGoldInc(){
-        if (!plugin_experience.getConfig().contains("goldinc")) return;
-        for (String s : plugin_experience.getConfig().getConfigurationSection("goldinc").getKeys(false))
-        {
-            setGoldIncrease(s, plugin_experience.getConfig().getInt("goldinc."+s));
-        }
-    }
-
-    public static void saveDmgDec(){
-        for(String p : damageDecrease.getDecreaseMap().keySet()){
-            plugin_experience.getConfig().set("dec."+p, damageDecrease.getDecreaseMap().get(p));
-        }
-        plugin_experience.saveConfig();
-    }
-
-    public static void loadDmgDec(){
-        if (!plugin_experience.getConfig().contains("dec")) return;
-        for (String s : plugin_experience.getConfig().getConfigurationSection("dec").getKeys(false))
-        {
-            damageDecrease.setDecrease(s, plugin_experience.getConfig().getInt("dec."+s));
-        }
-    }
 }
