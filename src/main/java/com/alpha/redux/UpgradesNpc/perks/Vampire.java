@@ -59,10 +59,8 @@ public class Vampire extends PitPerk {
             public void run(ReduxDeathEvent event){
                 ReduxPlayer player = event.getAttacker();
 
-                if(!player.getPlayerObject().hasPotionEffect(PotionEffectType.REGENERATION)){
                     //player.getPlayerObject().removePotionEffect(PotionEffectType.REGENERATION);
-                    player.getPlayerObject().addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 8*20, 0, true, true));
-                }
+                player.getPlayerObject().addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 8*20, 0, true, true));
 
                 /*
                 if(player.getPerks().contains(redux.vampire.getRefID())){

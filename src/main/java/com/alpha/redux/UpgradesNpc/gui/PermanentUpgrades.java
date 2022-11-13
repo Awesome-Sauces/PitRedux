@@ -184,7 +184,7 @@ public class PermanentUpgrades implements Listener {
                 "&7BUT:\n" +
                 "&c&l- &7Die.\n\n" +
                 "&7On death:\n" +
-                "&e&l- &7Earn &e3 Renown&7.");
+                "&e&l- &7Earn &e7 Renown&7.");
     }
 
 

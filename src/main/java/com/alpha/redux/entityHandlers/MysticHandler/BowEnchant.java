@@ -27,7 +27,7 @@ public class BowEnchant {
         this.event = event;
         this.enchant = enchant;
 
-        for(String ench : event.getEnchants())
+        if(event.getEnchants() != null)for(String ench : event.getEnchants())
             if (ench.contains(this.enchant)) {
                 this.hasEnchant = true;
                 this.enchantTier = ench.replace(this.enchant, "");
@@ -41,7 +41,7 @@ public class BowEnchant {
         this.enchant = enchant;
         this.bowEvent = event;
 
-        for(String ench : Objects.requireNonNull(getEnchants((Player) event.getEntity())))
+        if(getEnchants((Player) event.getEntity()) !=null)for(String ench : getEnchants((Player) event.getEntity()))
             if (ench.contains(this.enchant)) {
                 this.hasEnchant = true;
                 this.enchantTier = ench.replace(this.enchant, "");

@@ -30,8 +30,16 @@ public class ArmorJoin {
                 player.getInventory().setHelmet(itemManager.IronHelmet);
             }
 
+            if (!player.getInventory().containsAtLeast(itemManager.Bow, 1)) {
+                player.getInventory().addItem(itemManager.Bow);
+            }
+
             if (!player.getInventory().containsAtLeast(itemManager.IronSword, 1)) {
                 player.getInventory().addItem(itemManager.IronSword);
+            }
+
+            if (!player.getInventory().containsAtLeast(new ItemStack(Material.ARROW), 1)) {
+                player.getInventory().addItem(new ItemStack(Material.ARROW));
             }
         }catch (Exception e){
 

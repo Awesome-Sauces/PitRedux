@@ -70,26 +70,6 @@ public class ReduxDeathEvent extends Event implements Cancellable{
 
     public void run(){
 
-        if(!isNPC(attacker.getPlayerObject())){
-            if(redux.renownXpBump.hasValue(attacker.getPlayerUUID())){
-                this.xp += ((Integer)redux.renownXpBump.getValue(attacker.getPlayerUUID()));
-            }
-
-            if(redux.experienceIndustrialComplex.hasValue(attacker.getPlayerUUID())){
-                this.xp_cap += 50;
-            }
-
-            if(redux.renownGoldBoost.hasValue(attacker.getPlayerUUID())){
-                this.gold += gold*(((double)((Integer)redux.renownGoldBoost.getValue(attacker.getPlayerUUID())))/100);
-            }
-
-            if(redux.tenacity.hasValue(attacker.getPlayerUUID())){
-                attacker.getPlayerObject().setHealth(Math.min(attacker.getPlayerObject().getMaxHealth(),
-                        attacker.getPlayerObject().getHealth()+
-                        (((double)((Integer)redux.tenacity.getValue(attacker.getPlayerUUID())))/10)));
-            }
-        }
-
         if(!isNPC(defender.getPlayerObject())){
             hasMegaStreak(defender.getPlayerUUID());
             hasStreak(defender.getPlayerUUID());
@@ -239,7 +219,7 @@ public class ReduxDeathEvent extends Event implements Cancellable{
             Bukkit.broadcastMessage(colorCode("&c&lMEGASTREAK! " +ChatEventApiGetLevelColor(attacker.getPlayerObject().getDisplayName(), attacker.getPlayerUUID()) + rank.getNameColor(attacker.getPlayerObject()) + attacker.getPlayerObject().getDisplayName() +" &7activated &e&lMAGNUM OPUS &7and exploded! So smart!"));
             attacker.getPlayerObject().getWorld().playEffect(attacker.getPlayerObject().getLocation(), Effect.EXPLOSION_LARGE, 10);
             Sounds.JUGGERNAUT_EXPLOSION.play(attacker.getPlayerObject());
-            Renown.addRenown(attacker.getPlayerUUID(), 3);
+            Renown.addRenown(attacker.getPlayerUUID(), 7);
             KillMan(defender.getPlayerObject(), attacker.getPlayerObject());
         }else if(streak.equals("uber") && getStreak(attacker.getPlayerUUID()) >= 200 && attacker.getPlayerObject().getMaxHealth()/2 == 10){
             attacker.getPlayerObject().setMaxHealth(attacker.getPlayerObject().getMaxHealth()-4);
@@ -264,6 +244,36 @@ public class ReduxDeathEvent extends Event implements Cancellable{
         if(XP_BOOSTER>1) xp_cap+=300;
         if(twoTimesEvent>1) xp_cap+=300;
 
+        // Celebrity
+        if(!isNPC(attacker.getPlayerObject())){
+            if(redux.celebrity.hasValue(attacker.getPlayerUUID())) {
+                gold += gold;
+            }
+        }
+
+        if(!isNPC(attacker.getPlayerObject())){
+            if(redux.renownXpBump.hasValue(attacker.getPlayerUUID())){
+                this.xp += ((Integer)redux.renownXpBump.getValue(attacker.getPlayerUUID()));
+            }
+
+            if(redux.experienceIndustrialComplex.hasValue(attacker.getPlayerUUID())){
+                this.xp_cap += 50;
+            }
+
+            if(redux.renownGoldBoost.hasValue(attacker.getPlayerUUID())){
+                this.gold += gold*(((double)((Integer)redux.renownGoldBoost.getValue(attacker.getPlayerUUID())))/100);
+            }
+
+            if(redux.tenacity.hasValue(attacker.getPlayerUUID())){
+                attacker.getPlayerObject().setHealth(Math.min(attacker.getPlayerObject().getMaxHealth(),
+                        attacker.getPlayerObject().getHealth()+
+                                (((double)((Integer)redux.tenacity.getValue(attacker.getPlayerUUID())))/10)));
+            }
+        }
+
+        xp = (int) Math.round(xp);
+        gold = (int) Math.round(gold);
+
         // Attacker Streak tick
         if(!isNPC(attacker.getPlayerObject())){
             hasStreak(attacker.getPlayerUUID());
@@ -278,7 +288,7 @@ public class ReduxDeathEvent extends Event implements Cancellable{
             if(!KillMessages.containsKey(attacker.getPlayerUUID())){
                 KillMessages.put(attacker.getPlayerUUID(), true);
             }else if(KillMessages.get(attacker.getPlayerUUID()).equals(true)){
-                attacker.getPlayerObject().sendMessage(ChatColor.GREEN + colorCode("&lKILL! ") + ChatColor.GRAY + "on " + defender.getPlayerObject().getDisplayName() + ChatColor.RESET + ChatColor.AQUA + " +" + Math.min(this.xp, xp_cap) + "XP" + ChatColor.GOLD + " +" + Math.min(this.gold, this.gold_cap) + "g");
+                attacker.getPlayerObject().sendMessage(ChatColor.GREEN + colorCode("&lKILL! ") + ChatColor.GRAY + "on " + defender.getPlayerObject().getDisplayName() + ChatColor.RESET + ChatColor.AQUA + " +" + String.valueOf((int)Math.min(this.xp, xp_cap)) + "XP" + ChatColor.GOLD + " +" + String.valueOf((int) Math.min(this.gold, this.gold_cap)) + "g");
             }
 
         }
@@ -316,13 +326,6 @@ public class ReduxDeathEvent extends Event implements Cancellable{
         if(!isNPC(attacker.getPlayerObject())) killEnchants();
 
         if(!isNPC(attacker.getPlayerObject())) customDrops();
-
-        if(!isNPC(attacker.getPlayerObject())){
-            double inc = 1;
-
-            if(redux.celebrity.hasValue(attacker.getPlayerUUID())) inc = 2;
-            addGold((int) Math.round(getGold()*inc));
-        }
 
         // Final TICK Scoreboard refresh
         /*

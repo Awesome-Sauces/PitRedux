@@ -3,6 +3,8 @@ package com.alpha.redux.eventManagers;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.items.enchants;
 import com.alpha.redux.items.itemManager;
+import com.alpha.redux.playerdata.economy;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -11,6 +13,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -172,6 +175,9 @@ public class ReduxDamageEvent extends Event implements Cancellable {
     }
 
     public void run(){
+        //Bukkit.broadcastMessage("TICK");
+
+
         Player attacker = this.getAttacker().getPlayerObject();
         Player defender = this.getDefenders().getPlayerObject();
 
@@ -179,13 +185,24 @@ public class ReduxDamageEvent extends Event implements Cancellable {
         ReduxPlayer ReduxDefender = this.getDefenders();
 
 
+        if(isNPC(attacker) && isNPC(defender)){
+            this.setReduxDamage(3);
+        }
+
+        if(!isNPC(attacker) && isNPC(defender)){
+            this.setReduxDamage(this.getReduxDamage()*.75);
+        }
+
         if(isNPC(attacker)){
             this.setReduxDamage(7);
         }
 
+        /*
         if(isNPC(defender) && !isNPC(attacker)){
             this.subtractReduxDamage(event.getDamage()*.4);
         }
+
+         */
 
         /*
         if(true_damage_amount.containsKey(ReduxDefender.getPlayerUUID())){
@@ -194,28 +211,23 @@ public class ReduxDamageEvent extends Event implements Cancellable {
 
          */
 
-        try {
-            if (attacker.getInventory().getItemInHand().getItemMeta().getDisplayName().contains("Tier III")) {
-                ItemStack sword = attacker.getItemInHand();
-                if(!attacker.getInventory().getItemInHand().getEnchantments().containsKey(Enchantment.DAMAGE_ALL)){
-                    sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
-                }else if (attacker.getInventory().getItemInHand().getEnchantments().get(Enchantment.DAMAGE_ALL) == 1){
-                    sword.removeEnchantment(Enchantment.DAMAGE_ALL);
-                    sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
-                }
-
-
-
+        if(attacker.getInventory().getItemInHand()!=null&&
+        attacker.getInventory().getItemInHand().getItemMeta()!=null&&
+                attacker.getInventory().getItemInHand().getItemMeta().getDisplayName() != null &&
+        attacker.getInventory().getItemInHand().getItemMeta().getDisplayName().contains("Tier III") &&
+        attacker.getInventory().getItemInHand().getType().equals(Material.GOLD_SWORD)){
+            ItemStack sword = attacker.getItemInHand();
+            if(!attacker.getInventory().getItemInHand().getEnchantments().containsKey(Enchantment.DAMAGE_ALL)){
+                sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+            }else if (attacker.getInventory().getItemInHand().getEnchantments().get(Enchantment.DAMAGE_ALL) == 1){
+                sword.removeEnchantment(Enchantment.DAMAGE_ALL);
+                sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
             }
-
-            if (attacker.getInventory().getItemInHand().equals(enchants.jewl_sword)) {
-                ItemStack sword = attacker.getItemInHand();
-                if(!attacker.getInventory().getItemInHand().getEnchantments().containsKey(Enchantment.DAMAGE_ALL)){
-                    sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
-                }
-
-            }
-        } catch (Exception e){
+        }else if (attacker.getInventory().getItemInHand()!=null &&
+                attacker.getInventory().getItemInHand().equals(enchants.jewl_sword)) {
+            if(!attacker.getInventory().getItemInHand().
+                    getEnchantments().containsKey(Enchantment.DAMAGE_ALL)) attacker.getItemInHand()
+                    .addEnchantment(Enchantment.DAMAGE_ALL, 3);
 
         }
 
@@ -223,18 +235,20 @@ public class ReduxDamageEvent extends Event implements Cancellable {
 
             if(attacker.getInventory().getItemInHand().getType().equals(Material.DIAMOND_SPADE)){
 
+                this.setReduxDamage(5);
+
                 try {
                     if(defender.getInventory().getChestplate().getType().equals(Material.DIAMOND_LEGGINGS)){
-                        this.addReduxDamage(2);
+                        this.addReduxDamage(1);
                     }else if(defender.getInventory().getLeggings().getType().equals(Material.DIAMOND_CHESTPLATE)){
-                        this.addReduxDamage(2);
+                        this.addReduxDamage(1);
                     }else if(defender.getInventory().getBoots().getType().equals(Material.DIAMOND_BOOTS)){
-                        this.addReduxDamage(2);
+                        this.addReduxDamage(1);
                     }
 
-                    this.addReduxDamage(3);
+
                 }catch (Exception e){
-                    this.addReduxDamage(4);
+                    this.setReduxDamage(5);
                 }
 
             }

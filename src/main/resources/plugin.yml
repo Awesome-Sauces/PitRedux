@@ -3,7 +3,7 @@ version: 1.0
 author: Alpha
 main: com.alpha.redux.redux
 api-version: 1.8
-depend: [Multiverse-Core,Citizens,Hunter,HolographicDisplays,NametagEdit]
+depend: [Multiverse-Core,Citizens,Hunter,HolographicDisplays,NametagEdit, BossBarAPI]
 commands:
   spawn:
     description: Teleports player to spawn

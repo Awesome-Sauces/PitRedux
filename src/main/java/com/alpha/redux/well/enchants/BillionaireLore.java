@@ -2,6 +2,7 @@ package com.alpha.redux.well.enchants;
 
 import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.eventManagers.ReduxDamageEvent;
+import org.bukkit.Bukkit;
 
 import static com.alpha.redux.events.boards.integerToRoman;
 
@@ -22,11 +23,13 @@ public class BillionaireLore extends PitEnchant{
             multiplier += (level*.33)+.01;
         }else {multiplier += (level*.33);}
 
+        multiplier+=1;
+
         if (event.getAttacker().getPlayerGold() >= gold){
             event.getAttacker().setPlayerGold((int) (event.getAttacker().getPlayerGold() - gold));
             event.getAttacker().refreshScoreBoard();
             Sounds.BILLIONAIRE.play(event.getAttacker().getPlayerObject());
-            event.addReduxDamage(event.getReduxDamage() * (multiplier));
+            event.setReduxDamage(event.getReduxDamage() * (multiplier));
         }
     }
 

@@ -5,6 +5,7 @@ import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.playerdata.prestiges;
 import com.alpha.redux.playerdata.xpManager;
 import com.alpha.redux.redux;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -14,6 +15,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.*;
+import org.inventivetalent.bossbar.BossBar;
+import org.inventivetalent.bossbar.BossBarAPI;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -30,6 +33,7 @@ import static com.alpha.redux.apis.leaderboardsplus.leaderboards.RefreshBoard;
 import static com.alpha.redux.entityHandlers.ReduxPlayerHandler.playerExists;
 import static com.alpha.redux.events.events.*;
 import static com.alpha.redux.funEvents.event.handleTwoEvent;
+import static com.alpha.redux.funEvents.event.twoTimesEvent;
 import static com.alpha.redux.playerdata.economy.getEconomy;
 import static com.alpha.redux.playerdata.economy.hasEconomy;
 import static com.alpha.redux.playerdata.prestiges.getPrestige;
@@ -48,6 +52,16 @@ public class boards implements Listener {
     public void onJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
 
+        if(twoTimesEvent == 2){
+            BossBar bossBar = BossBarAPI.addBar(player,
+                    new TextComponent(colorCode("&d&lMINOR EVENT! &e2x in &e&lPit Area")),
+                    BossBarAPI.Color.GREEN,
+                    BossBarAPI.Style.NOTCHED_6,
+                    1.0f);
+        }else{
+            BossBarAPI.removeAllBars(player);
+        }
+
         try {
             playerExists(event.getPlayer()).setSpeed(0);
         }catch (Exception ignored){}
@@ -60,6 +74,8 @@ public class boards implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event){
         Player player = event.getPlayer();
+
+        BossBarAPI.removeAllBars(player);
 
         try {
             playerExists(event.getPlayer()).setSpeed(0);
@@ -131,6 +147,8 @@ public class boards implements Listener {
         ReduxPlayer reduxPlayer = playerExists(player);
         int STRENGTH = reduxPlayer.getStrengthTier();
 
+        //Bukkit.broadcastMessage(String.valueOf(reduxPlayer.getSTRENGTH_TIMER()));
+
         hasStreak(uuid);
         hasEconomy(uuid);
         hasPrestige(uuid);
@@ -164,7 +182,7 @@ public class boards implements Listener {
             lobby = "M14E";
         }
 
-        String version = ChatColor.GRAY + "v1.4.5 " + ChatColor.DARK_GRAY + lobby; // Pit Redux Version
+        String version = ChatColor.GRAY + "v1.4.6 " + ChatColor.DARK_GRAY + lobby; // Pit Redux Version
 
         String spacer1 = " "; //blank space
         String spacer2 = "  "; //blank space

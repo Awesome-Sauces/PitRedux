@@ -33,13 +33,14 @@ public class ReduxPlayer {
     boolean booCD = true;
     boolean GoldenCD = true;
     boolean PitPocketCD = true;
+    boolean AttackCD = true;
     boolean perunCD = true;
     boolean prickCD = true;
     boolean ComboDamageCD = true;
     boolean gambleCD = true;
     boolean escape = true;
     double damageIncrease;
-    int STRENGTH_TIMER = 0;
+    int STRENGTH_TIMER = 7;
     boolean STRENGTH_REPEATABLE = false;
     double damageDecrease;
     double xpBooster = 1;
@@ -130,6 +131,10 @@ public class ReduxPlayer {
     public void setPitPocketCD(){this.PitPocketCD = !this.PitPocketCD;}
 
     public boolean getPitPocketCD(){return this.PitPocketCD;}
+
+    public void setAttackCD(){this.AttackCD = !this.AttackCD;}
+
+    public boolean getAttackCD(){return this.AttackCD;}
 
     public boolean getRegCD(){return this.regCD;}
 
@@ -275,8 +280,7 @@ public class ReduxPlayer {
     }
 
     public void strengthTick(){
-
-        strengthTimer = 7;
+        STRENGTH_TIMER=7;
         strength = Math.min(.40, strength+.08);
 
         if (!this.STRENGTH_REPEATABLE) {
@@ -285,11 +289,11 @@ public class ReduxPlayer {
                 @Override
                 public void run() {
 
-                    if (strengthTimer > 0) {
-                        strengthTimer -= 1;
+                    if (STRENGTH_TIMER > 0) {
+                        STRENGTH_TIMER -= 1;
                     }
 
-                    if (strengthTimer <= 0) {
+                    if (STRENGTH_TIMER <= 0) {
                         strength = 0.0;
                     }
                 }

@@ -27,6 +27,7 @@ public class PerkHandler implements Listener {
         redux.goldenHeads.getPerkExecute().run(event);
         redux.dirty.getPerkExecute().run(event);
         redux.streaker.getPerkExecute().run(event);
+        redux.vampire.getPerkExecute().run(event);
 
     }
 

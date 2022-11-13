@@ -287,7 +287,7 @@ public class events implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public static void HandleMegaStreakDamage(ReduxDamageEvent event){
         // Mega Streak Calculations
         if(!isNPC(event.getDefenders().getPlayerObject())){
@@ -418,13 +418,14 @@ public class events implements Listener {
             ((Player) event.getEntity()).damage(event.getDamage(), player);
 
             if(player.getItemInHand() != null && player.getItemInHand().getItemMeta() != null &&
+                    player.getItemInHand().getItemMeta().getDisplayName() != null&&
                     !player.getItemInHand().getItemMeta().getDisplayName().contains("Super Bow") &&
             player.getItemInHand().getType().equals(Material.BOW)){
                 player.getInventory().removeItem(player.getItemInHand());
                 player.setItemInHand(enchants.fresh_bow);
             }
 
-            ReduxBowEvent me = new ReduxBowEvent(playerExists(player), playerExists((Player) event.getEntity()), 3, event);
+            ReduxBowEvent me = new ReduxBowEvent(playerExists(player), playerExists((Player) event.getEntity()), 1, event);
             Bukkit.getPluginManager().callEvent(me);
 
 

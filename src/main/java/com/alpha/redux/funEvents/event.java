@@ -4,13 +4,17 @@ import com.alpha.redux.playerdata.economy;
 import com.earth2me.essentials.api.Economy;
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.inventivetalent.bossbar.BossBar;
+import org.inventivetalent.bossbar.BossBarAPI;
 
 import java.io.BufferedReader;
 
+import static com.alpha.redux.apis.chatManager.rank.colorCode;
 import static com.alpha.redux.apis.locations.getBotSpawnLocation;
 import static com.alpha.redux.apis.locations.getEventNotifyLocation;
 
@@ -18,6 +22,7 @@ public class event {
 
     private static Hologram hologram = HologramsAPI.createHologram(economy.getPlugin(), getEventNotifyLocation(Bukkit.getWorld("world")));
     private static Hologram hologram2 = HologramsAPI.createHologram(economy.getPlugin(), getEventNotifyLocation(Bukkit.getWorld("lobby")));
+    private static Hologram hologram3 = HologramsAPI.createHologram(economy.getPlugin(), getEventNotifyLocation(Bukkit.getWorld("lobby2")));
     public static int twoTimesEvent = 1;
 
     public static void twoTimesEvent(){
@@ -26,6 +31,14 @@ public class event {
         }
 
          */
+
+        for(Player player : Bukkit.getOnlinePlayers()){
+            BossBar bossBar = BossBarAPI.addBar(player,
+                    new TextComponent(colorCode("&d&lMINOR EVENT! &e2x in &e&lPit Area")),
+                    BossBarAPI.Color.GREEN,
+                    BossBarAPI.Style.NOTCHED_6,
+                    1.0f);
+        }
 
         Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&d&lMINOR EVENT! &e2x in &e&lPit Area"));
 
@@ -49,12 +62,22 @@ public class event {
         hologram2.appendTextLine(ChatColor.translateAlternateColorCodes('&', "&e2x &bXP &d/&6gold&e!"));
         hologram2.appendTextLine(ChatColor.translateAlternateColorCodes('&', "&ein Pit Area"));
 
+        if(hologram3.isDeleted()){
+            refreshHoloGram();
+        }
+
+        hologram3.clearLines();
+
+        hologram3.appendTextLine(ChatColor.translateAlternateColorCodes('&', "&d&lMINOR EVENT!"));
+        hologram3.appendTextLine(ChatColor.translateAlternateColorCodes('&', "&e2x &bXP &d/&6gold&e!"));
+        hologram3.appendTextLine(ChatColor.translateAlternateColorCodes('&', "&ein Pit Area"));
+
         twoTimesEvent = 2;
 
     }
 
     public static void handleTwoEvent(){
-        if(!hologram.isDeleted() && !hologram2.isDeleted()){
+        if(!hologram.isDeleted() && !hologram2.isDeleted() && !hologram3.isDeleted()){
             endTwoTimes();
         }else{
             twoTimesEvent();
@@ -68,9 +91,14 @@ public class event {
 
          */
 
+        for(Player player : Bukkit.getOnlinePlayers()){
+            BossBarAPI.removeAllBars(player);
+        }
+
         Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&d&lMINOR EVENT! &e2x in &e&lPit Area &c&lENDED"));
         hologram.delete();
         hologram2.delete();
+        hologram3.delete();
 
         twoTimesEvent = 1;
 
@@ -79,5 +107,6 @@ public class event {
     public static void refreshHoloGram(){
         hologram = HologramsAPI.createHologram(economy.getPlugin(), getEventNotifyLocation(Bukkit.getWorld("world")));
         hologram2 = HologramsAPI.createHologram(economy.getPlugin(), getEventNotifyLocation(Bukkit.getWorld("lobby")));
+        hologram3 = HologramsAPI.createHologram(economy.getPlugin(), getEventNotifyLocation(Bukkit.getWorld("lobby2")));
     }
 }

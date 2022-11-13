@@ -1,5 +1,6 @@
 package com.alpha.redux;
 
+import com.alpha.redux.PitEvents.MinorEvents.KingOfTheLadder;
 import com.alpha.redux.UpgradesNpc.gui.PerkSelectGUI;
 import com.alpha.redux.UpgradesNpc.gui.PermanentUpgrades;
 import com.alpha.redux.UpgradesNpc.perks.*;
@@ -163,6 +164,8 @@ public class redux extends JavaPlugin {
     public static ExtraHearts extraHearts = new ExtraHearts("hearts");
     public static Promotion promotion = new Promotion("promotion");
 
+    // Pit Event registration
+    public static KingOfTheLadder kingOfTheLadder = new KingOfTheLadder();
 
 
     @Override

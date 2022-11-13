@@ -8,6 +8,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityShootBowEvent;
 
+import static com.alpha.redux.apis.chatManager.rank.colorCode;
+
 public class Volley {
     public Volley(EntityShootBowEvent event){
         BowEnchant volley = new BowEnchant(event, "v") {
@@ -16,6 +18,11 @@ public class Volley {
 
                 Player shooter = (Player) bowEvent.getEntity();
 
+                if(!shooter.isOp()){
+                    shooter.sendMessage(colorCode("&c&lTemporarily Disabled!"));
+                    Sounds.NO.play(shooter);
+                    return;
+                }
 
                 Arrow arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation().add(0,-1,0), EntityType.ARROW);
                 arrow.setCritical(true);
@@ -52,6 +59,11 @@ public class Volley {
 
                 Player shooter = (Player) bowEvent.getEntity();
 
+                if(!shooter.isOp()){
+                    shooter.sendMessage(colorCode("&c&lTemporarily Disabled!"));
+                    Sounds.NO.play(shooter);
+                    return;
+                }
 
                 Arrow arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation().add(0,-1,0), EntityType.ARROW);
                 arrow.setCritical(true);
@@ -82,6 +94,11 @@ public class Volley {
 
                 Player shooter = (Player) bowEvent.getEntity();
 
+                if(!shooter.isOp()){
+                    shooter.sendMessage(colorCode("&9Volley &c&lTemporarily Disabled!"));
+                    Sounds.NO.play(shooter);
+                    return;
+                }
 
                 Arrow arrow = (Arrow) bowEvent.getProjectile().getWorld().spawnEntity(bowEvent.getProjectile().getLocation().add(0,-1,0), EntityType.ARROW);
                 arrow.setCritical(true);

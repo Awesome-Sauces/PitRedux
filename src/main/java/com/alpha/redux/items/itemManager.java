@@ -35,6 +35,7 @@ public class itemManager {
     public static ItemStack IronLeggings;
     public static ItemStack IronBoots;
     public static ItemStack IronSword;
+    public static ItemStack Bow;
     // Diamond Armor
     public static ItemStack DiamondHelmet;
     public static ItemStack DiamondChestplate;
@@ -140,6 +141,8 @@ public class itemManager {
         createChainChestplate();
 
         createGMCFeather();
+
+        createBow();
     }
 
     // Chain Armor
@@ -792,6 +795,15 @@ public class itemManager {
         meta.spigot().setUnbreakable(true);
         item.setItemMeta(meta);
         IronSword = item;
+    }
+
+    private static void createBow() {
+        ItemStack item = new ItemStack(Material.BOW, 1);
+        List<String> lore = new ArrayList<>();
+        ItemMeta meta = item.getItemMeta();
+        meta.spigot().setUnbreakable(true);
+        item.setItemMeta(meta);
+        Bow = item;
     }
     // Diamond Armor
     private static void createDiamondHelmet() {

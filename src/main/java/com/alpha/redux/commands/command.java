@@ -8,6 +8,7 @@ import com.alpha.redux.commands.crates.crate;
 import com.alpha.redux.commands.repairs.menu;
 import com.alpha.redux.commands.view.ViewCore;
 import com.alpha.redux.events.boards;
+import com.alpha.redux.funEvents.event;
 import com.alpha.redux.items.enchants;
 import com.alpha.redux.playerdata.economy;
 import com.alpha.redux.playerdata.prestiges;
@@ -22,8 +23,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import com.alpha.redux.items.itemManager;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -176,7 +179,11 @@ public class command implements CommandExecutor {
             player.sendMessage(colorCode("&c" + playerExists(player).getPerks()));
 
              */
-            setXp(player.getUniqueId().toString(),getLevelXP(player, Integer.parseInt(args[0]), getPrestige(player.getUniqueId().toString())));
+            //redux.kingOfTheLadder.getEventExecute().runnable();
+
+            event.handleTwoEvent();
+
+            //setXp(player.getUniqueId().toString(),getLevelXP(player, Integer.parseInt(args[0]), getPrestige(player.getUniqueId().toString())));
 
             return true;
         }
@@ -523,7 +530,7 @@ public class command implements CommandExecutor {
             player.getInventory().addItem(termy);
             twoTimesEvent();
             Bukkit.broadcastMessage(String.valueOf(getXp(String.valueOf(player.getUniqueId()))));
-            int[] randomDUDE = GetCurrentLevel(String.valueOf(player.getUniqueId()), xpManager.getXp(String.valueOf(player.getUniqueId())), prestiges.getPrestige(String.valueOf(player.getUniqueId())), player);
+            int[] randomDUDE = GetCurrentLevel(String.valueOf(player.getUniqueId()), getXp(String.valueOf(player.getUniqueId())), getPrestige(String.valueOf(player.getUniqueId())), player);
             Bukkit.broadcastMessage("First thingy" + randomDUDE[0]);
             Bukkit.broadcastMessage("Second thingy" + randomDUDE[1]);
             return true;
@@ -761,7 +768,12 @@ public class command implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("oof")) {
-            KillMan(player,player);
+            if(player.getKiller() != null){
+                KillMan(player.getKiller(), player);
+            }else{
+                player.sendMessage(colorCode("&c&lOOF! &7seems like no one has hit you in a while!"));
+                Sounds.NO.play(player);
+            }
             return true;
         }
 
