@@ -40,6 +40,7 @@ import static com.alpha.redux.commands.command.KillMessages;
 import static com.alpha.redux.entityHandlers.MysticHandler.Pants.data.PitBlobMap.deleteBlob;
 import static com.alpha.redux.events.events.Strength;
 import static com.alpha.redux.events.nonPermItems.ClearAndCheck;
+import static com.alpha.redux.events.nonPermItems.ClearRegular;
 import static com.alpha.redux.funEvents.event.twoTimesEvent;
 import static com.alpha.redux.playerdata.bounties.BountyClaimed;
 import static com.alpha.redux.playerdata.bounties.BountyManager;
@@ -89,7 +90,15 @@ public class ReduxDeathEvent extends Event implements Cancellable{
         }
         
         if(!isNPC(defender.getPlayerObject())) deleteBlob(defender.getPlayerObject());
-        if(!isNPC(defender.getPlayerObject())) ClearAndCheck(defender.getPlayerObject());
+        if(!isNPC(defender.getPlayerObject())){
+            if(defender.getPerks().contains(redux.assistantStreaker.getRefID()) && redux.promotion.hasValue(defender.getPlayerUUID()) &&
+                    (((Integer)redux.promotion.getValue(defender.getPlayerUUID()))>=1) && getStreak(defender.getPlayerUUID())>=100){
+                if(!isNPC(defender.getPlayerObject())) ClearRegular(defender.getPlayerObject());
+                defender.getPlayerObject().sendMessage(colorCode("&e&lPROMOTION! &7you managed to reach a &c100 killstreak &7and kept your mystic lives!"));
+            }else if(!isNPC(defender.getPlayerObject())) {
+                ClearAndCheck(defender.getPlayerObject());
+            }
+        }
 
         // Defender Streak tick
         if (!isNPC(defender.getPlayerObject())) {

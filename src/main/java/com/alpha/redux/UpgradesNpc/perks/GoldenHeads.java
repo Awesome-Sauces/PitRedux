@@ -17,7 +17,7 @@ public class GoldenHeads extends PitPerk {
     public GoldenHeads(){
         this.setRefID("goldenhead");
         this.setMaterial(Material.SKULL_ITEM);
-        this.setName(colorCode("&aGolden Heads"));
+        this.setName(colorCode("Golden Heads"));
         this.setLore(colorCode("&7Golden apples you earn turn into\n" +
                 "&6Golden Heads&7."));
         this.setCost(1000);

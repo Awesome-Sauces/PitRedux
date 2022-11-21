@@ -77,6 +77,7 @@ public class redux extends JavaPlugin {
     public static redux INSTANCE;
     public static Vampire vampire = new Vampire();
     public static GoldenHeads goldenHeads = new GoldenHeads();
+    public static AssistantStreaker assistantStreaker = new AssistantStreaker();
     public static Dirty dirty = new Dirty();
 
     public static Gladiator gladiator = new Gladiator();
@@ -234,10 +235,10 @@ public class redux extends JavaPlugin {
         extraHearts.loadHashMap();
         promotion.loadHashMap();
 
-        perkSlotOne.loadHashMap();
-        perkSlotTwo.loadHashMap();
-        perkSlotThree.loadHashMap();
-        perkSlotFour.loadHashMap();
+        perkSlotOne.loadHashMap(true);
+        perkSlotTwo.loadHashMap(true);
+        perkSlotThree.loadHashMap(true);
+        perkSlotFour.loadHashMap(true);
 
         moonStreak.loadHashMap();
         uberStreak.loadHashMap();

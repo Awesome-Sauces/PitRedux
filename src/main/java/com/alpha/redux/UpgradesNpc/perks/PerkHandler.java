@@ -14,8 +14,12 @@ public class PerkHandler implements Listener {
     public void PlayerDamageEvent(ReduxDamageEvent event){
         if(isNPC(event.getAttacker().getPlayerObject())) return;
 
-        redux.vampire.getPerkExecute().run(event);
         redux.strengthChaining.getPerkExecute().run(event);
+        redux.goldenHeads.getPerkExecute().run(event);
+        redux.dirty.getPerkExecute().run(event);
+        redux.streaker.getPerkExecute().run(event);
+        redux.vampire.getPerkExecute().run(event);
+        redux.assistantStreaker.getPerkExecute().run(event);
         redux.gladiator.getPerkExecute().run(event);
     }
 
@@ -28,6 +32,8 @@ public class PerkHandler implements Listener {
         redux.dirty.getPerkExecute().run(event);
         redux.streaker.getPerkExecute().run(event);
         redux.vampire.getPerkExecute().run(event);
+        redux.assistantStreaker.getPerkExecute().run(event);
+        redux.gladiator.getPerkExecute().run(event);
 
     }
 

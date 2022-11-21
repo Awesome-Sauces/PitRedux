@@ -15,7 +15,7 @@ public class StrengthChaining extends PitPerk {
     public StrengthChaining(){
         this.setRefID("strength");
         this.setMaterial(Material.REDSTONE);
-        this.setName(colorCode("&aStrength-Chaining"));
+        this.setName(colorCode("Strength-Chaining"));
         this.setLore(colorCode("&c+8% damage &7for 7s stacking\n" +
                 "&7on kill."));
         this.setCost(4000);
@@ -29,31 +29,23 @@ public class StrengthChaining extends PitPerk {
             public void run(ReduxDamageEvent event){
                 ReduxPlayer player = event.getAttacker();
 
-                if(player.getStrength()<=0) return;
-                event.addReduxDamage(event.getReduxDamage() * player.getStrength());
 
-                /*
                 if(player.getPerks().contains(redux.strengthChaining.getRefID())){
                     if(player.getStrength()<=0) return;
-                    player.getPlayerObject().sendMessage("Strength Worked");
                     event.addReduxDamage(event.getReduxDamage() * player.getStrength());
                 }
 
-                 */
+
 
             }
 
             @Override
             public void run(ReduxDeathEvent event){
                 ReduxPlayer player = event.getAttacker();
-                player.strengthTick();
-                /*
+
                 if(player.getPerks().contains(redux.strengthChaining.getRefID())){
-                    player.getPlayerObject().sendMessage("Strength Worked");
                     player.strengthTick();
                 }
-
-                 */
 
             }
         };

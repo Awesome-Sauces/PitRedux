@@ -182,7 +182,7 @@ public class boards implements Listener {
             lobby = "M14E";
         }
 
-        String version = ChatColor.GRAY + "v1.4.6 " + ChatColor.DARK_GRAY + lobby; // Pit Redux Version
+        String version = ChatColor.GRAY + "v1.4.7 " + ChatColor.DARK_GRAY + lobby; // Pit Redux Version
 
         String spacer1 = " "; //blank space
         String spacer2 = "  "; //blank space

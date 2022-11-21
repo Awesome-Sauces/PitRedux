@@ -15,7 +15,7 @@ public class Dirty extends PitPerk {
     public Dirty(){
         this.setRefID("dirty");
         this.setMaterial(Material.DIRT);
-        this.setName(colorCode("&aDirty"));
+        this.setName(colorCode("Dirty"));
         this.setLore(colorCode("&7Gain &9Resistance II &7(4s) on\n" +
                 "&7kill."));
         this.setCost(8000);
@@ -32,12 +32,6 @@ public class Dirty extends PitPerk {
             public void run(ReduxDeathEvent event){
                 ReduxPlayer player = event.getAttacker();
 
-                if(!player.getPlayerObject().hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE)){
-                    player.getPlayerObject().removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
-                    player.getPlayerObject().addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 4*20, 1, true, true));
-                }
-
-                /*
                 if(player.getPerks().contains(redux.dirty.getRefID())){
                     if(!player.getPlayerObject().hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE)){
                         player.getPlayerObject().removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
@@ -45,7 +39,6 @@ public class Dirty extends PitPerk {
                     }
                 }
 
-                 */
 
             }
         };

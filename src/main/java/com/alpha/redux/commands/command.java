@@ -403,7 +403,7 @@ public class command implements CommandExecutor {
                 mega_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
                 true_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
                 xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
-                Location loc = new Location(Bukkit.getWorld("world"), 0.5, 114, 10.5, 0, 0);
+                Location loc = getSpawnLocation(player.getWorld());
                 player.teleport(loc);
                 boards.CreateScore(player);
             }

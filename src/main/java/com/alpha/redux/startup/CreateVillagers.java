@@ -87,6 +87,10 @@ public class CreateVillagers {
     private static Hologram LobbyBetterPit;
     private static Hologram Lobby2BetterPit;
 
+    private static Hologram JumpBetterPit;
+    private static Hologram LobbyJumpBetterPit;
+    private static Hologram Lobby2JumpBetterPit;
+
     public static void loadNPC(){
 
         perm_upgrades_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.GRAY + "Permanent");
@@ -155,8 +159,8 @@ public class CreateVillagers {
     }
 
     public static void unloadNPC(){
-        deleteHolograms();
         deleteNPC();
+        deleteHolograms();
     }
 
     private static void moveNPC(){
@@ -391,6 +395,19 @@ public class CreateVillagers {
         Lobby2BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7[&b120&7] &bPrestige"));
         Lobby2BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7Gain levels to unlock more"));
 
+        JumpBetterPit = HologramsAPI.createHologram(economy.getPlugin(), locations.getPlayPitLocation(Bukkit.getWorld("world")));
+        JumpBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&eThe Better Pit"));
+        JumpBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&a&lJUMP! &c&lFIGHT!"));
+
+        LobbyBetterPit = HologramsAPI.createHologram(economy.getPlugin(), locations.getPlayPitLocation(Bukkit.getWorld("lobby")));
+        LobbyBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&eThe Better Pit"));
+        LobbyBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&a&lJUMP! &c&lFIGHT!"));
+
+        Lobby2BetterPit = HologramsAPI.createHologram(economy.getPlugin(), locations.getPlayPitLocation(Bukkit.getWorld("lobby2")));
+        Lobby2BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&eThe Better Pit"));
+        Lobby2BetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&a&lJUMP! &c&lFIGHT!"));
+
+
     }
 
     private static void deleteHolograms(){
@@ -427,6 +444,10 @@ public class CreateVillagers {
         BetterPit.delete();
         LobbyBetterPit.delete();
         Lobby2BetterPit.delete();
+
+        JumpBetterPit.delete();
+        LobbyJumpBetterPit.delete();
+        Lobby2JumpBetterPit.delete();
     }
 
     private static void deleteNPC(){

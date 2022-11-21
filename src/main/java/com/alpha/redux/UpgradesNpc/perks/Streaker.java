@@ -15,7 +15,7 @@ public class Streaker extends PitPerk {
     public Streaker(){
         this.setRefID("streaker");
         this.setMaterial(Material.WHEAT);
-        this.setName(colorCode("&aStreaker"));
+        this.setName(colorCode("Streaker"));
         this.setLore(colorCode("&7Triple streak kill &bbase XP &7bonus."));
         this.setCost(8000);
         this.setLevel(50);
@@ -34,7 +34,7 @@ public class Streaker extends PitPerk {
                 ReduxPlayer player = event.getAttacker();
 
                 if(player.getPerks().contains(redux.streaker.getRefID())){
-
+                    event.addXp(event.getXp()*3);
                 }
 
             }

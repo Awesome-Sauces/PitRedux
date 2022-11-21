@@ -129,7 +129,7 @@ public class enchants {
 
         skullMeta.setLore(lore);
 
-        skullMeta.setOwner("nftv");
+        skullMeta.setOwner("ifishdupe");
         skull.setItemMeta(skullMeta);
 
 

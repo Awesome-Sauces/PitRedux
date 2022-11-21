@@ -3,6 +3,7 @@ package com.alpha.redux.UpgradesNpc.gui;
 import com.alpha.redux.UpgradesNpc.perks.Streaker;
 import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.advancedInventory;
+import com.alpha.redux.apis.chatManager.rank;
 import com.alpha.redux.playerdata.prestiges;
 import com.alpha.redux.playerdata.xpManager;
 import com.alpha.redux.redux;
@@ -19,6 +20,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import static com.alpha.redux.UpgradesNpc.gui.PerkSelectGUI.getPerkSelectMenu;
 import static com.alpha.redux.apis.advancedInventory.*;
 import static com.alpha.redux.apis.chatManager.rank.colorCode;
 import static com.alpha.redux.playerdata.prestiges.getPrestige;
@@ -46,7 +48,7 @@ public class PermanentUpgrades implements Listener {
     }
 
     public static ItemStack GoldenHeadPerkItem(String uuid, int slot){
-        return HeadMaker("nftv", ChatColor.YELLOW + "Perk Slot #" + String.valueOf(slot),
+        return HeadMaker("ifishdupe", ChatColor.YELLOW + "Perk Slot #" + String.valueOf(slot),
                 ChatColor.GRAY + "Selected: " + redux.goldenHeads.getName() + "\n\n" + redux.goldenHeads.getLore() + "\n\n" +
                         ChatColor.YELLOW + "Click to choose perk!");
     }
@@ -233,8 +235,8 @@ public class PermanentUpgrades implements Listener {
                     getHighLanderLore() + "\n\n" + ChatColor.YELLOW + "Click to select!", 1, true);
         }else if(redux.highlanderStreak.hasValue(uuid) && level<50){
             return ItemMaker(Material.GOLD_BOOTS, ChatColor.YELLOW + "Highlander",
-                    getHighLanderLore() + "\n\n" + ChatColor.RED + "This requires level " + ChatColor.AQUA+"50\n" + ChatColor.RED +
-                            "or higher.", 1, true);
+                    getHighLanderLore() + "\n\n" + colorCode("&cThis requires level " + rank.getBracketsWithLevel(uuid,50) + "\n" +
+                            "&cor higher."), 1, true);
         }else{
             return ItemMaker(Material.BEDROCK, ChatColor.YELLOW + "Highlander",
                     getHighLanderLore() + "\n\n" + ChatColor.RED + "Unlocked in Renown Shop!\n" + ChatColor.RED +
@@ -260,8 +262,8 @@ public class PermanentUpgrades implements Listener {
                     getToTheMoonLore() + "\n\n" + ChatColor.YELLOW + "Click to select!", 1, true);
         }else if(redux.moonStreak.hasValue(uuid) && level<50){
             return ItemMaker(Material.ENDER_STONE, ChatColor.YELLOW + "To the Moon",
-                    getToTheMoonLore() + "\n\n" + ChatColor.RED + "This requires level "+ChatColor.AQUA+"50\n" + ChatColor.RED +
-                            "or higher.", 1, true);
+                    getToTheMoonLore() + "\n\n" + colorCode("&cThis requires level " + rank.getBracketsWithLevel(uuid,50) + "\n" +
+                            "&cor higher."), 1, true);
         }else{
             return ItemMaker(Material.BEDROCK, ChatColor.YELLOW + "To the Moon",
                     getToTheMoonLore() + "\n\n" + ChatColor.RED + "Unlocked in Renown Shop!\n" + ChatColor.RED +
@@ -287,8 +289,8 @@ public class PermanentUpgrades implements Listener {
                     getUberLore() + "\n\n" + ChatColor.YELLOW + "Click to select!", 1, true);
         }else if(redux.uberStreak.hasValue(uuid) && level<100){
             return ItemMaker(Material.GOLD_SWORD, ChatColor.YELLOW + "Uberstreak",
-                    getUberLore() + "\n\n" + ChatColor.RED + "This requires level "+ChatColor.AQUA+"100\n" + ChatColor.RED +
-                            "or higher.", 1, true);
+                    getUberLore() + "\n\n" + ChatColor.RED + colorCode("&cThis requires level " + rank.getBracketsWithLevel(uuid,100) + "\n" +
+                            "&cor higher."), 1, true);
         }else{
             return ItemMaker(Material.BEDROCK, ChatColor.YELLOW + "Uberstreak",
                     getUberLore() + "\n\n" + ChatColor.RED + "Unlocked in Renown Shop!\n" + ChatColor.RED +
@@ -314,8 +316,8 @@ public class PermanentUpgrades implements Listener {
                     getMagnum() + "\n\n" + ChatColor.YELLOW + "Click to select!", 1, true);
         }else if(redux.magnumOpus.hasValue(uuid) && level<70){
             return ItemMaker(Material.NETHER_STAR, ChatColor.RED + "Magnum Opus",
-                    getMagnum() + "\n\n" + ChatColor.RED + "This requires level "+ChatColor.AQUA+"70\n" + ChatColor.RED +
-                            "or higher.", 1, true);
+                    getMagnum() + "\n\n" + ChatColor.RED + colorCode("&cThis requires level " + rank.getBracketsWithLevel(uuid,70) + "\n" +
+                            "&cor higher."), 1, true);
         }else{
             return ItemMaker(Material.NETHER_STAR, ChatColor.RED + "Magnum Opus",
                     getMagnum() + "\n\n" + ChatColor.RED + "Unlocked in Renown Shop!\n" + ChatColor.RED +
@@ -341,8 +343,8 @@ public class PermanentUpgrades implements Listener {
                     getBeastModeLore() + "\n\n" + ChatColor.YELLOW + "Click to select!", 1, true);
         }else if(redux.beastmodeStreak.hasValue(uuid) && level<25){
             return ItemMaker(Material.DIAMOND_HELMET, ChatColor.RED + "Beastmode",
-                    getBeastModeLore() + "\n\n" + ChatColor.RED + "This requires level "+ChatColor.AQUA+"25\n" + ChatColor.RED +
-                            "or higher.", 1, true);
+                    getBeastModeLore() + "\n\n" + ChatColor.RED + colorCode("&cThis requires level " + rank.getBracketsWithLevel(uuid,25) + "\n" +
+                            "&cor higher."), 1, true);
         }else{
             return ItemMaker(Material.BEDROCK, ChatColor.RED + "Beastmode",
                     getBeastModeLore() + "\n\n" + ChatColor.RED + "Unlocked in Renown Shop!\n" + ChatColor.RED +
@@ -360,6 +362,138 @@ public class PermanentUpgrades implements Listener {
 
         return ItemMaker(Material.BLAZE_POWDER, ChatColor.YELLOW + "Overdrive",
                 getOverDriveLore() + "\n\n" + ChatColor.YELLOW + "Click to select!", 1, true);
+    }
+
+    public static ItemStack getPerkOneItem(String uuid, int slot){
+        if(String.valueOf(redux.perkSlotOne.getValue(uuid, "")).equals(redux.vampire.getRefID())) return ItemMaker(redux.vampire.getMaterial(), ChatColor.YELLOW + redux.vampire.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.vampire.getName() + "\n\n" +
+                colorCode(redux.vampire.getLore() + "\n\n" +
+                        "&eAlready selected!"),1, true);
+        if(String.valueOf(redux.perkSlotOne.getValue(uuid, "")).equals(redux.streaker.getRefID())) return ItemMaker(redux.streaker.getMaterial(), ChatColor.YELLOW + redux.streaker.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.streaker.getName() + "\n\n" +
+                        colorCode(redux.streaker.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+        if(String.valueOf(redux.perkSlotOne.getValue(uuid, "")).equals(redux.assistantStreaker.getRefID())) return ItemMaker(redux.assistantStreaker.getMaterial(), ChatColor.YELLOW + redux.assistantStreaker.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.assistantStreaker.getName() + "\n\n" +
+                        colorCode(redux.assistantStreaker.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+        if(String.valueOf(redux.perkSlotOne.getValue(uuid, "")).equals(redux.dirty.getRefID())) return ItemMaker(redux.dirty.getMaterial(), ChatColor.YELLOW + redux.dirty.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.dirty.getName() + "\n\n" +
+                        colorCode(redux.dirty.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+        if(String.valueOf(redux.perkSlotOne.getValue(uuid, "")).equals(redux.gladiator.getRefID())) return ItemMaker(redux.gladiator.getMaterial(), ChatColor.YELLOW + redux.gladiator.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.gladiator.getName() + "\n\n" +
+                        colorCode(redux.gladiator.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+        if(String.valueOf(redux.perkSlotOne.getValue(uuid, "")).equals(redux.goldenHeads.getRefID())) return HeadMaker("ifishdupe", ChatColor.YELLOW + redux.goldenHeads.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.goldenHeads.getName() + "\n\n" +
+                        colorCode(redux.goldenHeads.getLore() + "\n\n" +
+                                "&eAlready selected!"));
+        if(String.valueOf(redux.perkSlotOne.getValue(uuid, "")).equals(redux.strengthChaining.getRefID())) return ItemMaker(redux.strengthChaining.getMaterial(), ChatColor.YELLOW + redux.strengthChaining.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.strengthChaining.getName() + "\n\n" +
+                        colorCode(redux.strengthChaining.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+
+        return EmptySlotItem(uuid, 1);
+    }
+
+    public static ItemStack getPerkTwoItem(String uuid, int slot){
+        if(String.valueOf(redux.perkSlotTwo.getValue(uuid, "")).equals(redux.vampire.getRefID())) return ItemMaker(redux.vampire.getMaterial(), ChatColor.YELLOW + redux.vampire.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.vampire.getName() + "\n\n" +
+                        colorCode(redux.vampire.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+        if(String.valueOf(redux.perkSlotTwo.getValue(uuid, "")).equals(redux.streaker.getRefID())) return ItemMaker(redux.streaker.getMaterial(), ChatColor.YELLOW + redux.streaker.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.streaker.getName() + "\n\n" +
+                        colorCode(redux.streaker.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+        if(String.valueOf(redux.perkSlotTwo.getValue(uuid, "")).equals(redux.assistantStreaker.getRefID())) return ItemMaker(redux.assistantStreaker.getMaterial(), ChatColor.YELLOW + redux.assistantStreaker.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.assistantStreaker.getName() + "\n\n" +
+                        colorCode(redux.assistantStreaker.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+        if(String.valueOf(redux.perkSlotTwo.getValue(uuid, "")).equals(redux.dirty.getRefID())) return ItemMaker(redux.dirty.getMaterial(), ChatColor.YELLOW + redux.dirty.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.dirty.getName() + "\n\n" +
+                        colorCode(redux.dirty.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+        if(String.valueOf(redux.perkSlotTwo.getValue(uuid, "")).equals(redux.gladiator.getRefID())) return ItemMaker(redux.gladiator.getMaterial(), ChatColor.YELLOW + redux.gladiator.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.gladiator.getName() + "\n\n" +
+                        colorCode(redux.gladiator.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+        if(String.valueOf(redux.perkSlotTwo.getValue(uuid, "")).equals(redux.goldenHeads.getRefID())) return HeadMaker("ifishdupe", ChatColor.YELLOW + redux.goldenHeads.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.goldenHeads.getName() + "\n\n" +
+                        colorCode(redux.goldenHeads.getLore() + "\n\n" +
+                                "&eAlready selected!"));
+        if(String.valueOf(redux.perkSlotTwo.getValue(uuid, "")).equals(redux.strengthChaining.getRefID())) return ItemMaker(redux.strengthChaining.getMaterial(), ChatColor.YELLOW + redux.strengthChaining.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.strengthChaining.getName() + "\n\n" +
+                        colorCode(redux.strengthChaining.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+
+        return EmptySlotItem(uuid, 2);
+    }
+
+    public static ItemStack getPerkThreeItem(String uuid, int slot){
+        if(String.valueOf(redux.perkSlotThree.getValue(uuid, "")).equals(redux.vampire.getRefID())) return ItemMaker(redux.vampire.getMaterial(), ChatColor.YELLOW + redux.vampire.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.vampire.getName() + "\n\n" +
+                        colorCode(redux.vampire.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+        if(String.valueOf(redux.perkSlotThree.getValue(uuid, "")).equals(redux.streaker.getRefID())) return ItemMaker(redux.streaker.getMaterial(), ChatColor.YELLOW + redux.streaker.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.streaker.getName() + "\n\n" +
+                        colorCode(redux.streaker.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+        if(String.valueOf(redux.perkSlotThree.getValue(uuid, "")).equals(redux.assistantStreaker.getRefID())) return ItemMaker(redux.assistantStreaker.getMaterial(), ChatColor.YELLOW + redux.assistantStreaker.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.assistantStreaker.getName() + "\n\n" +
+                        colorCode(redux.assistantStreaker.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+        if(String.valueOf(redux.perkSlotThree.getValue(uuid, "")).equals(redux.dirty.getRefID())) return ItemMaker(redux.dirty.getMaterial(), ChatColor.YELLOW + redux.dirty.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.dirty.getName() + "\n\n" +
+                        colorCode(redux.dirty.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+        if(String.valueOf(redux.perkSlotThree.getValue(uuid, "")).equals(redux.gladiator.getRefID())) return ItemMaker(redux.gladiator.getMaterial(), ChatColor.YELLOW + redux.gladiator.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.gladiator.getName() + "\n\n" +
+                        colorCode(redux.gladiator.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+        if(String.valueOf(redux.perkSlotThree.getValue(uuid, "")).equals(redux.goldenHeads.getRefID())) return HeadMaker("ifishdupe", ChatColor.YELLOW + redux.goldenHeads.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.goldenHeads.getName() + "\n\n" +
+                        colorCode(redux.goldenHeads.getLore() + "\n\n" +
+                                "&eAlready selected!"));
+        if(String.valueOf(redux.perkSlotThree.getValue(uuid, "")).equals(redux.strengthChaining.getRefID())) return ItemMaker(redux.strengthChaining.getMaterial(), ChatColor.YELLOW + redux.strengthChaining.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.strengthChaining.getName() + "\n\n" +
+                        colorCode(redux.strengthChaining.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+
+        return EmptySlotItem(uuid, 3);
+    }
+
+    public static ItemStack getPerkFourItem(String uuid, int slot){
+        if(String.valueOf(redux.perkSlotFour.getValue(uuid, "")).equals(redux.vampire.getRefID())) return ItemMaker(redux.vampire.getMaterial(), ChatColor.YELLOW + redux.vampire.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.vampire.getName() + "\n\n" +
+                        colorCode(redux.vampire.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+        if(String.valueOf(redux.perkSlotFour.getValue(uuid, "")).equals(redux.streaker.getRefID())) return ItemMaker(redux.streaker.getMaterial(), ChatColor.YELLOW + redux.streaker.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.streaker.getName() + "\n\n" +
+                        colorCode(redux.streaker.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+        if(String.valueOf(redux.perkSlotFour.getValue(uuid, "")).equals(redux.assistantStreaker.getRefID())) return ItemMaker(redux.assistantStreaker.getMaterial(), ChatColor.YELLOW + redux.assistantStreaker.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.assistantStreaker.getName() + "\n\n" +
+                        colorCode(redux.assistantStreaker.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+        if(String.valueOf(redux.perkSlotFour.getValue(uuid, "")).equals(redux.dirty.getRefID())) return ItemMaker(redux.dirty.getMaterial(), ChatColor.YELLOW + redux.dirty.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.dirty.getName() + "\n\n" +
+                        colorCode(redux.dirty.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+        if(String.valueOf(redux.perkSlotFour.getValue(uuid, "")).equals(redux.gladiator.getRefID())) return ItemMaker(redux.gladiator.getMaterial(), ChatColor.YELLOW + redux.gladiator.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.gladiator.getName() + "\n\n" +
+                        colorCode(redux.gladiator.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+        if(String.valueOf(redux.perkSlotFour.getValue(uuid, "")).equals(redux.goldenHeads.getRefID())) return HeadMaker("ifishdupe", ChatColor.YELLOW + redux.goldenHeads.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.goldenHeads.getName() + "\n\n" +
+                        colorCode(redux.goldenHeads.getLore() + "\n\n" +
+                                "&eAlready selected!"));
+        if(String.valueOf(redux.perkSlotFour.getValue(uuid, "")).equals(redux.strengthChaining.getRefID())) return ItemMaker(redux.strengthChaining.getMaterial(), ChatColor.YELLOW + redux.strengthChaining.getName(),
+                ChatColor.GRAY + "Selected: " + ChatColor.GREEN + redux.strengthChaining.getName() + "\n\n" +
+                        colorCode(redux.strengthChaining.getLore() + "\n\n" +
+                                "&eAlready selected!"),1, true);
+
+        return EmptySlotItem(uuid, 4);
     }
 
     public static Inventory getPermanentUpgrades(Player player){
@@ -383,12 +517,6 @@ public class PermanentUpgrades implements Listener {
 
         ItemStack base_glass = advancedInventory.cGlass();
 
-        ItemStack vampire = VampirePerkItem(uuid, 1);
-        ItemStack strength = StrengthPerkItem(uuid, 2);
-        ItemStack goldenhead = GoldenHeadPerkItem(uuid, 1);
-        ItemStack gladiator = GladiatorPerkItem(uuid, 3);
-        ItemStack dirty = DirtyPerkItem(uuid, 4);
-        ItemStack empty = EmptySlotItem(uuid, 4);
         ItemStack killstreak = KillStreakItem(uuid, megastreak);
 
         ItemStack xpBoost = XPBoostSlotItem(uuid);
@@ -408,11 +536,17 @@ public class PermanentUpgrades implements Listener {
         }
 
         // First Row
+        //String.valueOf(redux.perkSlotOne.getValue(uuid, "")
+
+        advancedInventory.addInv(gui, getPerkOneItem(uuid, 1), 4, 2, false);
+
+        advancedInventory.addInv(gui, getPerkTwoItem(uuid, 2), 5, 2, false);
+
+        advancedInventory.addInv(gui, getPerkThreeItem(uuid, 3), 6, 2, false);
+
+        advancedInventory.addInv(gui, getPerkFourItem(uuid, 4), 7, 2, false);
+
         advancedInventory.addInv(gui, killstreak, 3, 2, false);
-        advancedInventory.addInv(gui, vampire, 4, 2, false);
-        advancedInventory.addInv(gui, strength, 5, 2, false);
-        advancedInventory.addInv(gui, gladiator, 6, 2, false);
-        advancedInventory.addInv(gui, dirty, 7, 2, false);
 
         advancedInventory.addInv(gui, xpBoost, 2, 4, false);
         advancedInventory.addInv(gui, goldBoost, 3, 4, false);
@@ -528,6 +662,13 @@ public class PermanentUpgrades implements Listener {
 
         if(event.getCurrentItem().getType().equals(megastreak)){
             player.openInventory(getKillstreakUpgrades(player));
+        }
+
+        if(event.getSlot()==12||
+        event.getSlot()==13||
+        event.getSlot()==14||
+        event.getSlot()==15){
+            player.openInventory(getPerkSelectMenu(player, event.getSlot()-11));
         }
 
     }

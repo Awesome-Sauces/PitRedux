@@ -28,6 +28,7 @@ public class ReduxPlayer {
     Player player;
     String uuid;
     int task;
+    int assistantStreakerCount = 0;
     boolean regCD = true;
     boolean vampireCD = true;
     boolean booCD = true;
@@ -206,6 +207,15 @@ public class ReduxPlayer {
         return this.damageDecrease;
     }
 
+    public int tickAssistantStreaker(){
+        this.assistantStreakerCount++;
+        return this.assistantStreakerCount;
+    }
+
+    public void resetAssistantStreaker(){
+        this.assistantStreakerCount=0;
+    }
+
     public String getPlayerUUID(){
         return this.uuid;
     }
@@ -263,7 +273,12 @@ public class ReduxPlayer {
         return ReduxPlayerUtils.calculateGoldAmount(this);
     }
 
-    public List<String> getPerks() {
+    public String getPerks() {
+        String perks = "";
+        perks+= redux.perkSlotOne.getValue(uuid, "");
+        perks+= redux.perkSlotTwo.getValue(uuid, "");
+        perks+= redux.perkSlotThree.getValue(uuid, "");
+        perks+= redux.perkSlotFour.getValue(uuid, "");
         return perks;
     }
 

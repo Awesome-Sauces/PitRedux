@@ -11,6 +11,7 @@ import com.alpha.redux.well.MysticType;
 import com.alpha.redux.well.enchants.CricketLore;
 import com.alpha.redux.well.enchants.DiamondAllergyLore;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.event.entity.EntityShootBowEvent;
 
 import java.util.ArrayList;
@@ -66,7 +67,6 @@ public class EnchantRuntime {
             new PitPocket(event);
             new Grasshopper(event);
             new GoldBoosted(event);
-            new Billionaire(event);
             new DiamondStomp(event);
             new Executioner(event);
             new Gamble(event);
@@ -76,6 +76,7 @@ public class EnchantRuntime {
             new ComboDamage(event);
             new Shark(event);
             new Sharp(event);
+            new Billionaire(event);
             new Lifesteal(event);
             new Mirror(event, event.getDefenders());
             return false;

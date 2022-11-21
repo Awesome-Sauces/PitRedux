@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 
+import static com.alpha.redux.DeathHandler.ProccessHit.KillMan;
 import static com.alpha.redux.DeathHandler.killHandler.isNPC;
 import static com.alpha.redux.events.boards.integerToRoman;
 
@@ -16,7 +17,7 @@ public class ExecutionerLore extends PitEnchant{
 
         double tier = level;
 
-        if(isNPC(event.getDefenders().getPlayerObject())) tier+=7;
+        if(isNPC(event.getDefenders().getPlayerObject())) tier+=3;
 
         double damage = event.getReduxTrueDamage() + event.getReduxTrueDamage();
 
@@ -24,7 +25,10 @@ public class ExecutionerLore extends PitEnchant{
         if(event.getDefenders().getPlayerObject().getHealth() - damage <= tier){
             Sounds.EXE.play(event.getAttacker().getPlayerObject());
             event.getDefenders().getPlayerObject().getWorld().playEffect(event.getDefenders().getPlayerObject().getLocation(), Effect.STEP_SOUND, Material.REDSTONE_BLOCK);
-            event.getDefenders().killPlayer(event.getAttacker().getPlayerObject());
+
+            KillMan(event.getAttacker().getPlayerObject(), event.getDefenders().getPlayerObject());
+
+            event.setCancelled(true);
             event.getBukkitEvent().setCancelled(true);
         }
     }

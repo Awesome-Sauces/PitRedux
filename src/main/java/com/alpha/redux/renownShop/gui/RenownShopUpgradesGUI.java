@@ -416,7 +416,7 @@ public class RenownShopUpgradesGUI implements Listener {
             }else if(redux.extraHearts.hasValue(uuid) &&
                     Renown.getRenown(uuid)>=(((Integer)redux.extraHearts.getValue(uuid))*20)){
                 Sounds.RENOWN_SHOP_PURCHASE.play(player);
-                Renown.setRenown(uuid, Renown.getRenown(uuid)-(((Integer)redux.renownXpBump.getValue(uuid))*20));
+                Renown.setRenown(uuid, Renown.getRenown(uuid)-(((Integer)redux.extraHearts.getValue(uuid))*20));
                 redux.extraHearts.addValue(uuid, (Integer) 1);
 
                 player.setMaxHealth(20+((Integer)redux.extraHearts.getValue(uuid, 1)*2));
