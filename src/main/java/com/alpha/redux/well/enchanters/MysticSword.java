@@ -41,6 +41,15 @@ public class MysticSword {
         }
     }
 
+    public static int getTokens(List<String> lore){
+        int tokens = 0;
+        if(lore!=null) for(String string : CheckEnchantOnSword(lore)){
+            tokens+=string.length()-string.replaceAll("I", "").length();
+        }
+
+        return tokens;
+    }
+
     public static void clickSword(InventoryClickEvent event){
         event.setCancelled(true);
 
@@ -48,22 +57,32 @@ public class MysticSword {
         Player player = (Player) event.getWhoClicked();
         ItemStack items = event.getClickedInventory().getItem(20);
 
-        if (items.getItemMeta().getDisplayName().contains("Tier III")){
+        int tokens = getTokens(items.getItemMeta().getLore());
+
+        if (items.getEnchantments().containsKey(Enchantment.DAMAGE_ALL) && tokens>0){
+            ItemMeta meta = items.getItemMeta();
+            meta.setDisplayName(ChatColor.RED + "Tier III Sword");
+            items.setItemMeta(meta);
             player.sendMessage(ChatColor.RED + "This sword is already max tier!");
+
             return;
-        } else if (items.getItemMeta().getDisplayName().contains("Tier II") && removeGold(player, uuid, 8000)) {
+        } else if (tokens==0 && removeGold(player, uuid, 1000)) {
             Sounds.BUTTON.play(player);
             Sounds.PIN_DOWN.play(player);
-            event.getClickedInventory().setItem(20, createSword(player,3, event.getClickedInventory().getItem(20)));
-        }else if (!items.getItemMeta().getDisplayName().contains("Tier II") &&
-                items.getItemMeta().getDisplayName().contains("Tier I") && removeGold(player, uuid, 4000)) {
-            Sounds.BUTTON.play(player);
-            Sounds.PIN_DOWN.play(player);
-            event.getClickedInventory().setItem(20, createSword(player,2, event.getClickedInventory().getItem(20)));
-        } else if (items.getItemMeta().getDisplayName().contains("Mystic Sword") && removeGold(player, uuid, 1000)) {
-            Sounds.BUTTON.play(player);
-            Sounds.PIN_DOWN.play(player);
+
             event.getClickedInventory().setItem(20, createSword(player,1, null));
+            //Bukkit.broadcastMessage(String.valueOf(getTokens(items.getItemMeta().getLore())));
+        } else if (CheckEnchantOnSword(items.getItemMeta().getLore()).size()==1 && !items.getItemMeta().getItemFlags().contains(ItemFlag.HIDE_ENCHANTS) && removeGold(player, uuid, 4000)) {
+            Sounds.BUTTON.play(player);
+            Sounds.PIN_DOWN.play(player);
+            //Bukkit.broadcastMessage(String.valueOf(getTokens(items.getItemMeta().getLore())));
+            event.getClickedInventory().setItem(20, createSword(player,2, event.getClickedInventory().getItem(20)));
+        }else if (
+                items.getItemMeta().getItemFlags().contains(ItemFlag.HIDE_ENCHANTS)&& removeGold(player, uuid, 8000)) {
+            Sounds.BUTTON.play(player);
+            Sounds.PIN_DOWN.play(player);
+            //Bukkit.broadcastMessage(String.valueOf(getTokens(items.getItemMeta().getLore())));
+            event.getClickedInventory().setItem(20, createSword(player,3, event.getClickedInventory().getItem(20)));
         }
 
 
@@ -74,19 +93,24 @@ public class MysticSword {
             ItemStack item = new ItemStack(Material.GOLD_SWORD, 1);
             ItemMeta meta = item.getItemMeta();
             meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cTier " + integerToRoman(tier) + " Sword"));
-            item.addEnchantment(Enchantment.DAMAGE_ALL, 2);
-            meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
+            meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES);
             meta.spigot().setUnbreakable(true);
-            meta.setLore(enchantSword(player, sword, tier));
-            item.setItemMeta(meta);
+            meta.setLore(enchantSword(player, null, tier));
             //Shaped Recipe
+
+            item.setItemMeta(meta);
 
             return item;
         }else{
             ItemMeta meta = sword.getItemMeta();
             meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cTier " + integerToRoman(tier) + " Sword"));
-            sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
-            meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
+            if(tier==3){
+                meta.addEnchant(Enchantment.DAMAGE_ALL,2,false);
+            }
+            if(tier==2){
+                meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            }
+            meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES);
             meta.spigot().setUnbreakable(true);
             //enchantSword(player, sword, tier)
             meta.setLore(enchantSword(player, sword, tier));
@@ -116,13 +140,10 @@ public class MysticSword {
 
         List<String> enchants = new ArrayList<>();
 
-        try{
 
-            if (sword != null){enchants = CheckEnchantOnSword(sword.getItemMeta().getLore());}
-
-        }catch (Exception ignored){}
-
-
+        if (sword != null &&
+        sword.getItemMeta()!=null&&
+        sword.getItemMeta().getLore()!=null){enchants = CheckEnchantOnSword(sword.getItemMeta().getLore());}
 
         List<String> lore = new ArrayList<>();
         lore.add(ChatColor.translateAlternateColorCodes('&', "&7Lives: &a5&7/5"));
@@ -472,7 +493,7 @@ public class MysticSword {
     }
 
     private static double calcEnchant(List<String> lore, String name){
-        if (lore.contains(name)) return 3;
+        if (lore.contains(name)) return 4;
         return 1;
     }
 

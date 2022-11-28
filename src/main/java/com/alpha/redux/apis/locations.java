@@ -80,7 +80,19 @@ public class locations {
         return new Location(world, -13.5, 98.5, 0.5);
     }
 
-    public static int getSpawnProtection() {return 100;}
+    public static Location getKingsQuestLocation(World world){
+        return new Location(world, -10.5, 95, -5.5);
+    }
+
+    public static Location getArmageddonLocation(World world){
+        return new Location(world, 13.5,95, -12.5);
+    }
+
+    public static Location getArchAngelLocation(World world){
+        return new Location(world, 13.5, 95, 13.5);
+    }
+
+    public static int getSpawnProtection() {return 93;}
 
     /*public static Location getCakeLocation(){
         return cake;

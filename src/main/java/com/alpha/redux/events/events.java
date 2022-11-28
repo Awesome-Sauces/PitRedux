@@ -1,6 +1,11 @@
 package com.alpha.redux.events;
 
+import com.alpha.redux.Factions.ArchAngelFaction;
+import com.alpha.redux.Factions.ArmageddonFaction;
+import com.alpha.redux.Factions.KingFaction;
 import com.alpha.redux.MenuClicks.Cactus.CactusRunTime;
+import com.alpha.redux.Stash.StashCore;
+import com.alpha.redux.Stash.StashData;
 import com.alpha.redux.UpgradesNpc.gui.PermanentUpgrades;
 import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.chatManager.rank;
@@ -24,6 +29,8 @@ import com.nametagedit.plugin.NametagEdit;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.event.*;
 import net.citizensnpcs.api.npc.NPC;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.minecraft.server.v1_8_R3.*;
 import org.bukkit.*;
 import org.bukkit.Material;
@@ -87,9 +94,13 @@ public class events implements Listener {
         true_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
         xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
         GiveChain(player);
-        player.sendMessage(ChatColor.GOLD + "Welcome to " + ChatColor.LIGHT_PURPLE + "BetterPit!");
-        player.sendMessage(ChatColor.GRAY + "Please do /kit to receive the normal kit!");
-        player.sendMessage(ChatColor.GRAY + "Have Fun!");
+        // Make a new component (Bungee API).
+        TextComponent component = new TextComponent(TextComponent.fromLegacyText("&e&lPIT! &fLatest update: &ev1.4.9 &bStash! &7[&e&lCLICK&7]"));
+        // Add a click event to the component.
+        component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/patchnotes"));
+
+        // Send it!
+        player.spigot().sendMessage(component);
         player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
         hasStreak(String.valueOf(player.getUniqueId()));
         setStreak(String.valueOf(player.getUniqueId()), 0);
@@ -120,7 +131,7 @@ public class events implements Listener {
         try {
             if(event.getInventory().getTitle().equals(ChatColor.GRAY + "Mystic Well")){
                 ItemStack items = event.getInventory().getItem(20);
-                player.getInventory().addItem(items);
+                StashCore.safeGive(player, items);
             }
 
         }catch (Exception e){
@@ -228,8 +239,8 @@ public class events implements Listener {
                 // They still have time left on mute
                 long timeleft = (cooldowns.get(String.valueOf(player.getUniqueId())) - System.currentTimeMillis()) / 1000;
                 player.removePotionEffect(PotionEffectType.WEAKNESS);
-                ClearAndCheck(player);
 
+                ClearAndCheck(player);
 
                 setStreak(String.valueOf(player.getUniqueId()), 0);
                 xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
@@ -281,7 +292,7 @@ public class events implements Listener {
                     }
                 }
 
-                ((Player) event.getNPC().getEntity()).damage(4, player);
+                ((Player) event.getNPC().getEntity()).damage(7, player);
             }
 
         }
@@ -355,6 +366,12 @@ public class events implements Listener {
 
     @EventHandler 
     public static void MainDamageEvent(EntityDamageByEntityEvent event){
+
+        if(event.getDamager().getLocation().getY()>=locations.getSpawnProtection() ||
+                event.getEntity().getLocation().getY()>=locations.getSpawnProtection()) {
+            event.setCancelled(true);
+            return;
+        }
 
         if (event.getEntity().getType().equals(EntityType.VILLAGER)){
             event.setCancelled(true);
@@ -1237,6 +1254,18 @@ public class events implements Listener {
                 Objects.equals(npc, CreateVillagers.lobby_perm_upgrades_npc) ||
                 Objects.equals(npc, CreateVillagers.lobby2_perm_upgrades_npc)){
             player.openInventory(PermanentUpgrades.getPermanentUpgrades(player));
+        }else if (Objects.equals(npc, CreateVillagers.king_npc) ||
+                Objects.equals(npc, CreateVillagers.lobby_king_npc) ||
+                Objects.equals(npc, CreateVillagers.lobby2_king_npc)){
+            KingFaction.openInventory(player);
+        }else if (Objects.equals(npc, CreateVillagers.archAngel_npc) ||
+                Objects.equals(npc, CreateVillagers.lobby_archAngel_npc) ||
+                Objects.equals(npc, CreateVillagers.lobby2_archAngel_npc)){
+            ArchAngelFaction.openInventory(player);
+        }else if (Objects.equals(npc, CreateVillagers.armageddon_npc) ||
+                Objects.equals(npc, CreateVillagers.lobby_armageddon_npc) ||
+                Objects.equals(npc, CreateVillagers.lobby2_armageddon_npc)){
+            ArmageddonFaction.openInventory(player);
         }else if(Objects.equals(npc, CreateVillagers.quest_npc) ||
                 Objects.equals(npc, CreateVillagers.lobby_quest_npc) ||
                 Objects.equals(npc, CreateVillagers.lobby2_quest_npc)){

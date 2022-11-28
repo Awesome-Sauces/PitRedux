@@ -9,6 +9,14 @@ commands:
     description: Teleports player to spawn
     usage: /<command>
     aliases: spwn
+  stash:
+    description: Claims all items from the stash
+    usage: /<command>
+    aliases: pickupstash
+  patchnotes:
+    description: Sends you a message of all current update patch notes
+    usage: /<command>
+    aliases: updatenotes
   view:
     description: Views a player
     usage: /<command>

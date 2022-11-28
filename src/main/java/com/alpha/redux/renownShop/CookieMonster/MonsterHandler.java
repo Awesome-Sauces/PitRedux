@@ -3,29 +3,40 @@ package com.alpha.redux.renownShop.CookieMonster;
 import com.alpha.redux.DeathHandler.ReduxDeathEvent;
 import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.chatManager.rank;
+import com.alpha.redux.eventManagers.ReduxDamageEvent;
 import com.alpha.redux.items.enchants;
 import com.alpha.redux.redux;
 import com.nametagedit.plugin.NametagEdit;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.trait.trait.Equipment;
+import net.citizensnpcs.trait.LookClose;
+import net.citizensnpcs.trait.SkinTrait;
 import net.minecraft.server.v1_8_R3.PacketPlayOutAnimation;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Effect;
+import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.util.Vector;
 
 import static com.alpha.redux.DeathHandler.killHandler.getNPC;
+import static com.alpha.redux.DeathHandler.killHandler.isNPC;
 import static com.alpha.redux.apis.chatManager.rank.ChatEventApiGetLevelColor;
 import static com.alpha.redux.apis.chatManager.rank.colorCode;
 import static com.alpha.redux.questMaster.bossBattles.maldingBoss.gearNearby;
 
-public class MonsterHandler {
+public class MonsterHandler implements Listener {
 
     public static void percentageSpawn(Player player){/*
         if(Math.random() <= ((double)Monster.getMonsterChance(String.valueOf(player.getUniqueId()))/3000)){
@@ -36,14 +47,48 @@ public class MonsterHandler {
         */
     }
 
+    @EventHandler(priority = EventPriority.HIGH)
+    public void MonsterDamageEvent(ReduxDamageEvent event){
+        if(isNPC(event.getDefenders().getPlayerObject()) &&
+                getNPC(event.getDefenders().getPlayerObject()).getName().equals(ChatColor.AQUA + "CookieMonster")){
+            NPC npc = getNPC(event.getDefenders().getPlayerObject());
+
+            event.setReduxDamage(event.getReduxDamage()/100);
+
+            event.getDefenders().getPlayerObject().setHealth(Math.min(event.getDefenders().getPlayerObject().getMaxHealth(),
+                    event.getDefenders().getPlayerObject().getHealth()+2));
+
+            npc.getEntity().setVelocity(new Vector(0,0,0));
+
+            npc.getEntity().getWorld().playEffect(event.getDefenders().getPlayerObject().getLocation(), Effect.HEART, 1);
+            npc.getEntity().getWorld().playEffect(event.getDefenders().getPlayerObject().getLocation(), Effect.HEART, 1);
+            npc.getEntity().getWorld().playEffect(event.getDefenders().getPlayerObject().getLocation(), Effect.HEART, 1);
+            npc.getEntity().getWorld().playEffect(event.getDefenders().getPlayerObject().getLocation(), Effect.HEART, 1);
+            npc.getEntity().getWorld().playEffect(event.getDefenders().getPlayerObject().getLocation(), Effect.HEART, 1);
+        }else if(isNPC(event.getAttacker().getPlayerObject()) &&
+        getNPC(event.getAttacker().getPlayerObject()).getName().equals(ChatColor.AQUA + "CookieMonster")){
+            NPC npc = getNPC(event.getAttacker().getPlayerObject());
+
+            npc.getEntity().getWorld().strikeLightningEffect(event.getDefenders().getPlayerObject().getLocation());
+            event.getAttacker().addPotionEffect(PotionEffectType.POISON, 15, 1);
+        }
+    }
+
+    private static void skin(NPC npc) {
+        SkinTrait skinTrait = npc.getTrait(SkinTrait.class);
+        skinTrait.setSkinName("HawaiiFox");
+
+        LookClose lookClose = npc.getTrait(LookClose.class);
+        lookClose.lookClose(true);
+    }
+
     public static void createMonsterBoss(Player player){
         NPC npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.AQUA + "CookieMonster");
         npc.getOrAddTrait(Equipment.class).set(Equipment.EquipmentSlot.HAND, enchants.malding_sword);
 
         npc.setBukkitEntityType(EntityType.PLAYER);
 
-        npc.data().setPersistent(NPC.Metadata.PLAYER_SKIN_UUID, "HawaiiFox");
-        npc.data().setPersistent(NPC.Metadata.PLAYER_SKIN_USE_LATEST, false);
+        skin(npc);
 
         npc.spawn(player.getLocation());
 
@@ -52,7 +97,7 @@ public class MonsterHandler {
         npc.setProtected(false);
 
         npc.getNavigator().getDefaultParameters()
-                .speedModifier(5);
+                .speedModifier(1);
 
         npc.getNavigator().setTarget(player, false);
 
@@ -69,7 +114,7 @@ public class MonsterHandler {
                     npc.getNavigator().setTarget(player.getLocation());
                     npc.faceLocation(player.getLocation());
 
-                    if (gearNearby(npc.getEntity(), 3.2, 3.2, 3.2).contains(player)) {
+                    if (gearNearby(npc.getEntity(), 3.5, 3.5, 3.5).contains(player)) {
                         if(player.isOnGround() || player.isFlying()){
                             for (Player players : gearNearby(npc.getEntity(), 4, 4, 4)){
                                 PacketPlayOutAnimation animationPacket = new PacketPlayOutAnimation(((CraftEntity) npc.getEntity()).getHandle(), 0);
@@ -101,7 +146,7 @@ public class MonsterHandler {
                     Sounds.DEATH_GHAST_SCREAM.play(player);
                 }
             }
-        }, 300L);
+        }, 600L);
     }
 
     public static void handleMonsterDeath(Player player, NPC npc){

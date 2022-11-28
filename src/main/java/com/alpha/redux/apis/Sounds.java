@@ -17,6 +17,8 @@ public class Sounds {
     public static final SoundEffect NO = new SoundEffect(Sound.VILLAGER_NO, 1, 1);
     public static final SoundEffect WARNING_LOUD = new SoundEffect(Sound.NOTE_PLING, 1000, 1);
 
+    public static final SoundEffect MYSTIC_DROP_1 = new SoundEffect(Sound.NOTE_PIANO, 1000, 1);
+
     //	Game / Misc
     public static final SoundEffect LEVEL_UP = new SoundEffect(Sound.LEVEL_UP, 1, 1);
     public static final SoundEffect PRESTIGE = new SoundEffect(Sound.ENDERDRAGON_GROWL, 1, 1);

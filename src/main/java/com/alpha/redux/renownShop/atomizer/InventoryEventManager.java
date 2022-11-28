@@ -1,5 +1,6 @@
 package com.alpha.redux.renownShop.atomizer;
 
+import com.alpha.redux.Stash.StashCore;
 import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.items.enchants;
@@ -274,23 +275,23 @@ public class InventoryEventManager implements Listener {
             if(event.getWhoClicked().getInventory().containsAtLeast(enchants.cactus, 1) && event.getCurrentItem().equals(enchants.fresh_reds)){
                 player.closeInventory();
                 event.getWhoClicked().getInventory().removeItem(enchants.cactus);
-                player.getInventory().addItem(enchants.fresh_reds);
+                StashCore.safeGive(player, enchants.fresh_reds);
             }else if(event.getWhoClicked().getInventory().containsAtLeast(enchants.cactus, 1) && event.getCurrentItem().equals(enchants.fresh_blues)){
                 player.closeInventory();
                 event.getWhoClicked().getInventory().removeItem(enchants.cactus);
-                player.getInventory().addItem(enchants.fresh_blues);
+                StashCore.safeGive(player, enchants.fresh_blues);
             }else if(event.getWhoClicked().getInventory().containsAtLeast(enchants.cactus, 1) && event.getCurrentItem().equals(enchants.fresh_greens)){
                 player.closeInventory();
                 event.getWhoClicked().getInventory().removeItem(enchants.cactus);
-                player.getInventory().addItem(enchants.fresh_greens);
+                StashCore.safeGive(player, enchants.fresh_greens);
             }else if(event.getWhoClicked().getInventory().containsAtLeast(enchants.cactus, 1) && event.getCurrentItem().equals(enchants.fresh_yellows)){
                 player.closeInventory();
                 player.getInventory().removeItem(enchants.cactus);
-                player.getInventory().addItem(enchants.fresh_yellows);
+                StashCore.safeGive(player, enchants.fresh_yellows);
             }else if(event.getWhoClicked().getInventory().containsAtLeast(enchants.cactus, 1) && event.getCurrentItem().equals(enchants.fresh_oranges)){
                 player.closeInventory();
                 event.getWhoClicked().getInventory().removeItem(enchants.cactus);
-                player.getInventory().addItem(enchants.fresh_oranges);
+                StashCore.safeGive(player, enchants.fresh_oranges);
             }
 
             Sounds.FIRST_AID.play(player);

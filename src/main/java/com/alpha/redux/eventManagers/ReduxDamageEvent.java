@@ -12,6 +12,7 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -211,19 +212,7 @@ public class ReduxDamageEvent extends Event implements Cancellable {
 
          */
 
-        if(attacker.getInventory().getItemInHand()!=null&&
-        attacker.getInventory().getItemInHand().getItemMeta()!=null&&
-                attacker.getInventory().getItemInHand().getItemMeta().getDisplayName() != null &&
-        attacker.getInventory().getItemInHand().getItemMeta().getDisplayName().contains("Tier III") &&
-        attacker.getInventory().getItemInHand().getType().equals(Material.GOLD_SWORD)){
-            ItemStack sword = attacker.getItemInHand();
-            if(!attacker.getInventory().getItemInHand().getEnchantments().containsKey(Enchantment.DAMAGE_ALL)){
-                sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
-            }else if (attacker.getInventory().getItemInHand().getEnchantments().get(Enchantment.DAMAGE_ALL) == 1){
-                sword.removeEnchantment(Enchantment.DAMAGE_ALL);
-                sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
-            }
-        }else if (attacker.getInventory().getItemInHand()!=null &&
+        if (attacker.getInventory().getItemInHand()!=null &&
                 attacker.getInventory().getItemInHand().equals(enchants.jewl_sword)) {
             if(!attacker.getInventory().getItemInHand().
                     getEnchantments().containsKey(Enchantment.DAMAGE_ALL)) attacker.getItemInHand()
@@ -302,12 +291,14 @@ public class ReduxDamageEvent extends Event implements Cancellable {
         //attacker.setHealth(Math.min(attacker.getHealth() +.5, attacker.getMaxHealth()));
 
 
-        if(defender.getInventory().getHelmet() != null && defender.getInventory().getHelmet().equals(itemManager.goldHelm)){
+        if(defender.getInventory().getHelmet() != null && defender.getInventory().getHelmet().getType().equals(Material.GOLD_HELMET)){
             this.subtractReduxDamage(this.getReduxDamage() * .05);
         }
 
-        if(defender.getInventory().getChestplate() != null && defender.getInventory().getChestplate().equals(itemManager.arch)){
-            this.subtractReduxDamage(this.getReduxDamage() * .05);
+        if(defender.getInventory().getChestplate() != null && defender.getInventory().getChestplate().getType().equals(Material.DIAMOND_CHESTPLATE) &&
+                defender.getInventory().getChestplate().getItemMeta()!=null &&
+        defender.getInventory().getChestplate().getItemMeta().getItemFlags().contains(ItemFlag.HIDE_ATTRIBUTES)){
+            this.subtractReduxDamage(this.getReduxDamage() * .10);
         }
 
 

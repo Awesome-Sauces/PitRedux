@@ -1,5 +1,6 @@
 package com.alpha.redux.apis.chatManager;
 
+import com.alpha.redux.entityHandlers.ReduxPlayer;
 import com.alpha.redux.playerdata.prestiges;
 import com.alpha.redux.playerdata.xpManager;
 import org.bukkit.Bukkit;
@@ -18,6 +19,15 @@ import static com.alpha.redux.playerdata.xpManager.*;
 public class rank {
 
     public static String colorCode(String text){
+        return ChatColor.translateAlternateColorCodes('&', text);
+    }
+
+    public static String colorCode(String text, ReduxPlayer player){
+
+        text = text.replaceAll("<level_username>", ChatEventApiGetLevelColor(player.getPlayerObject().getDisplayName(), player.getPlayerUUID())+ rank.getNameColor(player.getPlayerObject()) + player.getPlayerObject().getDisplayName());
+
+        text = text.replaceAll("<username>", rank.getNameColor(player.getPlayerObject()) + player.getPlayerObject().getDisplayName());
+
         return ChatColor.translateAlternateColorCodes('&', text);
     }
 
@@ -101,12 +111,14 @@ public class rank {
             case 42:
             case 43:
             case 44:
+                prestige_bracket = String.valueOf(ChatColor.DARK_BLUE);
+                break;
             case 45:
             case 46:
             case 47:
             case 48:
             case 49:
-                prestige_bracket = String.valueOf(ChatColor.DARK_BLUE);
+                prestige_bracket = String.valueOf(ChatColor.BLACK);
                 break;
             case 50:
             case 51:
@@ -166,7 +178,7 @@ public class rank {
             case 97:
             case 98:
             case 99:
-                prestige_bracket = String.valueOf(ChatColor.MAGIC);
+                prestige_bracket = String.valueOf(ChatColor.STRIKETHROUGH) + String.valueOf(ChatColor.GOLD);
                 break;
             default:
                 prestige_bracket = String.valueOf(ChatColor.DARK_RED);
@@ -334,12 +346,14 @@ public class rank {
             case 42:
             case 43:
             case 44:
+                prestige_bracket = String.valueOf(ChatColor.DARK_BLUE);
+                break;
             case 45:
             case 46:
             case 47:
             case 48:
             case 49:
-                prestige_bracket = String.valueOf(ChatColor.DARK_BLUE);
+                prestige_bracket = String.valueOf(ChatColor.BLACK);
                 break;
             case 50:
             case 51:
@@ -399,7 +413,7 @@ public class rank {
             case 97:
             case 98:
             case 99:
-                prestige_bracket = String.valueOf(ChatColor.MAGIC);
+                prestige_bracket = String.valueOf(ChatColor.STRIKETHROUGH) + String.valueOf(ChatColor.GOLD);
                 break;
             default:
                 prestige_bracket = String.valueOf(ChatColor.DARK_RED);
@@ -494,12 +508,14 @@ public class rank {
             case 42:
             case 43:
             case 44:
+                prestige_bracket = String.valueOf(ChatColor.DARK_BLUE);
+                break;
             case 45:
             case 46:
             case 47:
             case 48:
             case 49:
-                prestige_bracket = String.valueOf(ChatColor.DARK_BLUE);
+                prestige_bracket = String.valueOf(ChatColor.BLACK);
                 break;
             case 50:
             case 51:
@@ -559,7 +575,7 @@ public class rank {
             case 97:
             case 98:
             case 99:
-                prestige_bracket = String.valueOf(ChatColor.MAGIC);
+                prestige_bracket = String.valueOf(ChatColor.STRIKETHROUGH) + String.valueOf(ChatColor.GOLD);
                 break;
             default:
                 prestige_bracket = String.valueOf(ChatColor.DARK_RED);
@@ -686,12 +702,14 @@ public class rank {
             case 42:
             case 43:
             case 44:
+                prestige_bracket = String.valueOf(ChatColor.DARK_BLUE);
+                break;
             case 45:
             case 46:
             case 47:
             case 48:
             case 49:
-                prestige_bracket = String.valueOf(ChatColor.DARK_BLUE);
+                prestige_bracket = String.valueOf(ChatColor.BLACK);
                 break;
             case 50:
             case 51:
@@ -751,13 +769,12 @@ public class rank {
             case 97:
             case 98:
             case 99:
-                prestige_bracket = String.valueOf(ChatColor.MAGIC);
+                prestige_bracket = String.valueOf(ChatColor.STRIKETHROUGH) + String.valueOf(ChatColor.GOLD);
                 break;
             default:
                 prestige_bracket = String.valueOf(ChatColor.DARK_RED);
                 break;
         }
-
 
 
         hasPrestige(uuid);

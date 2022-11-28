@@ -1,5 +1,8 @@
 package com.alpha.redux.startup;
 
+import com.alpha.redux.Factions.ArchAngelFaction;
+import com.alpha.redux.Factions.ArmageddonFaction;
+import com.alpha.redux.Factions.KingFaction;
 import com.alpha.redux.apis.locations;
 import com.alpha.redux.playerdata.economy;
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
@@ -12,6 +15,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
+import static com.alpha.redux.apis.chatManager.rank.colorCode;
 import static com.alpha.redux.apis.locations.getLeaderBoardLocation;
 
 
@@ -68,6 +72,18 @@ public class CreateVillagers {
     public static NPC lobby2_quest_npc;
 
     public static NPC lobby2_prestige_npc;
+
+    public static NPC armageddon_npc;
+    public static NPC lobby_armageddon_npc;
+    public static NPC lobby2_armageddon_npc;
+
+    public static NPC archAngel_npc;
+    public static NPC lobby_archAngel_npc;
+    public static NPC lobby2_archAngel_npc;
+
+    public static NPC king_npc;
+    public static NPC lobby_king_npc;
+    public static NPC lobby2_king_npc;
 
     private static Hologram lobby2_perm_upgrades_hologram;
     private static Hologram lobby2_non_perm_upgrades_hologram;
@@ -153,6 +169,51 @@ public class CreateVillagers {
         lobby2_prestige_npc.setBukkitEntityType(EntityType.VILLAGER);
         lobby2_prestige_npc.setProtected(true);
 
+        king_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, colorCode("&6&lTHE KING"));
+        king_npc.setBukkitEntityType(EntityType.PLAYER);
+        king_npc.setProtected(true);
+        KingFaction.editNPC(king_npc);
+
+        lobby_king_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, colorCode("&6&lTHE KING"));
+        lobby_king_npc.setBukkitEntityType(EntityType.PLAYER);
+        lobby_king_npc.setProtected(true);
+        KingFaction.editNPC(lobby_king_npc);
+
+        lobby2_king_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, colorCode("&6&lTHE KING"));
+        lobby2_king_npc.setBukkitEntityType(EntityType.PLAYER);
+        lobby2_king_npc.setProtected(true);
+        KingFaction.editNPC(lobby2_king_npc);
+
+        archAngel_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, colorCode("&f&lANGEL"));
+        archAngel_npc.setBukkitEntityType(EntityType.PLAYER);
+        archAngel_npc.setProtected(true);
+        ArchAngelFaction.editNPC(archAngel_npc);
+
+        lobby_archAngel_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, colorCode("&f&lANGEL"));
+        lobby_archAngel_npc.setProtected(true);
+        lobby_archAngel_npc.setBukkitEntityType(EntityType.PLAYER);
+        ArchAngelFaction.editNPC(lobby_archAngel_npc);
+
+        lobby2_archAngel_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, colorCode("&f&lANGEL"));
+        lobby2_archAngel_npc.setBukkitEntityType(EntityType.PLAYER);
+        lobby2_archAngel_npc.setProtected(true);
+        ArchAngelFaction.editNPC(lobby2_archAngel_npc);
+
+        armageddon_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, colorCode("&c&lDEMON"));
+        armageddon_npc.setBukkitEntityType(EntityType.PLAYER);
+        armageddon_npc.setProtected(true);
+        ArmageddonFaction.editNPC(armageddon_npc);
+
+        lobby_armageddon_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, colorCode("&c&lDEMON"));
+        lobby_armageddon_npc.setProtected(true);
+        lobby_armageddon_npc.setBukkitEntityType(EntityType.PLAYER);
+        ArmageddonFaction.editNPC(lobby_armageddon_npc);
+
+        lobby2_armageddon_npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, colorCode("&c&lDEMON"));
+        lobby2_armageddon_npc.setBukkitEntityType(EntityType.PLAYER);
+        lobby2_armageddon_npc.setProtected(true);
+        ArmageddonFaction.editNPC(lobby2_armageddon_npc);
+
 
         moveNPC();
         makeHolograms();
@@ -224,6 +285,42 @@ public class CreateVillagers {
             lobby2_prestige_npc.spawn(locations.lobby2_prestige_npc_loc);
         }
 
+        if(!king_npc.isSpawned()){
+            king_npc.spawn(locations.getKingsQuestLocation(Bukkit.getWorld("world")));
+        }
+
+        if(!lobby_king_npc.isSpawned()){
+            lobby_king_npc.spawn(locations.getKingsQuestLocation(Bukkit.getWorld("lobby")));
+        }
+
+        if(!lobby2_king_npc.isSpawned()){
+            lobby2_king_npc.spawn(locations.getKingsQuestLocation(Bukkit.getWorld("lobby2")));
+        }
+
+        if(!armageddon_npc.isSpawned()){
+            armageddon_npc.spawn(locations.getArmageddonLocation(Bukkit.getWorld("world")));
+        }
+
+        if(!lobby_armageddon_npc.isSpawned()){
+            lobby_armageddon_npc.spawn(locations.getArmageddonLocation(Bukkit.getWorld("lobby")));
+        }
+
+        if(!lobby2_armageddon_npc.isSpawned()){
+            lobby2_armageddon_npc.spawn(locations.getArmageddonLocation(Bukkit.getWorld("lobby2")));
+        }
+
+        if(!archAngel_npc.isSpawned()){
+            archAngel_npc.spawn(locations.getArchAngelLocation(Bukkit.getWorld("world")));
+        }
+
+        if(!lobby_archAngel_npc.isSpawned()){
+            lobby_archAngel_npc.spawn(locations.getArchAngelLocation(Bukkit.getWorld("lobby")));
+        }
+
+        if(!lobby2_archAngel_npc.isSpawned()){
+            lobby2_archAngel_npc.spawn(locations.getArchAngelLocation(Bukkit.getWorld("lobby2")));
+        }
+
         perm_upgrades_npc.teleport(locations.perm_upgrades_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
         non_perm_upgrades_npc.teleport(locations.non_perm_upgrades_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
         leaderboard_npc.teleport(locations.leaderboard_npc_loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
@@ -291,13 +388,13 @@ public class CreateVillagers {
         prestige_hologram = HologramsAPI.createHologram(economy.getPlugin(), locations.prestige_npc_loc.add(0,2.75,-1));
         prestige_hologram.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&ePRESTIGE"));
 
-        ender_chest = HologramsAPI.createHologram(economy.getPlugin(), locations.getEnderChestLocation(Bukkit.getWorld("world")).add(0,-.5,0));
+        ender_chest = HologramsAPI.createHologram(economy.getPlugin(), locations.getEnderChestLocation(Bukkit.getWorld("world")).add(0,-.75,0));
         ender_chest.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&5ENDER CHEST"));
 
         ender_chest_lore = HologramsAPI.createHologram(economy.getPlugin(), locations.getEnderChestLocation(Bukkit.getWorld("world")).add(0,-1,0));
         ender_chest_lore.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7Store items forever"));
 
-        mystic_well = HologramsAPI.createHologram(economy.getPlugin(), locations.getMysticWellLocation(Bukkit.getWorld("world")).add(0,-.5,0));
+        mystic_well = HologramsAPI.createHologram(economy.getPlugin(), locations.getMysticWellLocation(Bukkit.getWorld("world")).add(0,-.75,0));
         mystic_well.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&dMYSTIC WELL"));
 
         mystic_well_lore = HologramsAPI.createHologram(economy.getPlugin(), locations.getMysticWellLocation(Bukkit.getWorld("world")).add(0,-1,0));
@@ -314,13 +411,13 @@ public class CreateVillagers {
         lobby_prestige_hologram = HologramsAPI.createHologram(economy.getPlugin(), locations.lobby_prestige_npc_loc.add(0,2.75,-1));
         lobby_prestige_hologram.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&ePRESTIGE"));
 
-        lobby_ender_chest = HologramsAPI.createHologram(economy.getPlugin(), locations.getEnderChestLocation(Bukkit.getWorld("lobby")).add(0,-.5,0));
+        lobby_ender_chest = HologramsAPI.createHologram(economy.getPlugin(), locations.getEnderChestLocation(Bukkit.getWorld("lobby")).add(0,-.75,0));
         lobby_ender_chest.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&5ENDER CHEST"));
 
         lobby_ender_chest_lore = HologramsAPI.createHologram(economy.getPlugin(), locations.getEnderChestLocation(Bukkit.getWorld("lobby")).add(0,-1,0));
         lobby_ender_chest_lore.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7Store items forever"));
 
-        lobby_mystic_well = HologramsAPI.createHologram(economy.getPlugin(), locations.getMysticWellLocation(Bukkit.getWorld("lobby")).add(0,-.5,0));
+        lobby_mystic_well = HologramsAPI.createHologram(economy.getPlugin(), locations.getMysticWellLocation(Bukkit.getWorld("lobby")).add(0,-.75,0));
         lobby_mystic_well.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&dMYSTIC WELL"));
 
         lobby_mystic_well_lore = HologramsAPI.createHologram(economy.getPlugin(), locations.getMysticWellLocation(Bukkit.getWorld("lobby")).add(0,-1,0));
@@ -338,13 +435,13 @@ public class CreateVillagers {
         lobby2_prestige_hologram = HologramsAPI.createHologram(economy.getPlugin(), locations.lobby2_prestige_npc_loc.add(0,2.75,-1));
         lobby2_prestige_hologram.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&ePRESTIGE"));
 
-        lobby2_ender_chest = HologramsAPI.createHologram(economy.getPlugin(), locations.getEnderChestLocation(Bukkit.getWorld("lobby2")).add(0,-.5,0));
+        lobby2_ender_chest = HologramsAPI.createHologram(economy.getPlugin(), locations.getEnderChestLocation(Bukkit.getWorld("lobby2")).add(0,-.75,0));
         lobby2_ender_chest.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&5ENDER CHEST"));
 
         lobby2_ender_chest_lore = HologramsAPI.createHologram(economy.getPlugin(), locations.getEnderChestLocation(Bukkit.getWorld("lobby2")).add(0,-1,0));
         lobby2_ender_chest_lore.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&7Store items forever"));
 
-        lobby2_mystic_well = HologramsAPI.createHologram(economy.getPlugin(), locations.getMysticWellLocation(Bukkit.getWorld("lobby2")).add(0,-.5,0));
+        lobby2_mystic_well = HologramsAPI.createHologram(economy.getPlugin(), locations.getMysticWellLocation(Bukkit.getWorld("lobby2")).add(0,-.75,0));
         lobby2_mystic_well.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&l&dMYSTIC WELL"));
 
         lobby2_mystic_well_lore = HologramsAPI.createHologram(economy.getPlugin(), locations.getMysticWellLocation(Bukkit.getWorld("lobby2")).add(0,-1,0));
@@ -495,6 +592,33 @@ public class CreateVillagers {
 
         lobby2_prestige_npc.despawn();
         CitizensAPI.getNPCRegistry().deregister(lobby2_prestige_npc);
+
+        king_npc.despawn();
+        CitizensAPI.getNPCRegistry().deregister(king_npc);
+
+        lobby_king_npc.despawn();
+        CitizensAPI.getNPCRegistry().deregister(lobby_king_npc);
+
+        lobby_king_npc.despawn();
+        CitizensAPI.getNPCRegistry().deregister(lobby_king_npc);
+
+        archAngel_npc.despawn();
+        CitizensAPI.getNPCRegistry().deregister(archAngel_npc);
+
+        lobby_archAngel_npc.despawn();
+        CitizensAPI.getNPCRegistry().deregister(lobby_archAngel_npc);
+
+        lobby2_archAngel_npc.despawn();
+        CitizensAPI.getNPCRegistry().deregister(lobby2_archAngel_npc);
+
+        armageddon_npc.despawn();
+        CitizensAPI.getNPCRegistry().deregister(armageddon_npc);
+
+        lobby_armageddon_npc.despawn();
+        CitizensAPI.getNPCRegistry().deregister(lobby_armageddon_npc);
+
+        lobby2_armageddon_npc.despawn();
+        CitizensAPI.getNPCRegistry().deregister(lobby2_armageddon_npc);
     }
 
 }

@@ -1,6 +1,11 @@
 package com.alpha.redux;
 
+import com.alpha.redux.Factions.ArchAngelFaction;
+import com.alpha.redux.Factions.ArmageddonFaction;
+import com.alpha.redux.Factions.KingFaction;
 import com.alpha.redux.PitEvents.MinorEvents.KingOfTheLadder;
+import com.alpha.redux.Stash.StashCommands;
+import com.alpha.redux.Stash.StashCore;
 import com.alpha.redux.UpgradesNpc.gui.PerkSelectGUI;
 import com.alpha.redux.UpgradesNpc.gui.PermanentUpgrades;
 import com.alpha.redux.UpgradesNpc.perks.*;
@@ -30,6 +35,7 @@ import com.alpha.redux.items.itemManager;
 import com.alpha.redux.items.enchants;
 import com.alpha.redux.questMaster.bossBattles.bossEvents;
 import com.alpha.redux.renownShop.CookieMonster.Monster;
+import com.alpha.redux.renownShop.CookieMonster.MonsterHandler;
 import com.alpha.redux.renownShop.DataStorage.*;
 import com.alpha.redux.renownShop.atomizer.InventoryEventManager;
 import com.alpha.redux.renownShop.gui.RenownShopGUI;
@@ -147,11 +153,14 @@ public class redux extends JavaPlugin {
     public static BeastmodeStreak beastmodeStreak = new BeastmodeStreak("beastmode");
     public static MagnumOpus magnumOpus = new MagnumOpus("magnum");
 
+
     // Perks
     public static PerkSlotOne perkSlotOne = new PerkSlotOne("perkone");
     public static PerkSlotTwo perkSlotTwo = new PerkSlotTwo("perktwo");
     public static PerkSlotThree perkSlotThree = new PerkSlotThree("perkthree");
     public static PerkSlotFour perkSlotFour = new PerkSlotFour("perkfour");
+
+    public static FactionReward factionReward = new FactionReward("factionreward");
 
     public static ExperienceIndustrialComplex experienceIndustrialComplex = new ExperienceIndustrialComplex("industrial");
     public static FastPass fastPass = new FastPass("fastpass");
@@ -164,6 +173,9 @@ public class redux extends JavaPlugin {
     public static Celebrity celebrity = new Celebrity("celebrity");
     public static ExtraHearts extraHearts = new ExtraHearts("hearts");
     public static Promotion promotion = new Promotion("promotion");
+
+    public static BotKills botKills = new BotKills("botkill");
+    public static FactionData factionData = new FactionData("faction");
 
     // Pit Event registration
     public static KingOfTheLadder kingOfTheLadder = new KingOfTheLadder();
@@ -189,8 +201,11 @@ public class redux extends JavaPlugin {
 
         List<String> listy = new ArrayList<>();
 
+        getServer().getPluginManager().registerEvents(new MonsterHandler(), this);
         getServer().getPluginManager().registerEvents(new ArmorListener(listy), this);
-
+        getServer().getPluginManager().registerEvents(new ArchAngelFaction(), this);
+        getServer().getPluginManager().registerEvents(new ArmageddonFaction(), this);
+        getServer().getPluginManager().registerEvents(new KingFaction(), this);
         getServer().getPluginManager().registerEvents(new boards(), this);
         getServer().getPluginManager().registerEvents(new PerkHandler(), this);
         getServer().getPluginManager().registerEvents(new events(),this);
@@ -235,10 +250,14 @@ public class redux extends JavaPlugin {
         extraHearts.loadHashMap();
         promotion.loadHashMap();
 
+        botKills.loadHashMap();
+
         perkSlotOne.loadHashMap(true);
         perkSlotTwo.loadHashMap(true);
         perkSlotThree.loadHashMap(true);
         perkSlotFour.loadHashMap(true);
+        factionData.loadHashMap(true);
+        factionReward.loadHashMap(true);
 
         moonStreak.loadHashMap();
         uberStreak.loadHashMap();
@@ -285,6 +304,12 @@ public class redux extends JavaPlugin {
                         updateBoard(boardMap.get(uuid),Bukkit.getPlayer(uuid));
                     }
                 },0,20);
+
+                getServer().getScheduler().runTaskTimer(redux.INSTANCE, () -> {
+                    for(Player player : Bukkit.getOnlinePlayers()){
+                        StashCore.reminderMessage(player);
+                    }
+                },0,6000);
             }
         }, 200L);
 
@@ -319,7 +344,7 @@ public class redux extends JavaPlugin {
             }
         }}, 0L,  200L); //0 Tick initial delay, 20 Tick (1 Second) between repeats
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             @Override
             public void run() {
 
@@ -327,7 +352,7 @@ public class redux extends JavaPlugin {
                     NametagEdit.getApi().setNametag(player, ChatEventApiGetLevelColor(player.getDisplayName(), String.valueOf(player.getUniqueId()))+ rank.getNameColor(player), "");
                 }
             }
-        }, 50L);
+        }, 1200L, 1200L);
 
 
         for (int i = 0; i < 15; i++) {
@@ -389,6 +414,7 @@ public class redux extends JavaPlugin {
                 celebrity.saveHashMap();
                 extraHearts.saveHashMap();
                 promotion.saveHashMap();
+                botKills.saveHashMap();
 
                 moonStreak.saveHashMap();
                 uberStreak.saveHashMap();
@@ -400,6 +426,8 @@ public class redux extends JavaPlugin {
                 perkSlotTwo.saveHashMap();
                 perkSlotThree.saveHashMap();
                 perkSlotFour.saveHashMap();
+                factionData.saveHashMap();
+                factionReward.saveHashMap();
 
                 SLAPI.loadMonster();
                 SLAPI.loadGoldReq();
@@ -408,6 +436,7 @@ public class redux extends JavaPlugin {
                 SLAPI.loadBotBooster();
                 SLAPI.loadGoldBooster();
                 SLAPI.loadBotBooster();
+                botKills.loadHashMap();
                 moonStreak.loadHashMap();
                 uberStreak.loadHashMap();
                 beastmodeStreak.loadHashMap();
@@ -425,10 +454,12 @@ public class redux extends JavaPlugin {
                 tenacity.loadHashMap();
                 theWay.loadHashMap();
 
-                perkSlotOne.loadHashMap();
-                perkSlotTwo.loadHashMap();
-                perkSlotThree.loadHashMap();
-                perkSlotFour.loadHashMap();
+                perkSlotOne.loadHashMap(true);
+                perkSlotTwo.loadHashMap(true);
+                perkSlotThree.loadHashMap(true);
+                perkSlotFour.loadHashMap(true);
+                factionData.loadHashMap(true);
+                factionReward.loadHashMap(true);
             }
         }.runTaskTimer(plugin, 12000, 12000);
 
@@ -466,10 +497,13 @@ public class redux extends JavaPlugin {
         moonStreak.saveHashMap();
         uberStreak.saveHashMap();
         beastmodeStreak.saveHashMap();
+        botKills.saveHashMap();
         highlanderStreak.saveHashMap();
         theWay.saveHashMap();
         mysticism.saveHashMap();
         magnumOpus.saveHashMap();
+        factionData.saveHashMap();
+        factionReward.saveHashMap();
         CreateVillagers.unloadNPC();
         delBoard();
         getServer().getConsoleSender().sendMessage(ChatColor.RED + "[Redux] plugin is disabled");
@@ -491,6 +525,11 @@ public class redux extends JavaPlugin {
 
     private void commandRegistration(){
         command commands = new command();
+
+        StashCommands stash = new StashCommands();
+
+        getCommand("stash").setExecutor(stash);
+
         getCommand("cookiemonster").setExecutor(commands);
         getCommand("crategive").setExecutor(commands);
         getCommand("enchantPant").setExecutor(commands);
@@ -528,6 +567,7 @@ public class redux extends JavaPlugin {
         getCommand("booster").setExecutor(commands);
         getCommand("atest").setExecutor(commands);
         getCommand("view").setExecutor(commands);
+        getCommand("patchnotes").setExecutor(commands);
        // getCommand("trade").setExecutor(commands);
     }
 

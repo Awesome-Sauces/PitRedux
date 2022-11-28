@@ -43,7 +43,7 @@ public class questMenuItems {
     public static ItemStack PlayerSoulsToMalding(String uuid){
         return ItemMaker(Material.DIAMOND_HOE, ChatColor.YELLOW +
                 "Soul Reaper", colorCode("&7Bring the &bQuest Master &332\n" +
-                "&3Player Souls &7to convert\n&7them into a &cMalding &7kill\n" +
+                "&3Player Souls &7to convert\n&7them into a &bCookie Monster &7kill\n" +
                 "&7him for special rewards!\n\n" +
                 "&625,000g &7conversion cost!"), 1, true);
     }

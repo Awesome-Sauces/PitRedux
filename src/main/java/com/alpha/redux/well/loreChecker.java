@@ -255,7 +255,7 @@ public class loreChecker {
 
     public static List<String> CheckEnchantOnSword(List<String> lore) {
 
-        List<String> list=new ArrayList<String>();
+        List<String> list=new ArrayList<>();
 
         if (lore.contains(colorCode("&9Fancy Raider III"))){
             list.add("fancyraiderIII");

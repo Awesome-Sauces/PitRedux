@@ -26,6 +26,7 @@ import static com.alpha.redux.events.boards.integerToRoman;
 import static com.alpha.redux.playerdata.economy.getEconomy;
 import static com.alpha.redux.playerdata.economy.removeEconomy;
 import static com.alpha.redux.well.loreChecker.CheckEnchantOnPant;
+import static com.alpha.redux.well.loreChecker.CheckEnchantOnSword;
 import static com.alpha.redux.well.mysticWell.*;
 
 public class FreshPants {
@@ -41,6 +42,15 @@ public class FreshPants {
         }
     }
 
+    public static int getTokens(List<String> lore){
+        int tokens = 0;
+        if(lore!=null) for(String string : CheckEnchantOnPant(lore)){
+            tokens+=string.length()-string.replaceAll("I", "").length();
+        }
+
+        return tokens;
+    }
+
     public static void clickFresh(InventoryClickEvent event){
         event.setCancelled(true);
 
@@ -48,19 +58,27 @@ public class FreshPants {
         Player player = (Player) event.getWhoClicked();
         ItemStack items = event.getClickedInventory().getItem(20);
 
-        if (items.getItemMeta().getDisplayName().contains("Tier III")){
+        int tokens = getTokens(items.getItemMeta().getLore());
+
+        if (items.getItemMeta().getItemFlags().contains(ItemFlag.HIDE_ENCHANTS) && tokens>0){
             player.sendMessage(ChatColor.RED + "This pant is already max tier!");
             return;
-        } else if (items.getItemMeta().getDisplayName().contains("Tier II") && removeGold(player, uuid, 8000)) {
+        } else if (items.getItemMeta().getItemFlags().contains(ItemFlag.HIDE_ATTRIBUTES) &&
+                !items.getItemMeta().getItemFlags().contains(ItemFlag.HIDE_ENCHANTS) && removeGold(player, uuid, 8000)) {
             Sounds.BUTTON.play(player);
             Sounds.PIN_DOWN.play(player);
+
+            LeatherArmorMeta meta = ((LeatherArmorMeta)items.getItemMeta());
+
+            meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS);
+
             event.getClickedInventory().setItem(20, createPant(player,3, event.getClickedInventory().getItem(20), null));
-        }else if (!items.getItemMeta().getDisplayName().contains("Tier II") &&
-                items.getItemMeta().getDisplayName().contains("Tier I") && removeGold(player, uuid, 4000)) {
+        }else if (CheckEnchantOnPant(items.getItemMeta().getLore()).size()==1&&
+        !items.getItemMeta().getItemFlags().contains(ItemFlag.HIDE_ATTRIBUTES)&& removeGold(player, uuid, 4000)) {
             Sounds.BUTTON.play(player);
             Sounds.PIN_DOWN.play(player);
             event.getClickedInventory().setItem(20, createPant(player,2, event.getClickedInventory().getItem(20), null));
-        } else if (items.getItemMeta().getDisplayName().contains("Fresh") && removeGold(player, uuid, 1000)) {
+        } else if (tokens == 0 && removeGold(player, uuid, 1000)) {
             Sounds.BUTTON.play(player);
             Sounds.PIN_DOWN.play(player);
             event.getClickedInventory().setItem(20, createPant(player,1, null, event.getClickedInventory().getItem(20)));
@@ -78,7 +96,7 @@ public class FreshPants {
 
             meta.setColor(lmeta.getColor());
             meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cTier " + integerToRoman(tier) + " Pants"));
-            meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
+            meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
             meta.spigot().setUnbreakable(true);
             meta.setLore(enchantPant(player, pant, tier));
             item.setItemMeta(meta);
@@ -88,7 +106,14 @@ public class FreshPants {
         }else{
             ItemMeta meta = pant.getItemMeta();
             meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cTier " + integerToRoman(tier) + " Pants"));
-            meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
+            meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+
+            if(tier==2){
+                meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+            }else if(tier==3){
+                meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            }
+
             meta.spigot().setUnbreakable(true);
             //enchantpant(player, pant, tier)
             meta.setLore(enchantPant(player, pant, tier));

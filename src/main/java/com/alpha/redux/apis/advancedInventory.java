@@ -65,6 +65,17 @@ public class advancedInventory {
         return dye;
     }
 
+    public static ItemStack WoolMaker(short dyeColor, String DisplayName, String lore){
+        ItemStack dye = new ItemStack(35, 1, dyeColor);
+        ItemMeta meta = dye.getItemMeta();
+        meta.setDisplayName(DisplayName);
+        String[] lines = lore.split("\\n");
+        ArrayList<String> dye_lore = new ArrayList<>(Arrays.asList(lines));
+        meta.setLore(dye_lore);
+        dye.setItemMeta(meta);
+        return dye;
+    }
+
     public static ItemStack EggMaker(short dyeColor, String DisplayName, String lore){
         ItemStack dye = new ItemStack(383, 1, dyeColor);
         ItemMeta meta = dye.getItemMeta();
@@ -112,6 +123,17 @@ public class advancedInventory {
 
     public static ItemStack ClayMaker(short clayColor, String DisplayName, String lore){
         ItemStack dye = new ItemStack(159, 1, clayColor);
+        ItemMeta meta = dye.getItemMeta();
+        meta.setDisplayName(DisplayName);
+        String[] lines = lore.split("\\n");
+        ArrayList<String> dye_lore = new ArrayList<>(Arrays.asList(lines));
+        meta.setLore(dye_lore);
+        dye.setItemMeta(meta);
+        return dye;
+    }
+
+    public static ItemStack ClayMaker(String DisplayName, String lore){
+        ItemStack dye = new ItemStack(159, 1);
         ItemMeta meta = dye.getItemMeta();
         meta.setDisplayName(DisplayName);
         String[] lines = lore.split("\\n");

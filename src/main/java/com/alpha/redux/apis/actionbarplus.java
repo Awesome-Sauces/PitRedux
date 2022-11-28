@@ -1,5 +1,6 @@
 package com.alpha.redux.apis;
 
+import me.alpha.hunter.api.HunterAPI;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
 import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
 import org.bukkit.Bukkit;
@@ -10,6 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import java.text.DecimalFormat;
 
+import static com.alpha.redux.DeathHandler.killHandler.getNPC;
 import static com.alpha.redux.DeathHandler.killHandler.isNPC;
 
 public class actionbarplus {
@@ -53,14 +55,22 @@ public class actionbarplus {
         DecimalFormat df = new DecimalFormat("#.000");
         float number = Float.parseFloat(df.format(event.getFinalDamage()));
 
-        sendActionBar(player, colorPlayer + defender.getDisplayName() + health + " &c" + number + "HP");
+        if(isNPC(defender)){
+            sendActionBar(player, colorPlayer + getNPC(defender).getName() + health + " &c" + number + "HP");
+        }else{
+            sendActionBar(player, colorPlayer + defender.getDisplayName() + health + " &c" + number + "HP");
+        }
     }
 
     public static void sendKillBar(Player player, Player defender){
         String health = " &a&lKILL!";
         String colorPlayer = PlayerNameColor(defender);
 
-        sendActionBar(player, colorPlayer + defender.getDisplayName() + health);
+        if(isNPC(defender)){
+            sendActionBar(player, colorPlayer + getNPC(defender).getName() + health);
+        }else{
+            sendActionBar(player, colorPlayer + defender.getDisplayName() + health);
+        }
     }
 
     public static String PlayerNameColor(Player player){

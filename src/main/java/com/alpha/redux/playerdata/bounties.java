@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 
+import static com.alpha.redux.DeathHandler.killHandler.getNPC;
 import static com.alpha.redux.DeathHandler.killHandler.isNPC;
 import static com.alpha.redux.playerdata.streaks.getStreak;
 import static com.alpha.redux.playerdata.streaks.hasStreak;
@@ -46,7 +47,11 @@ public class bounties {
             if(BountiesMap.containsKey(uuid)){
                 if(BountiesMap.get(uuid) > 0){
                     NametagEdit.getApi().setSuffix(bountied, "");
-                    Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',"&6&lBOUNTY CLAIMED! " + "&7" + rank.getNameColor(claimer) + claimer.getDisplayName() + "&7 killed " + rank.getNameColor(bountied) + bountied.getDisplayName() + "&7 for " + "&6&l" + BountiesMap.get(uuid) + "&6&lg"));
+                    if(isNPC(claimer)){
+                        Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',"&6&lBOUNTY CLAIMED! " + "&7" + rank.getNameColor(claimer) + getNPC(claimer).getName() + "&7 killed " + rank.getNameColor(bountied) + bountied.getDisplayName() + "&7 for " + "&6&l" + BountiesMap.get(uuid) + "&6&lg"));
+                    }else{
+                        Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',"&6&lBOUNTY CLAIMED! " + "&7" + rank.getNameColor(claimer) + claimer.getDisplayName() + "&7 killed " + rank.getNameColor(bountied) + bountied.getDisplayName() + "&7 for " + "&6&l" + BountiesMap.get(uuid) + "&6&lg"));
+                    }
                     BountiesMap.put(uuid, 0);
                     return;
                 }

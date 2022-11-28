@@ -1,5 +1,6 @@
 package com.alpha.redux.DeathHandler;
 
+import com.alpha.redux.Stash.StashCore;
 import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.chatManager.rank;
 import com.alpha.redux.boosters.Booster;
@@ -10,9 +11,11 @@ import com.alpha.redux.items.enchants;
 import com.alpha.redux.playerdata.Renown;
 import com.alpha.redux.playerdata.goldReq;
 import com.alpha.redux.redux;
+import com.alpha.redux.renownShop.DataStorage.BotKills;
 import com.alpha.redux.renownShop.MysticismChance;
 import com.alpha.redux.well.enchants.global.*;
 import com.nametagedit.plugin.NametagEdit;
+import me.alpha.hunter.api.HunterAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.minecraft.server.v1_8_R3.EntityHuman;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
@@ -116,7 +119,7 @@ public class ReduxDeathEvent extends Event implements Cancellable{
             UberRewardClaimDeath(defender.getPlayerObject());
             
             // Resets streaks
-            hasStreak(defender.getPlayerObject().getDisplayName());
+            hasStreak(defender.getPlayerUUID());
             setStreak(defender.getPlayerUUID(), 0);
             
             // Refil Health
@@ -129,7 +132,7 @@ public class ReduxDeathEvent extends Event implements Cancellable{
             }
 
             // Refresh tab name
-            NametagEdit.getApi().setNametag(defender.getPlayerObject(), ChatEventApiGetLevelColor(defender.getPlayerObject().getDisplayName(), defender.getPlayerUUID())+ rank.getNameColor(defender.getPlayerObject()), "");
+            if(!isNPC(defender.getPlayerObject())) NametagEdit.getApi().setNametag(defender.getPlayerObject(), ChatEventApiGetLevelColor(defender.getPlayerObject().getDisplayName(), defender.getPlayerUUID())+ rank.getNameColor(defender.getPlayerObject()), "");
         }
 
         // Mega Streak Calculations
@@ -280,6 +283,19 @@ public class ReduxDeathEvent extends Event implements Cancellable{
             }
         }
 
+        if(isNPC(defender.getPlayerObject())&&
+        !isNPC(attacker.getPlayerObject())){
+            if(redux.botKills.hasValue(attacker.getPlayerObject().getUniqueId().toString())){
+                redux.botKills.addValue(attacker.getPlayerObject().getUniqueId().toString(),1);
+            }else{
+                redux.botKills.setValue(attacker.getPlayerObject().getUniqueId().toString(),1);
+            }
+
+            if(((int)redux.botKills.getValue(attacker.getPlayerObject().getUniqueId().toString()))==40000){
+                redux.factionReward.setValue(attacker.getPlayerObject().getUniqueId().toString(), "unclaimed");
+            }
+        }
+
         xp = (int) Math.round(xp);
         gold = (int) Math.round(gold);
 
@@ -297,7 +313,22 @@ public class ReduxDeathEvent extends Event implements Cancellable{
             if(!KillMessages.containsKey(attacker.getPlayerUUID())){
                 KillMessages.put(attacker.getPlayerUUID(), true);
             }else if(KillMessages.get(attacker.getPlayerUUID()).equals(true)){
-                attacker.getPlayerObject().sendMessage(ChatColor.GREEN + colorCode("&lKILL! ") + ChatColor.GRAY + "on " + defender.getPlayerObject().getDisplayName() + ChatColor.RESET + ChatColor.AQUA + " +" + String.valueOf((int)Math.min(this.xp, xp_cap)) + "XP" + ChatColor.GOLD + " +" + String.valueOf((int) Math.min(this.gold, this.gold_cap)) + "g");
+                if(isNPC(defender.getPlayerObject())){
+                    attacker.getPlayerObject().sendMessage(ChatColor.GREEN + colorCode("&lKILL! ") + ChatColor.GRAY + "on " + getNPC(defender.getPlayerObject()).getName() + ChatColor.RESET + ChatColor.AQUA + " +" + String.valueOf((int)Math.min(this.xp, xp_cap)) + "XP" + ChatColor.GOLD + " +" + String.valueOf((int) Math.min(this.gold, this.gold_cap)) + "g");
+                }else{
+                    attacker.getPlayerObject().sendMessage(ChatColor.GREEN + colorCode("&lKILL! ") + ChatColor.GRAY + "on " + defender.getPlayerObject().getDisplayName() + ChatColor.RESET + ChatColor.AQUA + " +" + String.valueOf((int)Math.min(this.xp, xp_cap)) + "XP" + ChatColor.GOLD + " +" + String.valueOf((int) Math.min(this.gold, this.gold_cap)) + "g");
+                }
+            }
+
+        }
+
+        // Streak Messages
+        if(!isNPC(attacker.getPlayerObject())){
+            // &c&lSTREAK! &7of &c5 &7kills by <level_username>
+            hasStreak(attacker.getPlayerUUID());
+
+            if(getStreak(attacker.getPlayerUUID())%5==0){
+                Bukkit.broadcastMessage(colorCode("&c&lSTREAK! &7of &c"+getStreak(attacker.getPlayerUUID())+" &7kills by <level_username>", attacker));
             }
 
         }
@@ -321,7 +352,13 @@ public class ReduxDeathEvent extends Event implements Cancellable{
         }
 
         // Standard Messages
-        defender.getPlayerObject().sendMessage(ChatColor.RED + colorCode("&lDEATH! ") + ChatColor.GRAY + "by " + attacker.getPlayerObject().getDisplayName());
+        if(!isNPC(defender.getPlayerObject())) {
+            if(isNPC(attacker.getPlayerObject())){
+                defender.getPlayerObject().sendMessage(ChatColor.RED + colorCode("&lDEATH! ") + ChatColor.GRAY + "by " + HunterAPI.getRandomName());
+            }else{
+                defender.getPlayerObject().sendMessage(ChatColor.RED + colorCode("&lDEATH! ") + ChatColor.GRAY + "by " + attacker.getPlayerObject().getDisplayName());
+            }
+        }
         killTitle(defender.getPlayerObject());
         BountyClaimed(defender.getPlayerObject(), attacker.getPlayerObject());
         if(!isNPC(attacker.getPlayerObject())) BountyManager(attacker.getPlayerObject());
@@ -442,13 +479,13 @@ public class ReduxDeathEvent extends Event implements Cancellable{
                         break;
 
                     case "pantsradarIII":
-                        mystic_chance+=19;
+                        mystic_chance+=9;
                         break;
                     case "pantsradarII":
-                        mystic_chance+=12;
+                        mystic_chance+=5;
                         break;
                     case "pantsradarI":
-                        mystic_chance+=6;
+                        mystic_chance+=2;
                         break;
                 }
             }
@@ -458,55 +495,104 @@ public class ReduxDeathEvent extends Event implements Cancellable{
     public void customDrops(){
         if(isNPC(defender.getPlayerObject()) && percentChance(0.005) &&
         redux.heresy.hasValue(attacker.getPlayerUUID())){
-            attacker.getPlayerObject().getInventory().addItem(enchants.vile);
+            StashCore.safeGive(attacker.getPlayerObject(), enchants.vile);
             attacker.getPlayerObject().sendMessage(ChatColor.GREEN + "WOW!" + ChatColor.GRAY + " You got a" + ChatColor.DARK_PURPLE + " Vile!");
             attacker.getPlayerObject().playSound(attacker.getPlayerObject().getLocation(), Sound.NOTE_PLING, 1.0F, 1.0F);
         }else if(!isNPC(defender.getPlayerObject()) && percentChance(0.50) &&
                 redux.heresy.hasValue(attacker.getPlayerUUID())){
-            attacker.getPlayerObject().getInventory().addItem(enchants.vile);
+            StashCore.safeGive(attacker.getPlayerObject(), enchants.vile);
             attacker.getPlayerObject().sendMessage(ChatColor.GREEN + "WOW!" + ChatColor.GRAY + " You got a" + ChatColor.DARK_PURPLE + " Vile!");
             attacker.getPlayerObject().playSound(attacker.getPlayerObject().getLocation(), Sound.NOTE_PLING, 1.0F, 1.0F);
         }
 
         if(redux.mysticism.hasValue(attacker.getPlayerUUID())&&
-                percentChance(((double)((Integer) redux.mysticism.getValue(attacker.getPlayerUUID()))+mystic_chance)/1000)){
+                percentChance(((double)((Integer) redux.mysticism.getValue(attacker.getPlayerUUID()))+mystic_chance)/1250)){
             while (true){
                 if(percentChance(.20)){
-                    attacker.getPlayerObject().getInventory().addItem(enchants.fresh_greens);
-                    attacker.getPlayerObject().sendMessage(ChatColor.GREEN + "WOW!" + ChatColor.GRAY + " You got a" + ChatColor.GREEN + " Green Fresh!");
+                    StashCore.safeGive(attacker.getPlayerObject(), enchants.fresh_greens);
+                    if(isNPC(defender.getPlayerObject())){
+                        attacker.getPlayerObject().sendMessage(colorCode("&d&lMYSTIC ITEM!" +
+                                " &7dropped from killing " + getNPC(defender.getPlayerObject()).getName() + "&7!"));
+                    }else{
+                        attacker.getPlayerObject().sendMessage(colorCode("&d&lMYSTIC ITEM!" +
+                                " &7dropped from killing " +
+                                ChatEventApiGetLevelColor(attacker.getPlayerObject().getDisplayName(), attacker.getPlayerUUID())+ rank.getNameColor(attacker.getPlayerObject()) + attacker.getPlayerObject().getDisplayName() + attacker.getPlayerObject().getDisplayName() + "&7!"));
+                    }
                     attacker.getPlayerObject().playSound(attacker.getPlayerObject().getLocation(), Sound.NOTE_PLING, 1.0F, 1.0F);
                     break;
                 }else if(percentChance(.20)){
-                    attacker.getPlayerObject().getInventory().addItem(enchants.fresh_blues);
-                    attacker.getPlayerObject().sendMessage(ChatColor.GREEN + "WOW!" + ChatColor.GRAY + " You got a" + ChatColor.BLUE + " Blue Fresh!");
+                    StashCore.safeGive(attacker.getPlayerObject(), enchants.fresh_blues);
+                    if(isNPC(defender.getPlayerObject())){
+                        attacker.getPlayerObject().sendMessage(colorCode("&d&lMYSTIC ITEM!" +
+                                " &7dropped from killing " + getNPC(defender.getPlayerObject()).getName() + "&7!"));
+                    }else{
+                        attacker.getPlayerObject().sendMessage(colorCode("&d&lMYSTIC ITEM!" +
+                                " &7dropped from killing " +
+                                ChatEventApiGetLevelColor(attacker.getPlayerObject().getDisplayName(), attacker.getPlayerUUID())+ rank.getNameColor(attacker.getPlayerObject()) + attacker.getPlayerObject().getDisplayName() + attacker.getPlayerObject().getDisplayName() + "&7!"));
+                    }
                     attacker.getPlayerObject().playSound(attacker.getPlayerObject().getLocation(), Sound.NOTE_PLING, 1.0F, 1.0F);
                     break;
                 }else if(percentChance(.20)){
-                    attacker.getPlayerObject().getInventory().addItem(enchants.fresh_reds);
-                    attacker.getPlayerObject().sendMessage(ChatColor.GREEN + "WOW!" + ChatColor.GRAY + " You got a" + ChatColor.RED + " Red Fresh!");
+                    StashCore.safeGive(attacker.getPlayerObject(), enchants.fresh_reds);
+                    if(isNPC(defender.getPlayerObject())){
+                        attacker.getPlayerObject().sendMessage(colorCode("&d&lMYSTIC ITEM!" +
+                                " &7dropped from killing " + getNPC(defender.getPlayerObject()).getName() + "&7!"));
+                    }else{
+                        attacker.getPlayerObject().sendMessage(colorCode("&d&lMYSTIC ITEM!" +
+                                " &7dropped from killing " +
+                                ChatEventApiGetLevelColor(attacker.getPlayerObject().getDisplayName(), attacker.getPlayerUUID())+ rank.getNameColor(attacker.getPlayerObject()) + attacker.getPlayerObject().getDisplayName() + attacker.getPlayerObject().getDisplayName() + "&7!"));
+                    }
                     attacker.getPlayerObject().playSound(attacker.getPlayerObject().getLocation(), Sound.NOTE_PLING, 1.0F, 1.0F);
                     break;
                 }else if(percentChance(.20)){
-                    attacker.getPlayerObject().getInventory().addItem(enchants.fresh_oranges);
-                    attacker.getPlayerObject().sendMessage(ChatColor.GREEN + "WOW!" + ChatColor.GRAY + " You got a" + ChatColor.GOLD + " Orange Fresh!");
+                    StashCore.safeGive(attacker.getPlayerObject(), enchants.fresh_oranges);
+                    if(isNPC(defender.getPlayerObject())){
+                        attacker.getPlayerObject().sendMessage(colorCode("&d&lMYSTIC ITEM!" +
+                                " &7dropped from killing " + getNPC(defender.getPlayerObject()).getName() + "&7!"));
+                    }else{
+                        attacker.getPlayerObject().sendMessage(colorCode("&d&lMYSTIC ITEM!" +
+                                " &7dropped from killing " +
+                                ChatEventApiGetLevelColor(attacker.getPlayerObject().getDisplayName(), attacker.getPlayerUUID())+ rank.getNameColor(attacker.getPlayerObject()) + attacker.getPlayerObject().getDisplayName() + attacker.getPlayerObject().getDisplayName() + "&7!"));
+                    }
                     attacker.getPlayerObject().playSound(attacker.getPlayerObject().getLocation(), Sound.NOTE_PLING, 1.0F, 1.0F);
                     break;
                 }else if(percentChance(.20)){
-                    attacker.getPlayerObject().getInventory().addItem(enchants.fresh_yellows);
-                    attacker.getPlayerObject().sendMessage(ChatColor.GREEN + "WOW!" + ChatColor.GRAY + " You got a" + ChatColor.YELLOW + " Yellow Fresh!");
+                    StashCore.safeGive(attacker.getPlayerObject(), enchants.fresh_yellows);
+                    if(isNPC(defender.getPlayerObject())){
+                        attacker.getPlayerObject().sendMessage(colorCode("&d&lMYSTIC ITEM!" +
+                                " &7dropped from killing " + getNPC(defender.getPlayerObject()).getName() + "&7!"));
+                    }else{
+                        attacker.getPlayerObject().sendMessage(colorCode("&d&lMYSTIC ITEM!" +
+                                " &7dropped from killing " +
+                                ChatEventApiGetLevelColor(attacker.getPlayerObject().getDisplayName(), attacker.getPlayerUUID())+ rank.getNameColor(attacker.getPlayerObject()) + attacker.getPlayerObject().getDisplayName() + attacker.getPlayerObject().getDisplayName() + "&7!"));
+                    }
                     attacker.getPlayerObject().playSound(attacker.getPlayerObject().getLocation(), Sound.NOTE_PLING, 1.0F, 1.0F);
                     break;
                 }
             }
         }else if (redux.mysticism.hasValue(attacker.getPlayerUUID())&&
-                percentChance(((double)((Integer) redux.mysticism.getValue(attacker.getPlayerUUID()))+mystic_chance)/1000)) {
-            attacker.getPlayerObject().getInventory().addItem(enchants.fresh_bow);
-            attacker.getPlayerObject().sendMessage(ChatColor.GREEN + "WOW!" + ChatColor.GRAY + " You got a" + ChatColor.RED + " Mystic Bow!");
+                percentChance(((double)((Integer) redux.mysticism.getValue(attacker.getPlayerUUID()))+mystic_chance)/1250)) {
+            StashCore.safeGive(attacker.getPlayerObject(), enchants.fresh_bow);
+            if(isNPC(defender.getPlayerObject())){
+                attacker.getPlayerObject().sendMessage(colorCode("&d&lMYSTIC ITEM!" +
+                        " &7dropped from killing " + getNPC(defender.getPlayerObject()).getName() + "&7!"));
+            }else{
+                attacker.getPlayerObject().sendMessage(colorCode("&d&lMYSTIC ITEM!" +
+                        " &7dropped from killing " +
+                        ChatEventApiGetLevelColor(attacker.getPlayerObject().getDisplayName(), attacker.getPlayerUUID())+ rank.getNameColor(attacker.getPlayerObject()) + attacker.getPlayerObject().getDisplayName() + "&7!"));
+            }
             attacker.getPlayerObject().playSound(attacker.getPlayerObject().getLocation(), Sound.NOTE_PLING, 1.0F, 1.0F);
         }else if(redux.mysticism.hasValue(attacker.getPlayerUUID())&&
-                percentChance(((double)((Integer) redux.mysticism.getValue(attacker.getPlayerUUID()))+mystic_chance)/1000)){
-            attacker.getPlayerObject().getInventory().addItem(enchants.fresh_sword);
-            attacker.getPlayerObject().sendMessage(ChatColor.GREEN + "WOW!" + ChatColor.GRAY + " You got a" + ChatColor.RED + " Mystic Sword!");
+                percentChance(((double)((Integer) redux.mysticism.getValue(attacker.getPlayerUUID()))+mystic_chance)/1250)){
+            StashCore.safeGive(attacker.getPlayerObject(), enchants.fresh_sword);
+            if(isNPC(defender.getPlayerObject())){
+                attacker.getPlayerObject().sendMessage(colorCode("&d&lMYSTIC ITEM!" +
+                        " &7dropped from killing " + getNPC(defender.getPlayerObject()).getName() + "&7!"));
+            }else{
+                attacker.getPlayerObject().sendMessage(colorCode("&d&lMYSTIC ITEM!" +
+                        " &7dropped from killing " +
+                        ChatEventApiGetLevelColor(attacker.getPlayerObject().getDisplayName(), attacker.getPlayerUUID())+ rank.getNameColor(attacker.getPlayerObject()) + attacker.getPlayerObject().getDisplayName() + "&7!"));
+            }
             attacker.getPlayerObject().playSound(attacker.getPlayerObject().getLocation(), Sound.NOTE_PLING, 1.0F, 1.0F);
         }
     }

@@ -9,6 +9,10 @@ commands:
     description: Teleports player to spawn
     usage: /<command>
     aliases: spwn
+  stash:
+    description: Claims all items from the stash
+    usage: /<command>
+    aliases: pickupstash
   view:
     description: Views a player
     usage: /<command>

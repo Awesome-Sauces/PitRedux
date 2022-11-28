@@ -103,6 +103,22 @@ public class nonPermItems {
 
                 }
 
+            try {
+                if (player.getInventory().getChestplate().equals(itemManager.arch)) {
+                    player.getInventory().setChestplate(null);
+                }
+            }catch (Exception e){
+
+            }
+
+            try {
+                if (player.getInventory().getHelmet().equals(itemManager.goldHelm)) {
+                    player.getInventory().setHelmet(null);
+                }
+            }catch (Exception e){
+
+            }
+
                 try {
                     if ((player.getInventory().getChestplate().equals(itemManager.DiamondChestplate))) {
                         player.getInventory().setChestplate(null);
@@ -144,6 +160,22 @@ public class nonPermItems {
                 }catch (Exception e){
 
                 }
+
+            try {
+                if (player.getInventory().contains(itemManager.arch)) {
+                    player.getInventory().remove(itemManager.arch);
+                }
+            }catch (Exception e){
+
+            }
+
+            try {
+                if (player.getInventory().contains(itemManager.goldHelm)) {
+                    player.getInventory().remove(itemManager.goldHelm);
+                }
+            }catch (Exception e){
+
+            }
 
                 try {
                     if (player.getInventory().contains(itemManager.DiamondSword)) {

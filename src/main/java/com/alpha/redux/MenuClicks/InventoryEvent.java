@@ -1,5 +1,6 @@
 package com.alpha.redux.MenuClicks;
 
+import com.alpha.redux.Stash.StashCore;
 import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.chatManager.rank;
 import com.alpha.redux.events.boards;
@@ -77,7 +78,7 @@ public class InventoryEvent {
                             event.getCurrentItem().getType().equals(Material.GOLD_SWORD) ||
                             event.getCurrentItem().getType().equals(Material.BOW)) {
 
-                        player.getInventory().addItem(event.getClickedInventory().getItem(20));
+                        StashCore.safeGive(player, event.getClickedInventory().getItem(20));
                         event.getClickedInventory().setItem(20, null);
 
                     }
@@ -130,7 +131,8 @@ public class InventoryEvent {
                 if (hasEconomy(String.valueOf(player.getUniqueId()))) {
                     if (getEconomy(String.valueOf(player.getUniqueId())) >= 150) {
                         removeEconomy(String.valueOf(player.getUniqueId()), 150);
-                        player.getInventory().addItem(ItemMaker(Material.DIAMOND_SWORD, "NULL", "NULL", 1, false));
+
+                        StashCore.safeGive(player, ItemMaker(Material.DIAMOND_SWORD, "NULL", "NULL", 1, false));
 
                         player.getWorld().playSound(player.getLocation(), Sound.LEVEL_UP, 1, 20);
 
@@ -147,7 +149,8 @@ public class InventoryEvent {
                 if (hasEconomy(String.valueOf(player.getUniqueId()))) {
                     if (getEconomy(String.valueOf(player.getUniqueId())) >= 750) {
                         removeEconomy(String.valueOf(player.getUniqueId()), 750);
-                        player.getInventory().addItem(ItemMaker(Material.DIAMOND_SPADE, ChatColor.AQUA + "Combat Spade", ChatColor.GRAY + "Deals " + ChatColor.BLUE +
+
+                        StashCore.safeGive(player, ItemMaker(Material.DIAMOND_SPADE, ChatColor.AQUA + "Combat Spade", ChatColor.GRAY + "Deals " + ChatColor.BLUE +
                                 "+1 damage per\n" + ChatColor.AQUA + "diamond piece " + ChatColor.GRAY + "on enemy." + "\n\n"  +
                                 ChatColor.BLUE + "+7 Attack Damage", 1, false));
 
@@ -167,7 +170,12 @@ public class InventoryEvent {
                     if (getEconomy(String.valueOf(player.getUniqueId())) >= 200) {
                         removeEconomy(String.valueOf(player.getUniqueId()), 200);
 
-                        player.getInventory().addItem(itemManager.IronHelmet, itemManager.IronChestplate, itemManager.IronLeggings, itemManager.IronBoots);}
+                        StashCore.safeGive(player, itemManager.IronHelmet);
+                        StashCore.safeGive(player, itemManager.IronChestplate);
+                        StashCore.safeGive(player, itemManager.IronLeggings);
+                        StashCore.safeGive(player, itemManager.IronBoots);
+
+                        }
 
                         player.getWorld().playSound(player.getLocation(), Sound.LEVEL_UP, 1, 20);
 
@@ -189,7 +197,7 @@ public class InventoryEvent {
                             Sounds.ARMOR_SWAP.play(player);
                             player.getInventory().setChestplate(ItemMaker(Material.DIAMOND_CHESTPLATE, "NULL", "NULL", 1, false));
                         }else{
-                            player.getInventory().addItem(ItemMaker(Material.DIAMOND_CHESTPLATE, "NULL", "NULL", 1, false));
+                            StashCore.safeGive(player, ItemMaker(Material.DIAMOND_CHESTPLATE, "NULL", "NULL", 1, false));
                         }
 
                         player.getWorld().playSound(player.getLocation(), Sound.LEVEL_UP, 1, 20);
@@ -213,7 +221,7 @@ public class InventoryEvent {
                             Sounds.ARMOR_SWAP.play(player);
                             player.getInventory().setLeggings(ItemMaker(Material.DIAMOND_LEGGINGS, "NULL", "NULL", 1, false));
                         }else{
-                            player.getInventory().addItem(ItemMaker(Material.DIAMOND_LEGGINGS, "NULL", "NULL", 1, false));
+                            StashCore.safeGive(player,ItemMaker(Material.DIAMOND_LEGGINGS, "NULL", "NULL", 1, false));
                         }
 
                         player.getWorld().playSound(player.getLocation(), Sound.LEVEL_UP, 1, 20);
@@ -231,7 +239,7 @@ public class InventoryEvent {
                 if (hasEconomy(String.valueOf(player.getUniqueId()))) {
                     if (getEconomy(String.valueOf(player.getUniqueId())) >= 40) {
                         removeEconomy(String.valueOf(player.getUniqueId()), 40);
-                        player.getInventory().addItem(ItemMaker(Material.OBSIDIAN, "NULL", "NULL", 8, false));
+                        StashCore.safeGive(player,ItemMaker(Material.OBSIDIAN, "NULL", "NULL", 8, false));
 
                         player.getWorld().playSound(player.getLocation(), Sound.LEVEL_UP, 1, 20);
 
@@ -249,7 +257,7 @@ public class InventoryEvent {
                     if (getEconomy(String.valueOf(player.getUniqueId())) >= 2000) {
                         removeEconomy(String.valueOf(player.getUniqueId()), 2000);
 
-                        player.getInventory().addItem(enchants.firstaidfull);
+                        StashCore.safeGive(player, enchants.firstaidfull);
                         player.getWorld().playSound(player.getLocation(), Sound.LEVEL_UP, 1, 20);
 
                         boards.CreateScore(player);
@@ -265,7 +273,7 @@ public class InventoryEvent {
                 if (hasEconomy(String.valueOf(player.getUniqueId()))) {
                     if (getEconomy(String.valueOf(player.getUniqueId())) >= 150 && event.getCurrentItem().getItemMeta().getDisplayName().contains("Pants Bundle")) {
                         removeEconomy(String.valueOf(player.getUniqueId()), 150);
-                        player.getInventory().addItem(enchants.pantsPB);
+                        StashCore.safeGive(player,enchants.pantsPB);
 
                         player.getWorld().playSound(player.getLocation(), Sound.LEVEL_UP, 1, 20);
 
@@ -273,7 +281,7 @@ public class InventoryEvent {
 
                     }else if (getEconomy(String.valueOf(player.getUniqueId())) >= 150 && event.getCurrentItem().getItemMeta().getDisplayName().contains("Sword Bundle")) {
                         removeEconomy(String.valueOf(player.getUniqueId()), 150);
-                        player.getInventory().addItem(enchants.swordPB);
+                        StashCore.safeGive(player, enchants.swordPB);
 
                         player.getWorld().playSound(player.getLocation(), Sound.LEVEL_UP, 1, 20);
 
@@ -298,7 +306,7 @@ public class InventoryEvent {
                             Sounds.ARMOR_SWAP.play(player);
                             player.getInventory().setBoots(ItemMaker(Material.DIAMOND_BOOTS, "NULL", "NULL", 1, false));
                         }else{
-                            player.getInventory().addItem(ItemMaker(Material.DIAMOND_BOOTS, "NULL", "NULL", 1, false));
+                            StashCore.safeGive(player, ItemMaker(Material.DIAMOND_BOOTS, "NULL", "NULL", 1, false));
                         }
 
 

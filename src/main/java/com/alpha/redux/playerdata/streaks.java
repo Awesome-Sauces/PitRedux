@@ -1,5 +1,6 @@
 package com.alpha.redux.playerdata;
 
+import com.alpha.redux.Stash.StashCore;
 import com.alpha.redux.apis.chatManager.rank;
 import com.alpha.redux.items.itemManager;
 import com.alpha.redux.items.enchants;
@@ -32,11 +33,9 @@ public class streaks {
     // Set Material to BARRIER when running unless not using custom item
     public static void GiveUberItems(Player player, ItemStack item, int amount, boolean customItem, Material material){
         if (customItem){
-            for (int i = 0; i < amount; i++) {
-                player.getInventory().addItem(item);
-            }
+            StashCore.safeGiveMultiple(player, item, amount);
         }else{
-            player.getInventory().addItem(new ItemStack(material, amount));
+            StashCore.safeGiveMultiple(player, new ItemStack(material), amount);
         }
 
     }
@@ -127,7 +126,7 @@ public class streaks {
                 mega_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
                 true_damage_amount.put(String.valueOf(player.getUniqueId()), 0.0);
                 xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
-                player.getInventory().addItem(getUberDrop());
+                StashCore.safeGive(player, getUberDrop());
                 Location loc = getSpawnLocation(player.getWorld());
                 player.teleport(loc);
             }

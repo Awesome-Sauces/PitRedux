@@ -1,5 +1,7 @@
 package com.alpha.redux.commands;
 
+import com.alpha.redux.Stash.StashCore;
+import com.alpha.redux.Stash.StashData;
 import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.chatManager.rank;
 import com.alpha.redux.apis.leaderboardsplus.leaderboards;
@@ -161,6 +163,20 @@ public class command implements CommandExecutor {
             return true;
         }
 
+        if(cmd.getName().equalsIgnoreCase("patchnotes")){
+
+            player.sendMessage(colorCode("&e1.4.9\n" +
+                    "&a(+) &7Added Angel and Demon Factions\n" +
+                    "&a(+) &7Added Kings Quest\n" +
+                    "&a(+) &7Added Streak Of Message\n" +
+                    "&a(+) &7Fixed Stash\n" +
+                    "&a(+) &7Made bots have skins\n" +
+                    "&e(#) &7Fixed Item rename enchanting glitch\n\n" +
+                    "&eJoin the discord: &bdiscord.gg/FKVQUK2Z"));
+
+            return true;
+        }
+
         if(cmd.getName().equalsIgnoreCase("cookiemonster") &&
                 player.isOp()){
 
@@ -174,6 +190,14 @@ public class command implements CommandExecutor {
         if(cmd.getName().equalsIgnoreCase("atest") &&
         player.isOp()){
 
+            StashData.addStashData(player.getUniqueId(), enchants.fresh_blues);
+
+            StashCore.reminderMessage(player);
+            redux.botKills.setValue(player.getUniqueId().toString(), Integer.parseInt(args[0]));
+            player.sendMessage(redux.botKills.getValue(player.getUniqueId().toString()).toString());
+
+            Sounds.MYSTIC_DROP_1.play(player);
+
             /*
             playerExists(player).addPerks(args[0]);
             player.sendMessage(colorCode("&c" + playerExists(player).getPerks()));
@@ -181,7 +205,7 @@ public class command implements CommandExecutor {
              */
             //redux.kingOfTheLadder.getEventExecute().runnable();
 
-            event.handleTwoEvent();
+            //event.handleTwoEvent();
 
             //setXp(player.getUniqueId().toString(),getLevelXP(player, Integer.parseInt(args[0]), getPrestige(player.getUniqueId().toString())));
 
@@ -455,7 +479,7 @@ public class command implements CommandExecutor {
                 inv.addItem(enchants.malding_pants);
                 inv.addItem(enchants.lores);
                 inv.addItem(enchants.vile);
-                inv.addItem(itemManager.arch);
+                inv.addItem(enchants.archAngel);
                 inv.addItem(enchants.fresh_sword);
                 inv.addItem(itemManager.feather);
                 inv.addItem(enchants.jewl_pant);
@@ -469,7 +493,8 @@ public class command implements CommandExecutor {
 
                 inv.addItem(enchants.fresh_reds);
                 inv.addItem(itemManager.megalongbow);
-                inv.addItem(itemManager.goldHelm);
+                inv.addItem(enchants.kingsHelmet);
+                inv.addItem(enchants.arma);
                 inv.addItem(itemManager.ftts);
                 giveDyes(player.getDisplayName());
             }

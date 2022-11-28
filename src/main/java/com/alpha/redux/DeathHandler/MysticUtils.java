@@ -1,6 +1,7 @@
 package com.alpha.redux.DeathHandler;
 
 
+import com.alpha.redux.items.itemManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -22,6 +23,24 @@ public class MysticUtils {
         try{
             if(ChatColor.stripColor(player.getInventory().getLeggings().getItemMeta().getLore().get(0)).contains("Lives: 1/5")){
                 player.getInventory().setLeggings(null);
+            }
+
+        } catch (Exception e) {
+
+        }
+
+        try{
+            if(ChatColor.stripColor(player.getInventory().getChestplate().getItemMeta().getLore().get(0)).contains("Lives: 1/5")){
+                player.getInventory().setChestplate(null);
+            }
+
+        } catch (Exception e) {
+
+        }
+
+        try{
+            if(ChatColor.stripColor(player.getInventory().getHelmet().getItemMeta().getLore().get(0)).contains("Lives: 1/5")){
+                player.getInventory().setHelmet(null);
             }
 
         } catch (Exception e) {
@@ -95,10 +114,78 @@ public class MysticUtils {
 
 
     public static void registerCommonItems(Player p){
+        try{
+            ItemStack i = p.getInventory().getHelmet();
+
+            if(i.getType().equals(Material.GOLD_HELMET)){
+                if(i.getItemMeta()!=null&&
+                        i.getItemMeta().getLore()!=null&&
+                        i.getItemMeta().getLore().get(0).contains("Lives")){
+                    MysticLivesHandler(p, i);
+                }
+            }
+        }catch (Exception e){
+
+        }
+
+        try{
+            ItemStack i = p.getInventory().getChestplate();
+
+            if(i.getType().equals(Material.DIAMOND_CHESTPLATE)){
+                if(i.getItemMeta()!=null&&
+                        i.getItemMeta().getLore()!=null&&
+                        i.getItemMeta().getLore().get(0).contains("Lives")){
+                    MysticLivesHandler(p, i);
+                }
+            }
+        }catch (Exception e){
+
+        }
+
+        try{
+            ItemStack i = p.getInventory().getBoots();
+
+            if(i.getType().equals(Material.LEATHER_BOOTS)){
+                if(i.getItemMeta()!=null&&
+                        i.getItemMeta().getLore()!=null&&
+                        i.getItemMeta().getLore().get(0).contains("Lives")){
+                    MysticLivesHandler(p, i);
+                }
+            }
+        }catch (Exception e){
+
+        }
+
         for(ItemStack i : p.getInventory().getContents()){
             try{
                 if(i.getType().equals(Material.GOLD_SWORD)){
-                    if(ChatColor.stripColor(i.getItemMeta().getDisplayName()).contains("Tier")){
+                    if(i.getItemMeta()!=null&&
+                    i.getItemMeta().getLore()!=null&&
+                    i.getItemMeta().getLore().get(0).contains("Lives")){
+                        MysticLivesHandler(p, i);
+                    }
+                }
+            }catch (Exception e){
+
+            }
+
+            try{
+                if(i.getType().equals(Material.GOLD_HELMET)){
+                    if(i.getItemMeta()!=null&&
+                            i.getItemMeta().getLore()!=null&&
+                            i.getItemMeta().getLore().get(0).contains("Lives")){
+                        MysticLivesHandler(p, i);
+                    }
+                }
+            }catch (Exception e){
+
+            }
+
+            try{
+                if(i.getType().equals(Material.DIAMOND_CHESTPLATE)){
+                    if(i.getItemMeta()!=null&&
+                            i.getItemMeta().getLore()!=null&&
+                            i.getItemMeta().getLore().get(0).contains("Lives")){
                         MysticLivesHandler(p, i);
                     }
                 }
@@ -108,7 +195,21 @@ public class MysticUtils {
 
             try{
                 if(i.getType().equals(Material.LEATHER_LEGGINGS)){
-                    if(ChatColor.stripColor(i.getItemMeta().getDisplayName()).contains("Tier")){
+                    if(i.getItemMeta()!=null&&
+                            i.getItemMeta().getLore()!=null&&
+                            i.getItemMeta().getLore().get(0).contains("Lives")){
+                        MysticLivesHandler(p, i);
+                    }
+                }
+            } catch (Exception e) {
+
+            }
+
+            try{
+                if(i.getType().equals(Material.BOW)){
+                    if(i.getItemMeta()!=null&&
+                            i.getItemMeta().getLore()!=null&&
+                            i.getItemMeta().getLore().get(0).contains("Lives")){
                         MysticLivesHandler(p, i);
                     }
                 }

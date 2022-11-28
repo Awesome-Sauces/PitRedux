@@ -47,6 +47,9 @@ public class enchants {
     public static ItemStack goldenhead;
     public static ItemStack firstaidfull;
     public static ItemStack firstaidempty;
+    public static ItemStack kingsHelmet;
+    public static ItemStack archAngel;
+    public static ItemStack arma;
 
 
     public static void init(){
@@ -76,6 +79,64 @@ public class enchants {
         createFULLSwordPB();
         createFirstAidFull();
         createFirstAidEmpty();
+        createKingsHelmet();
+        createArchAngel();
+        createArma();
+    }
+
+    private static void createArma() {
+        ItemStack item = new ItemStack(Material.LEATHER_BOOTS, 1);
+        LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
+        meta.setColor(Color.RED);
+        meta.setDisplayName(colorCode("&cArmageddon Boots"));
+        List<String> lore = new ArrayList<>();
+        lore.add(colorCode("&7Lives: &a5&7/5"));
+        lore.add("");
+        lore.add(colorCode("&9Evil Within"));
+        lore.add(colorCode("&7Your hits ignore Somber"));
+        lore.add("  ");
+        lore.add(colorCode("&cDemon Faction Reward"));
+        meta.setLore(lore);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+        meta.spigot().setUnbreakable(true);
+        item.setItemMeta(meta);
+        arma = item;
+    }
+
+    private static void createArchAngel() {
+        ItemStack item = new ItemStack(Material.DIAMOND_CHESTPLATE, 1);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(colorCode("&bArchangel Chestplate"));
+        List<String> lore = new ArrayList<>();
+        lore.add(colorCode("&7Lives: &a5&7/5"));
+        lore.add(" ");
+        lore.add(colorCode("&9Guardian"));
+        lore.add(colorCode("&7Receive &9-10% &7less damage"));
+        lore.add("  ");
+        lore.add(colorCode("&bAngel Faction Reward"));
+        meta.setLore(lore);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+        meta.spigot().setUnbreakable(true);
+        item.setItemMeta(meta);
+        archAngel = item;
+    }
+
+    private static void createKingsHelmet() {
+        ItemStack item = new ItemStack(Material.GOLD_HELMET, 1);
+        ItemMeta meta = item.getItemMeta();
+        List<String> lore = new ArrayList<>();
+        meta.setDisplayName(colorCode("&6Golden Helmet"));
+        lore.add(colorCode("&7Lives: &a5&7/5"));
+        lore.add("   ");
+        lore.add(ChatColor.BLUE + "Royalty");
+        lore.add(colorCode("&7Earn ") + ChatColor.AQUA + "+50 xp cap");
+        lore.add(" ");
+        lore.add(ChatColor.GOLD + "As strong as diamond");
+        meta.setLore(lore);
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+        meta.spigot().setUnbreakable(true);
+        item.setItemMeta(meta);
+        kingsHelmet = item;
     }
 
     private static void createFirstAidFull() {
@@ -259,7 +320,7 @@ public class enchants {
     private static void createFreshReds() {
         ItemStack item = new ItemStack(Material.LEATHER_LEGGINGS, 1);
         LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
-        meta.setColor(Color.RED);
+        meta.setColor(Color.fromRGB(255,85,85));
         meta.setDisplayName(colorCode("&cFresh Red Pants"));
         List<String> lore = new ArrayList<>();
         lore.add(colorCode("&7Kept on death"));

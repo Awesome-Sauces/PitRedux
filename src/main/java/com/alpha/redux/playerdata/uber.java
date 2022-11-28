@@ -1,5 +1,6 @@
 package com.alpha.redux.playerdata;
 
+import com.alpha.redux.Stash.StashCore;
 import com.alpha.redux.apis.chatManager.rank;
 import com.alpha.redux.items.enchants;
 import com.alpha.redux.items.itemManager;
@@ -70,7 +71,7 @@ public class uber {
                 looping=false;
                 break;
             }else if(percentChance(.01)){
-                player.getInventory().addItem(enchants.gem);
+                StashCore.safeGive(player, enchants.gem);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.GREEN + " Totally Legit Gem", GemLore);
                 looping=false;
                 break;
@@ -80,121 +81,99 @@ public class uber {
                 looping=false;
                 break;
             }else if(percentChance(.10)){
-                player.getInventory().addItem(enchants.cactus);
-                player.getInventory().addItem(enchants.cactus);
-                player.getInventory().addItem(enchants.cactus);
-                player.getInventory().addItem(enchants.cactus);
-                player.getInventory().addItem(enchants.cactus);
+                StashCore.safeGiveMultiple(player, enchants.cactus, 5);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x5 Cactus!", FreshRedsLore);
                 looping=false;
                 break;
             }else if(percentChance(.05)){
-                player.getInventory().addItem(enchants.cactus);
-                player.getInventory().addItem(enchants.cactus);
-                player.getInventory().addItem(enchants.cactus);
-                player.getInventory().addItem(enchants.cactus);
-                player.getInventory().addItem(enchants.cactus);
-                player.getInventory().addItem(enchants.cactus);
-                player.getInventory().addItem(enchants.cactus);
-                player.getInventory().addItem(enchants.cactus);
-                player.getInventory().addItem(enchants.cactus);
-                player.getInventory().addItem(enchants.cactus);
-                player.getInventory().addItem(enchants.cactus);
-                player.getInventory().addItem(enchants.cactus);
-                player.getInventory().addItem(enchants.cactus);
-                player.getInventory().addItem(enchants.cactus);
-                player.getInventory().addItem(enchants.cactus);
-                player.getInventory().addItem(enchants.cactus);
+                StashCore.safeGiveMultiple(player, enchants.cactus, 16);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x16 Cactus!", FreshRedsLore);
                 looping=false;
                 break;
             }else if(percentChance(.03)){
-                player.getInventory().addItem(itemManager.DiamondBoots);
+                StashCore.safeGive(player, itemManager.DiamondBoots);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x1 Diamond Boots!", BootLore);
                 looping=false;
                 break;
             }else if(percentChance(.03)){
-                player.getInventory().addItem(itemManager.DiamondLeggings);
+                StashCore.safeGive(player, itemManager.DiamondLeggings);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x1 Diamond Leggings!", LegLore);
                 looping=false;
                 break;
             }else if(percentChance(.03)){
-                player.getInventory().addItem(itemManager.DiamondChestplate);
+                StashCore.safeGive(player, itemManager.DiamondChestplate);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x1 Diamond Chestplate!", ChestLore);
                 looping=false;
                 break;
             }else if(percentChance(.03)){
-                player.getInventory().addItem(itemManager.DiamondHelmet);
+                StashCore.safeGive(player, itemManager.DiamondHelmet);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x1 Diamond Helmet!", HeadLore);
                 looping=false;
                 break;
             }else if(percentChance(.05)){
-                player.getInventory().addItem(itemManager.feather);
+                StashCore.safeGive(player, itemManager.feather);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.DARK_AQUA + " x1 Funky Feather!", FeatherLore);
                 looping=false;
                 break;
             }else if(percentChance(.04)){
-                player.getInventory().addItem(itemManager.feather);
-                player.getInventory().addItem(itemManager.feather);
+                StashCore.safeGiveMultiple(player, itemManager.feather, 2);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.DARK_AQUA + " x2 Funky Feather!", FeatherLore);
                 looping=false;
                 break;
             }else if(percentChance(.03)){
-                player.getInventory().addItem(itemManager.feather);
-                player.getInventory().addItem(itemManager.feather);
-                player.getInventory().addItem(itemManager.feather);
+                StashCore.safeGiveMultiple(player, itemManager.feather, 3);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.DARK_AQUA + " x3 Funky Feather!", FeatherLore);
                 looping=false;
                 break;
             }else if(percentChance(.05)){
-                player.getInventory().addItem(itemManager.DiamondSword);
+                StashCore.safeGive(player, itemManager.DiamondSword);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x1 Diamond Sword!", DiamondSwordLore);
                 looping=false;
                 break;
             }else if(percentChance(.10)){
-                player.getInventory().addItem(itemManager.megalongbow);
+                StashCore.safeGive(player, itemManager.megalongbow);
                 player.getInventory().addItem(new ItemStack(Material.ARROW));
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.RED + " x1 Bow!", MLBLore);
                 looping=false;
                 break;
             }else if(percentChance(.10)){
-                player.getInventory().addItem(itemManager.ftts);
+                StashCore.safeGive(player, itemManager.ftts);
                 player.getInventory().addItem(new ItemStack(Material.ARROW));
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.RED + " x1 Bow!", fttsLore);
                 looping=false;
                 break;
             }else if(percentChance(.03)){
-                GiveUberItems(player, enchants.vile, 16, true, null);
+                StashCore.safeGiveMultiple(player, enchants.vile, 16);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.RED + " x16 Vile!", VileLore);
                 looping=false;
                 break;
             }else if(percentChance(.05)){
-                GiveUberItems(player, enchants.vile, 8, true, null);
+                StashCore.safeGiveMultiple(player, enchants.vile, 8);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.RED + " x8 Vile!", VileLore);
                 looping=false;
                 break;
             }else if(percentChance(.02)){
-                GiveUberItems(player, enchants.vile, 32, true, null);
+                StashCore.safeGiveMultiple(player, enchants.vile, 32);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.RED + " x32 Vile!", VileLore);
                 looping=false;
                 break;
             }else if(percentChance(.05)){
-                GiveUberItems(player, itemManager.goldHelm, 1, true, null);
+                StashCore.safeGive(player, itemManager.goldHelm);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.GOLD + " x1 Golden Helmet!", GhelmLore);
                 looping=false;
                 break;
             }else if(percentChance(.05)){
-                GiveUberItems(player, itemManager.arch, 1, true, null);
+                StashCore.safeGive(player, itemManager.arch);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x1 Archangel Chestplate!", ArchLore);
                 looping=false;
                 break;
             }else if(percentChance(.08)){
-                GiveUberItems(player, enchants.jewl_pant, 1, true, null);
+                StashCore.safeGive(player, enchants.jewl_pant);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.DARK_AQUA + " x1 Jewel!", JewelPantLore);
                 looping=false;
                 break;
             }else if(percentChance(.08)){
-                GiveUberItems(player, enchants.jewl_sword, 1, true, null);
+                StashCore.safeGive(player, enchants.jewl_sword);
                 hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.DARK_AQUA + " x1 Jewel!", JewelSwordLore);
                 looping=false;
                 break;
