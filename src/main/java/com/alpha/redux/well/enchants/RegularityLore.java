@@ -11,7 +11,7 @@ public class RegularityLore extends PitEnchant{
     @Override
     public void run(ReduxDamageEvent event, int level) {
 
-        triggerAttack(event, ((double) (25+((level-1)*25))/100));
+        triggerAttack(event, ((double) (25+((level-1)*15))/100));
 
     }
 
@@ -26,7 +26,7 @@ public class RegularityLore extends PitEnchant{
                 public void run() {
                     event.getAttacker().setRegCD();
                 }
-            }.runTaskLater(economy.getPlugin(), 11L);
+            }.runTaskLater(economy.getPlugin(), 20L);
         }
     }
 

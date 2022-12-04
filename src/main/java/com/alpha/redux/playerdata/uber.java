@@ -1,6 +1,7 @@
 package com.alpha.redux.playerdata;
 
 import com.alpha.redux.Stash.StashCore;
+import com.alpha.redux.apis.Sounds;
 import com.alpha.redux.apis.chatManager.rank;
 import com.alpha.redux.items.enchants;
 import com.alpha.redux.items.itemManager;
@@ -15,6 +16,8 @@ import java.util.List;
 import java.util.Random;
 
 import static com.alpha.redux.apis.FancyText.*;
+import static com.alpha.redux.apis.chatManager.rank.colorCode;
+import static com.alpha.redux.entityHandlers.ReduxPlayerHandler.playerExists;
 import static com.alpha.redux.playerdata.economy.addEconomy;
 import static com.alpha.redux.playerdata.streaks.GiveUberItems;
 
@@ -67,117 +70,125 @@ public class uber {
         while(looping){
             if(percentChance(.10)){
                 addEconomy(String.valueOf(player.getUniqueId()), 100000);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.GOLD + " 50,000 Gold!", ChatColor.GOLD + "Golden Bar\n" + ChatColor.GRAY + "Receive: " + ChatColor.GOLD + "50,000g");
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)), ChatColor.GOLD + "Golden Bar\n" + ChatColor.GRAY + "Receive: " + ChatColor.GOLD + "100,000g");
                 looping=false;
+                player.sendMessage(colorCode("&6&lGOLD REQUIREMENT! &7This gold counts toward your prestige gold requirement."));
+                Sounds.BOOSTER_REMIND.play(player);
+                goldReq.addGoldReq(player.getUniqueId().toString(), 100000);
                 break;
             }else if(percentChance(.01)){
                 StashCore.safeGive(player, enchants.gem);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.GREEN + " Totally Legit Gem", GemLore);
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)),  GemLore);
                 looping=false;
                 break;
             }else if(percentChance(.15)){
                 addEconomy(String.valueOf(player.getUniqueId()), 250000);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.GOLD + " 25,000 Gold!", ChatColor.GOLD + "Golden Bar\n" + ChatColor.GRAY + "Receive: " + ChatColor.GOLD + "25,000g");
+
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)),  ChatColor.GOLD + "Golden Bar\n" + ChatColor.GRAY + "Receive: " + ChatColor.GOLD + "250,000g");
+                player.sendMessage(colorCode("&6&lGOLD REQUIREMENT! &7This gold counts toward your prestige gold requirement."));
+                Sounds.BOOSTER_REMIND.play(player);
+                goldReq.addGoldReq(player.getUniqueId().toString(), 250000);
                 looping=false;
                 break;
             }else if(percentChance(.10)){
                 StashCore.safeGiveMultiple(player, enchants.cactus, 5);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x5 Cactus!", FreshRedsLore);
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)), FreshRedsLore);
                 looping=false;
                 break;
             }else if(percentChance(.05)){
                 StashCore.safeGiveMultiple(player, enchants.cactus, 16);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x16 Cactus!", FreshRedsLore);
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)), FreshRedsLore);
                 looping=false;
                 break;
             }else if(percentChance(.03)){
                 StashCore.safeGive(player, itemManager.DiamondBoots);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x1 Diamond Boots!", BootLore);
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)), BootLore);
                 looping=false;
                 break;
             }else if(percentChance(.03)){
                 StashCore.safeGive(player, itemManager.DiamondLeggings);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x1 Diamond Leggings!", LegLore);
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)), LegLore);
                 looping=false;
                 break;
             }else if(percentChance(.03)){
                 StashCore.safeGive(player, itemManager.DiamondChestplate);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x1 Diamond Chestplate!", ChestLore);
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)), ChestLore);
                 looping=false;
                 break;
             }else if(percentChance(.03)){
                 StashCore.safeGive(player, itemManager.DiamondHelmet);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x1 Diamond Helmet!", HeadLore);
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)), HeadLore);
                 looping=false;
                 break;
             }else if(percentChance(.05)){
                 StashCore.safeGive(player, itemManager.feather);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.DARK_AQUA + " x1 Funky Feather!", FeatherLore);
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)), FeatherLore);
                 looping=false;
                 break;
             }else if(percentChance(.04)){
                 StashCore.safeGiveMultiple(player, itemManager.feather, 2);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.DARK_AQUA + " x2 Funky Feather!", FeatherLore);
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)), FeatherLore);
                 looping=false;
                 break;
             }else if(percentChance(.03)){
                 StashCore.safeGiveMultiple(player, itemManager.feather, 3);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.DARK_AQUA + " x3 Funky Feather!", FeatherLore);
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)), FeatherLore);
                 looping=false;
                 break;
             }else if(percentChance(.05)){
                 StashCore.safeGive(player, itemManager.DiamondSword);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x1 Diamond Sword!", DiamondSwordLore);
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)), DiamondSwordLore);
                 looping=false;
                 break;
-            }else if(percentChance(.10)){
-                StashCore.safeGive(player, itemManager.megalongbow);
-                player.getInventory().addItem(new ItemStack(Material.ARROW));
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.RED + " x1 Bow!", MLBLore);
+            }else if(percentChance(.01)){
+                StashCore.safeGive(player, enchants.jewl_sword);
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)),  JewelSwordLore);
                 looping=false;
                 break;
-            }else if(percentChance(.10)){
-                StashCore.safeGive(player, itemManager.ftts);
-                player.getInventory().addItem(new ItemStack(Material.ARROW));
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.RED + " x1 Bow!", fttsLore);
+            }else if(percentChance(.05)){
+                StashCore.safeGiveMultiple(player, itemManager.feather, 1);
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)), FeatherLore);
                 looping=false;
                 break;
             }else if(percentChance(.03)){
                 StashCore.safeGiveMultiple(player, enchants.vile, 16);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.RED + " x16 Vile!", VileLore);
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)),  VileLore);
                 looping=false;
                 break;
             }else if(percentChance(.05)){
                 StashCore.safeGiveMultiple(player, enchants.vile, 8);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.RED + " x8 Vile!", VileLore);
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)),  VileLore);
                 looping=false;
                 break;
             }else if(percentChance(.02)){
                 StashCore.safeGiveMultiple(player, enchants.vile, 32);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.RED + " x32 Vile!", VileLore);
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)),  VileLore);
                 looping=false;
                 break;
             }else if(percentChance(.05)){
-                StashCore.safeGive(player, itemManager.goldHelm);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.GOLD + " x1 Golden Helmet!", GhelmLore);
+                StashCore.safeGive(player, enchants.jewl_pant);
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)),  JewelPantLore);
                 looping=false;
                 break;
             }else if(percentChance(.05)){
-                StashCore.safeGive(player, itemManager.arch);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.AQUA + " x1 Archangel Chestplate!", ArchLore);
+                StashCore.safeGive(player, enchants.jewl_pant);
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)),  JewelPantLore);
                 looping=false;
                 break;
             }else if(percentChance(.08)){
                 StashCore.safeGive(player, enchants.jewl_pant);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.DARK_AQUA + " x1 Jewel!", JewelPantLore);
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)),  JewelPantLore);
                 looping=false;
                 break;
             }else if(percentChance(.08)){
                 StashCore.safeGive(player, enchants.jewl_sword);
-                hoverText(rank.getNameColor(player) + player.getDisplayName() + ChatColor.GRAY + " obtained" + ChatColor.DARK_AQUA + " x1 Jewel!", JewelSwordLore);
+                hoverText(colorCode("&d&lUBERDROP! <level_username> &7obtained an &dUberdrop&7!", playerExists(player)),  JewelSwordLore);
                 looping=false;
                 break;
             }
         }
+
+        Sounds.UBER_500.play(player);
+
     }
 }

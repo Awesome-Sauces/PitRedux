@@ -20,7 +20,7 @@ public class CriticallyFunkyLore extends PitEnchant{
 
         if(criticalHit(event.getAttacker().getPlayerObject().getPlayer())){
             event.getDefenders().setPlayerIncrease(damage/100);
-            event.subtractReduxDamage(event.getReduxDamage() * (dmg/100));
+            event.setReduxDamage(event.getReduxDamage() * (dmg/100));
         }
     
     }

@@ -12,7 +12,7 @@ public class EscapePodLore extends PitEnchant{
 
     @Override
     public void run(ReduxDamageEvent event, int level) {
-        if(event.getDefenders().getEscape() && event.getDefenders().getPlayerObject().getHealth()/2 <= 10){
+        if(event.getDefenders().getEscape() && event.getDefenders().getPlayerObject().getHealth() <= 8){
             giveRegen(event.getDefenders().getPlayerObject(), level+2, 15+((level-1)*15));
         }
     }

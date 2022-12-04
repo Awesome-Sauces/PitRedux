@@ -506,7 +506,7 @@ public class ReduxDeathEvent extends Event implements Cancellable{
         }
 
         if(redux.mysticism.hasValue(attacker.getPlayerUUID())&&
-                percentChance(((double)((Integer) redux.mysticism.getValue(attacker.getPlayerUUID()))+mystic_chance)/1250)){
+                percentChance(((double)((Integer) redux.mysticism.getValue(attacker.getPlayerUUID()))+mystic_chance)/1500)){
             while (true){
                 if(percentChance(.20)){
                     StashCore.safeGive(attacker.getPlayerObject(), enchants.fresh_greens);
@@ -571,7 +571,7 @@ public class ReduxDeathEvent extends Event implements Cancellable{
                 }
             }
         }else if (redux.mysticism.hasValue(attacker.getPlayerUUID())&&
-                percentChance(((double)((Integer) redux.mysticism.getValue(attacker.getPlayerUUID()))+mystic_chance)/1250)) {
+                percentChance(((double)((Integer) redux.mysticism.getValue(attacker.getPlayerUUID()))+mystic_chance)/1500)) {
             StashCore.safeGive(attacker.getPlayerObject(), enchants.fresh_bow);
             if(isNPC(defender.getPlayerObject())){
                 attacker.getPlayerObject().sendMessage(colorCode("&d&lMYSTIC ITEM!" +
@@ -583,7 +583,7 @@ public class ReduxDeathEvent extends Event implements Cancellable{
             }
             attacker.getPlayerObject().playSound(attacker.getPlayerObject().getLocation(), Sound.NOTE_PLING, 1.0F, 1.0F);
         }else if(redux.mysticism.hasValue(attacker.getPlayerUUID())&&
-                percentChance(((double)((Integer) redux.mysticism.getValue(attacker.getPlayerUUID()))+mystic_chance)/1250)){
+                percentChance(((double)((Integer) redux.mysticism.getValue(attacker.getPlayerUUID()))+mystic_chance)/1500)){
             StashCore.safeGive(attacker.getPlayerObject(), enchants.fresh_sword);
             if(isNPC(defender.getPlayerObject())){
                 attacker.getPlayerObject().sendMessage(colorCode("&d&lMYSTIC ITEM!" +

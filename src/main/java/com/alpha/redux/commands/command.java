@@ -165,13 +165,12 @@ public class command implements CommandExecutor {
 
         if(cmd.getName().equalsIgnoreCase("patchnotes")){
 
-            player.sendMessage(colorCode("&e1.4.9\n" +
-                    "&a(+) &7Added Angel and Demon Factions\n" +
-                    "&a(+) &7Added Kings Quest\n" +
-                    "&a(+) &7Added Streak Of Message\n" +
-                    "&a(+) &7Fixed Stash\n" +
-                    "&a(+) &7Made bots have skins\n" +
-                    "&e(#) &7Fixed Item rename enchanting glitch\n\n" +
+            player.sendMessage(colorCode("&eBetter Pit Update - v1.5.0\n" +
+                    "&7- &a(+) &7Fixed Jewels\n" +
+                    "&7- &a(+) &7Nerfed Perun\n" +
+                    "&7- &a(+) &7Buffed Critically Funky\n" +
+                    "&7- &a(+) &7Changed Uber Streak\n" +
+                    "&7- &a(+) &7Lowered Bot Amount and removed Outskirt bots\n\n" +
                     "&eJoin the discord: &bdiscord.gg/FKVQUK2Z"));
 
             return true;

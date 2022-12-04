@@ -354,26 +354,34 @@ public class redux extends JavaPlugin {
             }
         }, 1200L, 1200L);
 
-
+/*
         for (int i = 0; i < 15; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 0, true);
         }
+
+ */
 
         for (int i = 0; i < 25; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("world")), 0, false);
         }
 
+        /*
         for (int i = 0; i < 15; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby")), 0, true);
         }
+
+         */
 
         for (int i = 0; i < 25; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby")), 0, false);
         }
 
+        /*
         for (int i = 0; i < 15; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby2")), 0, true);
         }
+
+         */
 
         for (int i = 0; i < 25; i++) {
             HunterAPI.createHunterNon(locations.getBotSpawnLocation(Bukkit.getWorld("lobby2")), 0, false);

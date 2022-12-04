@@ -55,6 +55,7 @@ public class streaks {
     }
 
     public static int getStreak(String player){
+        hasStreak(player);
         return killstreak.get(player);
     }
 

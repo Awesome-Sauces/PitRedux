@@ -95,7 +95,7 @@ public class events implements Listener {
         xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
         GiveChain(player);
         // Make a new component (Bungee API).
-        TextComponent component = new TextComponent(TextComponent.fromLegacyText("&e&lPIT! &fLatest update: &ev1.4.9 &bStash! &7[&e&lCLICK&7]"));
+        TextComponent component = new TextComponent(TextComponent.fromLegacyText(colorCode("&e&lPIT! &fLatest update: &ev1.5.0 &bBug Fixes! &7[&e&lCLICK&7]")));
         // Add a click event to the component.
         component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/patchnotes"));
 
@@ -361,6 +361,10 @@ public class events implements Listener {
                     event.subtractReduxDamage(event.getReduxDamage()*.50);
                 }
             }
+
+            if(streak.equals("uber") && getStreak(event.getAttacker().getPlayerUUID()) >= 400){
+                new TrueDamageHandler(event.getDefenders(), event.getAttacker(), event.getReduxDamage()/4, 0).run();
+            }
         }
     }
 
@@ -442,7 +446,7 @@ public class events implements Listener {
                 player.setItemInHand(enchants.fresh_bow);
             }
 
-            ReduxBowEvent me = new ReduxBowEvent(playerExists(player), playerExists((Player) event.getEntity()), 1, event);
+            ReduxBowEvent me = new ReduxBowEvent(playerExists(player), playerExists((Player) event.getEntity()), 0, event);
             Bukkit.getPluginManager().callEvent(me);
 
 

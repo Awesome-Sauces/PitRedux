@@ -54,7 +54,7 @@ public class pantJewl {
         meta.setColor(Color.RED);
         meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',"&cTier I Red Pants"));
 
-        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS);
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
         meta.spigot().setUnbreakable(true);
 
 
