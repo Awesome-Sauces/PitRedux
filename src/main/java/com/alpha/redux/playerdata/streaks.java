@@ -118,7 +118,6 @@ public class streaks {
                 player.setHealth(player.getMaxHealth());
                 player.removePotionEffect(PotionEffectType.SLOW);
                 player.removePotionEffect(PotionEffectType.POISON);
-                setMega(String.valueOf(player.getUniqueId()), "overdrive");
                 setStreak(String.valueOf(player.getUniqueId()), 0);
                 NametagEdit.getApi().setNametag(player, ChatEventApiGetLevelColor(player.getDisplayName(), String.valueOf(player.getUniqueId())) + rank.getNameColor(player), "");
                 setStreak(String.valueOf(player.getUniqueId()), 0);

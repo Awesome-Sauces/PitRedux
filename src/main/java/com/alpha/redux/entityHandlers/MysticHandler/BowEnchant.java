@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.List;
@@ -18,6 +19,8 @@ public class BowEnchant {
     public ReduxBowEvent event;
 
     public EntityShootBowEvent bowEvent;
+
+    public ProjectileHitEvent hitEvent;
 
     String enchant;
     Boolean hasEnchant = false;
@@ -42,6 +45,20 @@ public class BowEnchant {
         this.bowEvent = event;
 
         if(getEnchants((Player) event.getEntity()) !=null)for(String ench : getEnchants((Player) event.getEntity()))
+            if (ench.contains(this.enchant)) {
+                this.hasEnchant = true;
+                this.enchantTier = ench.replace(this.enchant, "");
+                break;
+            }
+
+
+    }
+
+    public BowEnchant(ProjectileHitEvent event, String enchant){
+        this.enchant = enchant;
+        this.hitEvent = event;
+
+        if(getEnchants((Player) event.getEntity().getShooter()) !=null)for(String ench : getEnchants((Player) event.getEntity().getShooter()))
             if (ench.contains(this.enchant)) {
                 this.hasEnchant = true;
                 this.enchantTier = ench.replace(this.enchant, "");

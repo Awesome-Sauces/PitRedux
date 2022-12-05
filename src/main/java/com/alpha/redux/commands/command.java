@@ -18,6 +18,7 @@ import com.alpha.redux.playerdata.xpManager;
 import com.alpha.redux.redux;
 import com.alpha.redux.well.EnchantingMechanics;
 import com.alpha.redux.well.enchanters.FreshPants;
+import com.alpha.redux.well.enchanters.MysticBow;
 import com.nametagedit.plugin.NametagEdit;
 import net.citizensnpcs.api.CitizensAPI;
 import org.bukkit.*;
@@ -165,12 +166,11 @@ public class command implements CommandExecutor {
 
         if(cmd.getName().equalsIgnoreCase("patchnotes")){
 
-            player.sendMessage(colorCode("&eBetter Pit Update - v1.5.0\n" +
-                    "&7- &a(+) &7Fixed Jewels\n" +
-                    "&7- &a(+) &7Nerfed Perun\n" +
-                    "&7- &a(+) &7Buffed Critically Funky\n" +
-                    "&7- &a(+) &7Changed Uber Streak\n" +
-                    "&7- &a(+) &7Lowered Bot Amount and removed Outskirt bots\n\n" +
+            player.sendMessage(colorCode("&eBetter Pit Update - v1.5.1\n" +
+                    "&7- &e(#) &7Fixed Lifesteal\n" +
+                    "&7- &a(#) &7Fixed Billionaire\n" +
+                    "&7- &a(#) &7Fixed Volley, MLB, Telebow\n" +
+                    "&7- &a(#) &7Fixed gold being capped like if it was xp\n\n" +
                     "&eJoin the discord: &bdiscord.gg/FKVQUK2Z"));
 
             return true;
@@ -308,6 +308,16 @@ public class command implements CommandExecutor {
 
                     lore = renewEnchant(meta.getLore(), translateList(Arrays.asList(enchantTier(args[0], Integer.parseInt(args[1])).split("\n"))));
                     lore.add(ChatColor.BLUE + "+6.5 Attack Damage");
+                    meta.setLore(lore);
+
+                }else if(player.getInventory().getItemInHand().getType().equals(Material.BOW)){
+
+
+                    meta.setDisplayName(colorCode("&cTier III Super Bow"));
+
+                    List<String> lore = new ArrayList<>();
+
+                    lore = MysticBow.renewEnchant(meta.getLore(), translateList(Arrays.asList(MysticBow.enchantTier(args[0], Integer.parseInt(args[1])).split("\n"))));
                     meta.setLore(lore);
 
                 }

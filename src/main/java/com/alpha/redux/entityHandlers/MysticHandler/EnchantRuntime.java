@@ -43,11 +43,8 @@ public class EnchantRuntime {
     public boolean bowRun(){
 
         new SprintDrain(bowEvent);
-        new Explosive(bowEvent);
         new FasterThanTheirShadow(bowEvent);
         new PullBow(bowEvent);
-        new Telebow(bowEvent);
-
         return true;
     }
 
@@ -55,6 +52,7 @@ public class EnchantRuntime {
 
         new MegaLongBow(shootEvent);
         new Volley(shootEvent);
+        new Telebow(shootEvent);
 
         return true;
     }

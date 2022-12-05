@@ -309,17 +309,6 @@ public class ReduxDeathEvent extends Event implements Cancellable{
             if(getStreak(attacker.getPlayerUUID()) <= 49){
                 NametagEdit.getApi().setNametag(attacker.getPlayerObject(), ChatEventApiGetLevelColor(attacker.getPlayerObject().getDisplayName(), attacker.getPlayerUUID())+ rank.getNameColor(attacker.getPlayerObject()), "");
             }
-
-            if(!KillMessages.containsKey(attacker.getPlayerUUID())){
-                KillMessages.put(attacker.getPlayerUUID(), true);
-            }else if(KillMessages.get(attacker.getPlayerUUID()).equals(true)){
-                if(isNPC(defender.getPlayerObject())){
-                    attacker.getPlayerObject().sendMessage(ChatColor.GREEN + colorCode("&lKILL! ") + ChatColor.GRAY + "on " + getNPC(defender.getPlayerObject()).getName() + ChatColor.RESET + ChatColor.AQUA + " +" + String.valueOf((int)Math.min(this.xp, xp_cap)) + "XP" + ChatColor.GOLD + " +" + String.valueOf((int) Math.min(this.gold, this.gold_cap)) + "g");
-                }else{
-                    attacker.getPlayerObject().sendMessage(ChatColor.GREEN + colorCode("&lKILL! ") + ChatColor.GRAY + "on " + defender.getPlayerObject().getDisplayName() + ChatColor.RESET + ChatColor.AQUA + " +" + String.valueOf((int)Math.min(this.xp, xp_cap)) + "XP" + ChatColor.GOLD + " +" + String.valueOf((int) Math.min(this.gold, this.gold_cap)) + "g");
-                }
-            }
-
         }
 
         // Streak Messages
@@ -340,7 +329,7 @@ public class ReduxDeathEvent extends Event implements Cancellable{
         if(!isNPC(attacker.getPlayerObject())){
             attacker.addPlayerEXP((int) Math.round(Math.min(this.xp_cap, this.xp)));
             hasEconomy(attacker.getPlayerUUID());
-            addEconomy(attacker.getPlayerUUID(), Math.min((int) Math.round(this.gold), xp_cap));
+            addEconomy(attacker.getPlayerUUID(), Math.min((int) Math.round(this.gold), (int)gold_cap));
         }
 
         // Teleporting
@@ -372,6 +361,18 @@ public class ReduxDeathEvent extends Event implements Cancellable{
         if(!isNPC(attacker.getPlayerObject())) killEnchants();
 
         if(!isNPC(attacker.getPlayerObject())) customDrops();
+
+        if(!isNPC(attacker.getPlayerObject().getPlayer())){
+            if(!KillMessages.containsKey(attacker.getPlayerUUID())){
+                KillMessages.put(attacker.getPlayerUUID(), true);
+            }else if(KillMessages.get(attacker.getPlayerUUID()).equals(true)){
+                if(isNPC(defender.getPlayerObject())){
+                    attacker.getPlayerObject().sendMessage(ChatColor.GREEN + colorCode("&lKILL! ") + ChatColor.GRAY + "on " + getNPC(defender.getPlayerObject()).getName() + ChatColor.RESET + ChatColor.AQUA + " +" + String.valueOf((int)Math.min(this.xp, xp_cap)) + "XP" + ChatColor.GOLD + " +" + String.valueOf((int) Math.min(this.gold, this.gold_cap)) + "g");
+                }else{
+                    attacker.getPlayerObject().sendMessage(ChatColor.GREEN + colorCode("&lKILL! ") + ChatColor.GRAY + "on " + defender.getPlayerObject().getDisplayName() + ChatColor.RESET + ChatColor.AQUA + " +" + String.valueOf((int)Math.min(this.xp, xp_cap)) + "XP" + ChatColor.GOLD + " +" + String.valueOf((int) Math.min(this.gold, this.gold_cap)) + "g");
+                }
+            }
+        }
 
         // Final TICK Scoreboard refresh
         /*

@@ -31,7 +31,9 @@ public class ReduxPlayer {
     int assistantStreakerCount = 0;
     boolean regCD = true;
     boolean vampireCD = true;
+    boolean mlbCD = true;
     boolean booCD = true;
+    boolean telebowCD = true;
     boolean GoldenCD = true;
     boolean PitPocketCD = true;
     boolean AttackCD = true;
@@ -121,6 +123,10 @@ public class ReduxPlayer {
 
     public void resetEscape(){this.escape = true;}
 
+    public void setMlbCD(){this.mlbCD = !this.mlbCD;}
+
+    public boolean getMlbCD(){return this.mlbCD;}
+
     public void setVampireCD(){this.vampireCD = !this.vampireCD;}
 
     public boolean getVampireCD(){return this.vampireCD;}
@@ -144,6 +150,10 @@ public class ReduxPlayer {
     public boolean getBooCD(){return this.booCD;}
 
     public void setBooCD(){this.booCD = !this.booCD;}
+
+    public boolean getTelebowCD(){return this.telebowCD;}
+
+    public void setTelebowCD(){this.telebowCD = !this.telebowCD;}
 
     public boolean getGoldenCD(){return this.GoldenCD;}
 

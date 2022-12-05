@@ -95,7 +95,7 @@ public class events implements Listener {
         xp_amount_mega.put(String.valueOf(player.getUniqueId()), 0);
         GiveChain(player);
         // Make a new component (Bungee API).
-        TextComponent component = new TextComponent(TextComponent.fromLegacyText(colorCode("&e&lPIT! &fLatest update: &ev1.5.0 &bBug Fixes! &7[&e&lCLICK&7]")));
+        TextComponent component = new TextComponent(TextComponent.fromLegacyText(colorCode("&e&lPIT! &fLatest update: &ev1.5.1 &bQuality of life! &7[&e&lCLICK&7]")));
         // Add a click event to the component.
         component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/patchnotes"));
 
@@ -363,7 +363,7 @@ public class events implements Listener {
             }
 
             if(streak.equals("uber") && getStreak(event.getAttacker().getPlayerUUID()) >= 400){
-                new TrueDamageHandler(event.getDefenders(), event.getAttacker(), event.getReduxDamage()/4, 0).run();
+                new TrueDamageHandler(event.getDefenders(), event.getAttacker(), event.getReduxDamage()/2, 0).run();
             }
         }
     }
@@ -1005,7 +1005,7 @@ public class events implements Listener {
 
         Player shooter = (Player) event.getEntity();
 
-        shooter.getInventory().addItem(new ItemStack(Material.ARROW, 1));
+        //shooter.getInventory().addItem(new ItemStack(Material.ARROW, 1));
 
         if (shooter.getInventory().getItemInHand().getItemMeta().equals(itemManager.megalongbow.getItemMeta())){
             shooter.getInventory().removeItem(itemManager.megalongbow);

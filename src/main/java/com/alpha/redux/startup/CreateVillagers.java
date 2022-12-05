@@ -496,6 +496,15 @@ public class CreateVillagers {
         JumpBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&eThe Better Pit"));
         JumpBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&a&lJUMP! &c&lFIGHT!"));
 
+        LobbyJumpBetterPit = HologramsAPI.createHologram(economy.getPlugin(), locations.getPlayPitLocation(Bukkit.getWorld("world")));
+        LobbyJumpBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&eThe Better Pit"));
+        LobbyJumpBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&a&lJUMP! &c&lFIGHT!"));
+
+        Lobby2JumpBetterPit = HologramsAPI.createHologram(economy.getPlugin(), locations.getPlayPitLocation(Bukkit.getWorld("world")));
+        Lobby2JumpBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&eThe Better Pit"));
+        Lobby2JumpBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&a&lJUMP! &c&lFIGHT!"));
+
+
         LobbyBetterPit = HologramsAPI.createHologram(economy.getPlugin(), locations.getPlayPitLocation(Bukkit.getWorld("lobby")));
         LobbyBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&eThe Better Pit"));
         LobbyBetterPit.appendTextLine( ChatColor.translateAlternateColorCodes('&', "&a&lJUMP! &c&lFIGHT!"));

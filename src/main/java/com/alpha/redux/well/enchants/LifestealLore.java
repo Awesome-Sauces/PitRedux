@@ -8,15 +8,16 @@ public class LifestealLore extends PitEnchant{
 
     @Override
     public void run(ReduxDamageEvent event, int level) {
-        double multiplier = 0;
-
-        if (level > 2) {
-            multiplier += (level*4) + 1;
-        }else {multiplier += level*4;}
 
         event.getAttacker().getPlayerObject().setHealth(Math.min(event.getAttacker().getPlayerObject().getHealth()
-                        + Math.min(((event.getReduxDamage()/2) * (multiplier/100)), 3),
+                        + (event.getReduxDamage() * (getHealing(level) / 100D)),
                 event.getAttacker().getPlayerObject().getMaxHealth()));
+    }
+
+    public double getHealing(int enchantLvl) {
+
+//		return (int) (Math.pow(enchantLvl, 1.1) * 4);
+        return enchantLvl * 3 + 1;
     }
 
     @Override

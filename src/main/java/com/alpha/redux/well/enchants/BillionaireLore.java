@@ -17,13 +17,7 @@ public class BillionaireLore extends PitEnchant{
             gold += (level*100)+50;
         }else{gold+=level*100;}
 
-        double multiplier = 0;
-
-        if (level > 1) {
-            multiplier += (level*.33)+.01;
-        }else {multiplier += (level*.33);}
-
-        multiplier+=1;
+        double multiplier = getDamageMultiplier(level);
 
         if (event.getAttacker().getPlayerGold() >= gold){
             event.getAttacker().setPlayerGold((int) (event.getAttacker().getPlayerGold() - gold));
@@ -31,6 +25,10 @@ public class BillionaireLore extends PitEnchant{
             Sounds.BILLIONAIRE.play(event.getAttacker().getPlayerObject());
             event.setReduxDamage(event.getReduxDamage() * (multiplier));
         }
+    }
+
+    public double getDamageMultiplier(int enchantLvl) {
+        return (double) Math.round((1 + (double) enchantLvl / 3) * 100) / 100;
     }
 
     @Override
