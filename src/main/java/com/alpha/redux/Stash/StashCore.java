@@ -4,6 +4,7 @@ import com.alpha.redux.items.enchants;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -14,13 +15,16 @@ import static com.alpha.redux.apis.chatManager.rank.colorCode;
 
 public class StashCore {
     public static boolean hasAvailableSlot(Player player){
+        if(player.getInventory()==null) return false;
         Inventory inv = player.getInventory();
         boolean check=false;
         for (ItemStack item: inv.getContents()) {
-            if(item == null) {
-                check = true;
-                break;
-            }
+            try{
+                if(item == null || item.getType().equals(Material.AIR)) {
+                    check = true;
+                    break;
+                }
+            }catch (Exception ignored){}
         }
 
         return check;
@@ -82,7 +86,7 @@ public class StashCore {
 
                 if(items!=null) for(Object item : items.toArray()){
                     if(hasAvailableSlot(player)){
-                        player.getInventory().addItem((ItemStack) item);
+                        if(((ItemStack) item)!=null)player.getInventory().addItem((ItemStack) item);
                         items.remove(item);
                         claimed++;
                     }else{

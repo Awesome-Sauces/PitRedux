@@ -34,7 +34,7 @@ public class PerunLore extends PitEnchant{
                 public void run() {
                     owner.setPerunCD();
                 }
-            }.runTaskLater(economy.getPlugin(), 11L);
+            }.runTaskLater(economy.getPlugin(), 1L);
             return true;
         }
 

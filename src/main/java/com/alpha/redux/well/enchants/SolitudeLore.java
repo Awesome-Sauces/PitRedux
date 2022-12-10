@@ -14,7 +14,7 @@ public class SolitudeLore extends PitEnchant{
 
         double damage = 40+((level-1)*10);
 
-        if (solitaryCheck(event.getDefenders())) event.subtractReduxDamage(event.getReduxDamage() * (damage/100));
+        if (solitaryCheck(event.getDefenders())) event.subtractReduxDamage(event.getReduxDamage() * (damage/100D));
 
     }
 
